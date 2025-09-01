@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://0iejaa850ddf"]
+
+[ext_resource type="Script" uid="uid://bxoy0gaw638ja" path="res://Movement.cs" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://byecr1fi4oa6i" path="res://Player.cs" id="1_onrkg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cguwc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_onrkg")
+
+[node name="Movement" type="Node2D" parent="."]
+script = ExtResource("1_4flbx")
+PlayerScene = null
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(55.5, 52.5)
+mesh = SubResource("BoxMesh_cguwc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4flbx")
