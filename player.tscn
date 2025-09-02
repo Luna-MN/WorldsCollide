@@ -15,7 +15,6 @@ script = ExtResource("1_onrkg")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("1_4flbx")
-PlayerScene = null
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 scale = Vector2(55.5, 52.5)

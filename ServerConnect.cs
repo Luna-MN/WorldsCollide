@@ -9,6 +9,7 @@ public partial class ServerConnect : Node2D
     
     public override void _Ready()
     {
+        GameManager.Rpcs = GetNode<Rpc>("/root/Rpc");
         Connect();
     }
     private async void Connect()
@@ -23,6 +24,7 @@ public partial class ServerConnect : Node2D
     private void ConnectionSuccess()
     {
         GD.Print("Connected");
+        GameManager.LocalID = Multiplayer.GetUniqueId();
     }
     private void ConnectionFailed()
     {
