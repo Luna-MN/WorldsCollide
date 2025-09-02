@@ -8,7 +8,7 @@ public partial class Server : Node
     [Export]
     public int Port = 7777;
 
-    private Rpc Rpcs;
+    public Rpc Rpcs;
     private List<long> PlayerIds = new List<long>();
     public override void _Ready()
     {
@@ -33,7 +33,7 @@ public partial class Server : Node
         Network.PeerConnected += OnPeerConnected;
 
     }
-
+ 
     private void OnPeerConnected(long id)
     {
         GD.Print("Peer connected");
