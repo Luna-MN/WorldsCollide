@@ -16,8 +16,9 @@ public partial class ServerManagmentNode : Node
         sendPositionsTimer.Timeout += SendPositions;
         AddChild(sendPositionsTimer);
     }
-    private void SendPositions()
+    private async void SendPositions()
     {
+
         ServerManager.ClientRpcs.Rpc("SendPositions", ServerManager.ChangedPosition);
         ServerManager.ChangedPosition.Clear();
     }

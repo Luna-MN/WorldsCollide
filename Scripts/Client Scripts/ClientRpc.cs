@@ -29,15 +29,20 @@ public partial class ClientRpc : Node2D
         }
     }
     // Client -> Send positions that have changed since the last call
-    [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.UnreliableOrdered)]
+    [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void SendPositions(Godot.Collections.Dictionary<string, Vector2> ObjectPositionChanges)
     {
-        GD.Print("Sending positions");
         foreach (var change in ObjectPositionChanges)
         {
             GameManager.ObjectPositions[change.Key] = change.Value;
         }
     }
-    
+
+    [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+    public void RequestPositions()
+    {
+        GameManager.ServerRpcs.RpcId(1, "GetPositions", GameManager.ChangedPositions);
+        GameManager.ChangedPositions.Clear();
+    }
     #endregion
 }

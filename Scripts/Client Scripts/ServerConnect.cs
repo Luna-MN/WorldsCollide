@@ -31,13 +31,4 @@ public partial class ServerConnect : Node2D
     {
         GD.Print("Failed");
     }
-
-    [Rpc]
-    private void AddPlayer(long id)
-    {
-        var newPlayer = Player.Instantiate<Player>();
-        newPlayer.Name = "Player" + id;
-        newPlayer.IsPlayer = false;
-        AddChild(newPlayer);
-    }
 }

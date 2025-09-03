@@ -10,8 +10,9 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("Movement")]
 script = ExtResource("1_onrkg")
+Movement = NodePath("Movement")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_onrkg")
