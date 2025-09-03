@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b70sv8dflvf0o"]
+[gd_scene load_steps=3 format=3 uid="uid://b70sv8dflvf0o"]
 
-[ext_resource type="Script" path="res://Server.cs" id="1_ob30c"]
+[ext_resource type="Script" uid="uid://ciyiiruer81yq" path="res://Scripts/Server Scripts/Server.cs" id="1_ob30c"]
+[ext_resource type="Script" uid="uid://bm4q5mpeofu3w" path="res://Scripts/Server Scripts/ServerManagmentNode.cs" id="2_h8t3n"]
 
 [node name="Server" type="Node"]
 script = ExtResource("1_ob30c")
-Port = null
+
+[node name="ServerMangmentNode" type="Node" parent="."]
+script = ExtResource("2_h8t3n")

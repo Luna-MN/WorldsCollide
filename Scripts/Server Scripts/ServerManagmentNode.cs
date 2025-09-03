@@ -19,5 +19,6 @@ public partial class ServerManagmentNode : Node
     private void SendPositions()
     {
         ServerManager.ClientRpcs.Rpc("SendPositions", ServerManager.ChangedPosition);
+        ServerManager.ChangedPosition.Clear();
     }
 }
