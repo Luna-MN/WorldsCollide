@@ -9,7 +9,8 @@ public partial class ServerConnect : Node2D
     
     public override void _Ready()
     {
-        GameManager.Rpcs = GetNode<Rpc>("/root/Rpc");
+        GameManager.ServerRpcs = GetNode<ServerRpc>("/root/ServerRpc");
+        GameManager.ClientRpcs = GetNode<ClientRpc>("/root/ClientRpc");
         Connect();
     }
     private async void Connect()

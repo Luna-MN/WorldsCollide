@@ -4,10 +4,8 @@ using System;
 public partial class ServerManagmentNode : Node
 {
     private Timer sendPositionsTimer = new();
-    private Server server;
     public override void _Ready()
     {
-        server = GetNode<Server>("/root/Server");
         sendPositionsTimer = new Timer()
         {
             Autostart = true,
@@ -20,6 +18,6 @@ public partial class ServerManagmentNode : Node
     }
     private void SendPositions()
     {
-        server.Rpcs.Rpc("SendPositions", ServerManager.ChangedPosition);
+        ServerManager.ClientRpcs.Rpc("SendPositions", ServerManager.ChangedPosition);
     }
 }

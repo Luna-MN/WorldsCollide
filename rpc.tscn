@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy1504hi2hsvy"]
-
-[ext_resource type="Script" uid="uid://bynei3yxxm631" path="res://Rpc.cs" id="1_ndbu0"]
-[ext_resource type="PackedScene" uid="uid://0iejaa850ddf" path="res://player.tscn" id="2_n87ya"]
-
-[node name="RPC" type="Node2D"]
-script = ExtResource("1_ndbu0")
-Player = ExtResource("2_n87ya")

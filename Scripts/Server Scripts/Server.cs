@@ -8,12 +8,13 @@ public partial class Server : Node
     [Export]
     public int Port = 7777;
 
-    public Rpc Rpcs;
     private List<long> PlayerIds = new List<long>();
     public override void _Ready()
     {
         CreateServer();
-        Rpcs = GetNode<Rpc>("/root/Rpc");
+        ServerManager.ServerRpcs = GetNode<ServerRpc>("/root/ServerRpc");
+        ServerManager.ClientRpcs = GetNode<ClientRpc>("/root/ClientRpc");
+        
     }
     private void CreateServer()
     {
@@ -40,10 +41,10 @@ public partial class Server : Node
 
 
         GD.Print("Creating player");
-        Rpcs.Rpc("CreateNewPlayer", id);
+        ServerManager.ClientRpcs.Rpc("CreateNewPlayer", id);
         foreach (var oldIds in PlayerIds)
         {
-            Rpcs.RpcId(id, "CreateNewPlayer", oldIds);
+            ServerManager.ClientRpcs.RpcId(id, "CreateNewPlayer", oldIds);
         }
         PlayerIds.Add(id);
     }
