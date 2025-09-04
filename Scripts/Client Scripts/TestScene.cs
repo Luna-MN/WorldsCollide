@@ -9,9 +9,25 @@ public partial class TestScene : Node2D
     // Smoothing config
     private const float SmoothingSpeed = 1f;   // Higher = faster convergence
     private const float SnapDistance   = 200f;  // Snap instead of lerp if correction is very large
+    private Node2D Server;
+    public override void _EnterTree()
+    {
+        try
+        {
+            Server = new Server();
+            GD.Print("I am server");
+        }
+        catch (Exception e)
+        {
+            GD.PushWarning($"Failed to create server: {e.Message}");
+            Server = new ServerConnect();
+            GD.Print("I am client");
+        }
+    }
 
     public override void _Ready()
     {
+        AddChild(Server);
         Multiplayer.ConnectedToServer += TestStuff;
         SendPositionsTimer = new Timer()
         {
@@ -43,24 +59,19 @@ public partial class TestScene : Node2D
     {
         foreach (var change in GameManager.ObjectPositions)
         {
-            var obj = GetNode<Player>(change.Key);
-            if (obj != null && obj.GlobalPosition != change.Value)
+            if (!GameManager.NodeDictionary.TryGetValue(change.Key, out var node) || node is not Player obj)
             {
-                obj.GlobalPosition = change.Value;
+                GD.Print("Object not found " + change.Key);
+                continue;
             }
-            else if (obj == null)
-            {
-                GD.Print("Object not found" + change.Key);
-            }
-            
+
+            // Never correct the locally controlled player here; let physics drive it.
             if (obj.IsPlayer)
                 continue;
 
-            
             Vector2 current = obj.GlobalPosition;
             Vector2 target  = change.Value;
 
-            
             // Large corrections: snap (teleports or big desyncs)
             float distance = current.DistanceTo(target);
             if (distance > SnapDistance)
@@ -69,18 +80,21 @@ public partial class TestScene : Node2D
                 continue;
             }
 
-            // Smoothly approach target using exponential smoothing
-            float weight = 1f - Mathf.Exp(-SmoothingSpeed * (float)delta); // stable across frame rates
+            // Smoothly approach target using exponential smoothing (frame-rate independent)
+            float weight = 1f - Mathf.Exp(-SmoothingSpeed * (float)delta);
             obj.GlobalPosition = current.Lerp(target, weight);
         }
+
     }
 
     private void TestStuff()
     {
         var player = GetNode<Player>("Player");
+        var id = Multiplayer.GetUniqueId();
         player.IsPlayer = true;
-        player.Name = "Player " + Multiplayer.GetUniqueId();
-        player.Movement.playerId = player.Name.ToString();
+        player.Name = "Player " + id;
+        player.Movement.playerId = id;
+        GameManager.NodeDictionary.Add(id, player);
         SendPositionsTimer.Start();
     }
 

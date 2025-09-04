@@ -16,6 +16,7 @@ public partial class ClientRpc : Node2D
         var newPlayer = Player.Instantiate<Player>();
         newPlayer.Name = "Player " + id;
         newPlayer.IsPlayer = false;
+        newPlayer.Movement.playerId = (int)id;
         Node2D Parent;
         var parents = GetTree().Root.GetChildren();
         foreach (var parent in parents)
@@ -25,12 +26,13 @@ public partial class ClientRpc : Node2D
                 continue;
             }
             parent.AddChild(newPlayer);
+            GameManager.NodeDictionary.Add((int)id, newPlayer);;
             break;
         }
     }
     // Client -> Send positions that have changed since the last call
     [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void SendPositions(Godot.Collections.Dictionary<string, Vector2> ObjectPositionChanges)
+    public void SendPositions(Godot.Collections.Dictionary<int, Vector2> ObjectPositionChanges)
     {
         foreach (var change in ObjectPositionChanges)
         {

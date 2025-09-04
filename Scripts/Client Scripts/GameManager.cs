@@ -7,20 +7,22 @@ public static class GameManager
     public static long LocalID;
     public static ServerRpc ServerRpcs;
     public static ClientRpc ClientRpcs;
-    public static Dictionary<string, Vector2> ObjectPositions = new Dictionary<string, Vector2>();
-    public static Godot.Collections.Dictionary<string, Vector2> ChangedPositions = new();
-    public static void ChangedPosition(string name, Vector2 position)
+    public static Dictionary<int, Vector2> ObjectPositions = new Dictionary<int, Vector2>();
+    public static Godot.Collections.Dictionary<int, Vector2> ChangedPositions = new();
+    
+    public static Dictionary<int, Node2D> NodeDictionary = new Dictionary<int, Node2D>();
+    public static void ChangedPosition(int id, Vector2 position)
     {
-        if (ObjectPositions.TryGetValue(name, out var localPos))
+        if (ObjectPositions.TryGetValue(id, out var localPos))
         {
             if (localPos != position)
             {
-                ChangedPositions[name] = position;
-                ObjectPositions[name] = position;
+                ChangedPositions[id] = position;
+                ObjectPositions[id] = position;
                 return;
             }
         }
-        ObjectPositions[name] = position;
-        ChangedPositions[name] = position;
+        ObjectPositions[id] = position;
+        ChangedPositions[id] = position;
     }
 }

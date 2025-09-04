@@ -2,38 +2,37 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Server : Node
+public partial class Server : Node2D
 {
     private ENetMultiplayerPeer Network;
     [Export]
     public int Port = 7777;
 
     private List<long> PlayerIds = new List<long>();
-    public override void _Ready()
+    public Server()
     {
         CreateServer();
-        ServerManager.ServerRpcs = GetNode<ServerRpc>("/root/ServerRpc");
-        ServerManager.ClientRpcs = GetNode<ClientRpc>("/root/ClientRpc");
-        
     }
     private void CreateServer()
     {
         Network = new ENetMultiplayerPeer();
-        Network.CreateServer(Port);
-        
-        if (Network.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
+        var err = Network.CreateServer(Port);
+        if (err != Error.Ok)
         {
-            GD.Print("Failed to create server");
+            // Make the failure explicit
+            throw new InvalidOperationException($"Failed to create server on port {Port}: {err}");
         }
-        else
-        {
-            GD.Print("Server created");
-        }
-        
-        Multiplayer.MultiplayerPeer = Network;
-        Network.PeerConnected += OnPeerConnected;
 
     }
+    public override void _Ready()
+    {
+        ServerManager.ServerRpcs = GetNode<ServerRpc>("/root/ServerRpc");
+        ServerManager.ClientRpcs = GetNode<ClientRpc>("/root/ClientRpc");
+        Multiplayer.MultiplayerPeer = Network;
+        Network.PeerConnected += OnPeerConnected;
+    }
+
+
  
     private void OnPeerConnected(long id)
     {

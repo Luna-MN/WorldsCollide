@@ -4,10 +4,13 @@
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_wicfy"]
 [ext_resource type="PackedScene" uid="uid://0iejaa850ddf" path="res://player.tscn" id="2_cguwc"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_wicfy")
 
 [node name="Server" parent="." instance=ExtResource("1_mncer")]
 
 [node name="Player" parent="." instance=ExtResource("2_cguwc")]
 position = Vector2(114.2, 109.7)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath(".")

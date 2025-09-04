@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://0iejaa850ddf"]
+[gd_scene load_steps=6 format=3 uid="uid://0iejaa850ddf"]
 
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Player.cs" id="1_onrkg"]
-[ext_resource type="Script" uid="uid://byuv40vvspnef" path="res://Scripts/Client Scripts/Movement.cs" id="2_onrkg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cguwc"]
 
@@ -10,16 +9,25 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("Movement")]
-script = ExtResource("1_onrkg")
-Movement = NodePath("Movement")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(53, 52)
 
-[node name="Movement" type="Node2D" parent="."]
-script = ExtResource("2_onrkg")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Movement")]
+script = ExtResource("1_onrkg")
+Movement = NodePath("")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 scale = Vector2(55.5, 52.5)
 mesh = SubResource("BoxMesh_cguwc")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="CharacterSync" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="InputSync" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_onrkg")
