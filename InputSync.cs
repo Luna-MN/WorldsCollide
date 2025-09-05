@@ -10,7 +10,7 @@ public partial class InputSync : MultiplayerSynchronizer
         if(GetMultiplayerAuthority() != Multiplayer.GetUniqueId())
         {
             SetPhysicsProcess(false);
-        };
+        }
     }
 
     public override void _PhysicsProcess(double delta)

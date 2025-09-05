@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cidnbtxv81q7l"]
+[gd_scene load_steps=3 format=3 uid="uid://cidnbtxv81q7l"]
 
 [ext_resource type="Script" uid="uid://da25rip15e7dp" path="res://Scripts/Client Scripts/ServerConnect.cs" id="1_m3k61"]
+[ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://player.tscn" id="2_0pg33"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_m3k61")
+Player = ExtResource("2_0pg33")

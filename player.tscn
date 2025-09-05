@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://0iejaa850ddf"]
+[gd_scene load_steps=7 format=3 uid="uid://qgdu76e3yi45"]
 
-[ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Player.cs" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://InputSync.cs" id="2_onrkg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cguwc"]
@@ -17,6 +17,9 @@ size = Vector2(53, 52)
 properties/0/path = NodePath("InputSync:moveInput")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("InputSync:mousePosition")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inputSync", "PositionSync")]
 script = ExtResource("1_onrkg")

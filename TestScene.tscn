@@ -1,16 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ciqntsdkcedin"]
+[gd_scene load_steps=3 format=3 uid="uid://ciqntsdkcedin"]
 
-[ext_resource type="PackedScene" uid="uid://cidnbtxv81q7l" path="res://ServerConnect.tscn" id="1_mncer"]
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_wicfy"]
 [ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Camera.cs" id="3_wicfy"]
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_wicfy")
 
-[node name="Server" parent="." instance=ExtResource("1_mncer")]
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://0iejaa850ddf")
+_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45")
 spawn_path = NodePath(".")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -28,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Control"]
-custom_minimum_size = Vector2(211.51, 52.885)
+custom_minimum_size = Vector2(25.695, 27.055)
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 7
@@ -42,18 +39,27 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextEdit" type="TextEdit" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
-custom_minimum_size = Vector2(228.995, 42.64)
+[node name="1" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
-text = "aaaaaaaa"
-editable = false
-context_menu_enabled = false
-emoji_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
-middle_mouse_paste_enabled = false
-empty_selection_clipboard_enabled = false
-wrap_mode = 1
+text = "1"
+
+[node name="2" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "2"
+
+[node name="3" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "3"
+
+[node name="4" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "4"
+
+[node name="5" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "5"
