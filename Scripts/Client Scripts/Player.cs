@@ -6,10 +6,13 @@ public partial class Player : CharacterBody2D
     public long ID;
     [Export] public Movement Movement;
     [Export] public float Speed = 200f;
+    [Export] public InputSync inputSync;
+    [Export] public MultiplayerSynchronizer PositionSync;
     public bool IsPlayer { get; set; }
     public override void _EnterTree()
     {
         SetMultiplayerAuthority(Convert.ToInt32(Name));
+        PositionSync.SetMultiplayerAuthority(1);
     }
 
     public override void _Ready()
@@ -18,32 +21,19 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        
+        if (Multiplayer.IsServer())
+        {
+            Move((float)delta);
+        }
     }
 
-    public void Move()
+    public void Move(float delta)
     {
-        if (!IsPlayer) return;
-
         // Godot: up is negative Y
-        Vector2 input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+        Vector2 input = inputSync.moveInput;
         if (input != Vector2.Zero)
         {
-            GlobalPosition += input.Normalized() * Speed;
-            var pos = GlobalPosition;
-            // if (pos.DistanceSquaredTo(lastSentPosition) < SendDistanceThreshold * SendDistanceThreshold)
-            //     return;
-            //
-            // try
-            // {
-            //     // This must be non-blocking. If it blocks, it will stall the timer callback (and the main thread).
-            //     GameManager.ChangedPosition(playerId, pos);
-            //     lastSentPosition = pos;
-            // }
-            // catch (Exception e)
-            // {
-            //     GD.PushWarning($"ChangedPosition threw: {e.Message}");
-            // }
+            Position += input.Normalized() * Speed * delta;
         }
     }
 }

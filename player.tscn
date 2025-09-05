@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://0iejaa850ddf"]
+[gd_scene load_steps=7 format=3 uid="uid://0iejaa850ddf"]
 
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Player.cs" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://InputSync.cs" id="2_onrkg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cguwc"]
 
@@ -13,9 +14,14 @@ properties/0/replication_mode = 1
 size = Vector2(53, 52)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
+properties/0/path = NodePath("InputSync:moveInput")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inputSync", "PositionSync")]
 script = ExtResource("1_onrkg")
+inputSync = NodePath("InputSync")
+PositionSync = NodePath("CharacterSync")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 scale = Vector2(55.5, 52.5)
@@ -30,3 +36,4 @@ shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="InputSync" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_onrkg")
+script = ExtResource("2_onrkg")
