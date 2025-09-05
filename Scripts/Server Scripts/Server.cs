@@ -28,23 +28,9 @@ public partial class Server : Node2D
     {
         ServerManager.ServerRpcs = GetNode<ServerRpc>("/root/ServerRpc");
         ServerManager.ClientRpcs = GetNode<ClientRpc>("/root/ClientRpc");
+        ServerManager.spawner = GetParent().GetNode<MultiplayerSpawner>("MultiplayerSpawner");
         Multiplayer.MultiplayerPeer = Network;
-        Network.PeerConnected += OnPeerConnected;
     }
 
-
- 
-    private void OnPeerConnected(long id)
-    {
-        GD.Print("Peer connected");
-
-
-        GD.Print("Creating player");
-        ServerManager.ClientRpcs.Rpc("CreateNewPlayer", id);
-        foreach (var oldIds in PlayerIds)
-        {
-            ServerManager.ClientRpcs.RpcId(id, "CreateNewPlayer", oldIds);
-        }
-        PlayerIds.Add(id);
-    }
+    
 }

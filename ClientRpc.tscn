@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://3ts5stf1nvhk"]
+[gd_scene load_steps=2 format=3 uid="uid://3ts5stf1nvhk"]
 
 [ext_resource type="Script" uid="uid://brleq5dplqaa" path="res://Scripts/Client Scripts/ClientRpc.cs" id="1_2e81d"]
-[ext_resource type="PackedScene" uid="uid://0iejaa850ddf" path="res://player.tscn" id="2_rg0h1"]
 
 [node name="ClientRpc" type="Node2D"]
 script = ExtResource("1_2e81d")
-Player = ExtResource("2_rg0h1")

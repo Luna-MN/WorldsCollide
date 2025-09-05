@@ -7,6 +7,11 @@ public partial class Player : CharacterBody2D
     [Export] public Movement Movement;
     [Export] public float Speed = 200f;
     public bool IsPlayer { get; set; }
+    public override void _EnterTree()
+    {
+        SetMultiplayerAuthority(Convert.ToInt32(Name));
+    }
+
     public override void _Ready()
     {
     }

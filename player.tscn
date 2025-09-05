@@ -14,9 +14,8 @@ size = Vector2(53, 52)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Movement")]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
-Movement = NodePath("")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 scale = Vector2(55.5, 52.5)

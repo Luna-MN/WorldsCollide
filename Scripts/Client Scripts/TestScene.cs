@@ -28,7 +28,11 @@ public partial class TestScene : Node2D
     public override void _Ready()
     {
         AddChild(Server);
-        Multiplayer.ConnectedToServer += TestStuff;
+        if (Server is ServerConnect)
+        {
+            Multiplayer.ConnectedToServer += TestStuff;
+        }
+
         SendPositionsTimer = new Timer()
         {
             Autostart = false,
@@ -89,13 +93,7 @@ public partial class TestScene : Node2D
 
     private void TestStuff()
     {
-        var player = GetNode<Player>("Player");
-        var id = Multiplayer.GetUniqueId();
-        player.IsPlayer = true;
-        player.Name = "Player " + id;
-        player.Movement.playerId = id;
-        GameManager.NodeDictionary.Add(id, player);
-        SendPositionsTimer.Start();
+        GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId());
     }
 
 
