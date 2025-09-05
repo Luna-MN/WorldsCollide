@@ -4,7 +4,6 @@ using System;
 public partial class Player : CharacterBody2D
 {
     public long ID;
-    [Export] public Movement Movement;
     [Export] public float Speed = 200f;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
@@ -30,7 +29,7 @@ public partial class Player : CharacterBody2D
     public void Move(float delta)
     {
         // Godot: up is negative Y
-        Vector2 input = inputSync.moveInput;
+        Vector2 input = inputSync.moveInput.Normalized();
         if (input != Vector2.Zero)
         {
             Position += input.Normalized() * Speed * delta;

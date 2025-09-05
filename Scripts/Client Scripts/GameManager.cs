@@ -11,6 +11,8 @@ public static class GameManager
     public static Godot.Collections.Dictionary<int, Vector2> ChangedPositions = new();
     
     public static Dictionary<int, Node2D> NodeDictionary = new Dictionary<int, Node2D>();
+    
+    public static Camera2D camera;
     public static void ChangedPosition(int id, Vector2 position)
     {
         if (ObjectPositions.TryGetValue(id, out var localPos))

@@ -31,6 +31,7 @@ public partial class TestScene : Node2D
         if (Server is ServerConnect)
         {
             Multiplayer.ConnectedToServer += TestStuff;
+            GameManager.camera = GetNode<Camera2D>("Camera2D");
         }
 
         SendPositionsTimer = new Timer()
