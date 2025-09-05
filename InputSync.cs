@@ -4,6 +4,7 @@ using System;
 public partial class InputSync : MultiplayerSynchronizer
 {
     [Export] public Vector2 moveInput;
+    [Export] public Vector2 mousePosition;
     public override void _Ready()
     {
         if(GetMultiplayerAuthority() != Multiplayer.GetUniqueId())

@@ -7,6 +7,7 @@ public partial class Camera : Camera2D
     private bool found;
     public override void _Ready()
     {
+        if (Multiplayer.IsServer()) return;
         player = GetParent().GetNode<Node2D>($"MultiplayerSpawner/{Multiplayer.GetUniqueId()}");
         if (player != null)
         {
@@ -28,6 +29,5 @@ public partial class Camera : Camera2D
         {
             GlobalPosition = player.GlobalPosition;
         }
-
     }
 }

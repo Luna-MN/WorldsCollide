@@ -24,6 +24,10 @@ public partial class Player : CharacterBody2D
         {
             Move((float)delta);
         }
+        else if (Multiplayer.GetUniqueId() == Convert.ToInt32(Name))
+        {
+            inputSync.mousePosition = GetGlobalMousePosition();
+        }
     }
 
     public void Move(float delta)
