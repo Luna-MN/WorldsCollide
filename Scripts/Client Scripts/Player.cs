@@ -3,7 +3,7 @@ using System;
 [GlobalClass]
 public partial class Player : Character
 {
-    // should be able to ignore this
+    // Should be able to ignore this class (see ClassRpc)
     protected string ClassName = "Class1";
     #region Input Handling
     public Button TB1, TB2, TB3, TB4, TB5;
@@ -23,25 +23,30 @@ public partial class Player : Character
     {
         if (Input.IsActionJustPressed("skill_1"))
         {
+            Skill1();
             SetUI(TB1);
         }
         if (Input.IsActionPressed("skill_2"))
         {
+            Skill2();
             SetUI(TB2);
         }
 
         if (Input.IsActionJustPressed("skill_3"))
         {
+            Skill3();
             SetUI(TB3);
         }
 
         if (Input.IsActionJustPressed("skill_4"))
         {
+            Skill4();
             SetUI(TB4);
         }
 
         if (Input.IsActionJustPressed("skill_5"))
         {
+            Skill5();
             SetUI(TB5);
         }
         if (Input.IsActionJustReleased("skill_1"))
@@ -68,7 +73,6 @@ public partial class Player : Character
 
         if (@event is InputEventMouseButton Button && Button.Pressed)
         {
-            GD.Print("Clicked");
             if (Button.ButtonIndex == MouseButton.Left)
             {
                 LeftClick();
@@ -85,13 +89,33 @@ public partial class Player : Character
         button.Modulate = new Color(1, 1, 1);
     }
     #endregion
-    
-    #region skill stuff
-    protected virtual void LeftClick()
-    {
-        GD.Print("Left Clicked");
-        GameManager.ClassRpcs.RpcId(1, ClassName + "_LeftClick", Multiplayer.GetUniqueId());
-    }
-    
+    #region Inputs
+        protected virtual void LeftClick()
+        {
+            GameManager.ClassRpcs.RpcId(1, ClassName + "_LeftClick", Multiplayer.GetUniqueId());
+        }
+        #region skill stuff
+            protected virtual void Skill1()
+            {
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill1", Multiplayer.GetUniqueId());
+            }
+            protected virtual void Skill2()
+            {
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill2", Multiplayer.GetUniqueId());
+            }
+
+            protected virtual void Skill3()
+            {
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill3", Multiplayer.GetUniqueId());
+            }
+            protected virtual void Skill4()
+            {
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill4", Multiplayer.GetUniqueId());
+            }
+            protected virtual void Skill5()
+            {
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill5", Multiplayer.GetUniqueId());
+            }
+        #endregion
     #endregion
 }
