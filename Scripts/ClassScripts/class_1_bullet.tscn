@@ -15,9 +15,10 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Class1_Bullet" type="Node2D"]
+[node name="Class1_Bullet" type="Node2D" node_paths=PackedStringArray("Area")]
 modulate = Color(0.955766, 0.889708, 0.418238, 1)
 script = ExtResource("1_iorkc")
+Area = NodePath("Area2D")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 scale = Vector2(20, 5)

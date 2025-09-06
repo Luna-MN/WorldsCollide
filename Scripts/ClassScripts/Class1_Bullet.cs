@@ -5,6 +5,8 @@ public partial class Class1_Bullet : Node2D
 {
     public Vector2 MoveDirection;
     public long Id;
+    [Export]
+    public Area2D Area;
     
     [ExportGroup("Properties")]
     [Export]
@@ -23,6 +25,7 @@ public partial class Class1_Bullet : Node2D
     }
     public override void _Ready()
     {
+        // Bullet timeout
         Timer timer = new Timer()
         {
             WaitTime = RangeTime,
@@ -36,6 +39,9 @@ public partial class Class1_Bullet : Node2D
         };
         AddChild(timer);
         LookAt(GlobalPosition + MoveDirection);
+        
+        //On Bullet Hit
+        Area.BodyEntered += OnBulletHit;
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -46,6 +52,14 @@ public partial class Class1_Bullet : Node2D
         {
             Position += MoveDirection * ((float)delta * Speed / length);
         }
-
+    }
+    public virtual void OnBulletHit(Node2D Body)
+    {
+        if(!Multiplayer.IsServer()) return;
+        if (Body is Player p)
+        {
+            if(p.Name == Id.ToString()) return;
+        }
+        QueueFree();
     }
 }
