@@ -15,8 +15,9 @@ public partial class ClassRpc : Node2D
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Class1_Bullet.Instantiate<Class1_Bullet>();
-        bullet.MoveDirection = mousePos.Normalized();
+        bullet.MoveDirection = mousePos - Character.GlobalPosition;
         bullet.GlobalPosition = Character.GlobalPosition;
+        bullet.Id = id;
         ServerManager.spawner.AddChild(bullet, true);
     }
     

@@ -4,10 +4,9 @@ using System;
 public partial class Player : Character
 {
     // should be able to ignore this
-
+    protected string ClassName = "Class1";
     #region Input Handling
     public Button TB1, TB2, TB3, TB4, TB5;
-    protected string ClassName = "Class1";
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
@@ -86,15 +85,13 @@ public partial class Player : Character
         button.Modulate = new Color(1, 1, 1);
     }
     #endregion
+    
     #region skill stuff
-
     protected virtual void LeftClick()
     {
         GD.Print("Left Clicked");
         GameManager.ClassRpcs.RpcId(1, ClassName + "_LeftClick", Multiplayer.GetUniqueId());
     }
     
-    
     #endregion
-    
 }

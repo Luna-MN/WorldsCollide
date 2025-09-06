@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjwb7dl5et8f5"]
+[gd_scene load_steps=5 format=3 uid="uid://cjwb7dl5et8f5"]
 
 [ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Class1_Bullet.cs" id="1_iorkc"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_iorkc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]
+size = Vector2(20, 6)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iorkc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Class1_Bullet" type="Node2D"]
+modulate = Color(0.955766, 0.889708, 0.418238, 1)
 script = ExtResource("1_iorkc")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 5)
+mesh = SubResource("BoxMesh_iorkc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_iorkc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_iorkc")
