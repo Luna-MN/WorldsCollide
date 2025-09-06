@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkow3uekdikc4"]
+[gd_scene load_steps=4 format=3 uid="uid://dkow3uekdikc4"]
 
-[ext_resource type="Script" uid="uid://5u1rtibjq68g" path="res://Scripts/ClassScripts/EquipmentRpc.cs" id="1_13vvj"]
+[ext_resource type="Script" uid="uid://debo0nt1ykerh" path="res://Scripts/ClassScripts/EquipmentRpc.cs" id="1_13vvj"]
 [ext_resource type="PackedScene" uid="uid://cjwb7dl5et8f5" path="res://Scripts/ClassScripts/Gun_bullet.tscn" id="2_jsxp8"]
+[ext_resource type="PackedScene" uid="uid://ul6rh048aliv" path="res://Scripts/ClassScripts/Melee_Slash.tscn" id="3_pubod"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_13vvj")
 Basic_Bullet = ExtResource("2_jsxp8")
+Melee_Slash = ExtResource("3_pubod")

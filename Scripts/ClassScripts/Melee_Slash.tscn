@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ul6rh048aliv"]
 
-[ext_resource type="Script" uid="uid://bmne1wmp3uncw" path="res://Scripts/ClassScripts/MeleeSlash.cs" id="1_uirkt"]
+[ext_resource type="Script" uid="uid://bmne1wmp3uncw" path="res://Scripts/ClassScripts/Melee_Slash.cs" id="1_uirkt"]
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="2_uirkt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]
@@ -14,18 +14,20 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Melee_Slash" type="Node2D"]
+[node name="Melee_Slash" type="Node2D" node_paths=PackedStringArray("Area")]
 script = ExtResource("1_uirkt")
+Area = NodePath("MeshInstance2D/Area2D")
 RangeTime = 0.2
 
 [node name="MeshInstance2D" type="Sprite2D" parent="."]
+position = Vector2(50.075, -20.26)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("2_uirkt")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="MeshInstance2D"]
+scale = Vector2(0.714286, 0.714286)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1.5, 0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D/Area2D"]
 shape = SubResource("RectangleShape2D_iorkc")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
