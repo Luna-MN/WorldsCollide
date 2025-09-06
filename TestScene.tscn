@@ -7,7 +7,7 @@
 script = ExtResource("1_wicfy")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45")
+_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://cjwb7dl5et8f5")
 spawn_path = NodePath(".")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -23,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Control"]
 custom_minimum_size = Vector2(25.695, 27.055)
@@ -38,6 +39,7 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="1" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)

@@ -62,33 +62,7 @@ public partial class TestScene : Node2D
     
     public override void _Process(double delta)
     {
-        foreach (var change in GameManager.ObjectPositions)
-        {
-            if (!GameManager.NodeDictionary.TryGetValue(change.Key, out var node) || node is not Player obj)
-            {
-                GD.Print("Object not found " + change.Key);
-                continue;
-            }
 
-            // Never correct the locally controlled player here; let physics drive it.
-            if (obj.IsPlayer)
-                continue;
-
-            Vector2 current = obj.GlobalPosition;
-            Vector2 target  = change.Value;
-
-            // Large corrections: snap (teleports or big desyncs)
-            float distance = current.DistanceTo(target);
-            if (distance > SnapDistance)
-            {
-                obj.GlobalPosition = target;
-                continue;
-            }
-
-            // Smoothly approach target using exponential smoothing (frame-rate independent)
-            float weight = 1f - Mathf.Exp(-SmoothingSpeed * (float)delta);
-            obj.GlobalPosition = current.Lerp(target, weight);
-        }
 
     }
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjwb7dl5et8f5"]
+
+[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Class1_Bullet.cs" id="1_iorkc"]
+
+[node name="Class1_Bullet" type="Node2D"]
+script = ExtResource("1_iorkc")
