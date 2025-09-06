@@ -15,7 +15,7 @@ public partial class ServerRpc : Node2D
         if(id == GameManager.LocalID) return;
         var newPlayer = Player.Instantiate<Player>();
         newPlayer.Name = id.ToString();
-        newPlayer.IsPlayer = false;
+        
         ServerManager.spawner.AddChild(newPlayer, true);
         ServerManager.NodeDictionary.Add(id, newPlayer);
         GD.Print("New player created" + id);

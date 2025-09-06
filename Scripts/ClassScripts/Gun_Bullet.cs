@@ -35,6 +35,7 @@ public partial class Gun_Bullet : Node2D
         };
         timer.Timeout += () =>
         {
+            if(!Multiplayer.IsServer()) return;
             QueueFree();
         };
         AddChild(timer);
@@ -50,7 +51,7 @@ public partial class Gun_Bullet : Node2D
         float length = MoveDirection.Length();
         if (length > 0)
         {
-            Position += MoveDirection * ((float)delta * Speed / length);
+            GlobalPosition += MoveDirection * ((float)delta * Speed / length);
         }
     }
     public virtual void OnBulletHit(Node2D Body)

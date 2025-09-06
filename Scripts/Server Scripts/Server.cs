@@ -22,7 +22,6 @@ public partial class Server : Node2D
             // Make the failure explicit
             throw new InvalidOperationException($"Failed to create server on port {Port}: {err}");
         }
-
     }
     public override void _Ready()
     {

@@ -12,7 +12,7 @@ public partial class Player : Character
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
-        {
+        {   
             TB1 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/1");
             TB2 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/2");
             TB3 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/3");
@@ -23,6 +23,7 @@ public partial class Player : Character
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        if (GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) return;
         if (Input.IsActionJustPressed("skill_1"))
         {
             Skill1();
@@ -95,30 +96,30 @@ public partial class Player : Character
         #region Equipment
             protected virtual void LeftClick()
             {
-                GameManager.EquipmentRpcs.RpcId(1, PrimaryEquipment + "_LeftClick", Multiplayer.GetUniqueId());
+                GameManager.EquipmentRpcs.RpcId(1, PrimaryEquipment + "_LeftClick", Convert.ToInt32(Name));
             }
         #endregion
         #region skill stuff
             protected virtual void Skill1()
             {
-                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill1", Multiplayer.GetUniqueId());
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill1", Convert.ToInt32(Name));
             }
             protected virtual void Skill2()
             {
-                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill2", Multiplayer.GetUniqueId());
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill2", Convert.ToInt32(Name));
             }
 
             protected virtual void Skill3()
             {
-                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill3", Multiplayer.GetUniqueId());
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill3", Convert.ToInt32(Name));
             }
             protected virtual void Skill4()
             {
-                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill4", Multiplayer.GetUniqueId());
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill4", Convert.ToInt32(Name));
             }
             protected virtual void Skill5()
             {
-                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill5", Multiplayer.GetUniqueId());
+                GameManager.ClassRpcs.RpcId(1, ClassName + "_Skill5", Convert.ToInt32(Name));
             }
         #endregion
     #endregion

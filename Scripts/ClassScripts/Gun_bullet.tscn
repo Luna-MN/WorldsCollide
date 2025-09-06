@@ -8,14 +8,14 @@
 size = Vector2(20, 6)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iorkc"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath(".:rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
+properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Class1_Bullet" type="Node2D" node_paths=PackedStringArray("Area")]
+[node name="Gun_Bullet" type="Node2D" node_paths=PackedStringArray("Area")]
 modulate = Color(0.955766, 0.889708, 0.418238, 1)
 script = ExtResource("1_iorkc")
 Area = NodePath("Area2D")
