@@ -3,7 +3,7 @@ using System;
 [GlobalClass]
 public partial class Character : CharacterBody2D
 {
-    public long ID;
+    public int ID;
     [Export] public float Speed = 200f;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
@@ -17,7 +17,6 @@ public partial class Character : CharacterBody2D
     public override void _Ready()
     {
     }
-
     public override void _PhysicsProcess(double delta)
     {
         if (Multiplayer.IsServer())

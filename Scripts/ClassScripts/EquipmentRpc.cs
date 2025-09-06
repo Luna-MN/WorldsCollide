@@ -7,7 +7,7 @@ public partial class EquipmentRpc : Node2D
     [Export]
     public PackedScene Basic_Bullet;
         
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void Gun_LeftClick(int id)
     {
         var Character = ServerManager.NodeDictionary[id];

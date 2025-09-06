@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WorldsCollide"
-run/main_scene="uid://b70sv8dflvf0o"
+run/main_scene="uid://ciqntsdkcedin"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
