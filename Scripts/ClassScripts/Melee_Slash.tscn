@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ul6rh048aliv"]
+
+[ext_resource type="Script" uid="uid://bmne1wmp3uncw" path="res://Scripts/ClassScripts/MeleeSlash.cs" id="1_uirkt"]
+[ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="2_uirkt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]
+size = Vector2(97, 87)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iorkc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Melee_Slash" type="Node2D"]
+script = ExtResource("1_uirkt")
+RangeTime = 0.2
+
+[node name="MeshInstance2D" type="Sprite2D" parent="."]
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_uirkt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_iorkc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_iorkc")

@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+[GlobalClass]
 public partial class Gun_Bullet : Node2D
 {
     public Vector2 MoveDirection;
