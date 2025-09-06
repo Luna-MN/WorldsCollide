@@ -18,9 +18,9 @@ public partial class EquipmentRpc : Node2D
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Basic_Bullet.Instantiate<Gun_Bullet>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
-        bullet.GlobalPosition = Character.GlobalPosition;
         bullet.Id = id;
         ServerManager.spawner.AddChild(bullet, true);
+        bullet.GlobalPosition = Character.GlobalPosition;
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]

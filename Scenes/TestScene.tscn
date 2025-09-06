@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciqntsdkcedin"]
 
-[ext_resource type="Script" uid="uid://xhbdddojtcn" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
-[ext_resource type="Script" uid="uid://b1v381cd68jgj" path="res://Scripts/Client Scripts/Camera.cs" id="2_8k7wh"]
+[ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
+[ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Scripts/Client Scripts/Camera.cs" id="2_8k7wh"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="3_8k7wh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iufkg"]
@@ -11,7 +11,7 @@ size = Vector2(129, 129)
 script = ExtResource("1_5lt6y")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://cjwb7dl5et8f5", "uid://ul6rh048aliv")
+_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://cjwb7dl5et8f5")
 spawn_path = NodePath(".")
 
 [node name="Camera2D" type="Camera2D" parent="."]

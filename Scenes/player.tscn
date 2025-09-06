@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://qgdu76e3yi45"]
 
-[ext_resource type="Script" uid="uid://b0voaam7hoyic" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="2_vgqql"]
-[ext_resource type="Script" uid="uid://dhl73kpc5wgpr" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]
 properties/0/path = NodePath(".:position")
