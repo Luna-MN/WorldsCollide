@@ -8,5 +8,6 @@ public static class ServerManager
     public static ClientRpc ClientRpcs;
     public static ClassRpc ClassRpcs;
     public static MultiplayerSpawner spawner;
+    public static EquipmentRpc EquipmentRpcs;
     public static Dictionary<int, Character> NodeDictionary = new Dictionary<int, Character>();
 }

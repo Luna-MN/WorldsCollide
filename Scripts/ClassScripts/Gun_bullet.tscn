@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjwb7dl5et8f5"]
 
-[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Class1_Bullet.cs" id="1_iorkc"]
+[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Gun_Bullet.cs" id="1_iorkc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_iorkc"]
 

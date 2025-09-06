@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 ServerRpc="*res://Scenes/ServerRpc.tscn"
 ClientRpc="*res://Scenes/ClientRpc.tscn"
 ClassRpc="*res://Scenes/ClassRpc.tscn"
+EquipmentRpc="*res://Scripts/ClassScripts/EquipmentRpc.tscn"
 
 [dotnet]
 

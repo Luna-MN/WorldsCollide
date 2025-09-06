@@ -12,6 +12,7 @@ public partial class ServerConnect : Node2D
         GameManager.ServerRpcs = GetNode<ServerRpc>("/root/ServerRpc");
         GameManager.ClientRpcs = GetNode<ClientRpc>("/root/ClientRpc");
         GameManager.ClassRpcs = GetNode<ClassRpc>("/root/ClassRpc");
+        GameManager.EquipmentRpcs = GetNode<EquipmentRpc>("/root/EquipmentRpc");
         Connect();
     }
     private async void Connect()

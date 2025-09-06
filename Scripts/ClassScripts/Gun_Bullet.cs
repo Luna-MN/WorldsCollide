@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Class1_Bullet : Node2D
+public partial class Gun_Bullet : Node2D
 {
     public Vector2 MoveDirection;
     public long Id;

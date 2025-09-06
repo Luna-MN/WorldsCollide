@@ -5,6 +5,8 @@ public partial class Player : Character
 {
     // Should be able to ignore this class (see ClassRpc)
     protected string ClassName = "Class1";
+    public string PrimaryEquipment = "Gun";
+    
     #region Input Handling
     public Button TB1, TB2, TB3, TB4, TB5;
     public override void _Ready()
@@ -90,10 +92,12 @@ public partial class Player : Character
     }
     #endregion
     #region Inputs
-        protected virtual void LeftClick()
-        {
-            GameManager.ClassRpcs.RpcId(1, ClassName + "_LeftClick", Multiplayer.GetUniqueId());
-        }
+        #region Equipment
+            protected virtual void LeftClick()
+            {
+                GameManager.EquipmentRpcs.RpcId(1, PrimaryEquipment + "_LeftClick", Multiplayer.GetUniqueId());
+            }
+        #endregion
         #region skill stuff
             protected virtual void Skill1()
             {
