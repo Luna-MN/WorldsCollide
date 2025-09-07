@@ -21,7 +21,14 @@ public partial class Character : CharacterBody2D
     public Skill[] skills;
 
     public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
-    public event Action<Node2D> OnHit;
+
+    #region Passive Veriables
+    protected  event Action<Node2D> OnHit;
+    protected  List<Timer> PassiveMoveTimer = new List<Timer>();
+    protected event Action OnMove;
+
+    #endregion
+
     public bool IsPlayer { get; set; }
     public override void _EnterTree()
     {
@@ -31,17 +38,41 @@ public partial class Character : CharacterBody2D
 
     public override void _Ready()
     {
+        SetSkills();
+    }
+    public void SetSkills()
+    {
         foreach (var skill in skills)
         {
             if (skill.IsPassive)
             {
+                var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy );
                 switch (skill.passiveType)
                 {
                     case Skill.PassiveType.OnHit:
-                        GD.Print("Skill" + (skills.ToList().IndexOf(skill) + 1));
-                        var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy );
-                        GD.Print(info);
-                        OnHit += (Node2D body) => { info.Invoke(this, new object[] { }); };
+                        OnHit += _ => { info.Invoke(this, new object[] { }); };
+                        break;
+                    case Skill.PassiveType.OnMove:
+                        var foundTimer = PassiveMoveTimer.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
+                        if (foundTimer == null)
+                        {
+                            foundTimer = new Timer()
+                            {
+                                Autostart = true,
+                                OneShot = false,
+                                WaitTime = skill.TimerWaitTime,
+                            };
+                        }
+                        foundTimer.Timeout += () =>
+                        {
+                            if (!Multiplayer.IsServer()) return;
+                            info.Invoke(this, new object[] { });
+                        };
+                        if (!Multiplayer.IsServer())
+                        {
+                            AddChild(foundTimer);
+                            PassiveMoveTimer.Add(foundTimer);
+                        }
                         break;
                 }
             }
@@ -125,7 +156,12 @@ public partial class Character : CharacterBody2D
         Vector2 input = inputSync.moveInput.Normalized();
         if (input != Vector2.Zero)
         {
+            PassiveMoveTimer.ForEach(x => x.Start());
             Position += input.Normalized() * Speed * delta;
+        }
+        else
+        {
+            PassiveMoveTimer.ForEach(x => x.Stop());
         }
     }
 }
