@@ -1,7 +1,7 @@
 using Godot;
 using System;
 [GlobalClass]
-public partial class Gun_Bullet : Node2D
+public partial class Projectile : Node2D
 {
     public Vector2 MoveDirection;
     public long Id;
@@ -16,17 +16,12 @@ public partial class Gun_Bullet : Node2D
     [Export]
     public float RangeTime = 2f;
     
-    private Timer timer;
-
-
-    public override void _EnterTree()
-    {
-        SetMultiplayerAuthority(1);
-    }
+    protected Timer timer;
+    
     public override void _Ready()
     {
         // Bullet timeout
-        Timer timer = new Timer()
+        timer = new Timer()
         {
             WaitTime = RangeTime,
             OneShot = true,
@@ -44,29 +39,17 @@ public partial class Gun_Bullet : Node2D
         //On Bullet Hit
         Area.BodyEntered += OnBulletHit;
     }
-    public override void _PhysicsProcess(double delta)
+    
+    public override void _EnterTree()
     {
-        if(!Multiplayer.IsServer()) return;
-        // Move towards the move direction
-        float length = MoveDirection.Length();
-        if (length > 0)
-        {
-            GlobalPosition += MoveDirection * ((float)delta * Speed / length);
-        }
+        SetMultiplayerAuthority(1);
     }
-    public virtual void OnBulletHit(Node2D Body)
-    {
-        if(!Multiplayer.IsServer()) return;
-        if (Body is Player p)
-        {
-            if(p.Name == Id.ToString()) return;
-        }
 
+    protected virtual void OnBulletHit(Node2D Body)
+    {
         if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Player bulletOwner)
         {
             bulletOwner.CallOnHit(Body);
         }
-        QueueFree();
-        
     }
 }

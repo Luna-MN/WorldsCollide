@@ -3,28 +3,40 @@ using System;
 [GlobalClass]
 public partial class Skill : Resource
 {
+    [Export]
+    public string Name;
+
+
+    public enum PassiveType
+    {
+        None,
+        OnHit,
+        OnDeath,
+        OnMove,
+        OnKill,
+        StatBoost,
+        OnTimerTimeout
+    }
+    [ExportGroup("Passives")]
+    [Export]
+    public bool IsPassive;
+    [Export]
+    public PassiveType passiveType;
+    [Export]
+    public float TimerWaitTime = 2f;
+    [Export]
+    public float PassiveValue;
+    
+    [ExportGroup("RPC")]
+    [Export]
+    public string RpcName;
     public enum RpcLocation
     {
         ClassRpc,
         EquipmentRpc,
         EnemyRpc
     };
-
-    public enum PassiveType
-    {
-        none,
-        OnHit,
-        OnDeath,
-        OnMove,
-    }
-    [Export]
-    public string Name;
-    [Export]
-    public bool IsPassive;
-    [Export]
-    public string RpcName;
     [Export]
     public RpcLocation RpcCallLocation;
-    [Export]
-    public PassiveType passiveType;
+
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Melee_Slash : Gun_Bullet
+public partial class Melee_Slash : Projectile
 {
     public Character character;
     
@@ -10,9 +10,5 @@ public partial class Melee_Slash : Gun_Bullet
         if(!Multiplayer.IsServer()) return;
         GlobalPosition = character.GlobalPosition;
     }
-
-    public override void OnBulletHit(Node2D Body)
-    {
-        
-    }
+    
 }
