@@ -32,6 +32,7 @@ public partial class EquipmentRpc : Node2D
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
         bullet.GlobalPosition = Character.GlobalPosition;
         bullet.Id = id;
+        bullet.Name = id + "_Bullet";
         bullet.character = Character;
         ServerManager.spawner.AddChild(bullet, true);
     }

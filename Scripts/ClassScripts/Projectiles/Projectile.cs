@@ -4,6 +4,7 @@ using System;
 public partial class Projectile : Node2D
 {
     public Vector2 MoveDirection;
+    [Export]
     public long Id;
     [Export]
     public Area2D Area;
@@ -47,9 +48,9 @@ public partial class Projectile : Node2D
 
     protected virtual void OnBulletHit(Node2D Body)
     {
+        if(Name.ToString().Contains(Body.Name)) return;
+        ((Character)Body).DamageText(Damage);
         if(!Multiplayer.IsServer()) return;
-        if(Body.Name == Id.ToString()) return;
-        GD.Print(Body.Name);
         if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Character bulletOwner)
         {
             bulletOwner.CallOnHit(Body);

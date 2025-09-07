@@ -7,8 +7,11 @@ using System.Reflection;
 [GlobalClass]
 public partial class Character : CharacterBody2D
 {
+    [Export]
+    public bool IsDummy = false;
     public int ID;
-
+    [Export]
+    public PackedScene FloatingText;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
     
@@ -38,12 +41,22 @@ public partial class Character : CharacterBody2D
     #endregion
     public override void _EnterTree()
     {
+        if (IsDummy)
+        {
+            if (Multiplayer.IsServer())
+            {
+
+            }
+
+            return;
+        }
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
     }
 
     public override void _Ready()
     {
+        if (IsDummy) return;
         SetSkills();
     }
     public void SetSkills()
@@ -140,6 +153,7 @@ public partial class Character : CharacterBody2D
     #endregion
     public override void _PhysicsProcess(double delta)
     {
+        if(IsDummy) return;
         if (Multiplayer.IsServer())
         {
             Move((float)delta);
@@ -196,6 +210,7 @@ public partial class Character : CharacterBody2D
     #endregion
     public void Move(float delta)
     {
+        if (IsDummy) return;
         // Godot: up is negative Y
         Vector2 input = inputSync.moveInput.Normalized();
         if (input != Vector2.Zero)
@@ -207,6 +222,13 @@ public partial class Character : CharacterBody2D
         {
             PassiveMoveTimers.ForEach(x => x.Stop());
         }
+    }
+
+    public void DamageText(float damage)
+    {
+        var text = FloatingText.Instantiate<FloatingText>();
+        text.text.Text = damage.ToString();
+        AddChild(text, true);
     }
     public void TakeDamage(float damage, int attacker)
     {
@@ -221,7 +243,12 @@ public partial class Character : CharacterBody2D
             OnDeath?.Invoke(this);
             ServerManager.NodeDictionary[attacker].CallOnKill(this);
             ServerManager.NodeDictionary.Remove(ID);
-            QueueFree();
+            if (IsMultiplayerAuthority())
+            {
+                QueueFree();
+                ServerManager.ClientRpcs.Rpc("RemovePlayer", GetPath().ToString());
+            }
+
         }
     }
     public void Heal(float heal)
