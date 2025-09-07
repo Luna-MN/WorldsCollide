@@ -8,7 +8,7 @@ using System.Reflection;
 public partial class Character : CharacterBody2D
 {
     public int ID;
-    [Export] public float Speed = 200f;
+
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
     
@@ -24,12 +24,18 @@ public partial class Character : CharacterBody2D
 
     #region Passive Veriables
     protected  event Action<Node2D> OnHit;
-    protected  List<Timer> PassiveMoveTimer = new List<Timer>();
-    protected event Action OnMove;
-
+    protected  event Action<Node2D> OnKill;
+    protected  event Action<Node2D> OnDeath;
+    protected  List<Timer> PassiveMoveTimers = new List<Timer>();
+    protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
-
-    public bool IsPlayer { get; set; }
+    #region Player Properties
+    
+    [Export] public float Speed = 200f;
+    [Export] public float Health = 100f;
+    [Export] public float Armor = 0f;
+    
+    #endregion
     public override void _EnterTree()
     {
         SetMultiplayerAuthority(Convert.ToInt32(Name));
@@ -42,6 +48,8 @@ public partial class Character : CharacterBody2D
     }
     public void SetSkills()
     {
+        OnHit = null;
+        PassiveMoveTimers.Clear();
         foreach (var skill in skills)
         {
             if (skill.IsPassive)
@@ -52,13 +60,19 @@ public partial class Character : CharacterBody2D
                     case Skill.PassiveType.OnHit:
                         OnHit += _ => { info.Invoke(this, new object[] { }); };
                         break;
+                    case Skill.PassiveType.OnKill:
+                        OnKill += _ => { info.Invoke(this, new object[] { }); };
+                        break;
+                    case Skill.PassiveType.OnDeath:
+                        OnDeath += _ => { info.Invoke(this, new object[] { }); };
+                        break;
                     case Skill.PassiveType.OnMove:
-                        var foundTimer = PassiveMoveTimer.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
+                        var foundTimer = PassiveMoveTimers.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
                         if (foundTimer == null)
                         {
                             foundTimer = new Timer()
                             {
-                                Autostart = true,
+                                Autostart = false,
                                 OneShot = false,
                                 WaitTime = skill.TimerWaitTime,
                             };
@@ -71,8 +85,34 @@ public partial class Character : CharacterBody2D
                         if (!Multiplayer.IsServer())
                         {
                             AddChild(foundTimer);
-                            PassiveMoveTimer.Add(foundTimer);
+                            PassiveMoveTimers.Add(foundTimer);
                         }
+                        break;
+                    case Skill.PassiveType.OnTimerTimeout:
+                        var timer = PassiveMoveTimers.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
+                        if (timer == null)
+                        {
+                            timer = new Timer()
+                            {
+                                Autostart = true,
+                                OneShot = false,
+                                WaitTime = skill.TimerWaitTime,
+                            };
+                        }
+                        timer.Timeout += () =>
+                        {
+                            if (!Multiplayer.IsServer()) return;
+                            info.Invoke(this, new object[] { });
+                        };
+                        if (!Multiplayer.IsServer())
+                        {
+                            AddChild(timer);
+                            PassiveTimers.Add(timer);
+                        }
+                        break;
+                    case Skill.PassiveType.StatBoost:
+                        var stat = GetType().GetField(skill.PassiveStat);
+                        stat?.SetValue(this, (float)stat?.GetValue(this)! + skill.PassiveValue);
                         break;
                 }
             }
@@ -92,6 +132,10 @@ public partial class Character : CharacterBody2D
     public void CallOnHit(Node2D body)
     {
         OnHit?.Invoke(body);
+    }
+    public void CallOnKill(Node2D body)
+    {
+        OnKill?.Invoke(body);
     }
     #endregion
     public override void _PhysicsProcess(double delta)
@@ -156,12 +200,37 @@ public partial class Character : CharacterBody2D
         Vector2 input = inputSync.moveInput.Normalized();
         if (input != Vector2.Zero)
         {
-            PassiveMoveTimer.ForEach(x => x.Start());
+            PassiveMoveTimers.ForEach(x => x.Start());
             Position += input.Normalized() * Speed * delta;
         }
         else
         {
-            PassiveMoveTimer.ForEach(x => x.Stop());
+            PassiveMoveTimers.ForEach(x => x.Stop());
         }
+    }
+    public void TakeDamage(float damage, int attacker)
+    {
+        if (!Multiplayer.IsServer()) return;
+        Health -= damage;
+        if (Health <= 0)
+        {
+            if (this is Player p)
+            {
+                ServerManager.ServerRpcs.RpcId(1, "KillPlayer", p.Name);
+            }
+            OnDeath?.Invoke(this);
+            ServerManager.NodeDictionary[attacker].CallOnKill(this);
+            ServerManager.NodeDictionary.Remove(ID);
+            QueueFree();
+        }
+    }
+    public void Heal(float heal)
+    {
+        if (Health <= 0) return;
+        if (Health + heal > 100)
+        {
+            heal = 100 - Health;
+        }
+        Health += heal;
     }
 }

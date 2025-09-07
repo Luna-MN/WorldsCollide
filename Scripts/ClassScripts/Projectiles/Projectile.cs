@@ -10,7 +10,7 @@ public partial class Projectile : Node2D
     
     [ExportGroup("Properties")]
     [Export]
-    public int Damage;
+    public int Damage = 5;
     [Export]
     public float Speed = 400f;
     [Export]
@@ -50,9 +50,14 @@ public partial class Projectile : Node2D
         if(!Multiplayer.IsServer()) return;
         if(Body.Name == Id.ToString()) return;
         GD.Print(Body.Name);
-        if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Player bulletOwner)
+        if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Character bulletOwner)
         {
             bulletOwner.CallOnHit(Body);
+        }
+
+        if (Body is Character hitChar)
+        {
+            hitChar.TakeDamage(Damage, (int)Id);
         }
     }
 }
