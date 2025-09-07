@@ -61,6 +61,12 @@ public partial class Gun_Bullet : Node2D
         {
             if(p.Name == Id.ToString()) return;
         }
+
+        if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Player bulletOwner)
+        {
+            bulletOwner.CallOnHit(Body);
+        }
         QueueFree();
+        
     }
 }
