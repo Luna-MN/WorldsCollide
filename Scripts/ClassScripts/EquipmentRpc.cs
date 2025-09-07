@@ -19,6 +19,7 @@ public partial class EquipmentRpc : Node2D
         var bullet = Basic_Bullet.Instantiate<Gun_Bullet>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
         bullet.Id = id;
+        bullet.Name = id + "_Bullet";
         ServerManager.spawner.AddChild(bullet, true);
         bullet.GlobalPosition = Character.GlobalPosition;
     }

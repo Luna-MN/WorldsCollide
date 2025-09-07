@@ -55,7 +55,6 @@ script = ExtResource("1_6t5aa")
 FloatingText = ExtResource("2_x3wgy")
 inputSync = NodePath("InputSync")
 PositionSync = NodePath("CharacterSync")
-PrimaryEquipment = "SlashingSword"
 skills = Array[Object]([SubResource("Resource_x3wgy"), SubResource("Resource_vgqql")])
 
 [node name="Icon" type="Sprite2D" parent="."]

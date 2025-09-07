@@ -14,16 +14,25 @@ public partial class Gun_Bullet : Projectile
             GlobalPosition += MoveDirection * ((float)delta * Speed / length);
         }
     }
-    protected override void OnBulletHit(Node2D Body)
+    protected override async void OnBulletHit(Node2D Body)
     {
-        if(!Multiplayer.IsServer()) return;
-        if (Body is Player p)
-        {
-            if(p.Name == Id.ToString()) return;
-        }
-
         base.OnBulletHit(Body);
+        if(Name.ToString().Contains(Body.Name.ToString())) return;
+        if (Multiplayer.IsServer())
+        {
+            var timer = new Timer()
+            {
+                Autostart = true,
+                OneShot = true,
+                WaitTime = 0.05f
+            };
+            AddChild(timer);
+            timer.Timeout += () =>
+            {
+                timer.QueueFree();
+            };
+            await ToSignal(timer, "timeout");
+        }
         QueueFree();
-        
     }
 }
