@@ -47,6 +47,9 @@ public partial class Projectile : Node2D
 
     protected virtual void OnBulletHit(Node2D Body)
     {
+        if(!Multiplayer.IsServer()) return;
+        if(Body.Name == Id.ToString()) return;
+        GD.Print(Body.Name);
         if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Player bulletOwner)
         {
             bulletOwner.CallOnHit(Body);

@@ -45,10 +45,10 @@ properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inputSync", "PositionSync")]
 script = ExtResource("1_6t5aa")
-PrimaryEquipment = "SlashingSword"
-skills = Array[Object]([SubResource("Resource_x3wgy"), SubResource("Resource_vgqql"), null, null])
 inputSync = NodePath("InputSync")
 PositionSync = NodePath("CharacterSync")
+PrimaryEquipment = "SlashingSword"
+skills = Array[Object]([SubResource("Resource_x3wgy"), SubResource("Resource_vgqql"), null, null])
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
