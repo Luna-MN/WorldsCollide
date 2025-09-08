@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=12 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="2_vgqql"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_x3wgy"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
+[ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="3_x3wgy"]
 
 [sub_resource type="Resource" id="Resource_x3wgy"]
 script = ExtResource("2_fkybt")
-Name = ""
+Name = "Skill Thing"
+Icon = ExtResource("3_x3wgy")
 IsPassive = true
 passiveType = 1
 TimerWaitTime = 2.0
@@ -22,7 +24,8 @@ metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_vgqql"]
 script = ExtResource("2_fkybt")
-Name = ""
+Name = "Cool Skill"
+Icon = ExtResource("2_vgqql")
 IsPassive = false
 passiveType = 0
 TimerWaitTime = 2.0

@@ -3,15 +3,12 @@
 [ext_resource type="Script" uid="uid://cd65r4iwpokqx" path="res://Scenes/SkillUIPanel.cs" id="1_86x3w"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="1_uc8rf"]
 
-[node name="Skill" type="Panel" node_paths=PackedStringArray("SkillButton")]
+[node name="Skill" type="Panel"]
 custom_minimum_size = Vector2(135, 135)
 offset_right = 135.0
 offset_bottom = 135.0
 size_flags_vertical = 6
 script = ExtResource("1_86x3w")
-Icon = ExtResource("1_uc8rf")
-SkillButton = NodePath("Button")
-SkillName = "Skill 1"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0

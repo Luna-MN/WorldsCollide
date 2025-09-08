@@ -62,9 +62,13 @@ public partial class Character : CharacterBody2D
     public void SetSkills()
     {
         OnHit = null;
+        PassiveMoveTimers.ForEach(x => x.QueueFree());;
         PassiveMoveTimers.Clear();
+        PassiveTimers.ForEach(x => x.QueueFree());;
+        PassiveTimers.Clear();
         foreach (var skill in skills)
         {
+            if(!selectedSkillIndexes.Contains(skills.ToList().IndexOf(skill))) continue;
             if (skill.IsPassive)
             {
                 var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy );
@@ -173,7 +177,6 @@ public partial class Character : CharacterBody2D
     #region skill stuff
     protected virtual void Skill1()
     {
-        GD.Print("Hit");
         var skill = skills[selectedSkillIndexes[0]];
         GD.Print(CharacterName + skill.RpcName);
         var rpcNode = ResolveRpcNode(skill.RpcCallLocation);

@@ -5,7 +5,8 @@ public partial class Skill : Resource
 {
     [Export]
     public string Name;
-
+    [Export]
+    public Texture2D Icon;
 
     public enum PassiveType
     {
