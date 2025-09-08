@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://2o87ghb0ppc2"]
+
+[ext_resource type="PackedScene" uid="uid://dm1evqmmype2t" path="res://Scenes/Skill Select Button.tscn" id="1_3n5v1"]
+
+[node name="Skill Selection" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 70.0
+offset_right = -77.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Skills" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.0
+offset_top = -93.0
+offset_right = 475.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 7
+
+[node name="SkillsSelected" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -277.5
+offset_top = 10.555
+offset_right = 277.5
+offset_bottom = 145.555
+grow_horizontal = 2
+columns = 7
+
+[node name="Skill Select" parent="SkillsSelected" instance=ExtResource("1_3n5v1")]
+layout_mode = 2
+SkillName = "Skill 1"
+
+[node name="Skill Select2" parent="SkillsSelected" instance=ExtResource("1_3n5v1")]
+layout_mode = 2
+SkillName = "Skill 2"
+
+[node name="Skill Select3" parent="SkillsSelected" instance=ExtResource("1_3n5v1")]
+layout_mode = 2
+SkillName = "Skill 3"
+
+[node name="Skill Select4" parent="SkillsSelected" instance=ExtResource("1_3n5v1")]
+layout_mode = 2
+SkillName = "Skill 4"
