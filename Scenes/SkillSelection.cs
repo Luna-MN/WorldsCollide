@@ -67,7 +67,7 @@ public partial class SkillSelection : Panel
 
                 GameManager.player.selectedSkillIndexes[SkillsSelected.ToList().IndexOf(skill)] = skill.selectedSkill.skillIndex;
             }
-            GameManager.player.
+            GameManager.player.SetSkills();
             QueueFree();
         };
     }
