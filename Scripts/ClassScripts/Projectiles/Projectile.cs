@@ -11,7 +11,7 @@ public partial class Projectile : Node2D
     
     [ExportGroup("Properties")]
     [Export]
-    public int Damage = 5;
+    public float Damage = 10.0f;
     [Export]
     public float Speed = 400f;
     [Export]
@@ -59,6 +59,17 @@ public partial class Projectile : Node2D
         if (Body is Character hitChar)
         {
             hitChar.TakeDamage(Damage, (int)Id);
+        }
+    }
+
+    public void obtainStats(Character c)
+    {
+        Damage *= c.DamageIncrease;
+        var rng = new RandomNumberGenerator();
+        rng.Randomize();
+        if (rng.Randf() < c.CritChance)
+        {
+            Damage *= c.CritDamage;
         }
     }
 }

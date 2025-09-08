@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjwb7dl5et8f5"]
 
-[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Projectiles/Gun_Bullet.cs" id="1_iorkc"]
+[ext_resource type="Script" uid="uid://b2e3nx4ridnmh" path="res://Scripts/ClassScripts/Projectiles/Gun_Bullet.cs" id="1_iorkc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_iorkc"]
 
@@ -17,6 +17,9 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:Id")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath(".:Damage")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="Gun_Bullet" type="Node2D" node_paths=PackedStringArray("Area")]
 modulate = Color(0.955766, 0.889708, 0.418238, 1)

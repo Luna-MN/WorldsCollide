@@ -36,7 +36,12 @@ public partial class Character : CharacterBody2D
     
     [Export] public float Speed = 200f;
     [Export] public float Health = 100f;
-    [Export] public float Armor = 0f;
+    [Export] public float Armour = 0.0f;
+    [Export] public float DamageIncrease = 1.1f;
+    [Export] public float ItemFind = 1.0f;
+    [Export] public float CritChance = 0.5f;
+    [Export] public float CritDamage = 1.25f;
+    
     
     #endregion
     public override void _EnterTree()
@@ -236,7 +241,7 @@ public partial class Character : CharacterBody2D
     public void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        Health -= damage;
+        Health -= damage * ArmourFormula();
         if (Health <= 0)
         {
             if (this is Player p)
@@ -263,4 +268,11 @@ public partial class Character : CharacterBody2D
         }
         Health += heal;
     }
+    
+    #region Formulas
+    private float ArmourFormula()
+    {
+        return 100.0f / (100.0f + Armour);
+    }
+    #endregion
 }

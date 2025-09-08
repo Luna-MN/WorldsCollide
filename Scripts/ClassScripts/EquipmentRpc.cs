@@ -10,7 +10,7 @@ public partial class EquipmentRpc : Node2D
     [ExportGroup("Swords")]
     [Export]
     public PackedScene Melee_Slash;
-        
+    
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void Gun_LeftClick(int id)
     {
@@ -18,10 +18,11 @@ public partial class EquipmentRpc : Node2D
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Basic_Bullet.Instantiate<Gun_Bullet>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
+        bullet.GlobalPosition = Character.GlobalPosition;
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
+        bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
-        bullet.GlobalPosition = Character.GlobalPosition;
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
@@ -35,6 +36,7 @@ public partial class EquipmentRpc : Node2D
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
         bullet.character = Character;
+        bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
     
