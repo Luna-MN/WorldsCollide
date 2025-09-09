@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class BaseEnhancement : Resource
 {
     public string EnhancmentText;
