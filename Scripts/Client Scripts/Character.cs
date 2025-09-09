@@ -116,56 +116,47 @@ public partial class Character : CharacterBody2D
                         OnDeath += _ => { info.Invoke(this, new object[] { }); };
                         break;
                     case Skill.PassiveType.OnMove:
-                        var foundTimer = PassiveMoveTimers.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
-                        if (foundTimer == null)
-                        {
-                            foundTimer = new Timer()
-                            {
-                                Autostart = false,
-                                OneShot = false,
-                                WaitTime = skill.TimerWaitTime,
-                            };
-                        }
-                        foundTimer.Timeout += () =>
-                        {
-                            if (!Multiplayer.IsServer()) return;
-                            info.Invoke(this, new object[] { });
-                        };
-                        if (!Multiplayer.IsServer())
-                        {
-                            AddChild(foundTimer);
-                            PassiveMoveTimers.Add(foundTimer);
-                        }
+                            SetUpTimer(skill, info, false, false);
                         break;
                     case Skill.PassiveType.OnTimerTimeout:
-                        var timer = PassiveMoveTimers.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
-                        if (timer == null)
-                        {
-                            timer = new Timer()
-                            {
-                                Autostart = true,
-                                OneShot = false,
-                                WaitTime = skill.TimerWaitTime,
-                            };
-                        }
-                        timer.Timeout += () =>
-                        {
-                            if (!Multiplayer.IsServer()) return;
-                            info.Invoke(this, new object[] { });
-                        };
-                        if (!Multiplayer.IsServer())
-                        {
-                            AddChild(timer);
-                            PassiveTimers.Add(timer);
-                        }
+                            SetUpTimer(skill, info, true, false);
                         break;
                     case Skill.PassiveType.StatBoost:
-                        var stat = GetType().GetField(skill.PassiveStat);
-                        stat?.SetValue(this, (float)stat?.GetValue(this)! + skill.PassiveValue);
+                            var fieldInfo = GetType().GetField(skill.PassiveStat, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+                            StatBoost(fieldInfo, skill.PassiveValue);
                         break;
                 }
             }
         }
+    }
+
+    protected void SetUpTimer(Skill skill, MethodInfo info, bool autostart, bool oneShot)
+    {
+        var foundTimer = PassiveMoveTimers.FirstOrDefault(x => x.WaitTime == skill.TimerWaitTime);
+        if (foundTimer == null)
+        {
+            foundTimer = new Timer()
+            {
+                Autostart = autostart,
+                OneShot = oneShot,
+                WaitTime = skill.TimerWaitTime,
+            };
+        }
+        foundTimer.Timeout += () =>
+        {
+            if (!Multiplayer.IsServer()) return;
+            info.Invoke(this, new object[] { });
+        };
+        if (!Multiplayer.IsServer())
+        {
+            AddChild(foundTimer);
+            PassiveMoveTimers.Add(foundTimer);
+        }
+    }
+
+    public void StatBoost(FieldInfo stat, float value)
+    {
+        stat?.SetValue(this, (float)stat?.GetValue(this)! + value);
     }
     protected Node ResolveRpcNode(Skill.RpcLocation loc)
     {
