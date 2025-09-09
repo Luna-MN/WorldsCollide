@@ -18,18 +18,28 @@ public partial class Character : CharacterBody2D
     // Should be able to ignore this class (see ClassRpc)
     [Export]
     protected string CharacterName = "Class1";
-    [Export]
-    public string PrimaryEquipment = "Gun";
+    [Export( PropertyHint.ResourceType)]
+    public PrimaryWeapon PrimaryEquipment;
+    [Export(PropertyHint.ResourceType)]
+    public BaseEquipment[] equipment;
+    [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
     public Skill[] skills;
     [Export(PropertyHint.ResourceType)]
-    public BaseEquipment[] equipment;
+    public Skill UltSkill;
+
     public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
 
     #region Passive Veriables
-    protected  event Action<Node2D> OnHit;
-    protected  event Action<Node2D> OnKill;
-    protected  event Action<Node2D> OnDeath;
+    public event Action<Node2D> OnHit;
+    public event Action<Node2D> OnHitSkill;
+    public event Action<Node2D> OnHitEquip;
+    public event Action<Node2D> OnKill;
+    public event Action<Node2D> OnKillSkill;
+    public event Action<Node2D> OnKillEquip;
+    public event Action<Node2D> OnDeath;
+    public event Action<Node2D> OnDeathSkill;
+    public event Action<Node2D> OnDeathEquip;
     protected  List<Timer> PassiveMoveTimers = new List<Timer>();
     protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
@@ -49,13 +59,16 @@ public partial class Character : CharacterBody2D
     {
         if (IsDummy)
         {
-            if (Multiplayer.IsServer())
-            {
-
-            }
-
             return;
         }
+        OnHit += b => OnHitSkill?.Invoke(b);
+        OnHit += b => OnHitEquip?.Invoke(b);
+        
+        OnKill += b => OnKillSkill?.Invoke(b);
+        OnKill += b => OnKillEquip?.Invoke(b);
+        
+        OnDeath += b => OnDeathSkill?.Invoke(b);
+        OnDeath += b => OnDeathEquip?.Invoke(b);
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
     }
@@ -64,10 +77,23 @@ public partial class Character : CharacterBody2D
     {
         if (IsDummy) return;
         SetSkills();
+        equipAll();
+    }
+    private void equipAll()
+    {
+        if (equipment.Length > 0)
+        {
+            foreach (var equip in equipment)
+            {
+                equip.OnEquip(this);
+            }
+        }
     }
     public void SetSkills()
     {
-        OnHit = null;
+        OnHitSkill = null;
+        OnDeathSkill = null;
+        OnKillSkill = null;
         PassiveMoveTimers.ForEach(x => x.QueueFree());;
         PassiveMoveTimers.Clear();
         PassiveTimers.ForEach(x => x.QueueFree());;
@@ -177,7 +203,7 @@ public partial class Character : CharacterBody2D
     #region Equipment
     protected virtual void LeftClick()
     {
-        GameManager.EquipmentRpcs.RpcId(1, PrimaryEquipment + "_LeftClick", Convert.ToInt32(Name));
+        PrimaryEquipment.Left_Click();
     }
     #endregion
     #region skill stuff

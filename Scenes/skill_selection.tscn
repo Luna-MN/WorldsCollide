@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ctqrrxigldjdc" path="res://Scenes/SkillSelection.cs" id="1_ldqvr"]
 [ext_resource type="PackedScene" uid="uid://c7t0krqqvdpeo" path="res://Scenes/skill.tscn" id="2_jberl"]
 
-[node name="Skill Selection" type="Panel" node_paths=PackedStringArray("SkillGrid", "SkillsSelected")]
+[node name="Skill Selection" type="Panel" node_paths=PackedStringArray("SkillGrid", "ApplyButton", "SkillsSelected")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,6 +17,7 @@ grow_vertical = 2
 script = ExtResource("1_ldqvr")
 skillUIPanel = ExtResource("2_jberl")
 SkillGrid = NodePath("Skills")
+ApplyButton = NodePath("Button")
 SkillsSelected = [NodePath("SkillsSelected/Skill Select"), NodePath("SkillsSelected/Skill Select2"), NodePath("SkillsSelected/Skill Select3"), NodePath("SkillsSelected/Skill Select4")]
 
 [node name="Skills" type="GridContainer" parent="."]

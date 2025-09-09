@@ -15,6 +15,7 @@ public partial class ChangeSkills : Button
     {
         if (SkillPanel != null) return;
         SkillPanel = SkillUI.Instantiate<SkillSelection>();
+        SkillPanel.ChangeSkillsButton = this;
         GetParent().AddChild(SkillPanel);
     }
 }

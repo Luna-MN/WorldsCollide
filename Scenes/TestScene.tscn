@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciqntsdkcedin"]
+[gd_scene load_steps=7 format=3 uid="uid://ciqntsdkcedin"]
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
 [ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Scripts/Client Scripts/Camera.cs" id="2_8k7wh"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="3_8k7wh"]
 [ext_resource type="Script" uid="uid://qinaso0i8icb" path="res://Scripts/Client Scripts/ChangeSkills.cs" id="4_iufkg"]
+[ext_resource type="Script" uid="uid://b6i5bobwio7fp" path="res://Scenes/SkillOnScreen.cs" id="4_qsjrb"]
 [ext_resource type="PackedScene" uid="uid://2o87ghb0ppc2" path="res://Scenes/skill_selection.tscn" id="5_0f5h7"]
 
 [node name="Node2D2" type="Node2D"]
@@ -53,26 +54,46 @@ mouse_filter = 2
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 text = "1"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("4_qsjrb")
 
 [node name="2" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 text = "2"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("4_qsjrb")
 
 [node name="3" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 text = "3"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("4_qsjrb")
 
 [node name="4" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 text = "4"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("4_qsjrb")
 
 [node name="5" type="Button" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 text = "5"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("4_qsjrb")
 
 [node name="Button" type="Button" parent="Camera2D/CanvasLayer/Control"]
 layout_mode = 0

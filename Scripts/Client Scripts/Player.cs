@@ -8,18 +8,24 @@ using System.Reflection;
 public partial class Player : Character
 {
     #region Input Handling
-    public Button TB1, TB2, TB3, TB4, TB5;
+    public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
 
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
         {   
-            TB1 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/1");
-            TB2 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/2");
-            TB3 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/3");
-            TB4 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/4");
-            TB5 = GetNode<Button>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/5");
             GameManager.player = this;
+            TB1 = GetNode<SkillOnScreen>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/1");
+            TB1.SetIcon();
+            TB2 = GetNode<SkillOnScreen>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/2");
+            TB2.SetIcon();
+            TB3 = GetNode<SkillOnScreen>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/3");
+            TB3.SetIcon();
+            TB4 = GetNode<SkillOnScreen>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/4");
+            TB4.SetIcon();
+            TB5 = GetNode<SkillOnScreen>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/5");
+            TB5.SetIcon(true);
+
         }
         base._Ready();
     }

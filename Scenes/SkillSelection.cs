@@ -15,6 +15,7 @@ public partial class SkillSelection : Panel
     public SkillUIPanel[] SkillPanels;
     public SkillUIPanel PressedSkill = null;
     public SkillUI pressedSelectSkill;
+    public ChangeSkills ChangeSkillsButton;
     public override void _Ready()
     {
         foreach (var skill in GameManager.player.skills)
@@ -62,12 +63,24 @@ public partial class SkillSelection : Panel
 
         ApplyButton.ButtonDown += () =>
         {
+            int ammountOfSkills = 0;
             foreach (var skill in SkillsSelected)
             {
-
+                if (skill.selectedSkill == null) continue;
+                ammountOfSkills++;
                 GameManager.player.selectedSkillIndexes[SkillsSelected.ToList().IndexOf(skill)] = skill.selectedSkill.skillIndex;
             }
+
+            if (ammountOfSkills < 4)
+            {
+                return;
+            }
             GameManager.player.SetSkills();
+            GameManager.player.TB1.SetIcon();
+            GameManager.player.TB2.SetIcon();
+            GameManager.player.TB3.SetIcon();
+            GameManager.player.TB4.SetIcon();
+            ChangeSkillsButton.SkillPanel = null;
             QueueFree();
         };
     }
