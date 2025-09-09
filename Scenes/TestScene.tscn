@@ -16,6 +16,7 @@ spawn_path = NodePath(".")
 [node name="Character" parent="MultiplayerSpawner" instance=ExtResource("3_8k7wh")]
 position = Vector2(302, 201)
 IsDummy = true
+equipment = Array[Resource]([null, null])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_8k7wh")

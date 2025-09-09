@@ -22,7 +22,8 @@ public partial class Character : CharacterBody2D
     public string PrimaryEquipment = "Gun";
     [Export(PropertyHint.ResourceType)]
     public Skill[] skills;
-
+    [Export(PropertyHint.ResourceType)]
+    public BaseEquipment[] equipment;
     public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
 
     #region Passive Veriables

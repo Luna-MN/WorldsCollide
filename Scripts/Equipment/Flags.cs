@@ -1,0 +1,26 @@
+using Godot;
+using System;
+
+public partial class Flags : Node
+{
+    [Flags]
+    public enum AbilityFlags : long
+    {
+        Ranged     = 1L << 0,
+        Melee      = 1L << 1,
+        Magic      = 1L << 2,
+        ChestPiece = 1L << 3,
+        Boots      = 1L << 4,
+    }
+    [Flags]
+    public enum PassiveType : long
+    {
+        None             = 0,
+        OnHit            = 1L << 1,
+        OnDeath          = 1L << 2,
+        OnMove           = 1L << 3,
+        OnKill           = 1L << 4,
+        StatBoost        = 1L << 5,
+        OnTimerTimeout   = 1L << 6,
+    }
+}

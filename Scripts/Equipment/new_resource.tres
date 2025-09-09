@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bhu78f4dvsg37"]
+
+[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_r6p1y"]
+
+[resource]
+script = ExtResource("1_r6p1y")
+abilities = 0
