@@ -66,7 +66,6 @@ public partial class Projectile : Node2D
     {
         Damage *= c.DamageIncrease;
         var rng = new RandomNumberGenerator();
-        rng.Randomize();
         if (rng.Randf() < c.CritChance)
         {
             Damage *= c.CritDamage;

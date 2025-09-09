@@ -13,7 +13,7 @@ public partial class BaseEquipment : Resource
     [Export(PropertyHint.ResourceType)]
     public BaseEnhancement[] enhancement;
 
-    public void OnEquip(Character character)
+    public virtual void OnEquip(Character character)
     {
         foreach (var enhance in enhancement)
         {
