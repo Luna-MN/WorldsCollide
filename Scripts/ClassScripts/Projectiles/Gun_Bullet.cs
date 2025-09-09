@@ -32,7 +32,8 @@ public partial class Gun_Bullet : Projectile
                 timer.QueueFree();
             };
             await ToSignal(timer, "timeout");
+            QueueFree();
         }
-        QueueFree();
+
     }
 }

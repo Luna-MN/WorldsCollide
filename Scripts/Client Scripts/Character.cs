@@ -253,8 +253,8 @@ public partial class Character : CharacterBody2D
             ServerManager.NodeDictionary.Remove(ID);
             if (IsMultiplayerAuthority())
             {
-                QueueFree();
                 ServerManager.ClientRpcs.Rpc("RemovePlayer", GetPath().ToString());
+                QueueFree();
             }
 
         }
