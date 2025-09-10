@@ -2,4 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_2u2s0"]
 
-[node name="Character" instance=ExtResource("1_2u2s0")]
+[node name="Dummy" instance=ExtResource("1_2u2s0")]
+IsDummy = true
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+modulate = Color(1, 0.282353, 0.27451, 1)

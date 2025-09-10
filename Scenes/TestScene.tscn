@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
 [ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Scripts/Client Scripts/Camera.cs" id="2_8k7wh"]
-[ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="3_8k7wh"]
 [ext_resource type="Script" uid="uid://qinaso0i8icb" path="res://Scripts/Client Scripts/ChangeSkills.cs" id="4_iufkg"]
 [ext_resource type="Script" uid="uid://b6i5bobwio7fp" path="res://Scenes/SkillOnScreen.cs" id="4_qsjrb"]
 [ext_resource type="PackedScene" uid="uid://2o87ghb0ppc2" path="res://Scenes/skill_selection.tscn" id="5_0f5h7"]
+[ext_resource type="PackedScene" uid="uid://br8pl4apoykdi" path="res://Scenes/TrainingDummy.tscn" id="6_qsjrb"]
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_5lt6y")
@@ -14,10 +14,8 @@ script = ExtResource("1_5lt6y")
 _spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://ul6rh048aliv", "uid://cjwb7dl5et8f5")
 spawn_path = NodePath(".")
 
-[node name="Character" parent="MultiplayerSpawner" instance=ExtResource("3_8k7wh")]
-position = Vector2(302, 201)
-IsDummy = true
-EquipmentSlots = Array[Object]([])
+[node name="Dummy" parent="MultiplayerSpawner" instance=ExtResource("6_qsjrb")]
+position = Vector2(386, 227)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_8k7wh")
