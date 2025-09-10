@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=20 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
-[ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="8_f1ek2"]
 
 [sub_resource type="Resource" id="Resource_fkybt"]
 script = ExtResource("3_3smsa")
@@ -156,14 +155,9 @@ EquipmentSlots = Array[Object]([SubResource("Resource_x3wgy")])
 skills = Array[Object]([SubResource("Resource_3smsa"), SubResource("Resource_8erm5"), SubResource("Resource_f1ek2"), SubResource("Resource_tx1dd"), SubResource("Resource_gymyn"), SubResource("Resource_pu2lt")])
 UltSkill = SubResource("Resource_ukyrk")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="0"]
-modulate = Color(0.95515, 0.206328, 0.196478, 1)
-scale = Vector2(0.41, 0.41)
-sprite_frames = ExtResource("8_f1ek2")
-
-[node name="AnimatedSprite2D" parent="." index="2"]
+[node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_677pu")
 
-[node name="InputSync" type="MultiplayerSynchronizer" parent="." index="3"]
+[node name="InputSync" type="MultiplayerSynchronizer" parent="." index="2"]
 replication_config = SubResource("SceneReplicationConfig_v0iea")
 script = ExtResource("3_fkybt")
