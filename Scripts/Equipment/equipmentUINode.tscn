@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://64pmiclrx304"]
+
+[ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="1_583y4"]
+
+[node name="Equipment" type="Panel"]
+custom_minimum_size = Vector2(135, 135)
+offset_right = 135.0
+offset_bottom = 135.0
+size_flags_vertical = 6
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 135.0
+offset_bottom = 135.0
+text = "Skill 1"
+icon = ExtResource("1_583y4")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
