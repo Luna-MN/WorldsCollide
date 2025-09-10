@@ -22,5 +22,6 @@ public partial class Flags : Node
         OnKill           = 1L << 4,
         StatBoost        = 1L << 5,
         OnTimerTimeout   = 1L << 6,
+        DynamicStatBoost = 1L << 7,
     }
 }
