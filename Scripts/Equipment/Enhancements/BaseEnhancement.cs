@@ -5,7 +5,7 @@ using System;
 public partial class BaseEnhancement : Resource
 {
     public string EnhancmentText;
-
+    public Flags.AbilityFlags EnhancmentFlags;
 
     public virtual void Enhance(Character character)
     {

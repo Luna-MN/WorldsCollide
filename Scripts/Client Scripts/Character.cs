@@ -14,14 +14,15 @@ public partial class Character : CharacterBody2D
     public PackedScene FloatingText;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
-    
-    // Should be able to ignore this class (see ClassRpc)
     [Export]
     protected string CharacterName = "Class1";
-    [Export( PropertyHint.ResourceType)]
-    public PrimaryWeapon PrimaryEquipment;
-    [Export(PropertyHint.ResourceType)]
-    public BaseEquipment[] equipment;
+    
+
+    public List<PrimaryWeapon> PrimaryEquipment = new();
+    [ExportGroup("Equipment")]
+    [Export]
+    public EquipmentSlot[] EquipmentSlots;
+    
     [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
     public Skill[] skills;
@@ -81,7 +82,8 @@ public partial class Character : CharacterBody2D
     }
     private void equipAll()
     {
-        if (equipment.Length > 0)
+        var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).ToList();
+        if (equipment.Count > 0)
         {
             foreach (var equip in equipment)
             {
@@ -194,7 +196,16 @@ public partial class Character : CharacterBody2D
     #region Equipment
     protected virtual void LeftClick()
     {
-        PrimaryEquipment.Left_Click();
+        if(PrimaryEquipment.Count == 0) return;
+        if (PrimaryEquipment.Count == 1)
+        {
+            PrimaryEquipment[0].Left_Click();
+        }
+        else
+        {
+            var RandomEquipment = new Random().Next(0, PrimaryEquipment.Count);
+            PrimaryEquipment[RandomEquipment].Left_Click();
+        }
     }
     #endregion
     #region skill stuff

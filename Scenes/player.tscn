@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=21 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
@@ -7,10 +7,9 @@
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="3_x3wgy"]
-[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="4_8erm5"]
-[ext_resource type="Resource" uid="uid://cclut242r4bha" path="res://Scripts/Equipment/Enhancements/OnHit/TestRes.tres" id="4_f1ek2"]
+[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
 
-[sub_resource type="Resource" id="Resource_8erm5"]
+[sub_resource type="Resource" id="Resource_gymyn"]
 script = ExtResource("3_3smsa")
 WeaponName = "Gun"
 Description = ""
@@ -19,14 +18,32 @@ Damage = 0
 Range = 0
 AttackSpeed = 0
 equipmentFlags = 0
-enhancement = Array[Object]([])
+enhancement = null
 metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
 
-[sub_resource type="Resource" id="Resource_gymyn"]
+[sub_resource type="Resource" id="Resource_pu2lt"]
 script = ExtResource("4_8erm5")
+EquippedEquipment = SubResource("Resource_gymyn")
 equipmentFlags = 0
-enhancement = Array[Object]([ExtResource("4_f1ek2")])
-metadata/_custom_type_script = "uid://c8xpcraad14yd"
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_8erm5"]
+script = ExtResource("3_3smsa")
+WeaponName = "SlashingSword"
+Description = ""
+HasRightClick = false
+Damage = 0
+Range = 0
+AttackSpeed = 0
+equipmentFlags = 0
+enhancement = null
+metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
+
+[sub_resource type="Resource" id="Resource_7dp3o"]
+script = ExtResource("4_8erm5")
+EquippedEquipment = SubResource("Resource_8erm5")
+equipmentFlags = 0
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
 [sub_resource type="Resource" id="Resource_x3wgy"]
 script = ExtResource("2_fkybt")
@@ -121,8 +138,7 @@ script = ExtResource("1_6t5aa")
 FloatingText = ExtResource("2_x3wgy")
 inputSync = NodePath("InputSync")
 PositionSync = NodePath("CharacterSync")
-PrimaryEquipment = SubResource("Resource_8erm5")
-equipment = Array[Object]([SubResource("Resource_gymyn")])
+EquipmentSlots = Array[Object]([SubResource("Resource_pu2lt"), SubResource("Resource_7dp3o")])
 skills = Array[Object]([SubResource("Resource_x3wgy"), SubResource("Resource_vgqql"), SubResource("Resource_3smsa"), SubResource("Resource_f1ek2")])
 UltSkill = SubResource("Resource_tx1dd")
 
