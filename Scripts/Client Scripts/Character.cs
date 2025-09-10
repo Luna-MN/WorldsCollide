@@ -74,8 +74,8 @@ public partial class Character : CharacterBody2D
         OnDeath += b => OnDeathSkill?.Invoke(b);
         OnDeath += b => OnDeathEquip?.Invoke(b);
 
-        OnStatCalc += _ => OnStatCalcSkill?.Invoke(_);
-        OnStatCalc += _ => OnStatCalcEquip?.Invoke(_);
+        OnStatCalc += () => OnStatCalcSkill?.Invoke();
+        OnStatCalc += () => OnStatCalcEquip?.Invoke();
         
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
@@ -135,7 +135,7 @@ public partial class Character : CharacterBody2D
                             StatBoost(fieldInfo, skill.PassiveValue);
                         break;
                     case Skill.PassiveType.DynamicStatBoost:
-                            OnStatCalcSkill += += _ => { info.Invoke(this, new object[] { }); };
+                            OnStatCalcSkill += () => { info.Invoke(this, new object[] { }); };
                         break;
                 }
             }
