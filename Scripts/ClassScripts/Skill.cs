@@ -16,7 +16,8 @@ public partial class Skill : Resource
         OnMove,
         OnKill,
         StatBoost,
-        OnTimerTimeout
+        OnTimerTimeout,
+        DynamicStatBoost
     }
     [ExportGroup("Passives")]
     [Export]
