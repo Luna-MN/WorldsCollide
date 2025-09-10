@@ -10,7 +10,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(53, 52)
+size = Vector2(46.1538, 43.5824)
 
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync")]
 script = ExtResource("1_0y7nr")
@@ -22,9 +22,10 @@ replication_config = SubResource("SceneReplicationConfig_4flbx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-0.749999, -1.25)
-scale = Vector2(0.417969, 0.410156)
+scale = Vector2(0.643, 0.631)
 sprite_frames = ExtResource("3_677pu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -1)
+scale = Vector2(1.81, 1.81)
 shape = SubResource("RectangleShape2D_onrkg")
