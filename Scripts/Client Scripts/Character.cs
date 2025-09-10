@@ -41,6 +41,9 @@ public partial class Character : CharacterBody2D
     public event Action<Node2D> OnDeath;
     public event Action<Node2D> OnDeathSkill;
     public event Action<Node2D> OnDeathEquip;
+    public event Action OnStatCalc;
+    public event Action OnStatCalcSkill;
+    public event Action OnStatCalcEquip;
     protected  List<Timer> PassiveMoveTimers = new List<Timer>();
     protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
@@ -70,6 +73,10 @@ public partial class Character : CharacterBody2D
         
         OnDeath += b => OnDeathSkill?.Invoke(b);
         OnDeath += b => OnDeathEquip?.Invoke(b);
+
+        OnStatCalc += _ => OnStatCalcSkill?.Invoke(_);
+        OnStatCalc += _ => OnStatCalcEquip?.Invoke(_);
+        
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
     }
@@ -126,6 +133,9 @@ public partial class Character : CharacterBody2D
                     case Skill.PassiveType.StatBoost:
                             var fieldInfo = GetType().GetField(skill.PassiveStat, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
                             StatBoost(fieldInfo, skill.PassiveValue);
+                        break;
+                    case Skill.PassiveType.DynamicStatBoost:
+                            OnStatCalcSkill += += _ => { info.Invoke(this, new object[] { }); };
                         break;
                 }
             }
