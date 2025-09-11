@@ -174,8 +174,8 @@ public partial class Character : CharacterBody2D
     {
         return loc switch
         {
-            Skill.RpcLocation.ClassRpc     => ServerManager.ClassRpcs,
-            Skill.RpcLocation.EquipmentRpc => ServerManager.EquipmentRpcs,
+            Skill.RpcLocation.ClassRpc     => ServerManager.ClassRpcs == null ? GameManager.ClassRpcs : ServerManager.ClassRpcs,
+            Skill.RpcLocation.EquipmentRpc => ServerManager.EquipmentRpcs == null ? GameManager.EquipmentRpcs : ServerManager.EquipmentRpcs,
             Skill.RpcLocation.EnemyRpc     => throw(new NotImplementedException("Not implemented yet")),
             _ => null
         };

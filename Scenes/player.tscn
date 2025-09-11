@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=21 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
+[ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/ComboDude.png" id="8_f1ek2"]
 
 [sub_resource type="Resource" id="Resource_fkybt"]
 script = ExtResource("3_3smsa")
@@ -36,10 +37,10 @@ passiveType = 0
 TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
-RpcName = ""
+RpcName = "_Skill1"
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_8erm5"]
@@ -52,9 +53,9 @@ TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
 RpcName = ""
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_f1ek2"]
@@ -66,9 +67,9 @@ TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
 RpcName = ""
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_tx1dd"]
@@ -81,9 +82,9 @@ TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
 RpcName = ""
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_gymyn"]
@@ -95,9 +96,9 @@ TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
 RpcName = ""
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_pu2lt"]
@@ -109,9 +110,9 @@ TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
 RpcName = ""
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
@@ -123,16 +124,16 @@ TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
 RpcName = ""
+RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
-RpcCallLocation = 0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_677pu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_vgqql")
+"texture": ExtResource("8_f1ek2")
 }],
 "loop": true,
 "name": &"default",
@@ -156,6 +157,7 @@ skills = Array[Object]([SubResource("Resource_3smsa"), SubResource("Resource_8er
 UltSkill = SubResource("Resource_ukyrk")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_677pu")
 
 [node name="InputSync" type="MultiplayerSynchronizer" parent="." index="2"]

@@ -33,7 +33,8 @@ public partial class Skill : Resource
     [ExportGroup("RPC")]
     [Export]
     public string RpcName;
-    
+    [Export]
+    public RpcLocation RpcCallLocation;
     [ExportGroup("Stats")]
     [Export]
     public float Damage = 10f;
@@ -47,7 +48,6 @@ public partial class Skill : Resource
         EquipmentRpc,
         EnemyRpc
     };
-    [Export]
-    public RpcLocation RpcCallLocation;
+
 
 }
