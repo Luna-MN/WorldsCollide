@@ -20,9 +20,9 @@ IsDummy = true
 [node name="AnimatedSprite2D" parent="." index="1"]
 texture_filter = 1
 position = Vector2(-0.500001, -0.999998)
-scale = Vector2(3, 2.944)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_04klm")
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(-0.999999, 6.66)
+position = Vector2(-0.5, 4.5)
 scale = Vector2(1.82, 1.82)
