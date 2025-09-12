@@ -14,13 +14,29 @@ public partial class ClassRpc : Node2D
         {
             var Character = ServerManager.NodeDictionary[id];
             var mousePos = Character.inputSync.mousePosition;
-            var bullet = Shuriken.Instantiate<Gun_Bullet>();
-            bullet.MoveDirection = mousePos - Character.GlobalPosition;
-            bullet.GlobalPosition = Character.GlobalPosition;
-            bullet.Id = id;
-            bullet.Name = id + "_Bullet";
-            bullet.obtainStats(Character);
-            ServerManager.spawner.AddChild(bullet, true);
+            var bullet1 = Shuriken.Instantiate<Gun_Bullet>();
+            var bullet2 = Shuriken.Instantiate<Gun_Bullet>();
+            var bullet3 = Shuriken.Instantiate<Gun_Bullet>();
+            bullet1.MoveDirection = mousePos - Character.GlobalPosition;
+            var orth = bullet1.MoveDirection.Orthogonal();
+            orth = orth.Normalized();
+            bullet2.MoveDirection = mousePos - Character.GlobalPosition + orth * 25;
+            bullet3.MoveDirection = mousePos - Character.GlobalPosition - orth *25;
+            bullet1.GlobalPosition = Character.GlobalPosition;
+            bullet2.GlobalPosition = Character.GlobalPosition;
+            bullet3.GlobalPosition = Character.GlobalPosition;
+            bullet1.Id = id;
+            bullet2.Id = id;
+            bullet3.Id = id;
+            bullet1.Name = id + "_Bullet1";
+            bullet2.Name = id + "_Bullet2";
+            bullet3.Name = id + "_Bullet3";
+            bullet1.obtainStats(Character);
+            bullet2.obtainStats(Character);
+            bullet3.obtainStats(Character);
+            ServerManager.spawner.AddChild(bullet1, true);
+            ServerManager.spawner.AddChild(bullet2, true);
+            ServerManager.spawner.AddChild(bullet3, true);
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Class1_Blink(int id)

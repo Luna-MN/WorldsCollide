@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://dy1504hi2hsvy"]
 
-[ext_resource type="Script" uid="uid://dgv7yfjvkfoo8" path="res://Scripts/Server Scripts/ServerRpc.cs" id="1_7yuff"]
-[ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="2_j584x"]
+[ext_resource type="Script" uid="uid://c1hncvk8yjfw3" path="res://Scripts/Server Scripts/ServerRpc.cs" id="1_7yuff"]
+[ext_resource type="PackedScene" uid="uid://c0mq410gglmrp" path="res://Scenes/ComboClass/ComboClass.tscn" id="2_xiiuv"]
 
 [node name="ServerRPC" type="Node2D"]
 script = ExtResource("1_7yuff")
-Player = ExtResource("2_j584x")
+Player = ExtResource("2_xiiuv")
