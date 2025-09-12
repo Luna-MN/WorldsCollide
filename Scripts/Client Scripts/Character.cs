@@ -31,7 +31,7 @@ public partial class Character : CharacterBody2D
 
     public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
 
-    #region Passive Veriables
+    #region Passive Variables
     public event Action<Node2D> OnHit;
     public event Action<Node2D> OnHitSkill;
     public event Action<Node2D> OnHitEquip;

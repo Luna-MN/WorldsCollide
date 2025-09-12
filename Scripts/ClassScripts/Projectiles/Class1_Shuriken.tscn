@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://do66a6grki0dc"]
+
+[ext_resource type="Script" uid="uid://bodlwvonc10b0" path="res://Scripts/ClassScripts/Projectiles/Class1_Shuriken.cs" id="1_77pa3"]
+[ext_resource type="Texture2D" uid="uid://dj511axddasr1" path="res://Pirates/Class1/shuriken-Sheet.png" id="2_77pa3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv3re"]
+atlas = ExtResource("2_77pa3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue1wu"]
+atlas = ExtResource("2_77pa3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eawxm"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv3re")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue1wu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]
+size = Vector2(9, 9)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iorkc"]
+properties/0/path = NodePath(".:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:Id")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:Damage")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="Class1_Shuriken" type="Node2D"]
+script = ExtResource("1_77pa3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eawxm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_iorkc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_iorkc")

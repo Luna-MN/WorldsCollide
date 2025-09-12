@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8i60x8khgul6"
-path="res://.godot/imported/ComboDude.png-a543dab9f6e0d767aba9d2bf8569f340.ctex"
+uid="uid://dfcrg8l6noy8t"
+path="res://.godot/imported/shuriken1.png-283fbea2dd457b8e562c209c78f075ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/ComboDude.png"
-dest_files=["res://.godot/imported/ComboDude.png-a543dab9f6e0d767aba9d2bf8569f340.ctex"]
+source_file="res://Pirates/Class1/shuriken1.png"
+dest_files=["res://.godot/imported/shuriken1.png-283fbea2dd457b8e562c209c78f075ff.ctex"]
 
 [params]
 

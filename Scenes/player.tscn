@@ -1,14 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=22 format=3 uid="uid://qgdu76e3yi45"]
 
-[ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://b0voaam7hoyic" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://y5csa3y2a6h4" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="2_vgqql"]
-[ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
-[ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
+[ext_resource type="Script" uid="uid://dhl73kpc5wgpr" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="3_x3wgy"]
-[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
-[ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/ComboDude.png" id="8_f1ek2"]
+[ext_resource type="Script" uid="uid://516f76be8hhp" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
+[ext_resource type="Texture2D" uid="uid://dfcrg8l6noy8t" path="res://Pirates/Class1/shuriken1.png" id="5_tx1dd"]
+[ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
 
 [sub_resource type="Resource" id="Resource_fkybt"]
 script = ExtResource("3_3smsa")
@@ -31,13 +32,13 @@ metadata/_custom_type_script = "uid://bakru0sj3w5q"
 [sub_resource type="Resource" id="Resource_3smsa"]
 script = ExtResource("2_fkybt")
 Name = ""
-Icon = ExtResource("2_vgqql")
+Icon = ExtResource("5_tx1dd")
 IsPassive = false
 passiveType = 0
 TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
-RpcName = "_Skill1"
+RpcName = "_Shuriken"
 RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
@@ -52,7 +53,7 @@ passiveType = 0
 TimerWaitTime = 2.0
 PassiveStat = ""
 PassiveValue = 0.0
-RpcName = ""
+RpcName = "_Blink"
 RpcCallLocation = 0
 Damage = 10.0
 RangeTime = 1.0
@@ -155,6 +156,7 @@ inputSync = NodePath("InputSync")
 EquipmentSlots = Array[Object]([SubResource("Resource_x3wgy")])
 skills = Array[Object]([SubResource("Resource_3smsa"), SubResource("Resource_8erm5"), SubResource("Resource_f1ek2"), SubResource("Resource_tx1dd"), SubResource("Resource_gymyn"), SubResource("Resource_pu2lt")])
 UltSkill = SubResource("Resource_ukyrk")
+CritChance = 0.05
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(2, 2)

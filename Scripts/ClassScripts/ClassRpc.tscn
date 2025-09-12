@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bupvyyb7fh2m6"]
+
+[ext_resource type="Script" uid="uid://dy0h10l7o41t8" path="res://Scripts/ClassScripts/ClassRpc.cs" id="1_gdsdg"]
+[ext_resource type="PackedScene" uid="uid://do66a6grki0dc" path="res://Scripts/ClassScripts/Projectiles/Class1_Shuriken.tscn" id="2_lhx8m"]
+
+[node name="ClassRpc" type="Node2D"]
+script = ExtResource("1_gdsdg")
+Shuriken = ExtResource("2_lhx8m")
