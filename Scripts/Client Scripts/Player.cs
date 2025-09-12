@@ -38,7 +38,7 @@ public partial class Player : Character
             Skill1();
             SetUI(TB1);
         }
-        if (Input.IsActionPressed("skill_2"))
+        if (Input.IsActionJustPressed("skill_2"))
         {
             if (skills[selectedSkillIndexes[2]].IsPassive) return;
             Skill2();
