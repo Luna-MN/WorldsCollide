@@ -1,14 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=13 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
-[ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="2_vgqql"]
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
-[ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
-[ext_resource type="Texture2D" uid="uid://dfcrg8l6noy8t" path="res://Pirates/Class1/shuriken1.png" id="5_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
 
 [sub_resource type="Resource" id="Resource_fkybt"]
@@ -28,93 +25,6 @@ script = ExtResource("4_8erm5")
 EquippedEquipment = SubResource("Resource_fkybt")
 equipmentFlags = 0
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_3smsa"]
-script = ExtResource("2_fkybt")
-Name = ""
-Icon = ExtResource("5_tx1dd")
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = "_ShurikenThrow"
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_8erm5"]
-script = ExtResource("2_fkybt")
-Name = ""
-Icon = ExtResource("2_vgqql")
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = "_Blink"
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_f1ek2"]
-script = ExtResource("2_fkybt")
-Name = ""
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = ""
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_tx1dd"]
-script = ExtResource("2_fkybt")
-Name = ""
-Icon = ExtResource("3_x3wgy")
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = ""
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_gymyn"]
-script = ExtResource("2_fkybt")
-Name = ""
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = ""
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_pu2lt"]
-script = ExtResource("2_fkybt")
-Name = ""
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = ""
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
 script = ExtResource("2_fkybt")
@@ -154,7 +64,7 @@ script = ExtResource("1_6t5aa")
 FloatingText = null
 inputSync = NodePath("InputSync")
 EquipmentSlots = Array[Object]([SubResource("Resource_x3wgy")])
-skills = Array[Object]([SubResource("Resource_3smsa"), SubResource("Resource_8erm5"), SubResource("Resource_f1ek2"), SubResource("Resource_tx1dd"), SubResource("Resource_gymyn"), SubResource("Resource_pu2lt")])
+skills = Array[Object]([null, null, null, null, null, null])
 UltSkill = SubResource("Resource_ukyrk")
 CritChance = 0.05
 

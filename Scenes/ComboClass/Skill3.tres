@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://dfhi6dul4vcra"]
+
+[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="1_sbxds"]
+
+[resource]
+script = ExtResource("1_sbxds")
+Name = ""
+IsPassive = false
+passiveType = 0
+TimerWaitTime = 2.0
+PassiveStat = ""
+PassiveValue = 0.0
+RpcName = ""
+RpcCallLocation = 0
+Damage = 10.0
+RangeTime = 1.0
+metadata/_custom_type_script = "uid://q3epmkk3eovh"

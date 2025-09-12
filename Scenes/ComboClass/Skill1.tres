@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bji6slmaq3lpr"]
+
+[ext_resource type="Texture2D" uid="uid://dfcrg8l6noy8t" path="res://Pirates/Class1/shuriken1.png" id="1_200id"]
+[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_1t4cg"]
+
+[resource]
+script = ExtResource("2_1t4cg")
+Name = ""
+Icon = ExtResource("1_200id")
+IsPassive = false
+passiveType = 0
+TimerWaitTime = 2.0
+PassiveStat = ""
+PassiveValue = 0.0
+RpcName = "_ShurikenThrow"
+RpcCallLocation = 0
+Damage = 10.0
+RangeTime = 1.0
+metadata/_custom_type_script = "uid://q3epmkk3eovh"

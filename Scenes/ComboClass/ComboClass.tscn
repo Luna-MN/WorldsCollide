@@ -1,0 +1,12 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0mq410gglmrp"]
+
+[ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_xwqy6"]
+[ext_resource type="Resource" uid="uid://bji6slmaq3lpr" path="res://Scenes/ComboClass/Skill1.tres" id="2_s36wo"]
+[ext_resource type="Resource" uid="uid://cej67nfm0xwtk" path="res://Scenes/ComboClass/Skill2.tres" id="3_xwqy6"]
+[ext_resource type="Resource" uid="uid://dfhi6dul4vcra" path="res://Scenes/ComboClass/Skill3.tres" id="4_s36wo"]
+[ext_resource type="Resource" uid="uid://cjtw53hfqy2nj" path="res://Scenes/ComboClass/Skill4.tres" id="5_s36wo"]
+[ext_resource type="Resource" uid="uid://vd7ocqvg6pfa" path="res://Scenes/ComboClass/Skill5.tres" id="6_txpl1"]
+[ext_resource type="Resource" uid="uid://xougc64oq7qh" path="res://Scenes/ComboClass/Skill6.tres" id="7_txpl1"]
+
+[node name="Player" instance=ExtResource("1_xwqy6")]
+skills = Array[Object]([ExtResource("2_s36wo"), ExtResource("3_xwqy6"), ExtResource("4_s36wo"), ExtResource("5_s36wo"), ExtResource("6_txpl1"), ExtResource("7_txpl1")])
