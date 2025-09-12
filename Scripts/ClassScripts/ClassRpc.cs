@@ -10,11 +10,11 @@ public partial class ClassRpc : Node2D
     #region Class1
     
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Class1_Shuriken(int id)
+        public void Class1_ShurikenThrow(int id)
         {
             var Character = ServerManager.NodeDictionary[id];
             var mousePos = Character.inputSync.mousePosition;
-            var bullet = Shuriken.Instantiate<Class1_Shuriken>();
+            var bullet = Shuriken.Instantiate<Gun_Bullet>();
             bullet.MoveDirection = mousePos - Character.GlobalPosition;
             bullet.GlobalPosition = Character.GlobalPosition;
             bullet.Id = id;

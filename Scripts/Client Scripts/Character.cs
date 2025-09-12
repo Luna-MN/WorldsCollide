@@ -48,7 +48,7 @@ public partial class Character : CharacterBody2D
     protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
     #region Player Properties
-    
+    [ExportGroup("Stats")]
     [Export] public float Speed = 200f;
     [Export] public float Health = 100f;
     [Export] public float Armour = 0.0f;
