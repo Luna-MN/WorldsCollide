@@ -3,7 +3,8 @@ using System;
 [GlobalClass]
 public partial class Gun_Bullet : Projectile
 {
-
+    [Export]
+    bool deleteOnHit = true;
     public override void _PhysicsProcess(double delta)
     {
         if(!Multiplayer.IsServer()) return;
@@ -32,7 +33,8 @@ public partial class Gun_Bullet : Projectile
                 timer.QueueFree();
             };
             await ToSignal(timer, "timeout");
-            QueueFree();
+            if(deleteOnHit)
+                QueueFree();
         }
 
     }
