@@ -132,7 +132,7 @@ public partial class Character : CharacterBody2D
         SetSkills();
         equipAll();
     }
-    private void equipAll()
+    public void equipAll()
     {
         var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).Where(x => x != null).ToList();
         if (equipment.Count > 0)

@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class EquipmentUI : Panel
 {
     [Export] public Area2D area;
+    [Export] public Sprite2D Icon;
     public bool mouseIn;
     public bool mouseClick;
     public EquipmentSlotUI selectedSlot;
@@ -13,8 +15,6 @@ public partial class EquipmentUI : Panel
     public BaseEquipment AssignedEquipment;
     public override void _Ready()
     {
-        grid = GetParent<GridContainer>();
-        TopUI = GetParent().GetParent().GetParent<EquipmentSelection>();
         area.MouseEntered += () =>
         {
             mouseIn = true;
@@ -39,9 +39,15 @@ public partial class EquipmentUI : Panel
                 {
                     GlobalPosition = selectedSlot.GlobalPosition;
                     GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = AssignedEquipment;
+                    List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                    inv.Remove(AssignedEquipment);
+                    GameManager.player.inventory.AllEquipment = inv.ToArray();
                 }
                 else
                 {
+                    List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                    inv.Add(AssignedEquipment);
+                    GameManager.player.inventory.AllEquipment = inv.ToArray();
                     grid.CallDeferred("add_child", this);
                     GetParent().RemoveChild(this);
                 }
@@ -79,8 +85,12 @@ public partial class EquipmentUI : Panel
 
     public void OnEquipSlotExit(Node2D body)
     {
-        if (selectedSlot == body.GetParent())
+        if (selectedSlot == body.GetParent<EquipmentSlotUI>())
         {
+            if (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment == AssignedEquipment)
+            {
+                GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
+            }
             selectedSlot = null;
         }
     }

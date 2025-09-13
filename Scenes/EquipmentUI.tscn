@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36ypc"]
 size = Vector2(89, 88)
 
-[node name="Equipment" type="Panel" node_paths=PackedStringArray("area")]
+[node name="Equipment" type="Panel" node_paths=PackedStringArray("area", "Icon")]
 custom_minimum_size = Vector2(90, 90)
 offset_left = -45.0
 offset_top = -45.0
@@ -16,6 +16,7 @@ pivot_offset = Vector2(45, 45)
 mouse_filter = 2
 script = ExtResource("1_0xyv2")
 area = NodePath("Area2D")
+Icon = NodePath("Sprite2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 

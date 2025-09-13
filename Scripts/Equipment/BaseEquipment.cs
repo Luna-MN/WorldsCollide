@@ -13,6 +13,9 @@ public partial class BaseEquipment : Resource
     [ExportGroup("Enhancements")]
     [Export(PropertyHint.ResourceType)]
     public BaseEnhancement[] enhancement;
+    
+    [Export]
+    public Texture2D Icon;
 
     public virtual void OnEquip(Character character)
     {

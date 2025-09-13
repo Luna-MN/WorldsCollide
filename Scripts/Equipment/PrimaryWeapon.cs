@@ -8,7 +8,6 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public string WeaponName;
     [Export] public string Description;
     [Export] public bool HasRightClick;
-    [Export] public Texture2D Icon;
     [Export] public int Damage;
     [Export] public int Range;
     [Export] public int AttackSpeed;

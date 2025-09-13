@@ -1,17 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2podqpoej8hm"]
+[gd_scene load_steps=18 format=3 uid="uid://d2podqpoej8hm"]
 
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
 [ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="3_677pu"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="3_v7dgu"]
+[ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="4_xloa1"]
+[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_4b18b"]
 
 [sub_resource type="Resource" id="Resource_vdqda"]
 script = ExtResource("3_v7dgu")
 equipmentFlags = 32
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
+[sub_resource type="Resource" id="Resource_eydin"]
+script = ExtResource("5_4b18b")
+equipmentFlags = 0
+enhancement = null
+Icon = ExtResource("4_xloa1")
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
 [sub_resource type="Resource" id="Resource_xloa1"]
 script = ExtResource("3_v7dgu")
+EquippedEquipment = SubResource("Resource_eydin")
 equipmentFlags = 64
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
 

@@ -3,8 +3,6 @@ using System;
 [GlobalClass]
 public partial class EquipmentSlot : Resource
 {
-    
-
     [Export]
     public BaseEquipment EquippedEquipment;
     [ExportGroup("Flags")]
