@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bada8pua2i38e"]
+[gd_scene load_steps=12 format=3 uid="uid://bada8pua2i38e"]
 
 [ext_resource type="Script" uid="uid://cf18wdlg8is68" path="res://Scripts/Equipment/EquipmentSelection.cs" id="1_56myr"]
 [ext_resource type="PackedScene" uid="uid://cgnwv3s31cdbs" path="res://Scenes/EquipmentUI.tscn" id="3_7a4t0"]
@@ -10,8 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://byt2f0ok3jcn6" path="res://Pirates/Equipment/Slots/EquipmentSlot_OffHand.png" id="5_l8aht"]
 [ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_7f453"]
 [ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="8_4qi71"]
+[ext_resource type="Texture2D" uid="uid://dwpmpieyjslq6" path="res://Pirates/Equipment/Slots/EquipmentSlot_Gloves.png" id="8_fn6ck"]
 
-[node name="EquipmentSelection" type="Panel" node_paths=PackedStringArray("EquipmentGrid", "EquipmentSlots")]
+[node name="EquipmentSelection" type="Panel" node_paths=PackedStringArray("EquipmentGrid", "EquipmentSlots", "CloseButton")]
 self_modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,7 @@ script = ExtResource("1_56myr")
 EquipmentScene = ExtResource("3_7a4t0")
 EquipmentGrid = NodePath("GridContainer/GridContainer")
 EquipmentSlots = [NodePath("Slot0"), NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3"), NodePath("Slot4"), NodePath("Slot5"), NodePath("Slot6"), NodePath("Slot7")]
+CloseButton = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -104,6 +106,7 @@ offset_left = 300.0
 offset_top = 120.0
 offset_right = 389.0
 offset_bottom = 206.0
+Icon = ExtResource("8_fn6ck")
 
 [node name="Slot6" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0

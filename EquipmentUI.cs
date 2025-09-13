@@ -46,8 +46,16 @@ public partial class EquipmentUI : Panel
                 else
                 {
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
-                    inv.Add(AssignedEquipment);
-                    GameManager.player.inventory.AllEquipment = inv.ToArray();
+                    if (!inv.Contains(AssignedEquipment))
+                    {
+                        if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
+                        {
+                            GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment).EquippedEquipment = null;
+                        }
+
+                        inv.Add(AssignedEquipment);
+                        GameManager.player.inventory.AllEquipment = inv.ToArray();
+                    }
                     grid.CallDeferred("add_child", this);
                     GetParent().RemoveChild(this);
                 }
@@ -85,12 +93,12 @@ public partial class EquipmentUI : Panel
 
     public void OnEquipSlotExit(Node2D body)
     {
+        if (body.GetParent() is not EquipmentSlotUI)
+        {
+            return;
+        }
         if (selectedSlot == body.GetParent<EquipmentSlotUI>())
         {
-            if (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment == AssignedEquipment)
-            {
-                GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
-            }
             selectedSlot = null;
         }
     }

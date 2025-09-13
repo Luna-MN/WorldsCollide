@@ -134,6 +134,7 @@ public partial class Character : CharacterBody2D
     }
     public void equipAll()
     {
+        PrimaryEquipment.Clear();
         var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).Where(x => x != null).ToList();
         if (equipment.Count > 0)
         {

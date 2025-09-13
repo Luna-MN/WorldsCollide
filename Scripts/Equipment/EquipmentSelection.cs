@@ -23,11 +23,6 @@ public partial class EquipmentSelection : Panel
                 obj.Icon.Texture = equipment.Icon;
             }
             EquipmentGrid.AddChild(obj);
-            CloseButton.ButtonDown += () =>
-            {
-                GameManager.player.equipAll();
-                QueueFree();
-            };
         }
 
         foreach (var slot in GameManager.player.EquipmentSlots)
@@ -47,5 +42,11 @@ public partial class EquipmentSelection : Panel
                 obj.GlobalPosition = obj.selectedSlot.GlobalPosition;
             }
         }
+        CloseButton.ButtonDown += () =>
+        {
+            openButton.EquipmentPanel = null; 
+            GameManager.player.equipAll();
+            QueueFree();
+        };
     }
 }
