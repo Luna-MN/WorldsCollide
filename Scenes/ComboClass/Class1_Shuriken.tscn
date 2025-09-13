@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ilkueeb0cdpt"]
 
-[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Projectiles/Gun_Bullet.cs" id="1_fvr5m"]
+[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Projectiles/BasicRangedProjectile.cs" id="1_fvr5m"]
 [ext_resource type="Texture2D" uid="uid://dj511axddasr1" path="res://Pirates/Class1/shuriken-Sheet.png" id="2_rac1y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nv3re"]

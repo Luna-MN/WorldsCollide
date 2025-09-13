@@ -16,7 +16,7 @@ public partial class EquipmentRpc : Node2D
     {
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
-        var bullet = Basic_Bullet.Instantiate<Gun_Bullet>();
+        var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
         bullet.GlobalPosition = Character.GlobalPosition;
         bullet.Id = id;

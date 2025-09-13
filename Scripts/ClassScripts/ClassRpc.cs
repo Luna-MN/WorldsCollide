@@ -16,9 +16,9 @@ public partial class ClassRpc : Node2D
         {
             var Character = ServerManager.NodeDictionary[id];
             var mousePos = Character.inputSync.mousePosition;
-            var bullet1 = Shuriken.Instantiate<Gun_Bullet>();
-            var bullet2 = Shuriken.Instantiate<Gun_Bullet>();
-            var bullet3 = Shuriken.Instantiate<Gun_Bullet>();
+            var bullet1 = Shuriken.Instantiate<BasicRangedProjectile>();
+            var bullet2 = Shuriken.Instantiate<BasicRangedProjectile>();
+            var bullet3 = Shuriken.Instantiate<BasicRangedProjectile>();
             bullet1.MoveDirection = mousePos - Character.GlobalPosition;
             var orth = bullet1.MoveDirection.Orthogonal();
             orth = orth.Normalized();

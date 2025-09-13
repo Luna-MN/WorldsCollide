@@ -34,27 +34,32 @@ public partial class Player : Character
         if (GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) return;
         if (Input.IsActionJustPressed("skill_1"))
         {
-            if(skills[selectedSkillIndexes[1]].IsPassive) return;
+            if(skills[selectedSkillIndexes[0]].IsPassive) return;
             Skill1();
             SetUI(TB1);
         }
         if (Input.IsActionJustPressed("skill_2"))
         {
-            if (skills[selectedSkillIndexes[2]].IsPassive) return;
+            if (skills[selectedSkillIndexes[1]].IsPassive) return;
             Skill2();
             SetUI(TB2);
         }
 
         if (Input.IsActionJustPressed("skill_3"))
         {
-            if (skills[selectedSkillIndexes[3]].IsPassive) return;
+            GD.Print("3 Pressed");
+            if (skills[selectedSkillIndexes[2]].IsPassive)
+            {
+                GD.Print("3 is passive");
+                return;
+            }
             Skill3();
             SetUI(TB3);
         }
 
         if (Input.IsActionJustPressed("skill_4"))
         {
-            if (skills[selectedSkillIndexes[4]].IsPassive) return;
+            if (skills[selectedSkillIndexes[3]].IsPassive) return;
             Skill4();
             SetUI(TB4);
         }

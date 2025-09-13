@@ -307,7 +307,7 @@ public partial class Character : CharacterBody2D
         if (input != Vector2.Zero)
         {
             PassiveMoveTimers.ForEach(x => x.Start());
-            Position += input.Normalized() * characterStats.Speed * delta;
+            Position += input.Normalized() * Speed * delta;
         }
         else
         {
@@ -324,8 +324,8 @@ public partial class Character : CharacterBody2D
     public void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        characterStats.CurrentHealth -= damage * characterStats.DamageReductionMultiplier;
-        if (characterStats.CurrentHealth <= 0)
+        CurrentHealth -= damage * characterStats.DamageReductionMultiplier;
+        if (CurrentHealth <= 0)
         {
             if (this is Player p)
             {
@@ -344,12 +344,12 @@ public partial class Character : CharacterBody2D
     }
     public void Heal(float heal)
     {
-        if (characterStats.CurrentHealth <= 0) return;
-        if (characterStats.CurrentHealth + heal > characterStats.MaxHealth)
+        if (CurrentHealth <= 0) return;
+        if (CurrentHealth + heal > MaxHealth)
         {
-            heal = characterStats.MaxHealth - characterStats.CurrentHealth;
+            heal = MaxHealth - CurrentHealth;
         }
-        characterStats.CurrentHealth += heal;
+        CurrentHealth += heal;
     }
     
 

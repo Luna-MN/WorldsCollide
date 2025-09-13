@@ -1,7 +1,7 @@
 using Godot;
 using System;
 [GlobalClass]
-public partial class Gun_Bullet : Projectile
+public partial class BasicRangedProjectile : Projectile
 {
     [Export]
     bool deleteOnHit = true;

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://df8dg1w0bvmlj"]
+[gd_scene load_steps=8 format=3 uid="uid://bk7ppctm372s7"]
 
-[ext_resource type="Script" uid="uid://bjls8m35hv3ss" path="res://Scripts/ClassScripts/Projectiles/Circling_Projectile.cs" id="1_ryx78"]
+[ext_resource type="Script" uid="uid://cxd1pjvyvgy5l" path="res://Scripts/ClassScripts/Projectiles/Circling_Projectile.cs" id="1_ryx78"]
 [ext_resource type="Texture2D" uid="uid://dj511axddasr1" path="res://Pirates/Class1/shuriken-Sheet.png" id="2_cclxj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nv3re"]
