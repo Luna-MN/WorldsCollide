@@ -1,12 +1,52 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0mq410gglmrp"]
+[gd_scene load_steps=15 format=3 uid="uid://c0mq410gglmrp"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_xwqy6"]
+[ext_resource type="Script" uid="uid://dpxd3cqudjc36" path="res://Scripts/ClassScripts/Class1/ComboClass.cs" id="2_4n5jn"]
 [ext_resource type="Resource" uid="uid://bji6slmaq3lpr" path="res://Scenes/ComboClass/Skill1.tres" id="2_s36wo"]
+[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_qyo67"]
 [ext_resource type="Resource" uid="uid://cej67nfm0xwtk" path="res://Scenes/ComboClass/Skill2.tres" id="3_xwqy6"]
+[ext_resource type="Script" uid="uid://516f76be8hhp" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_2qbm4"]
 [ext_resource type="Resource" uid="uid://dfhi6dul4vcra" path="res://Scenes/ComboClass/Skill3.tres" id="4_s36wo"]
 [ext_resource type="Resource" uid="uid://cjtw53hfqy2nj" path="res://Scenes/ComboClass/Skill4.tres" id="5_s36wo"]
 [ext_resource type="Resource" uid="uid://vd7ocqvg6pfa" path="res://Scenes/ComboClass/Skill5.tres" id="6_txpl1"]
 [ext_resource type="Resource" uid="uid://xougc64oq7qh" path="res://Scenes/ComboClass/Skill6.tres" id="7_txpl1"]
+[ext_resource type="Script" uid="uid://y5csa3y2a6h4" path="res://Scripts/ClassScripts/Skill.cs" id="11_nhdph"]
+
+[sub_resource type="Resource" id="Resource_wbvm1"]
+script = ExtResource("3_qyo67")
+WeaponName = "Gun"
+Description = ""
+HasRightClick = false
+Damage = 0
+Range = 0
+AttackSpeed = 0
+equipmentFlags = 0
+enhancement = null
+metadata/_custom_type_script = "uid://dokk7cx2pflnk"
+
+[sub_resource type="Resource" id="Resource_7812l"]
+script = ExtResource("4_2qbm4")
+EquippedEquipment = SubResource("Resource_wbvm1")
+equipmentFlags = 0
+metadata/_custom_type_script = "uid://516f76be8hhp"
+
+[sub_resource type="Resource" id="Resource_pehvv"]
+script = ExtResource("11_nhdph")
+Name = ""
+IsPassive = false
+passiveType = 0
+TimerWaitTime = 2.0
+PassiveStat = ""
+PassiveValue = 0.0
+RpcName = ""
+RpcCallLocation = 0
+Damage = 10.0
+RangeTime = 1.0
+metadata/_custom_type_script = "uid://y5csa3y2a6h4"
 
 [node name="Player" instance=ExtResource("1_xwqy6")]
+script = ExtResource("2_4n5jn")
+comboLossTime = 2.0
+EquipmentSlots = Array[Object]([SubResource("Resource_7812l")])
 skills = Array[Object]([ExtResource("2_s36wo"), ExtResource("3_xwqy6"), ExtResource("4_s36wo"), ExtResource("5_s36wo"), ExtResource("6_txpl1"), ExtResource("7_txpl1")])
+UltSkill = SubResource("Resource_pehvv")

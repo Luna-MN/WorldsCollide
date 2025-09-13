@@ -48,16 +48,7 @@ public partial class Character : CharacterBody2D
     protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
     #region Player Properties
-    [ExportGroup("Stats")]
-    [Export] public float Speed = 200f;
-    [Export] public float Health = 100f;
-    [Export] public float Armour = 0.0f;
-    [Export] public float DamageIncrease = 1.1f;
-    [Export] public float ItemFind = 1.0f;
-    [Export] public float CritChance = 0.5f;
-    [Export] public float CritDamage = 1.25f;
-    
-    
+    public Stats characterStats = new Stats();
     #endregion
     public override void _EnterTree()
     {
@@ -263,7 +254,7 @@ public partial class Character : CharacterBody2D
         if (input != Vector2.Zero)
         {
             PassiveMoveTimers.ForEach(x => x.Start());
-            Position += input.Normalized() * Speed * delta;
+            Position += input.Normalized() * characterStats.Speed * delta;
         }
         else
         {
@@ -280,8 +271,8 @@ public partial class Character : CharacterBody2D
     public void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        Health -= damage * ArmourFormula();
-        if (Health <= 0)
+        characterStats.CurrentHealth -= damage * characterStats.DamageReductionMultiplier;
+        if (characterStats.CurrentHealth <= 0)
         {
             if (this is Player p)
             {
@@ -300,18 +291,13 @@ public partial class Character : CharacterBody2D
     }
     public void Heal(float heal)
     {
-        if (Health <= 0) return;
-        if (Health + heal > 100)
+        if (characterStats.CurrentHealth <= 0) return;
+        if (characterStats.CurrentHealth + heal > characterStats.MaxHealth)
         {
-            heal = 100 - Health;
+            heal = characterStats.MaxHealth - characterStats.CurrentHealth;
         }
-        Health += heal;
+        characterStats.CurrentHealth += heal;
     }
     
-    #region Formulas
-    private float ArmourFormula()
-    {
-        return 100.0f / (100.0f + Armour);
-    }
-    #endregion
+
 }
