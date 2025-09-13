@@ -6,6 +6,8 @@ public partial class ClassRpc : Node2D
     [ExportGroup("Class1")]
     [Export]
     public PackedScene Shuriken;
+    [Export]
+    public PackedScene CircleShuriken;
     
     #region Class1
     
@@ -47,9 +49,37 @@ public partial class ClassRpc : Node2D
             Character.GlobalPosition += MoveDirection.Normalized() * 500;
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Class1_Skill3(int id)
+        public void Class1_CircleShuriken(int id)
         {
-            
+            var Character = ServerManager.NodeDictionary[id];
+            var mousePos = Character.inputSync.mousePosition;
+            var bullet1 = CircleShuriken.Instantiate<Circling_Projectile>();
+            bullet1.GlobalPosition = Character.GlobalPosition;
+            bullet1.angle = 0;
+            bullet1.character = Character;
+            bullet1.GlobalPosition = Character.GlobalPosition + Vector2.FromAngle((float)bullet1.angle) * bullet1.distance;
+            bullet1.Id = id;
+            bullet1.Name = id + "_Bullet1";
+            bullet1.obtainStats(Character);
+            ServerManager.spawner.AddChild(bullet1, true);
+            var bullet2 = CircleShuriken.Instantiate<Circling_Projectile>();
+            bullet2.GlobalPosition = Character.GlobalPosition;
+            bullet2.angle = 2*double.Pi*2/3;
+            bullet2.character = Character;
+            bullet2.GlobalPosition = Character.GlobalPosition + Vector2.FromAngle((float)bullet2.angle) * bullet2.distance;
+            bullet2.Id = id;
+            bullet2.Name = id + "_Bullet2";
+            bullet2.obtainStats(Character);
+            ServerManager.spawner.AddChild(bullet2, true);
+            var bullet3 = CircleShuriken.Instantiate<Circling_Projectile>();
+            bullet3.GlobalPosition = Character.GlobalPosition;
+            bullet3.angle = 2*double.Pi*1/3;
+            bullet3.character = Character;
+            bullet3.GlobalPosition = Character.GlobalPosition + Vector2.FromAngle((float)bullet3.angle) * bullet3.distance;
+            bullet3.Id = id;
+            bullet3.Name = id + "_Bullet3";
+            bullet3.obtainStats(Character);
+            ServerManager.spawner.AddChild(bullet3, true);
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Class1_Skill4(int id)
