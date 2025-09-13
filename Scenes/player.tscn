@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=15 format=3 uid="uid://qgdu76e3yi45"]
 
-[ext_resource type="Script" uid="uid://b0voaam7hoyic" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://y5csa3y2a6h4" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
-[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
-[ext_resource type="Script" uid="uid://dhl73kpc5wgpr" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
-[ext_resource type="Script" uid="uid://516f76be8hhp" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
+[ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="6_8erm5"]
 [ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
 
 [sub_resource type="Resource" id="Resource_fkybt"]
@@ -40,6 +41,17 @@ Damage = 10.0
 RangeTime = 1.0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
+[sub_resource type="Resource" id="Resource_f1ek2"]
+script = ExtResource("6_8erm5")
+_speed = 200.0
+_currentHealth = 100.0
+_maxHealth = 100.0
+_armour = 0.0
+_damageIncrease = 1.1
+_itemFind = 1.0
+_critChance = 0.5
+_critDamage = 1.25
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_677pu"]
 animations = [{
 "frames": [{
@@ -66,7 +78,7 @@ inputSync = NodePath("InputSync")
 EquipmentSlots = Array[Object]([SubResource("Resource_x3wgy")])
 skills = Array[Object]([null, null, null, null, null, null])
 UltSkill = SubResource("Resource_ukyrk")
-CritChance = 0.05
+characterStats = SubResource("Resource_f1ek2")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(2, 2)

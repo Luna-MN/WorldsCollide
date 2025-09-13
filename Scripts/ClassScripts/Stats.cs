@@ -1,7 +1,7 @@
 using Godot;
 using System;
-
-public partial class Stats : Node2D
+[GlobalClass]
+public partial class Stats : Resource
 {
     private event Action onStatCalc;
     [ExportGroup("Stats")] 
