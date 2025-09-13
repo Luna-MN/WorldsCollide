@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b3txk3kwult20"]
+
+[ext_resource type="Texture2D" uid="uid://dwruhsq2fdjtr" path="res://Pirates/Equipment/Item_Holder_hud.png" id="1_stwa6"]
+
+[resource]
+texture = ExtResource("1_stwa6")
