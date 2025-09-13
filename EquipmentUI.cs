@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class EquipmentUI : Panel
 {
@@ -8,11 +9,12 @@ public partial class EquipmentUI : Panel
     public bool mouseClick;
     public EquipmentSlotUI selectedSlot;
     public GridContainer grid;
-    public Panel TopUI;
+    public EquipmentSelection TopUI;
+    public BaseEquipment AssignedEquipment;
     public override void _Ready()
     {
         grid = GetParent<GridContainer>();
-        TopUI = GetParent().GetParent().GetParent<Panel>();
+        TopUI = GetParent().GetParent().GetParent<EquipmentSelection>();
         area.MouseEntered += () =>
         {
             mouseIn = true;
@@ -36,6 +38,7 @@ public partial class EquipmentUI : Panel
                 if (selectedSlot != null)
                 {
                     GlobalPosition = selectedSlot.GlobalPosition;
+                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = AssignedEquipment;
                 }
                 else
                 {

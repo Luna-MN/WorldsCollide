@@ -11,7 +11,13 @@ public partial class Flags : Node
         Magic      = 1L << 2,
         ChestPiece = 1L << 3,
         Boots      = 1L << 4,
-        Weapon     = 1L << 5,
+        MainHand     = 1L << 5,
+        OffHand      = 1L << 6,
+        Helmet       = 1L << 7,
+        Gloves       = 1L << 8,
+        Legs       = 1L << 9,
+        Belt       = 1L << 10,
+        
     }
     [Flags]
     public enum PassiveType : long

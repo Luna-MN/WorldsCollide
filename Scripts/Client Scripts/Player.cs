@@ -9,7 +9,7 @@ public partial class Player : Character
 {
     #region Input Handling
     public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
-
+    
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
