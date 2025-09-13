@@ -7,6 +7,7 @@
 size = Vector2(89, 88)
 
 [node name="Equipment" type="Panel" node_paths=PackedStringArray("area")]
+custom_minimum_size = Vector2(90, 90)
 offset_left = -45.0
 offset_top = -45.0
 offset_right = 45.0

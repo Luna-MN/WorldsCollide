@@ -22,6 +22,7 @@ public partial class Character : CharacterBody2D
     [ExportGroup("Equipment")]
     [Export]
     public EquipmentSlot[] EquipmentSlots;
+    [Export] public Inventory inventory;
     
     [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
@@ -133,7 +134,7 @@ public partial class Character : CharacterBody2D
     }
     private void equipAll()
     {
-        var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).ToList();
+        var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).Where(x => x != null).ToList();
         if (equipment.Count > 0)
         {
             foreach (var equip in equipment)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=27 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -6,26 +6,80 @@
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_tx1dd"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="6_8erm5"]
+[ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
 
-[sub_resource type="Resource" id="Resource_fkybt"]
+[sub_resource type="Resource" id="Resource_8erm5"]
 script = ExtResource("3_3smsa")
 WeaponName = "Gun"
 Description = ""
 HasRightClick = false
-Damage = 0
+Damage = 10
 Range = 0
 AttackSpeed = 0
-equipmentFlags = 0
+equipmentFlags = 32
 enhancement = null
 metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
 
-[sub_resource type="Resource" id="Resource_x3wgy"]
+[sub_resource type="Resource" id="Resource_tx1dd"]
 script = ExtResource("4_8erm5")
-EquippedEquipment = SubResource("Resource_fkybt")
-equipmentFlags = 0
+EquippedEquipment = SubResource("Resource_8erm5")
+equipmentFlags = 32
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_xloa1"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 64
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_4b18b"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 128
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_peemv"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 8
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_omicx"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 512
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_v7dgu"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 256
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_8au8k"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 1024
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_p3cti"]
+script = ExtResource("4_8erm5")
+equipmentFlags = 16
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_pu2lt"]
+script = ExtResource("5_tx1dd")
+equipmentFlags = 8
+enhancement = null
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_7dp3o"]
+script = ExtResource("5_tx1dd")
+equipmentFlags = 256
+enhancement = null
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_h4iuc"]
+script = ExtResource("6_gymyn")
+AllEquipment = Array[Object]([SubResource("Resource_pu2lt"), SubResource("Resource_7dp3o")])
+metadata/_custom_type_script = "uid://b25igrq5gmts2"
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
 script = ExtResource("2_fkybt")
@@ -75,7 +129,8 @@ properties/1/replication_mode = 1
 script = ExtResource("1_6t5aa")
 FloatingText = null
 inputSync = NodePath("InputSync")
-EquipmentSlots = Array[Object]([SubResource("Resource_x3wgy")])
+EquipmentSlots = Array[Object]([SubResource("Resource_tx1dd"), SubResource("Resource_xloa1"), SubResource("Resource_4b18b"), SubResource("Resource_peemv"), SubResource("Resource_omicx"), SubResource("Resource_v7dgu"), SubResource("Resource_8au8k"), SubResource("Resource_p3cti")])
+inventory = SubResource("Resource_h4iuc")
 skills = Array[Object]([null, null, null, null, null, null])
 UltSkill = SubResource("Resource_ukyrk")
 characterStats = SubResource("Resource_f1ek2")

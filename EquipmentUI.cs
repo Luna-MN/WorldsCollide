@@ -69,7 +69,11 @@ public partial class EquipmentUI : Panel
     {
         if (body.GetParent() is EquipmentSlotUI)
         {
-            selectedSlot = body.GetParent<EquipmentSlotUI>();
+            var slot =  body.GetParent<EquipmentSlotUI>();
+            if((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0)
+            {
+                selectedSlot = body.GetParent<EquipmentSlotUI>();
+            }
         }
     }
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bada8pua2i38e"]
+[gd_scene load_steps=4 format=3 uid="uid://bada8pua2i38e"]
 
-[ext_resource type="Script" uid="uid://ctqrrxigldjdc" path="res://Scenes/SkillSelection.cs" id="1_ykoxw"]
-[ext_resource type="PackedScene" uid="uid://c7t0krqqvdpeo" path="res://Scenes/skill.tscn" id="2_56myr"]
+[ext_resource type="Script" uid="uid://cf18wdlg8is68" path="res://Scripts/Equipment/EquipmentSelection.cs" id="1_56myr"]
 [ext_resource type="PackedScene" uid="uid://cgnwv3s31cdbs" path="res://Scenes/EquipmentUI.tscn" id="3_7a4t0"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="3_56myr"]
 
-[node name="Skill Selection" type="Panel" node_paths=PackedStringArray("ApplyButton", "SkillsSelected")]
+[node name="EquipmentSelection" type="Panel" node_paths=PackedStringArray("EquipmentGrid", "EquipmentSlots")]
 self_modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,10 +16,10 @@ offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_ykoxw")
-skillUIPanel = ExtResource("2_56myr")
-ApplyButton = NodePath("Button")
-SkillsSelected = [null, null, null, null]
+script = ExtResource("1_56myr")
+EquipmentScene = ExtResource("3_7a4t0")
+EquipmentGrid = NodePath("GridContainer/GridContainer")
+EquipmentSlots = [NodePath("Slot0"), NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3"), NodePath("Slot4"), NodePath("Slot5"), NodePath("Slot6"), NodePath("Slot7")]
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -51,9 +50,6 @@ grow_horizontal = 0
 [node name="GridContainer" type="GridContainer" parent="GridContainer"]
 layout_mode = 2
 columns = 3
-
-[node name="Panel9" parent="GridContainer/GridContainer" instance=ExtResource("3_7a4t0")]
-layout_mode = 2
 
 [node name="Slot0" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
