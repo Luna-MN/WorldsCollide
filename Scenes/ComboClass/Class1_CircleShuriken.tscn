@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5qhptruqmq2t"]
+[gd_scene load_steps=8 format=3 uid="uid://df8dg1w0bvmlj"]
 
-[ext_resource type="Script" uid="uid://b2e3nx4ridnmh" path="res://Scripts/ClassScripts/Projectiles/Gun_Bullet.cs" id="1_ax1bu"]
-[ext_resource type="Texture2D" uid="uid://dj511axddasr1" path="res://Pirates/Class1/shuriken-Sheet.png" id="2_77pa3"]
+[ext_resource type="Script" uid="uid://bjls8m35hv3ss" path="res://Scripts/ClassScripts/Projectiles/Circling_Projectile.cs" id="1_ryx78"]
+[ext_resource type="Texture2D" uid="uid://dj511axddasr1" path="res://Pirates/Class1/shuriken-Sheet.png" id="2_cclxj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nv3re"]
-atlas = ExtResource("2_77pa3")
+atlas = ExtResource("2_cclxj")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ue1wu"]
-atlas = ExtResource("2_77pa3")
+atlas = ExtResource("2_cclxj")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eawxm"]
@@ -43,8 +43,9 @@ properties/3/spawn = true
 properties/3/replication_mode = 1
 
 [node name="Class1_Shuriken" type="Node2D" node_paths=PackedStringArray("Area")]
-script = ExtResource("1_ax1bu")
+script = ExtResource("1_ryx78")
 Area = NodePath("Area2D")
+RangeTime = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_eawxm")
