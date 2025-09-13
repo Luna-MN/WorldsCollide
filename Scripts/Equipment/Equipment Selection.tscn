@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bada8pua2i38e"]
+[gd_scene load_steps=9 format=3 uid="uid://bada8pua2i38e"]
 
 [ext_resource type="Script" uid="uid://cf18wdlg8is68" path="res://Scripts/Equipment/EquipmentSelection.cs" id="1_56myr"]
 [ext_resource type="PackedScene" uid="uid://cgnwv3s31cdbs" path="res://Scenes/EquipmentUI.tscn" id="3_7a4t0"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="3_56myr"]
+[ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="4_alyoc"]
+[ext_resource type="Texture2D" uid="uid://ft43whqwtdu5" path="res://Pirates/Equipment/Slots/EquipmentSlot_Chestpeice.png" id="4_g4amf"]
+[ext_resource type="Texture2D" uid="uid://bpmq6q010btsl" path="res://Pirates/Equipment/Slots/EquipmentSlot_Legs.png" id="5_alyoc"]
+[ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_7f453"]
+[ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="8_4qi71"]
 
 [node name="EquipmentSelection" type="Panel" node_paths=PackedStringArray("EquipmentGrid", "EquipmentSlots")]
 self_modulate = Color(0, 0, 0, 1)
@@ -71,6 +76,7 @@ offset_left = 175.0
 offset_top = 10.0
 offset_right = 264.0
 offset_bottom = 96.0
+Icon = ExtResource("4_alyoc")
 
 [node name="Slot3" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
@@ -78,6 +84,7 @@ offset_left = 50.0
 offset_top = 120.0
 offset_right = 139.0
 offset_bottom = 206.0
+Icon = ExtResource("4_g4amf")
 
 [node name="Slot4" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
@@ -85,6 +92,7 @@ offset_left = 50.0
 offset_top = 240.0
 offset_right = 139.0
 offset_bottom = 326.0
+Icon = ExtResource("5_alyoc")
 
 [node name="Slot5" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
@@ -99,6 +107,7 @@ offset_left = 300.0
 offset_top = 240.0
 offset_right = 389.0
 offset_bottom = 326.0
+Icon = ExtResource("7_7f453")
 
 [node name="Slot7" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
@@ -106,3 +115,4 @@ offset_left = 175.0
 offset_top = 350.0
 offset_right = 264.0
 offset_bottom = 436.0
+Icon = ExtResource("8_4qi71")
