@@ -1,59 +1,63 @@
-[gd_scene load_steps=18 format=3 uid="uid://d2podqpoej8hm"]
+[gd_scene load_steps=17 format=3 uid="uid://d2podqpoej8hm"]
 
-[ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
+[ext_resource type="Script" uid="uid://b25fkhy4lbqtd" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
 [ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="3_677pu"]
-[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="3_v7dgu"]
-[ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="4_xloa1"]
-[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_4b18b"]
+[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="3_vdqda"]
+[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="4_xloa1"]
 
-[sub_resource type="Resource" id="Resource_vdqda"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 32
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
+[sub_resource type="Resource" id="Resource_qf43b"]
+script = ExtResource("4_xloa1")
+_name = "armour"
+DisplayValue = 0.0
 
-[sub_resource type="Resource" id="Resource_eydin"]
-script = ExtResource("5_4b18b")
-equipmentFlags = 0
-enhancement = null
-Icon = ExtResource("4_xloa1")
-metadata/_custom_type_script = "uid://c8xpcraad14yd"
+[sub_resource type="Resource" id="Resource_blayf"]
+script = ExtResource("4_xloa1")
+_name = "critChance"
+DisplayValue = 0.5
 
-[sub_resource type="Resource" id="Resource_xloa1"]
-script = ExtResource("3_v7dgu")
-EquippedEquipment = SubResource("Resource_eydin")
-equipmentFlags = 64
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
+[sub_resource type="Resource" id="Resource_4pow8"]
+script = ExtResource("4_xloa1")
+_name = "critDamage"
+DisplayValue = 1.25
+
+[sub_resource type="Resource" id="Resource_5qtvi"]
+script = ExtResource("4_xloa1")
+_name = "currentHealth"
+DisplayValue = 10000.0
+
+[sub_resource type="Resource" id="Resource_6kgav"]
+script = ExtResource("4_xloa1")
+_name = "damageIncrease"
+DisplayValue = 1.1
+
+[sub_resource type="Resource" id="Resource_vmxlg"]
+script = ExtResource("4_xloa1")
+_name = "itemFind"
+DisplayValue = 1.0
+
+[sub_resource type="Resource" id="Resource_lb5d5"]
+script = ExtResource("4_xloa1")
+_name = "maxHealth"
+DisplayValue = 10000.0
+
+[sub_resource type="Resource" id="Resource_u363e"]
+script = ExtResource("4_xloa1")
+_name = "speed"
+DisplayValue = 300.0
 
 [sub_resource type="Resource" id="Resource_4b18b"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 128
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_peemv"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 8
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_omicx"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 512
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_v7dgu"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 256
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_8au8k"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 1024
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_p3cti"]
-script = ExtResource("3_v7dgu")
-equipmentFlags = 16
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
+script = ExtResource("3_vdqda")
+stats = Dictionary[String, ExtResource("4_xloa1")]({
+"armour": SubResource("Resource_qf43b"),
+"critChance": SubResource("Resource_blayf"),
+"critDamage": SubResource("Resource_4pow8"),
+"currentHealth": SubResource("Resource_5qtvi"),
+"damageIncrease": SubResource("Resource_6kgav"),
+"itemFind": SubResource("Resource_vmxlg"),
+"maxHealth": SubResource("Resource_lb5d5"),
+"speed": SubResource("Resource_u363e")
+})
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]
 properties/0/path = NodePath(".:position")
@@ -67,7 +71,7 @@ size = Vector2(30.7692, 32.6923)
 script = ExtResource("1_0y7nr")
 FloatingText = ExtResource("2_677pu")
 PositionSync = NodePath("CharacterSync")
-EquipmentSlots = Array[Object]([SubResource("Resource_vdqda"), SubResource("Resource_xloa1"), SubResource("Resource_4b18b"), SubResource("Resource_peemv"), SubResource("Resource_omicx"), SubResource("Resource_v7dgu"), SubResource("Resource_8au8k"), SubResource("Resource_p3cti")])
+characterStats = SubResource("Resource_4b18b")
 
 [node name="CharacterSync" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4flbx")

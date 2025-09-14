@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnfi3fxdao3pc"]
 
 [ext_resource type="Script" uid="uid://dy0h10l7o41t8" path="res://Scripts/ClassScripts/ClassRpc.cs" id="1_gdsdg"]
-[ext_resource type="PackedScene" uid="uid://c5qhptruqmq2t" path="res://Scenes/ComboClass/Class1_Shuriken.tscn" id="2_lhx8m"]
-[ext_resource type="PackedScene" uid="uid://df8dg1w0bvmlj" path="res://Scenes/ComboClass/Class1_CircleShuriken.tscn" id="3_h2fqx"]
+[ext_resource type="PackedScene" uid="uid://ilkueeb0cdpt" path="res://Scenes/ComboClass/Class1_Shuriken.tscn" id="2_lhx8m"]
+[ext_resource type="PackedScene" uid="uid://bk7ppctm372s7" path="res://Scenes/ComboClass/Class1_CircleShuriken.tscn" id="3_h2fqx"]
 
 [node name="ClassRpc" type="Node2D"]
 script = ExtResource("1_gdsdg")

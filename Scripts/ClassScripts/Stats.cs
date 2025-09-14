@@ -1,70 +1,89 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Godot.NativeInterop;
+
 [GlobalClass]
 public partial class Stats : Resource
 {
-    private event Action onStatCalc;
-    [ExportGroup("Stats")] 
-    [Export] private float _speed = 200f;
-    [Export] private float _currentHealth = 100f;
-    [Export] private float _maxHealth = 100f;
-    [Export] private float _armour = 0.0f;
-    [Export] private float _damageIncrease = 1.1f;
-    [Export] private float _itemFind = 1.0f;
-    [Export] private float _critChance = 0.5f;
-    [Export] private float _critDamage = 1.25f;
-    
-    #region getter/setter
-    public float Speed
+    [Export] 
+    private Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
+    public Stats()
     {
-        get => _speed;
-        set => _speed = value;
     }
-    public float CurrentHealth
-    {
-        get => _currentHealth;
-        set => _currentHealth = value;
-    }
-    public float MaxHealth
-    {
-        get => _maxHealth;
-        set => _maxHealth = value;
-    }
-    public float Armour
-    {
-        get => _armour;
-        set => _armour = value;
-    }
-    public float DamageReductionMultiplier => ArmourFormula();
 
-    public float DamageIncrease
+    public Stats(string startingStatsType)
     {
-        get => _damageIncrease;
-        set => _damageIncrease = value;
+        if (startingStatsType == "player")
+        {
+            setValue("speed", 200f);
+            setValue("currentHealth", 100f);
+            setValue("maxHealth", 100f);
+            setValue("armour", 0.0f);
+            setValue("damageIncrease", 1.1f);
+            setValue("itemFind", 1.0f);
+            setValue("critChance", 0.5f);
+            setValue("critDamage", 1.25f);
+        }
     }
-    public float ItemFind
-    {
-        get => _itemFind;
-        set => _itemFind = value;
-    }
-    public float CritChance
-    {
-        get => _critChance;
-        set => _critChance = value;
-    }
-    public float CritDamage
-    {
-        get => _critDamage;
-        set => _critDamage = value;
-    }
-    #endregion
     
-    #region Formulas
-    private float ArmourFormula()
+    public float this[string i]
     {
-        return 100.0f / (100.0f + _armour);
+        set => setValue(i, value);
+        get => getValue(i);
     }
-    #endregion
-    
-    
+
+    public float this[string i, string s]
+    {
+        get => s=="d"? getDisplayValue(i): getValue(i);
+        set => setValue(i, value);
+    }
+
+    public void setValue(string name, float value)
+    {
+        if (!stats.TryGetValue(name, out var stat))
+        {
+            stats.Add(name, new Stat(name, value));
+        }
+        else
+        {
+            stat.Value = value;
+        }
+    }
+    public float getValue(string name)
+    {
+        float value;
+        if (!stats.TryGetValue(name, out var stat))
+        {
+            setValue(name, 0.0f);
+            value = getValue(name);
+        }
+        else
+        {
+            value = stat.Value;
+        }
+        //GD.Print("getting " + name + ": " + value);
+        
+        return value;
+    }
+    public float getDisplayValue(string name)
+    {
+        return stats[name].DisplayValue;
+    }
+
+    public void addFunc(string statName, string funcName, Func<float, float> func, int priority)
+    {
+        if (stats.TryGetValue(statName, out var stat))
+        {
+            stat.addFunc(funcName, func, priority);
+        }
+    }
+
+    public void removeFunc(string statName, string funcName)
+    {
+        if (stats.TryGetValue(statName, out var stat))
+        {
+            stat.removeFunc(funcName);
+        }
+    }
 }

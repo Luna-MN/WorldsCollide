@@ -52,55 +52,57 @@ public partial class Character : CharacterBody2D
     
     [ExportGroup("Stats")]
     [Export]
-    public Stats characterStats = new Stats();
+    public Stats characterStats = new Stats("player");
         #region StatMirrors
+            /*
             [Export] public float Speed
             {
-                get => characterStats.Speed;
-                set => characterStats.Speed = value;
+                get => characterStats["Speed", "d"];
+                set => characterStats["Speed"] = value;
             }
 
             [Export] public float CurrentHealth
             {
-                get => characterStats.CurrentHealth;
-                set => characterStats.CurrentHealth = value;
+                get => characterStats["CurrentHealth", "d"];
+                set => characterStats["CurrentHealth"] = value;
             }
 
             [Export] public float MaxHealth
             {
-                get => characterStats.MaxHealth;
-                set => characterStats.MaxHealth = value;
+                get => characterStats["MaxHealth", "d"];
+                set => characterStats["MaxHealth"] = value;
             }
 
             [Export] public float Armour
             {
-                get => characterStats.Armour;
-                set => characterStats.Armour = value;
+                get => characterStats["Armour", "d"];
+                set => characterStats["Armour"] = value;
             }
 
             [Export] public float DamageIncrease
             {
-                get => characterStats.DamageIncrease;
-                set => characterStats.DamageIncrease = value;
+                get => characterStats["DamageIncrease", "d"];
+                set => characterStats["DamageIncrease"] = value;
             }
 
             [Export] public float ItemFind
             {
-                get => characterStats.ItemFind;
-                set => characterStats.ItemFind = value;
+                get => characterStats["ItemFind", "d"];
+                set => characterStats["ItemFind"] = value;
             }
 
             [Export] public float CritChance
             {
-                get => characterStats.CritChance;
-                set => characterStats.CritChance = value;
+                get => characterStats["CritChance", "d"];
+                set => characterStats["CritChance"] = value;
             }
 
             [Export] public float CritDamage
             {
-                get => characterStats.CritDamage;
-                set => characterStats.CritDamage = value;
+                get => characterStats["CritDamage", "d"];
+                set => characterStats["CritDamage"] = value;
             }
+            */
 
         #endregion
     #endregion
@@ -159,6 +161,7 @@ public partial class Character : CharacterBody2D
             if (skill.IsPassive)
             {
                 var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy );
+                
                 switch (skill.passiveType)
                 {
                     case Skill.PassiveType.OnHit:
@@ -309,7 +312,8 @@ public partial class Character : CharacterBody2D
         if (input != Vector2.Zero)
         {
             PassiveMoveTimers.ForEach(x => x.Start());
-            Position += input.Normalized() * Speed * delta;
+            GD.Print("movin: " + input.Normalized() * characterStats["speed"] * delta);
+            Position += input.Normalized() * characterStats["speed"] * delta;
         }
         else
         {
@@ -326,8 +330,8 @@ public partial class Character : CharacterBody2D
     public void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        CurrentHealth -= damage * characterStats.DamageReductionMultiplier;
-        if (CurrentHealth <= 0)
+        characterStats["currentHealth"] -= damage * characterStats["Armour"];
+        if (characterStats["currentHealth"] <= 0)
         {
             if (this is Player p)
             {
@@ -346,12 +350,12 @@ public partial class Character : CharacterBody2D
     }
     public void Heal(float heal)
     {
-        if (CurrentHealth <= 0) return;
-        if (CurrentHealth + heal > MaxHealth)
+        if (characterStats["currentHealth"] <= 0) return;
+        if (characterStats["currentHealth"] + heal > characterStats["maxHealth"])
         {
-            heal = MaxHealth - CurrentHealth;
+            heal = characterStats["maxHealth"] - characterStats["currentHealth"];
         }
-        CurrentHealth += heal;
+        characterStats["currentHealth"] += heal;
     }
     
 

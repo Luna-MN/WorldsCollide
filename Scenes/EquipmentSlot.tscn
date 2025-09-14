@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cty5igj15kppt"]
 
-[ext_resource type="Script" uid="uid://cnhjg83han757" path="res://Scenes/EquipmentSlotUI.cs" id="1_i7ckq"]
+[ext_resource type="Script" uid="uid://dktr7wrq055od" path="res://Scenes/EquipmentSlotUI.cs" id="1_i7ckq"]
 [ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="2_ei0t3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rniuo"]

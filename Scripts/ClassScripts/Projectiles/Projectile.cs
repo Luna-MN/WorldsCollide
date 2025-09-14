@@ -64,11 +64,11 @@ public partial class Projectile : Node2D
 
     public void obtainStats(Character c)
     {
-        Damage *= c.characterStats.DamageIncrease;
+        Damage *= c.characterStats["damageIncrease"];
         var rng = new RandomNumberGenerator();
-        if (rng.Randf() < c.characterStats.CritChance)
+        if (rng.Randf() < c.characterStats["critChance"])
         {
-            Damage *= c.characterStats.CritDamage;
+            Damage *= c.characterStats["critDamage"];
         }
     }
 }

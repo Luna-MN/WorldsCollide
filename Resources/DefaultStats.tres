@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=11 format=3 uid="uid://d1qg7816o6cbp"]
+
+[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="1_i0mew"]
+[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="2_1x8at"]
+
+[sub_resource type="Resource" id="Resource_qf43b"]
+script = ExtResource("2_1x8at")
+_name = "armour"
+DisplayValue = 0.0
+
+[sub_resource type="Resource" id="Resource_blayf"]
+script = ExtResource("2_1x8at")
+_name = "critChance"
+DisplayValue = 0.5
+
+[sub_resource type="Resource" id="Resource_4pow8"]
+script = ExtResource("2_1x8at")
+_name = "critDamage"
+DisplayValue = 1.25
+
+[sub_resource type="Resource" id="Resource_5qtvi"]
+script = ExtResource("2_1x8at")
+_name = "currentHealth"
+DisplayValue = 100.0
+
+[sub_resource type="Resource" id="Resource_6kgav"]
+script = ExtResource("2_1x8at")
+_name = "damageIncrease"
+DisplayValue = 1.1
+
+[sub_resource type="Resource" id="Resource_vmxlg"]
+script = ExtResource("2_1x8at")
+_name = "itemFind"
+DisplayValue = 1.0
+
+[sub_resource type="Resource" id="Resource_lb5d5"]
+script = ExtResource("2_1x8at")
+_name = "maxHealth"
+DisplayValue = 100.0
+
+[sub_resource type="Resource" id="Resource_u363e"]
+script = ExtResource("2_1x8at")
+_name = "speed"
+DisplayValue = 100.0
+
+[resource]
+script = ExtResource("1_i0mew")
+stats = Dictionary[String, ExtResource("2_1x8at")]({
+"armour": SubResource("Resource_qf43b"),
+"critChance": SubResource("Resource_blayf"),
+"critDamage": SubResource("Resource_4pow8"),
+"currentHealth": SubResource("Resource_5qtvi"),
+"damageIncrease": SubResource("Resource_6kgav"),
+"itemFind": SubResource("Resource_vmxlg"),
+"maxHealth": SubResource("Resource_lb5d5"),
+"speed": SubResource("Resource_u363e")
+})

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cv11ebq8y00to"]
 
-[ext_resource type="Script" uid="uid://darwncq5kpqge" path="res://Scripts/Client Scripts/FloatingText.cs" id="1_kfvxn"]
+[ext_resource type="Script" uid="uid://d4fhj3xhc4qdy" path="res://Scripts/Client Scripts/FloatingText.cs" id="1_kfvxn"]
 
 [sub_resource type="FontFile" id="FontFile_6k8mt"]
 subpixel_positioning = 0

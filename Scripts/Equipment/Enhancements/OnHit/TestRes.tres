@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://cclut242r4bha"]
 
-[ext_resource type="Script" uid="uid://bg7cx4iij3ngc" path="res://Scripts/Equipment/Enhancements/OnHit/One.cs" id="1_kcyph"]
+[ext_resource type="Script" uid="uid://d0f1ob4ykmj8a" path="res://Scripts/Equipment/Enhancements/OnHit/One.cs" id="1_kcyph"]
 
 [resource]
 script = ExtResource("1_kcyph")
