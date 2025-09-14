@@ -21,12 +21,15 @@ public partial class Stat : Resource
     {
         get => _name;
     }
+    //value indexer returns the calculated value
+    //allows setting
     public float Value
     {
         get => calculation();
         set => _value = (float)(_setValidationFunction?.Invoke(null, [value])?? _value);
     }
-
+    //display value indexer returns the value straight
+    //allows setting
     [Export]
     public float DisplayValue
     {
@@ -34,6 +37,7 @@ public partial class Stat : Resource
         set => _value = (float)(_setValidationFunction?.Invoke(null, [value]) ?? _value);
     }
 
+    //default constructor for godot
     private Stat()
     {
         _name = "Default Crappy Stupid Stat";
@@ -41,6 +45,7 @@ public partial class Stat : Resource
         _setValidationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
         Value = 0.0f;
     }
+    //constructor for use
     public Stat(string name, float startingValue)
     {
         StatConstructor(name, startingValue);
@@ -72,8 +77,7 @@ public partial class Stat : Resource
         }
         Value = startingValue;
     }
-
-
+    //adding functions to priority-ed list - add in priority order
     public void addFunc(string name, Func<float, float> func, int priority)
     {
         if (_funcs.Count(tuple => tuple.Item1 == name) != 0)
@@ -89,12 +93,12 @@ public partial class Stat : Resource
         }
         _funcs.Add((name, func, priority));
     }
-
+    //removing
     public void removeFunc(string name)
     {
         _funcs.Remove(_funcs.Find(tuple => tuple.Item1 == name));
     }
-
+    //do the math - loop through list - running the calculation at 10
     private float calculation()
     {
         float v = _value;
