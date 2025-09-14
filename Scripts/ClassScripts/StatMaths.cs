@@ -5,7 +5,7 @@ public static class StatMaths
 {
     //static formula function
     //functions obtained by invoking on name - careful changing any names
-    //[stat name]calc = calculation on value
+    //[stat name]Calc = calculation on value
     //[stat name]Vaildation = validation on setting a value
     //defaultFallBack returns the value put in. - it will use this if the function it's looking for can't be found
     public static float defaultFallBack(float value)

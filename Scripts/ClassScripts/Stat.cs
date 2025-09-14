@@ -55,6 +55,7 @@ public partial class Stat : Resource
         _name = name;
         try
         {
+            //[stat name]Vaildation = validation on setting a value
             _setValidationFunction = typeof(StatMaths).GetMethod(name + "Vaildation", BindingFlags.Static | BindingFlags.Public);
             if (_setValidationFunction == null)
                 _setValidationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
@@ -67,6 +68,7 @@ public partial class Stat : Resource
         }
         try
         {
+            //[stat name]Calc = calculation on value
             _calcFunction = typeof(StatMaths).GetMethod(name + "Calc", BindingFlags.Static | BindingFlags.Public);
             if (_calcFunction == null)
                 _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
@@ -105,20 +107,24 @@ public partial class Stat : Resource
         bool calcRun = false;
         if (_funcs.Count != 0)
         {
-            foreach (var valueTuple in _funcs)
+            //loop through _func
+            foreach (var function in _funcs)
             {
-                if (valueTuple.Item3 < 10)
+                //priorities lower than 10 before the default calculation 
+                if (function.Item3 < 10)
                 {
-                    v = valueTuple.Item2.Invoke(_value);
+                    v = function.Item2.Invoke(_value);
                 }
-                else if (valueTuple.Item3 > 10 && !calcRun)
+                //do the default calc calculation
+                else if (function.Item3 > 10 && !calcRun)
                 {
                     v = (float)(_calcFunction?.Invoke(null, [v]) ?? v);
                     calcRun = true;
                 }
+                //do the rest
                 else
                 {
-                    v = valueTuple.Item2.Invoke(_value);
+                    v = function.Item2.Invoke(_value);
                 }
             }
         }

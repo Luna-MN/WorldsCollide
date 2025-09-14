@@ -36,10 +36,9 @@ public partial class Stats : Resource
     //getter setter for display value stats
     public float this[string i, string s]
     {
-        get => s=="d"? getDisplayValue(i): getValue(i);
+        get => s.ToLower()=="d"? getDisplayValue(i): getValue(i);
         set => setValue(i, value);
     }
-    
     //set adds if nonexistent
     public void setValue(string name, float value)
     {
