@@ -1,26 +1,21 @@
 [gd_scene load_steps=29 format=3 uid="uid://qgdu76e3yi45"]
 
-[ext_resource type="Script" uid="uid://b0voaam7hoyic" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://y5csa3y2a6h4" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
-[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
-[ext_resource type="Script" uid="uid://dhl73kpc5wgpr" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="3_3smsa"]
+[ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://bnvh5tkipjpfo" path="res://Pirates/Class1/CirclingShuriken.png" id="3_gymyn"]
-[ext_resource type="Script" uid="uid://516f76be8hhp" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
-[ext_resource type="Script" uid="uid://73ibnv5rsxp8" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_tx1dd"]
-[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="6_8erm5"]
-[ext_resource type="Script" uid="uid://cy3pvgilxl1kh" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
+[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_tx1dd"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="6_8erm5"]
+[ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
-[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="11_pu2lt"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="11_pu2lt"]
 
 [sub_resource type="Resource" id="Resource_gymyn"]
 script = ExtResource("3_3smsa")
 WeaponName = "Gun"
-Description = ""
-HasRightClick = false
-Damage = 0
-Range = 0
-AttackSpeed = 0
 equipmentFlags = 32
 enhancement = null
 Icon = ExtResource("3_gymyn")
@@ -87,21 +82,10 @@ metadata/_custom_type_script = "uid://b25igrq5gmts2"
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
 script = ExtResource("2_fkybt")
-Name = ""
-IsPassive = false
-passiveType = 0
-TimerWaitTime = 2.0
-PassiveStat = ""
-PassiveValue = 0.0
-RpcName = ""
-RpcCallLocation = 0
-Damage = 10.0
-RangeTime = 1.0
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_f1ek2"]
 script = ExtResource("6_8erm5")
-stats = Dictionary[String, ExtResource("11_pu2lt")]({})
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_677pu"]
 animations = [{
@@ -124,7 +108,6 @@ properties/1/replication_mode = 1
 
 [node name="Player" node_paths=PackedStringArray("inputSync") instance=ExtResource("1_v0iea")]
 script = ExtResource("1_6t5aa")
-FloatingText = null
 inputSync = NodePath("InputSync")
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_qqcod"), SubResource("Resource_4b18b"), SubResource("Resource_peemv"), SubResource("Resource_omicx"), SubResource("Resource_v7dgu"), SubResource("Resource_8au8k"), SubResource("Resource_p3cti")])
 inventory = SubResource("Resource_h4iuc")

@@ -1,14 +1,7 @@
 [gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=2 format=3 uid="uid://biekc0nxmee0i"]
 
-[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="1_r6p1y"]
+[ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="1_r6p1y"]
 
 [resource]
 script = ExtResource("1_r6p1y")
-WeaponName = ""
-Description = ""
-HasRightClick = false
-Damage = 0
-Range = 0
-AttackSpeed = 0
-equipmentFlags = 0
 enhancement = null

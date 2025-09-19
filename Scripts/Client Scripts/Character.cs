@@ -23,6 +23,7 @@ public partial class Character : CharacterBody2D
     [Export]
     public EquipmentSlot[] EquipmentSlots;
     [Export] public Inventory inventory;
+    [Export] public bool DropLootOnDeath;
     
     [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
@@ -133,6 +134,10 @@ public partial class Character : CharacterBody2D
         if (IsDummy) return;
         SetSkills();
         equipAll();
+        if (DropLootOnDeath)
+        {
+            OnDeath += DropLoot;
+        }
     }
     public void equipAll()
     {
@@ -312,7 +317,6 @@ public partial class Character : CharacterBody2D
         if (input != Vector2.Zero)
         {
             PassiveMoveTimers.ForEach(x => x.Start());
-            GD.Print("movin: " + input.Normalized() * characterStats["speed"] * delta);
             Position += input.Normalized() * characterStats["speed"] * delta;
         }
         else
@@ -357,6 +361,10 @@ public partial class Character : CharacterBody2D
         }
         characterStats["currentHealth"] += heal;
     }
-    
+
+    public void DropLoot(Node2D Killer)
+    {
+        // drop loot
+    }
 
 }

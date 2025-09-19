@@ -1,12 +1,11 @@
 [gd_resource type="Resource" script_class="Stats" load_steps=11 format=3 uid="uid://d1qg7816o6cbp"]
 
-[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="1_i0mew"]
-[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="2_1x8at"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="1_i0mew"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="2_1x8at"]
 
 [sub_resource type="Resource" id="Resource_qf43b"]
 script = ExtResource("2_1x8at")
 _name = "armour"
-DisplayValue = 0.0
 
 [sub_resource type="Resource" id="Resource_blayf"]
 script = ExtResource("2_1x8at")

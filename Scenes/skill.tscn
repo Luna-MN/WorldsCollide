@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7t0krqqvdpeo"]
 
-[ext_resource type="Script" uid="uid://cqqppgn2c660t" path="res://Scenes/SkillUIPanel.cs" id="1_86x3w"]
+[ext_resource type="Script" uid="uid://cd65r4iwpokqx" path="res://Scenes/SkillUIPanel.cs" id="1_86x3w"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="1_uc8rf"]
 
 [node name="Skill" type="Panel"]

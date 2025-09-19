@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjwb7dl5et8f5"]
 
-[ext_resource type="Script" uid="uid://vjerp0ggdpr1" path="res://Scripts/ClassScripts/Projectiles/BasicRangedProjectile.cs" id="1_1h6f3"]
+[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Projectiles/BasicRangedProjectile.cs" id="1_1h6f3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_iorkc"]
 
