@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://b14otrrm17vx6"]
+
+[ext_resource type="PackedScene" uid="uid://pvnlwhskemr2" path="res://Scenes/enemy.tscn" id="1_qijij"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="2_cvwg5"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="3_mhupp"]
+
+[sub_resource type="Resource" id="Resource_qf43b"]
+script = ExtResource("3_mhupp")
+_name = "armour"
+
+[sub_resource type="Resource" id="Resource_blayf"]
+script = ExtResource("3_mhupp")
+_name = "critChance"
+DisplayValue = 0.5
+
+[sub_resource type="Resource" id="Resource_4pow8"]
+script = ExtResource("3_mhupp")
+_name = "critDamage"
+DisplayValue = 1.25
+
+[sub_resource type="Resource" id="Resource_mhupp"]
+script = ExtResource("3_mhupp")
+_name = "currentHealth"
+DisplayValue = 100.0
+
+[sub_resource type="Resource" id="Resource_6kgav"]
+script = ExtResource("3_mhupp")
+_name = "damageIncrease"
+DisplayValue = 1.1
+
+[sub_resource type="Resource" id="Resource_vmxlg"]
+script = ExtResource("3_mhupp")
+_name = "itemFind"
+DisplayValue = 1.0
+
+[sub_resource type="Resource" id="Resource_cvwg5"]
+script = ExtResource("3_mhupp")
+_name = "maxHealth"
+DisplayValue = 100.0
+
+[sub_resource type="Resource" id="Resource_u363e"]
+script = ExtResource("3_mhupp")
+_name = "speed"
+DisplayValue = 300.0
+
+[sub_resource type="Resource" id="Resource_46oi8"]
+script = ExtResource("2_cvwg5")
+stats = Dictionary[String, ExtResource("3_mhupp")]({
+"armour": SubResource("Resource_qf43b"),
+"critChance": SubResource("Resource_blayf"),
+"critDamage": SubResource("Resource_4pow8"),
+"currentHealth": SubResource("Resource_mhupp"),
+"damageIncrease": SubResource("Resource_6kgav"),
+"itemFind": SubResource("Resource_vmxlg"),
+"maxHealth": SubResource("Resource_cvwg5"),
+"speed": SubResource("Resource_u363e")
+})
+
+[node name="Dummy" instance=ExtResource("1_qijij")]
+IsDummy = true
+characterStats = SubResource("Resource_46oi8")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(0, -0.99999905)
+scale = Vector2(1.7500001, 1.8750001)

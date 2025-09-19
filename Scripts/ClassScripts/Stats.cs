@@ -8,24 +8,9 @@ public partial class Stats : Resource
 {
     //dictionary of all name & stat classes
     [Export] 
-    private Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
+    public Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
     public Stats()
     {
-    }
-
-    public Stats(string startingStatsType)
-    {
-        if (startingStatsType == "player")
-        {
-            setValue("speed", 200f);
-            setValue("currentHealth", 100f);
-            setValue("maxHealth", 100f);
-            setValue("armour", 0.0f);
-            setValue("damageIncrease", 1.1f);
-            setValue("itemFind", 1.0f);
-            setValue("critChance", 0.5f);
-            setValue("critDamage", 1.25f);
-        }
     }
     //getter setter for stats
     public float this[string i]

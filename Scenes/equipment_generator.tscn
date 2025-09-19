@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh43r4421n8lf"]
+
+[ext_resource type="Script" uid="uid://bltv4ms4d08ny" path="res://EquipmentGenerator.cs" id="1_t3mdg"]
+
+[node name="Equipment Generator" type="Node2D"]
+script = ExtResource("1_t3mdg")

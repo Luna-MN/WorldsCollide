@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://yhuibdr1jc5o"]
 
-[ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="1_xk3ai"]
+[ext_resource type="Texture2D" uid="uid://blm0bamuc0pqa" path="res://Pirates/Dummy.png" id="1_xk3ai"]
 
 [resource]
 animations = [{

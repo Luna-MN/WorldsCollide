@@ -56,7 +56,7 @@ public partial class Character : CharacterBody2D
     
     [ExportGroup("Stats")]
     [Export]
-    public Stats characterStats = new Stats("player");
+    public Stats characterStats;
         #region StatMirrors
             /*
             [Export] public float Speed
@@ -337,7 +337,9 @@ public partial class Character : CharacterBody2D
     public void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        characterStats["currentHealth"] -= damage * characterStats["Armour"];
+        characterStats.stats["currentHealth"].Value -= damage;
+        GD.Print(damage);
+        GD.Print(characterStats.stats["currentHealth"].Value);
         if (characterStats["currentHealth"] <= 0)
         {
             if (this is Player p)
