@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dft540hr27ugl"]
+[gd_scene load_steps=13 format=3 uid="uid://dft540hr27ugl"]
 
 [ext_resource type="Texture2D" uid="uid://b35u54ttw2jyu" path="res://Pirates/Equipment/Slots/FloorEquipmentIcon-Sheet.png" id="1_sy55v"]
 [ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="1_tppd4"]
@@ -60,6 +60,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w51j1"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_w51j1")
 sprite = NodePath("AnimatedSprite2D")
@@ -71,3 +76,6 @@ material = SubResource("ShaderMaterial_xtmdf")
 sprite_frames = SubResource("SpriteFrames_2l517")
 frame = 4
 frame_progress = 0.667271
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_w51j1")
