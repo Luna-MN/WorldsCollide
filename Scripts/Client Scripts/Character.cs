@@ -23,7 +23,10 @@ public partial class Character : CharacterBody2D
     [Export]
     public EquipmentSlot[] EquipmentSlots;
     [Export] public Inventory inventory;
-    [Export] public bool DropLootOnDeath;
+    [ExportSubgroup("Loot Drop")]
+    [Export(PropertyHint.GroupEnable)] public bool DropLootOnDeath;
+    [Export] public int Quality;
+    [Export(PropertyHint.ResourceType)] public BaseEquipment[] DroppableEquipment;
     
     [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
