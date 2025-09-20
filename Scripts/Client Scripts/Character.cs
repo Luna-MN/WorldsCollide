@@ -27,6 +27,9 @@ public partial class Character : CharacterBody2D
     [Export(PropertyHint.GroupEnable)] public bool DropLootOnDeath;
     [Export] public int Prestige = 1;
     [Export(PropertyHint.ResourceType)] public BaseEquipment[] DroppableEquipment;
+    public List<int> PlayerIds;
+    [Export]
+    public PackedScene EquipmentSpawner;
     
     [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
@@ -57,7 +60,9 @@ public partial class Character : CharacterBody2D
     [ExportGroup("Stats")]
     [Export]
     public Stats characterStats;
-        #region StatMirrors
+    [Export] public int Level;
+    
+    #region StatMirrors
             /*
             [Export] public float Speed
             {
@@ -334,7 +339,7 @@ public partial class Character : CharacterBody2D
         text.text.Text = damage.ToString();
         AddChild(text, true);
     }
-    public void TakeDamage(float damage, int attacker)
+    public virtual void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
         characterStats.stats["currentHealth"].Value -= damage;
@@ -354,8 +359,24 @@ public partial class Character : CharacterBody2D
                 ServerManager.ClientRpcs.Rpc("RemovePlayer", GetPath().ToString());
                 QueueFree();
             }
-
         }
+
+        if (DropLootOnDeath)
+        {
+            AddPlayersToDropLoot(attacker);
+        }
+    }
+    public void AddPlayersToDropLoot(int attacker)
+    {
+        PlayerIds.Add(attacker);
+    }
+    public void DropLoot(Node2D Killer)
+    {
+        var Gen = EquipmentSpawner.Instantiate<EquipmentGenerator>();
+        Gen.Level = Level;
+        Gen.Prestige = Prestige;
+        Gen.CharacterIds = PlayerIds;
+        ServerManager.spawner.AddChild(Gen);
     }
     public void Heal(float heal)
     {
@@ -365,11 +386,6 @@ public partial class Character : CharacterBody2D
             heal = characterStats["maxHealth"] - characterStats["currentHealth"];
         }
         characterStats["currentHealth"] += heal;
-    }
-
-    public void DropLoot(Node2D Killer)
-    {
-        // drop loot
     }
 
 }
