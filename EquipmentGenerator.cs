@@ -40,43 +40,56 @@ public partial class EquipmentGenerator : Node2D
         };
         timer.Timeout += () =>
         {
+            // add some delay to add some spice
             GenerateEquipment();
         };
         AddChild(timer);
-        AddToGroup("EquipmentGenerators");
-    }
+        }
 
     public override void _Process(double delta)
     {
         if (CharacterIds.Count == 0)
         {
+            // delete when no longer spawning
             QueueFree();
         }
     }
 
     public void GenerateEquipment()
     {
+        // randomize the rng
         rng.Randomize();
+        // try generate a item for each character
         foreach (var Id in CharacterIds.ToList())
         {
+            // snapped rounds it to that many DP ending in a number 0.xxxx
             var RandPercentage = (float)Mathf.Snapped(rng.RandfRange(0, 1), 0.0001);
             if(RandPercentage <= GeneratePercentage)
             {
                 GD.Print("Generating " + GeneratePercentage);
                 RandPercentage = rng.RandfRange(0, 1);
+                // get rarity
                 var ItemRarity = RaritySwitch(RandPercentage);
+                // convert rarity into the color
                 var colors = Colors[ItemRarity];
+                // get quality formula on notion if its annoying to read here
                 var quality = (Level * 50) + (Prestige) + ((float)Math.Pow(1.8, (int)ItemRarity) * 25);
+                // adjust quality to be between -100 and 100
                 var actualQuality = rng.RandiRange((int)Mathf.Min(0, quality-100), (int)quality+100);
                 
+                // generate floor item
                 var floorItem = FloorItem.Instantiate<FloorEquipmentDefault>();
                 floorItem.colors = colors;
                 if (GenerationEquipment.Count > 0)
                 {
+                    // Generate a random equipment
                     var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
+                    // the number of enhancments is equal to the first number for the quality
                     var enhancmentsNum = (actualQuality / 1000) + 1;
+                    // get all creatable enhancments based on flags and rarity level
                     var creatableEnhancments = Enhancments.Where(x => (x.MinEnhancmentLevel >= (int)ItemRarity) && (x.EnhancmentFlags & equipment.equipmentFlags) != 0).ToList();
                     var enhancments = new List<BaseEnhancement>();
+                    // convert the quality into a percentage
                     var qualPerc = actualQuality / 6630;
                     if (creatableEnhancments.Count > 0)
                     {
@@ -85,7 +98,7 @@ public partial class EquipmentGenerator : Node2D
                             var en = creatableEnhancments[rng.RandiRange(0, creatableEnhancments.Count)];
                             if (en.ValueBased)
                             {
-
+                                // of the enhancment is value based then get the percentage of max and then convert that into the value 
                                 en.Value = en.MinValue + (en.MaxValue - en.MinValue) * qualPerc;
                             }
 
@@ -96,6 +109,7 @@ public partial class EquipmentGenerator : Node2D
                     {
                         if (stat.Value.ClampValue)
                         {
+                            // clamp the value between the min and max
                             stat.Value.Value = stat.Value.MinValue + (stat.Value.MaxValue - stat.Value.MinValue) * qualPerc;
                         }
                     }
