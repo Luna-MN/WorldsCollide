@@ -9,7 +9,7 @@ public partial class BaseEquipment : Resource
     [ExportGroup("Flags")]
     [Export]
     public Flags.AbilityFlags equipmentFlags;
-    
+    [Export] public Stats stats;
     [ExportGroup("Enhancements")]
     [Export(PropertyHint.ResourceType)]
     public BaseEnhancement[] enhancements;

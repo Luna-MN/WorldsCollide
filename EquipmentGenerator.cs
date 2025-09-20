@@ -75,17 +75,29 @@ public partial class EquipmentGenerator : Node2D
                 {
                     var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
                     var enhancmentsNum = (actualQuality / 1000) + 1;
-                    var createableEnhancments = Enhancments.Where(x => x.MinEnhancmentLevel >= (int)ItemRarity).Where(x => (x.EnhancmentFlags & equipment.equipmentFlags) != 0).ToList();
-                    List<BaseEnhancement> enhancments = new List<BaseEnhancement>();
-                    for (int i = 0; i < enhancmentsNum; i++)
+                    var creatableEnhancments = Enhancments.Where(x => (x.MinEnhancmentLevel >= (int)ItemRarity) && (x.EnhancmentFlags & equipment.equipmentFlags) != 0).ToList();
+                    var enhancments = new List<BaseEnhancement>();
+                    var qualPerc = actualQuality / 6630;
+                    if (creatableEnhancments.Count > 0)
                     {
-                        var en = createableEnhancments[rng.RandiRange(0, createableEnhancments.Count)];
-                        if (en.ValueBased)
+                        for (int i = 0; i < enhancmentsNum; i++)
                         {
-                            var qualPerc = quality / 6630;
-                            en.Value = en.MinValue + (en.MaxValue - en.MinValue) * qualPerc;
+                            var en = creatableEnhancments[rng.RandiRange(0, creatableEnhancments.Count)];
+                            if (en.ValueBased)
+                            {
+
+                                en.Value = en.MinValue + (en.MaxValue - en.MinValue) * qualPerc;
+                            }
+
+                            enhancments.Add(en);
                         }
-                        enhancments.Add(en);
+                    }
+                    foreach (var stat in equipment.stats.stats)
+                    {
+                        if (stat.Value.ClampValue)
+                        {
+                            stat.Value.Value = stat.Value.MinValue + (stat.Value.MaxValue - stat.Value.MinValue) * qualPerc;
+                        }
                     }
                     equipment.enhancements = enhancments.ToArray();
                     floorItem.equipment = equipment;

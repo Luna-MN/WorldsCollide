@@ -36,7 +36,13 @@ public partial class Stat : Resource
         get => _value;
         set => _value = (float)(_setValidationFunction?.Invoke(null, [value]) ?? _value);
     }
-
+    [ExportGroup("Value Clamp")]
+    [Export]
+    public float MinValue;
+    [Export]
+    public float MaxValue;
+    [Export(PropertyHint.GroupEnable)]
+    public bool ClampValue;
     //default constructor for godot
     private Stat()
     {
