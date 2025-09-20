@@ -34,7 +34,7 @@ public partial class FloorEquipmentDefault : Node2D
             (startPos.X + FinalPosition.X) / 2,  // Halfway between start and end X
             Math.Min(startPos.Y, FinalPosition.Y) - 75f  // Above both points
         );
-        GD.Print(midPoint);
+
         tween.TweenProperty(this, "global_position", midPoint, 0.3f)
             .SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
         tween.TweenProperty(this, "global_position", FinalPosition, 0.4f)

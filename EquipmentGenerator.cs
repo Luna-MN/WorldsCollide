@@ -69,13 +69,13 @@ public partial class EquipmentGenerator : Node2D
                 
                 var floorItem = FloorItem.Instantiate<FloorEquipmentDefault>();
                 floorItem.colors = colors;
-                GD.Print(ItemRarity);
                 if (GenerationEquipment.Count > 0)
                 {
                     var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
                     var enhancments = (actualQuality / 1000) + 1;
                     for (int i = 0; i < enhancments; i++)
                     {
+                        //equipment.enhancements[i] = new One();
                         // generate enhancments
                     }
                     floorItem.equipment = equipment;

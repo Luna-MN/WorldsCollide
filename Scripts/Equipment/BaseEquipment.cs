@@ -12,7 +12,7 @@ public partial class BaseEquipment : Resource
     
     [ExportGroup("Enhancements")]
     [Export(PropertyHint.ResourceType)]
-    public BaseEnhancement[] enhancement;
+    public BaseEnhancement[] enhancements;
     
     [Export]
     public Texture2D Icon;
@@ -20,7 +20,7 @@ public partial class BaseEquipment : Resource
     
     public virtual void OnEquip(Character character)
     {
-        foreach (var enhance in enhancement)
+        foreach (var enhance in enhancements)
         {
             enhance.Enhance(character);
         }
