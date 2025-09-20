@@ -10,6 +10,8 @@ public partial class EquipmentGenerator : Node2D
     public PackedScene FloorItem;
     [Export]
     public Godot.Collections.Dictionary<Rarity, Color[]> Colors;
+    [Export]
+    public BaseEnhancement[] Enhancments;
     public int Level;
     public float Prestige;
     public List<int> CharacterIds;
@@ -72,12 +74,20 @@ public partial class EquipmentGenerator : Node2D
                 if (GenerationEquipment.Count > 0)
                 {
                     var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
-                    var enhancments = (actualQuality / 1000) + 1;
-                    for (int i = 0; i < enhancments; i++)
+                    var enhancmentsNum = (actualQuality / 1000) + 1;
+                    var createableEnhancments = Enhancments.Where(x => x.MinEnhancmentLevel >= (int)ItemRarity).Where(x => (x.EnhancmentFlags & equipment.equipmentFlags) != 0).ToList();
+                    List<BaseEnhancement> enhancments = new List<BaseEnhancement>();
+                    for (int i = 0; i < enhancmentsNum; i++)
                     {
-                        //equipment.enhancements[i] = new One();
-                        // generate enhancments
+                        var en = createableEnhancments[rng.RandiRange(0, createableEnhancments.Count)];
+                        if (en.ValueBased)
+                        {
+                            var qualPerc = quality / 6630;
+                            en.Value = en.MinValue + (en.MaxValue - en.MinValue) * qualPerc;
+                        }
+                        enhancments.Add(en);
                     }
+                    equipment.enhancements = enhancments.ToArray();
                     floorItem.equipment = equipment;
                 }
                 floorItem.GlobalPosition = GlobalPosition;
