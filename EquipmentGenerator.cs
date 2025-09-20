@@ -29,11 +29,12 @@ public partial class EquipmentGenerator : Node2D
     private RandomNumberGenerator rng = new RandomNumberGenerator();
     public override void _Ready()
     {
-        rng.Randomize();
+        AddToGroup("EquipmentGenerators");
     }
 
     public override void _Process(double delta)
     {
+        rng.Randomize();
         foreach (var Id in CharacterIds.ToList())
         {
             var RandPercentage = (float)Mathf.Snapped(rng.RandfRange(0, 1), 0.0001);
@@ -48,6 +49,7 @@ public partial class EquipmentGenerator : Node2D
                 
                 var floorItem = FloorItem.Instantiate<FloorEquipmentDefault>();
                 floorItem.colors = colors;
+                GD.Print(ItemRarity);
                 if (GenerationEquipment.Count > 0)
                 {
                     var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
@@ -58,7 +60,6 @@ public partial class EquipmentGenerator : Node2D
                     }
                     floorItem.equipment = equipment;
                 }
-                GetParent().AddChild(floorItem, true);
                 floorItem.GlobalPosition = GlobalPosition;
                 
                 // Generate random angle in radians
@@ -70,7 +71,7 @@ public partial class EquipmentGenerator : Node2D
                     Mathf.Cos(randomAngle) * radius,
                     Mathf.Sin(randomAngle) * radius
                 );
-
+                GetParent().AddChild(floorItem, true);
             }
             else
             {

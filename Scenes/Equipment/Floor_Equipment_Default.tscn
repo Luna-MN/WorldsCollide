@@ -4,7 +4,8 @@
 [ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="1_tppd4"]
 [ext_resource type="Script" uid="uid://8wxyrn2kcaqm" path="res://Scenes/Equipment/FloorEquipmentDefault.cs" id="1_w51j1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtmdf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w51j1"]
+resource_local_to_scene = true
 shader = ExtResource("1_tppd4")
 shader_parameter/palette_array_size = 8
 shader_parameter/input_palette_array = PackedColorArray(0.701961, 0.709804, 0.709804, 1, 0.85098, 0.854902, 0.854902, 1, 1, 1, 1, 1, 0.917647, 0.917647, 0.909804, 1, 0.937255, 0.937255, 0.937255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -66,7 +67,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:colors")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 2
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_w51j1")
@@ -75,7 +76,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_xtmdf")
+material = SubResource("ShaderMaterial_w51j1")
 sprite_frames = SubResource("SpriteFrames_2l517")
 frame = 4
 frame_progress = 0.667271
