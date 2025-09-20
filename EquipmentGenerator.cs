@@ -13,7 +13,8 @@ public partial class EquipmentGenerator : Node2D
     public float Prestige;
     public List<int> CharacterIds;
     public List<BaseEquipment> GenerationEquipment;
-    public float GeneratePercentage = 0.85f;
+    public float GenerateStep = 0.85f;
+    public float GeneratePercentage = 1f;
     
     public enum Rarity
     {
@@ -36,29 +37,34 @@ public partial class EquipmentGenerator : Node2D
         foreach (var Id in CharacterIds.ToList())
         {
             var RandPercentage = (float)Mathf.Snapped(rng.RandfRange(0, 1), 0.0001);
-            
-            if(RandPercentage >= GeneratePercentage)
+            if(RandPercentage <= GeneratePercentage)
             {
+                GD.Print("Generating " + GeneratePercentage);
                 RandPercentage = rng.RandfRange(0, 1);
                 var ItemRarity = RaritySwitch(RandPercentage);
                 var colors = Colors[ItemRarity];
                 var quality = (Level * 50) + (Prestige) + ((float)Math.Pow(1.8, (int)ItemRarity) * 25);
                 var actualQuality = rng.RandiRange((int)Mathf.Min(0, quality-100), (int)quality+100);
-                var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
-                var enhancments = (actualQuality / 1000) + 1;
-                for (int i = 0; i < enhancments; i++)
-                {
-                    // generate enhancments
-                }
+                
                 var floorItem = FloorItem.Instantiate<FloorEquipmentDefault>();
                 floorItem.colors = colors;
-                floorItem.equipment = equipment;
-                GetParent().AddChild(floorItem);
+                if (GenerationEquipment.Count > 0)
+                {
+                    var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
+                    var enhancments = (actualQuality / 1000) + 1;
+                    for (int i = 0; i < enhancments; i++)
+                    {
+                        // generate enhancments
+                    }
+                    floorItem.equipment = equipment;
+                }
+                GetParent().AddChild(floorItem, true);
             }
             else
             {
                 CharacterIds.Remove(Id);
             }
+            GeneratePercentage *= GenerateStep;
         }
     }
 
