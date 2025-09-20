@@ -377,6 +377,7 @@ public partial class Character : CharacterBody2D
         Gen.Prestige = Prestige;
         Gen.CharacterIds = PlayerIds;
         Gen.GenerationEquipment = DroppableEquipment.ToList();
+        Gen.GlobalPosition = GlobalPosition;
         ServerManager.spawner.AddChild(Gen);
     }
     public void Heal(float heal)

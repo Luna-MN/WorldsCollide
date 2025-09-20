@@ -59,6 +59,18 @@ public partial class EquipmentGenerator : Node2D
                     floorItem.equipment = equipment;
                 }
                 GetParent().AddChild(floorItem, true);
+                floorItem.GlobalPosition = GlobalPosition;
+                
+                // Generate random angle in radians
+                float randomAngle = (float)(rng.RandfRange(0, Mathf.Tau)); // Tau is 2*PI
+                float radius = 100f; // Adjust this radius as needed
+
+                // Set position using sine and cosine to create circular pattern
+                floorItem.FinalPosition = GlobalPosition + new Vector2(
+                    Mathf.Cos(randomAngle) * radius,
+                    Mathf.Sin(randomAngle) * radius
+                );
+
             }
             else
             {
