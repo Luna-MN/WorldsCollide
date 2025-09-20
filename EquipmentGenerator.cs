@@ -1,15 +1,20 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class EquipmentGenerator : Node2D
 {
     [Export]
     public PackedScene FloorItem;
+    [Export]
+    public Godot.Collections.Dictionary<Rarity, Color[]> Colors;
     public int Level;
     public float Prestige;
     public List<int> CharacterIds;
+    public List<BaseEquipment> GenerationEquipment;
     public float GeneratePercentage = 0.85f;
+    
     public enum Rarity
     {
         Common,
@@ -28,7 +33,7 @@ public partial class EquipmentGenerator : Node2D
 
     public override void _Process(double delta)
     {
-        foreach (var Id in CharacterIds)
+        foreach (var Id in CharacterIds.ToList())
         {
             var RandPercentage = (float)Mathf.Snapped(rng.RandfRange(0, 1), 0.0001);
             
@@ -36,11 +41,23 @@ public partial class EquipmentGenerator : Node2D
             {
                 RandPercentage = rng.RandfRange(0, 1);
                 var ItemRarity = RaritySwitch(RandPercentage);
-                
+                var colors = Colors[ItemRarity];
+                var quality = (Level * 50) + (Prestige) + ((float)Math.Pow(1.8, (int)ItemRarity) * 25);
+                var actualQuality = rng.RandiRange((int)Mathf.Min(0, quality-100), (int)quality+100);
+                var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
+                var enhancments = (actualQuality / 1000) + 1;
+                for (int i = 0; i < enhancments; i++)
+                {
+                    // generate enhancments
+                }
+                var floorItem = FloorItem.Instantiate<FloorEquipmentDefault>();
+                floorItem.colors = colors;
+                floorItem.equipment = equipment;
+                GetParent().AddChild(floorItem);
             }
             else
             {
-                QueueFree();
+                CharacterIds.Remove(Id);
             }
         }
     }

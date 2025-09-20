@@ -13,6 +13,7 @@ public partial class FloorEquipmentDefault : Node2D
     public int Id;
     public override void _Ready()
     {
+        // if the Id is not this client, loop through colors and make em' darker
         ((ShaderMaterial)sprite.Material).SetShaderParameter("output_palette_array", colors);
     }
 }

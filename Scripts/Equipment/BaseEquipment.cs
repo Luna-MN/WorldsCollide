@@ -16,7 +16,8 @@ public partial class BaseEquipment : Resource
     
     [Export]
     public Texture2D Icon;
-
+    public float Quality;
+    
     public virtual void OnEquip(Character character)
     {
         foreach (var enhance in enhancement)

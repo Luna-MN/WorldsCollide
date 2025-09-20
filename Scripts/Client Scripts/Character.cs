@@ -27,7 +27,7 @@ public partial class Character : CharacterBody2D
     [Export(PropertyHint.GroupEnable)] public bool DropLootOnDeath;
     [Export] public int Prestige = 1;
     [Export(PropertyHint.ResourceType)] public BaseEquipment[] DroppableEquipment;
-    public List<int> PlayerIds;
+    public List<int> PlayerIds = new();
     [Export]
     public PackedScene EquipmentSpawner;
     
@@ -139,13 +139,13 @@ public partial class Character : CharacterBody2D
 
     public override void _Ready()
     {
-        if (IsDummy) return;
-        SetSkills();
-        equipAll();
         if (DropLootOnDeath)
         {
             OnDeath += DropLoot;
         }
+        if (IsDummy) return;
+        SetSkills();
+        equipAll();
     }
     public void equipAll()
     {
@@ -347,12 +347,12 @@ public partial class Character : CharacterBody2D
         GD.Print(characterStats.stats["currentHealth"].Value);
         if (characterStats["currentHealth"] <= 0)
         {
+            OnDeath?.Invoke(this);
+            ServerManager.NodeDictionary[attacker].CallOnKill(this);
             if (this is Player p)
             {
                 ServerManager.ServerRpcs.RpcId(1, "KillPlayer", p.Name);
             }
-            OnDeath?.Invoke(this);
-            ServerManager.NodeDictionary[attacker].CallOnKill(this);
             ServerManager.NodeDictionary.Remove(ID);
             if (IsMultiplayerAuthority())
             {
@@ -376,6 +376,7 @@ public partial class Character : CharacterBody2D
         Gen.Level = Level;
         Gen.Prestige = Prestige;
         Gen.CharacterIds = PlayerIds;
+        Gen.GenerationEquipment = DroppableEquipment.ToList();
         ServerManager.spawner.AddChild(Gen);
     }
     public void Heal(float heal)

@@ -6,7 +6,6 @@ public partial class BaseEnhancement : Resource
 {
     public string EnhancmentText;
     public Flags.AbilityFlags EnhancmentFlags;
-
     public virtual void Enhance(Character character)
     {
         //add what you want it to do here
