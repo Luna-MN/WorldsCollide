@@ -106,7 +106,7 @@ public partial class EquipmentGenerator : Node2D
                 
                 // Generate random angle in radians
                 float randomAngle = (float)(rng.RandfRange(0, Mathf.Tau)); // Tau is 2*PI
-                float radius = 100f; // Adjust this radius as needed
+                float radius = rng.RandiRange(70, 150); // Adjust this radius as needed
 
                 // Set position using sine and cosine to create circular pattern
                 floorItem.FinalPosition = GlobalPosition + new Vector2(

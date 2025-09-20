@@ -72,11 +72,11 @@ properties/1/replication_mode = 2
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_w51j1")
 sprite = NodePath("AnimatedSprite2D")
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_w51j1")
+scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_2l517")
 frame = 4
 frame_progress = 0.667271
