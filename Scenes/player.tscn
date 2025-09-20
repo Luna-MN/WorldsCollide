@@ -17,7 +17,7 @@
 script = ExtResource("3_3smsa")
 WeaponName = "Gun"
 equipmentFlags = 32
-enhancement = null
+enhancements = null
 Icon = ExtResource("3_gymyn")
 metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
 
@@ -65,14 +65,14 @@ metadata/_custom_type_script = "uid://bakru0sj3w5q"
 [sub_resource type="Resource" id="Resource_pu2lt"]
 script = ExtResource("5_tx1dd")
 equipmentFlags = 8
-enhancement = null
+enhancements = null
 Icon = ExtResource("8_f1ek2")
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
 
 [sub_resource type="Resource" id="Resource_7dp3o"]
 script = ExtResource("5_tx1dd")
 equipmentFlags = 256
-enhancement = null
+enhancements = null
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
 
 [sub_resource type="Resource" id="Resource_h4iuc"]
