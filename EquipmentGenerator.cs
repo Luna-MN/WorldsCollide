@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class EquipmentGenerator : Node2D
 {
@@ -15,7 +16,7 @@ public partial class EquipmentGenerator : Node2D
     public List<BaseEquipment> GenerationEquipment;
     public float GenerateStep = 0.85f;
     public float GeneratePercentage = 1f;
-    
+    private Timer timer;
     public enum Rarity
     {
         Common,
@@ -29,10 +30,29 @@ public partial class EquipmentGenerator : Node2D
     private RandomNumberGenerator rng = new RandomNumberGenerator();
     public override void _Ready()
     {
+        timer = new Timer()
+        {
+            WaitTime = 0.3f,
+            OneShot = false,
+            Autostart = true
+        };
+        timer.Timeout += () =>
+        {
+            GenerateEquipment();
+        };
+        AddChild(timer);
         AddToGroup("EquipmentGenerators");
     }
 
     public override void _Process(double delta)
+    {
+        if (CharacterIds.Count == 0)
+        {
+            QueueFree();
+        }
+    }
+
+    public void GenerateEquipment()
     {
         rng.Randomize();
         foreach (var Id in CharacterIds.ToList())
@@ -80,7 +100,6 @@ public partial class EquipmentGenerator : Node2D
             GeneratePercentage *= GenerateStep;
         }
     }
-
     public Rarity RaritySwitch(float RarityPercentage)
     {
         switch (RarityPercentage)

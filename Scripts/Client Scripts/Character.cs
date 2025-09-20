@@ -368,6 +368,7 @@ public partial class Character : CharacterBody2D
     }
     public void AddPlayersToDropLoot(int attacker)
     {
+        if(PlayerIds.Contains(attacker)) return;
         PlayerIds.Add(attacker);
     }
     public void DropLoot(Node2D Killer)
