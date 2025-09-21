@@ -6,7 +6,7 @@ public partial class FloorEquipmentDefault : Node2D
 {
     [Export]
     public AnimatedSprite2D sprite;
-    
+    [Export] public Area2D area;
     public Color[] colors;
     private Color[] StoredColors;
     
@@ -24,7 +24,7 @@ public partial class FloorEquipmentDefault : Node2D
         }
         // if the Id is not this client, loop through colors and make em' darker
         ((ShaderMaterial)sprite.Material).SetShaderParameter("output_palette_array", colors);
-        
+        area.BodyEntered += OnBodyEntered;
         // Create a throwing animation with a tween
         var tween = CreateTween();
         
@@ -64,5 +64,14 @@ public partial class FloorEquipmentDefault : Node2D
         {
             material.SetShaderParameter("output_palette_array", colors);
         }
+    }
+
+    public void OnBodyEntered(Node2D Body)
+    {
+        if (Body.Name != Id.ToString())
+        {
+            return;
+        }
+        //move towards player
     }
 }

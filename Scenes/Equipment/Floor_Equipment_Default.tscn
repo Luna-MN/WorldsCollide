@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dft540hr27ugl"]
+[gd_scene load_steps=14 format=3 uid="uid://dft540hr27ugl"]
 
 [ext_resource type="Texture2D" uid="uid://b35u54ttw2jyu" path="res://Pirates/Equipment/Slots/FloorEquipmentIcon-Sheet.png" id="1_sy55v"]
 [ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="1_tppd4"]
@@ -69,9 +69,13 @@ properties/1/path = NodePath(".:colors")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_w51j1"]
+radius = 197.16237
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("sprite", "area")]
 script = ExtResource("1_w51j1")
 sprite = NodePath("AnimatedSprite2D")
+area = NodePath("Area2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -83,3 +87,8 @@ frame_progress = 0.667271
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_w51j1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_w51j1")

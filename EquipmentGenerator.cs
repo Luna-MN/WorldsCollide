@@ -116,6 +116,8 @@ public partial class EquipmentGenerator : Node2D
                     equipment.enhancements = enhancments.ToArray();
                     floorItem.equipment = equipment;
                 }
+
+                floorItem.Id = Id;
                 floorItem.GlobalPosition = GlobalPosition;
                 
                 // Generate random angle in radians
