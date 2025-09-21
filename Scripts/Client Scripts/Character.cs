@@ -16,8 +16,10 @@ public partial class Character : CharacterBody2D
     [Export] public MultiplayerSynchronizer PositionSync;
     [Export]
     protected string CharacterName = "Class1";
-    
+    [Export]
+    protected AnimatedSprite2D WepSprite;
 
+    [Export] public Node2D ShootPosition;
     public List<PrimaryWeapon> PrimaryEquipment = new();
     [ExportGroup("Equipment")]
     [Export]

@@ -100,6 +100,13 @@ public partial class Player : Character
         }
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if (GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) return;
+        WepSprite.LookAt(inputSync.mousePosition);
+    }
+
     protected virtual void SetUI(Button button)
     {
         button.Modulate = new Color(0, 0, 1);

@@ -1,16 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=30 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
-[ext_resource type="Resource" uid="uid://d3m0yqvnhk5e6" path="res://Resources/GunTest.tres" id="3_gymyn"]
+[ext_resource type="Resource" uid="uid://d3m0yqvnhk5e6" path="res://Resources/Equipment/GunTest.tres" id="3_gymyn"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_8erm5"]
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_tx1dd"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="6_8erm5"]
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="11_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="12_pu2lt"]
 
 [sub_resource type="Resource" id="Resource_fd4e3"]
 script = ExtResource("4_8erm5")
@@ -116,6 +117,20 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("InputSync:mousePosition")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("GunPos:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ukyrk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_pu2lt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" node_paths=PackedStringArray("inputSync") instance=ExtResource("1_v0iea")]
 script = ExtResource("1_6t5aa")
@@ -133,3 +148,11 @@ sprite_frames = SubResource("SpriteFrames_677pu")
 [node name="InputSync" type="MultiplayerSynchronizer" parent="." index="2"]
 replication_config = SubResource("SceneReplicationConfig_v0iea")
 script = ExtResource("3_fkybt")
+
+[node name="GunPos" parent="." index="4"]
+position = Vector2(-4.0000014, 9.000001)
+scale = Vector2(0.875, 0.875)
+sprite_frames = SubResource("SpriteFrames_ukyrk")
+
+[node name="ShootPos" parent="GunPos" index="0"]
+position = Vector2(14.857143, -3.4285724)

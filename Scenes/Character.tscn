@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2podqpoej8hm"]
+[gd_scene load_steps=18 format=3 uid="uid://d2podqpoej8hm"]
 
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
@@ -62,14 +62,21 @@ stats = Dictionary[String, ExtResource("4_xloa1")]({
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("GunPos:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(30.7692, 32.6923)
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdqda"]
+
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync", "WepSprite", "ShootPosition")]
 script = ExtResource("1_0y7nr")
 FloatingText = ExtResource("2_677pu")
 PositionSync = NodePath("CharacterSync")
+WepSprite = NodePath("GunPos")
+ShootPosition = NodePath("GunPos/ShootPos")
 characterStats = SubResource("Resource_4b18b")
 
 [node name="CharacterSync" type="MultiplayerSynchronizer" parent="."]
@@ -81,6 +88,11 @@ scale = Vector2(0.45, 0.45)
 sprite_frames = ExtResource("3_677pu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1)
+position = Vector2(5.9604645e-08, 1.1920929e-07)
 scale = Vector2(1.81, 1.81)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="GunPos" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vdqda")
+
+[node name="ShootPos" type="Node2D" parent="GunPos"]

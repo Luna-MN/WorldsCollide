@@ -18,7 +18,7 @@ public partial class EquipmentRpc : Node2D
     [ExportGroup("Swords")]
     [Export]
     public PackedScene Melee_Slash;
-    
+    // on ready dynamically load all equipment and enhancments into the arrays
 
     [Rpc(MultiplayerApi.RpcMode.Authority)]
     public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId)
@@ -41,7 +41,7 @@ public partial class EquipmentRpc : Node2D
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
-        bullet.GlobalPosition = Character.GlobalPosition;
+        bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
         bullet.obtainStats(Character);
@@ -55,7 +55,7 @@ public partial class EquipmentRpc : Node2D
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Melee_Slash.Instantiate<Melee_Slash>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
-        bullet.GlobalPosition = Character.GlobalPosition;
+        bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
         bullet.character = Character;
