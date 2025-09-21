@@ -51,6 +51,7 @@ public partial class EquipmentUI : Panel
             if (!MB.Pressed)
             {
                 mouseClick = false;
+                TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
                 if (selectedSlot != null)
                 {
                     GlobalPosition = selectedSlot.GlobalPosition;
@@ -84,6 +85,7 @@ public partial class EquipmentUI : Panel
             {
                 TopUI.CallDeferred("add_child", this);
                 GetParent().RemoveChild(this);
+                TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                 mouseClick = true;
             }
         }
