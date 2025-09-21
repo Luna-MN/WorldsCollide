@@ -105,6 +105,26 @@ public partial class Player : Character
         base._Process(delta);
         if (GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) return;
         WepSprite.LookAt(inputSync.mousePosition);
+        if (WepSprite.RotationDegrees > 360)
+        {
+            WepSprite.RotationDegrees -= 360;
+        }
+        if (WepSprite.RotationDegrees < 0)
+        {
+            WepSprite.RotationDegrees += 360;       
+        }
+
+        if (WepSprite.RotationDegrees > 90 && WepSprite.RotationDegrees < 270)
+        {
+            WepSprite.FlipV = true;
+            ShootPosition.Position = new Vector2(14.857f, 3.429f);      
+        }
+        else
+        {
+            WepSprite.FlipV = false;       
+            ShootPosition.Position = new Vector2(14.857f, -3.429f);       
+        }
+        GD.Print(WepSprite.RotationDegrees);
     }
 
     protected virtual void SetUI(Button button)
