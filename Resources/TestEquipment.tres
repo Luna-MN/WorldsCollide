@@ -16,4 +16,5 @@ script = ExtResource("1_boj3u")
 equipmentFlags = 2047
 stats = SubResource("Resource_hctok")
 enhancements = null
+ItemId = 14
 metadata/_custom_type_script = "uid://c8xpcraad14yd"

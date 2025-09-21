@@ -63,8 +63,10 @@ public partial class EquipmentUI : Panel
                 else
                 {
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                    List<int> equipIds = inv.Select(x => x.ItemId).ToList();
+                    
                     // it is finding other peices of equipment with the same base resource, might need to add an ID system
-                    if (!inv.Contains(AssignedEquipment))
+                    if (!equipIds.Contains(AssignedEquipment.ItemId))
                     {
                         if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
                         {

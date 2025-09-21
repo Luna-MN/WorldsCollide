@@ -21,14 +21,15 @@ public partial class EquipmentRpc : Node2D
     
 
     [Rpc(MultiplayerApi.RpcMode.Authority)]
-    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId)
+    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId)
     {
         GD.Print(equipmentId);
         GD.Print(string.Join(", ", EnhancmentIndexes));
         var currentEquipment = GameManager.player.inventory.AllEquipment;
         Array.Resize(ref currentEquipment, currentEquipment.Length + 1);
-        var eq = equipment[equipmentId];
+        var eq = equipment[equipmentId].Duplicate() as BaseEquipment;
         eq.enhancements = EnhancmentIndexes.Select(x => Enhancments[x]).ToArray();
+        eq.ItemId = ItemId;
         currentEquipment[currentEquipment.Length - 1] = eq;
         GameManager.player.inventory.AllEquipment = currentEquipment;
     }

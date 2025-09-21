@@ -79,8 +79,8 @@ public partial class FloorEquipmentDefault : Node2D
             return;
         }
         moving = true;
-        FinalPosition = Body.GlobalPosition;
         //move towards player
+        FinalPosition = Body.GlobalPosition;
     }
 
     private void OnDestroyEntered(Node2D Body)
@@ -98,7 +98,7 @@ public partial class FloorEquipmentDefault : Node2D
         var enhancmentIds = equipment.enhancements.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x)).ToArray();
         var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList()
             .First(x => x.ResourcePath == equipment.ResourcePath);
-        ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId);
+        ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId);
         QueueFree();
     }
 }

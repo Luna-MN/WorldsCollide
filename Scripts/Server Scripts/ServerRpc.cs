@@ -27,13 +27,14 @@ public partial class ServerRpc : Node2D
     {
         GD.Print(string.Join(", ", equipmentIds));
         GD.Print(string.Join(", ", InvIds));
-        var equipment = equipmentIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x] : null).ToArray();
-        var Inv = InvIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x] : null).ToArray();
+        var equipment = equipmentIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x].Duplicate() as BaseEquipment : null).ToArray();
+        var Inv = InvIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x].Duplicate() as BaseEquipment : null).ToArray();
         
         var player = ServerManager.NodeDictionary[id];
         foreach (EquipmentSlot equipmentSlot in player.EquipmentSlots)
         {
             var index = player.EquipmentSlots.ToList().IndexOf(equipmentSlot);
+            if (index == -1) continue;
             equipmentSlot.EquippedEquipment = equipment[index];
         }
         player.inventory.AllEquipment = Inv;
