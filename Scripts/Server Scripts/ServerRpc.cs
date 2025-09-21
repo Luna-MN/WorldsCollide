@@ -22,7 +22,7 @@ public partial class ServerRpc : Node2D
         GD.Print("New player created" + id);
     }
 
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
     public void UpdatePlayerEquipment(int id, int[] equipmentIds, int[] InvIds)
     {
         GD.Print(string.Join(", ", equipmentIds));

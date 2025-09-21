@@ -47,13 +47,27 @@ public partial class EquipmentSelection : Panel
         {
             openButton.EquipmentPanel = null; 
             GameManager.player.equipAll();
-            var inv = new List<BaseEquipment>();
-            GameManager.player.inventory.AllEquipment.ToList().ForEach(x => inv.Add(GameManager.EquipmentRpcs.equipment.ToList().FirstOrDefault(y => x.ResourcePath.Contains(y.ResourcePath))));
-            var InvIds = inv.Select(x => GameManager.EquipmentRpcs.equipment.ToList().IndexOf(x)).ToArray();
             
-            var equipped = GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).ToList();
-            var equippedIds = equipped.Select(x => GameManager.EquipmentRpcs.equipment.ToList().IndexOf(x)).ToList();
-            GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", GameManager.LocalID, equippedIds.ToArray(), InvIds.ToArray());
+            var invIds = new List<int>();
+            foreach (var equipment in GameManager.player.inventory.AllEquipment)
+            {
+                var item = GameManager.EquipmentRpcs.equipment.ToList().First(x => x.ResourceName.Contains(equipment.ResourceName));
+                invIds.Add(GameManager.EquipmentRpcs.equipment.ToList().IndexOf(item));
+            }
+            var equippedIds = new List<int>();
+            foreach (var slot in GameManager.player.EquipmentSlots)
+            {
+                if (slot.EquippedEquipment != null)
+                {
+                    var item = GameManager.EquipmentRpcs.equipment.ToList().First(x => x.ResourceName.Contains(slot.EquippedEquipment.ResourceName));
+                    equippedIds.Add(GameManager.EquipmentRpcs.equipment.ToList().IndexOf(item));
+                }
+                else
+                {
+                    equippedIds.Add(-1);
+                }
+            }
+            GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", GameManager.LocalID, equippedIds.ToArray(), invIds.ToArray());
             QueueFree();
         };
     }

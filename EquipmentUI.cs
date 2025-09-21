@@ -9,6 +9,8 @@ public partial class EquipmentUI : Panel
     [Export] public Sprite2D Icon;
     public bool mouseIn;
     public bool mouseClick;
+    public bool JustCreated = true;
+    public Timer timer;
     public EquipmentSlotUI selectedSlot;
     public GridContainer grid;
     public EquipmentSelection TopUI;
@@ -25,11 +27,25 @@ public partial class EquipmentUI : Panel
         };
         area.AreaEntered += OnEquipSlotEnter;
         area.AreaExited += OnEquipSlotExit;
-
+        timer = new Timer()
+        {
+            Autostart = true,
+            OneShot = true,
+            WaitTime = 0.5f
+        };
+        timer.Timeout += () =>
+        {
+            JustCreated = false;
+        };
+        AddChild(timer);
     }
 
     public override void _Input(InputEvent @event)
     {
+        if (JustCreated)
+        {
+            return; 
+        }
         if (@event is InputEventMouseButton MB)
         {
             if (!MB.Pressed)
@@ -39,6 +55,7 @@ public partial class EquipmentUI : Panel
                 {
                     GlobalPosition = selectedSlot.GlobalPosition;
                     GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = AssignedEquipment;
+                    GD.Print("Equipment Assigned");
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
                     inv.Remove(AssignedEquipment);
                     GameManager.player.inventory.AllEquipment = inv.ToArray();
@@ -46,6 +63,7 @@ public partial class EquipmentUI : Panel
                 else
                 {
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                    // it is finding other peices of equipment with the same base resource, might need to add an ID system
                     if (!inv.Contains(AssignedEquipment))
                     {
                         if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
