@@ -10,8 +10,6 @@ public partial class EquipmentGenerator : Node2D
     public PackedScene FloorItem;
     [Export]
     public Godot.Collections.Dictionary<Rarity, Color[]> Colors;
-    [Export]
-    public BaseEnhancement[] Enhancments;
     public int Level;
     public float Prestige;
     public List<int> CharacterIds;
@@ -83,11 +81,11 @@ public partial class EquipmentGenerator : Node2D
                 if (GenerationEquipment.Count > 0)
                 {
                     // Generate a random equipment
-                    var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count)];
+                    var equipment = GenerationEquipment[rng.RandiRange(0, GenerationEquipment.Count - 1)];
                     // the number of enhancments is equal to the first number for the quality
                     var enhancmentsNum = (actualQuality / 1000) + 1;
                     // get all creatable enhancments based on flags and rarity level
-                    var creatableEnhancments = Enhancments.Where(x => (x.MinEnhancmentLevel >= (int)ItemRarity) && (x.EnhancmentFlags & equipment.equipmentFlags) != 0).ToList();
+                    var creatableEnhancments = ServerManager.EquipmentRpcs.Enhancments.Where(x => (x.MinEnhancmentLevel >= (int)ItemRarity) && (x.EnhancmentFlags & equipment.equipmentFlags) != 0).ToList();
                     var enhancments = new List<BaseEnhancement>();
                     // convert the quality into a percentage
                     var qualPerc = actualQuality / 6630;
@@ -95,7 +93,7 @@ public partial class EquipmentGenerator : Node2D
                     {
                         for (int i = 0; i < enhancmentsNum; i++)
                         {
-                            var en = creatableEnhancments[rng.RandiRange(0, creatableEnhancments.Count)];
+                            var en = creatableEnhancments[rng.RandiRange(0, creatableEnhancments.Count - 1)];
                             if (en.ValueBased)
                             {
                                 // of the enhancment is value based then get the percentage of max and then convert that into the value 

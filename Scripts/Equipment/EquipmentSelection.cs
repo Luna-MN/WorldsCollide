@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class EquipmentSelection : Panel
@@ -46,6 +47,13 @@ public partial class EquipmentSelection : Panel
         {
             openButton.EquipmentPanel = null; 
             GameManager.player.equipAll();
+            var inv = new List<BaseEquipment>();
+            GameManager.player.inventory.AllEquipment.ToList().ForEach(x => inv.Add(GameManager.EquipmentRpcs.equipment.ToList().FirstOrDefault(y => x.ResourcePath.Contains(y.ResourcePath))));
+            var InvIds = inv.Select(x => GameManager.EquipmentRpcs.equipment.ToList().IndexOf(x)).ToArray();
+            
+            var equipped = GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).ToList();
+            var equippedIds = equipped.Select(x => GameManager.EquipmentRpcs.equipment.ToList().IndexOf(x)).ToList();
+            GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", GameManager.LocalID, equippedIds.ToArray(), InvIds.ToArray());
             QueueFree();
         };
     }

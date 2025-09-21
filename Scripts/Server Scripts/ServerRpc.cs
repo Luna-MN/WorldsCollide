@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 
@@ -19,6 +20,24 @@ public partial class ServerRpc : Node2D
         ServerManager.spawner.AddChild(newPlayer, true);
         ServerManager.NodeDictionary.Add(id, newPlayer);
         GD.Print("New player created" + id);
+    }
+
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+    public void UpdatePlayerEquipment(int id, int[] equipmentIds, int[] InvIds)
+    {
+        GD.Print(string.Join(", ", equipmentIds));
+        GD.Print(string.Join(", ", InvIds));
+        var equipment = equipmentIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x] : null).ToArray();
+        var Inv = InvIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x] : null).ToArray();
+        
+        var player = ServerManager.NodeDictionary[id];
+        foreach (EquipmentSlot equipmentSlot in player.EquipmentSlots)
+        {
+            var index = player.EquipmentSlots.ToList().IndexOf(equipmentSlot);
+            equipmentSlot.EquippedEquipment = equipment[index];
+        }
+        player.inventory.AllEquipment = Inv;
+        player.equipAll();
     }
     #endregion
 }

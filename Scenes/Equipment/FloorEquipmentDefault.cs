@@ -1,12 +1,14 @@
 using Godot;
 using System;
+using System.Linq;
 using Godot.NativeInterop;
 
 public partial class FloorEquipmentDefault : Node2D
 {
     [Export]
     public AnimatedSprite2D sprite;
-    [Export] public Area2D area;
+    [Export] public Area2D attractArea;
+    [Export] public Area2D DestroyArea;
     public Color[] colors;
     private Color[] StoredColors;
     
@@ -14,7 +16,7 @@ public partial class FloorEquipmentDefault : Node2D
     
     public Vector2 FinalPosition;
     public int Id;
-    private bool moving = true;
+    private bool moving;
     public override void _Ready()
     {
         sprite.Play();
@@ -24,7 +26,8 @@ public partial class FloorEquipmentDefault : Node2D
         }
         // if the Id is not this client, loop through colors and make em' darker
         ((ShaderMaterial)sprite.Material).SetShaderParameter("output_palette_array", colors);
-        area.BodyEntered += OnBodyEntered;
+        attractArea.BodyEntered += OnAttractEntered;
+        DestroyArea.BodyEntered += OnDestroyEntered;
         // Create a throwing animation with a tween
         var tween = CreateTween();
         
@@ -42,7 +45,6 @@ public partial class FloorEquipmentDefault : Node2D
 
         // When finished, we're no longer moving
         tween.Finished += () => { 
-            moving = false;
             // Make sure we're exactly at the final position
             GlobalPosition = FinalPosition;
         };
@@ -57,6 +59,10 @@ public partial class FloorEquipmentDefault : Node2D
             ApplyColors();
         }
 
+        if (moving)
+        {
+            GlobalPosition = GlobalPosition.Lerp(FinalPosition, (float)delta * 10);
+        }
     }
     public void ApplyColors()
     {
@@ -66,12 +72,33 @@ public partial class FloorEquipmentDefault : Node2D
         }
     }
 
-    public void OnBodyEntered(Node2D Body)
+    private void OnAttractEntered(Node2D Body)
     {
         if (Body.Name != Id.ToString())
         {
             return;
         }
+        moving = true;
+        FinalPosition = Body.GlobalPosition;
         //move towards player
+    }
+
+    private void OnDestroyEntered(Node2D Body)
+    {
+        if (Body.Name != Id.ToString())
+        {
+            return;
+        }
+        // add item to player inventory (server)
+        var currentEquipment = ServerManager.NodeDictionary[Id].inventory.AllEquipment;
+        Array.Resize(ref currentEquipment, currentEquipment.Length + 1);
+        currentEquipment[currentEquipment.Length - 1] = equipment;
+        ServerManager.NodeDictionary[Id].inventory.AllEquipment = currentEquipment;
+        //RPC that into the inv on the client
+        var enhancmentIds = equipment.enhancements.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x)).ToArray();
+        var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList()
+            .First(x => x.ResourcePath == equipment.ResourcePath);
+        ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId);
+        QueueFree();
     }
 }

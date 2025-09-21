@@ -1,8 +1,16 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class EquipmentRpc : Node2D
 {
+    [ExportGroup("Generic")]
+    [Export]
+    public BaseEnhancement[] Enhancments;
+    [Export]
+    public BaseEquipment[] equipment;
+    
     [ExportGroup("Ranged Bullets")]
     [Export]
     public PackedScene Basic_Bullet;
@@ -10,6 +18,20 @@ public partial class EquipmentRpc : Node2D
     [ExportGroup("Swords")]
     [Export]
     public PackedScene Melee_Slash;
+    
+
+    [Rpc(MultiplayerApi.RpcMode.Authority)]
+    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId)
+    {
+        GD.Print(equipmentId);
+        GD.Print(string.Join(", ", EnhancmentIndexes));
+        var currentEquipment = GameManager.player.inventory.AllEquipment;
+        Array.Resize(ref currentEquipment, currentEquipment.Length + 1);
+        var eq = equipment[equipmentId];
+        eq.enhancements = EnhancmentIndexes.Select(x => Enhancments[x]).ToArray();
+        currentEquipment[currentEquipment.Length - 1] = eq;
+        GameManager.player.inventory.AllEquipment = currentEquipment;
+    }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void Gun_LeftClick(int id)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://ciqntsdkcedin"]
+[gd_scene load_steps=12 format=4 uid="uid://ciqntsdkcedin"]
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
 [ext_resource type="PackedScene" uid="uid://b14otrrm17vx6" path="res://Scenes/TestingDummy.tscn" id="2_5rbs6"]
 [ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Scripts/Client Scripts/Camera.cs" id="2_8k7wh"]
 [ext_resource type="PackedScene" uid="uid://bh43r4421n8lf" path="res://Scenes/equipment_generator.tscn" id="3_201fe"]
+[ext_resource type="Resource" uid="uid://cmqpexfhmr6p4" path="res://Resources/TestEquipment.tres" id="3_xjl2p"]
 [ext_resource type="Script" uid="uid://qinaso0i8icb" path="res://Scripts/Client Scripts/ChangeSkills.cs" id="4_iufkg"]
 [ext_resource type="Script" uid="uid://b6i5bobwio7fp" path="res://Scenes/SkillOnScreen.cs" id="4_qsjrb"]
 [ext_resource type="PackedScene" uid="uid://2o87ghb0ppc2" path="res://Scenes/skill_selection.tscn" id="5_0f5h7"]
@@ -21,6 +22,7 @@ spawn_path = NodePath(".")
 [node name="Dummy" parent="MultiplayerSpawner" instance=ExtResource("2_5rbs6")]
 position = Vector2(328, 176)
 DropLootOnDeath = true
+DroppableEquipment = Array[Object]([ExtResource("3_xjl2p")])
 EquipmentSpawner = ExtResource("3_201fe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
