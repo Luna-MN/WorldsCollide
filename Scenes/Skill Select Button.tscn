@@ -16,6 +16,7 @@ layout_mode = 0
 offset_right = 134.0
 offset_bottom = 134.0
 text = "Skill 1"
+flat = true
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=31 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="6_8erm5"]
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b8i60x8khgul6" path="res://Pirates/Class1/ComboDude.png" id="8_f1ek2"]
+[ext_resource type="Resource" uid="uid://dcrn58i05jmtr" path="res://Resources/Equipment/SimpleChest.tres" id="8_ukyrk"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="11_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="12_pu2lt"]
 
@@ -89,7 +90,7 @@ metadata/_custom_type_script = "uid://c8xpcraad14yd"
 [sub_resource type="Resource" id="Resource_h4iuc"]
 resource_local_to_scene = true
 script = ExtResource("6_gymyn")
-AllEquipment = Array[Object]([SubResource("Resource_gymyn"), SubResource("Resource_pu2lt")])
+AllEquipment = Array[Object]([SubResource("Resource_gymyn"), SubResource("Resource_pu2lt"), ExtResource("8_ukyrk")])
 metadata/_custom_type_script = "uid://b25igrq5gmts2"
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
