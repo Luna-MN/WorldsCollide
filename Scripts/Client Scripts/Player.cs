@@ -117,12 +117,12 @@ public partial class Player : Character
         if (WepSprite.RotationDegrees > 90 && WepSprite.RotationDegrees < 270)
         {
             WepSprite.FlipV = true;
-            ShootPosition.Position = PrimaryEquipment[0].ShootPos1;
+            ShootPosition.Position = PrimaryEquipment[0].ShootPos;
         }
         else
         {
             WepSprite.FlipV = false;       
-            ShootPosition.Position = PrimaryEquipment[0].ShootPos2;       
+            ShootPosition.Position = PrimaryEquipment[0].FlippedPos;       
         }
     }
 

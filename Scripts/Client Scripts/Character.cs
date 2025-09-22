@@ -151,6 +151,7 @@ public partial class Character : CharacterBody2D
         if (PrimaryEquipment.Count > 0)
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
+            WepSprite.Position = PrimaryEquipment[0].GunPos;
         }
     }
     public void equipAll()
