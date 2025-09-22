@@ -124,7 +124,6 @@ public partial class Player : Character
             WepSprite.FlipV = false;       
             ShootPosition.Position = new Vector2(14.857f, -3.429f);       
         }
-        GD.Print(WepSprite.RotationDegrees);
     }
 
     protected virtual void SetUI(Button button)
