@@ -11,6 +11,9 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public int Damage;
     [Export] public int Range;
     [Export] public int AttackSpeed;
+    [Export] public Vector2 ShootPos1;
+    [Export] public Vector2 ShootPos2;
+    [Export] public SpriteFrames SpriteFrames;
     public override void OnEquip(Character character)
     {
         character.PrimaryEquipment.Add(this);

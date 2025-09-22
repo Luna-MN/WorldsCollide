@@ -1,13 +1,29 @@
-[gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=3 format=3 uid="uid://d3m0yqvnhk5e6"]
+[gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=5 format=3 uid="uid://d3m0yqvnhk5e6"]
 
 [ext_resource type="Texture2D" uid="uid://bnvh5tkipjpfo" path="res://Pirates/Class1/CirclingShuriken.png" id="1_6snfv"]
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="2_i8l6m"]
+[ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="2_und8r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h6cdl"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_und8r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
 resource_local_to_scene = true
 resource_name = "GunTest"
 script = ExtResource("2_i8l6m")
 WeaponName = "Gun"
+ShootPos1 = Vector2(14.857, 3.429)
+ShootPos2 = Vector2(14.857, -3.429)
+SpriteFrames = SubResource("SpriteFrames_h6cdl")
 equipmentFlags = 32
 enhancements = null
 Icon = ExtResource("1_6snfv")

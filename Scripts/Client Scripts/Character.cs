@@ -148,6 +148,10 @@ public partial class Character : CharacterBody2D
         if (IsDummy) return;
         SetSkills();
         equipAll();
+        if (PrimaryEquipment.Count > 0)
+        {
+            WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
+        }
     }
     public void equipAll()
     {
