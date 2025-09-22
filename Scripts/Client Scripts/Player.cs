@@ -124,6 +124,18 @@ public partial class Player : Character
             WepSprite.FlipV = false;       
             ShootPosition.Position = PrimaryEquipment[0].FlippedPos;       
         }
+
+        if (inputSync.moveInput.X < 0)
+        {
+            Sprite.FlipH = true;
+            WepSprite.Position = PrimaryEquipment[0].GunFlipped;
+        }
+        else if (inputSync.moveInput.X > 0)
+        {
+            Sprite.FlipH = false;
+            WepSprite.Position = PrimaryEquipment[0].GunPos;
+        }
+        
     }
 
     protected virtual void SetUI(Button button)

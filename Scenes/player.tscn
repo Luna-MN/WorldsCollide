@@ -126,10 +126,14 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath("GunPos:flip_v")
 properties/4/spawn = true
 properties/4/replication_mode = 2
+properties/5/path = NodePath("GunPos:position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
-[node name="Player" node_paths=PackedStringArray("inputSync") instance=ExtResource("1_v0iea")]
+[node name="Player" node_paths=PackedStringArray("inputSync", "Sprite") instance=ExtResource("1_v0iea")]
 script = ExtResource("1_6t5aa")
 inputSync = NodePath("InputSync")
+Sprite = NodePath("AnimatedSprite2D")
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_qqcod"), SubResource("Resource_4b18b"), SubResource("Resource_peemv"), SubResource("Resource_omicx"), SubResource("Resource_v7dgu"), SubResource("Resource_8au8k"), SubResource("Resource_p3cti")])
 inventory = SubResource("Resource_h4iuc")
 skills = Array[Object]([null, null, null, null, null, null])

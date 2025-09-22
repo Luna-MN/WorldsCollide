@@ -18,7 +18,8 @@ public partial class Character : CharacterBody2D
     protected string CharacterName = "Class1";
     [Export]
     protected AnimatedSprite2D WepSprite;
-
+    [Export]
+    protected AnimatedSprite2D Sprite;
     [Export] public Node2D ShootPosition;
     public List<PrimaryWeapon> PrimaryEquipment = new();
     [ExportGroup("Equipment")]
@@ -237,6 +238,7 @@ public partial class Character : CharacterBody2D
 
     public void StatBoost(FieldInfo stat, float value)
     {
+        // i don't think this works anymore
         stat?.SetValue(this, (float)stat?.GetValue(this)! + value);
     }
     protected Node ResolveRpcNode(Skill.RpcLocation loc)
