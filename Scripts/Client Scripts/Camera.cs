@@ -3,8 +3,10 @@ using System;
 
 public partial class Camera : Camera2D
 {
-    private Node2D player;
+    private Player player;
     private bool found;
+    [Export]
+    public bool followPlayer = true;
     public override void _Ready()
     {
         if (Multiplayer.IsServer())
@@ -22,7 +24,29 @@ public partial class Camera : Camera2D
             TryResolvePlayer();
 
         if (player != null)
-            GlobalPosition = player.GlobalPosition;
+        {
+            if (followPlayer)
+            {
+                GlobalPosition = player.GlobalPosition;
+            }
+            else
+            {
+                var playerPos = player.GlobalPosition;
+                var dir = (player.inputSync.mousePosition - player.GlobalPosition).Normalized();
+                var target = Vector2.Zero;
+                if (playerPos.DistanceTo(player.inputSync.mousePosition) > 100)
+                {
+                    target = playerPos + dir *  50;
+                }
+                else
+                {
+                    target = (playerPos + player.inputSync.mousePosition) /2;
+                }
+
+            
+                GlobalPosition = target;
+            }
+        }
 
     }
     private void TryResolvePlayer()
@@ -36,13 +60,13 @@ public partial class Camera : Camera2D
         var spawner = sceneRoot.GetNodeOrNull<Node>("MultiplayerSpawner");
         if (spawner != null)
         {
-            player = spawner.GetNodeOrNull<Node2D>(Multiplayer.GetUniqueId().ToString());
+            player = spawner.GetNodeOrNull<Player>(Multiplayer.GetUniqueId().ToString());
             if (player != null)
                 return;
         }
 
         // 2) Fallback: deep search anywhere under the scene root
-        player = sceneRoot.FindChild(Multiplayer.GetUniqueId().ToString(), recursive: true, owned: false) as Node2D;
+        player = sceneRoot.FindChild(Multiplayer.GetUniqueId().ToString(), recursive: true, owned: false) as Player;
     }
 
 }
