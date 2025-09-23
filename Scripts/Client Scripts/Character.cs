@@ -149,11 +149,6 @@ public partial class Character : CharacterBody2D
         if (IsDummy) return;
         SetSkills();
         equipAll();
-        if (PrimaryEquipment.Count > 0)
-        {
-            WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
-            WepSprite.Position = PrimaryEquipment[0].GunPos;
-        }
     }
     public void equipAll()
     {
@@ -165,6 +160,11 @@ public partial class Character : CharacterBody2D
             {
                 equip.OnEquip(this);
             }
+        }
+        if (PrimaryEquipment.Count > 0)
+        {
+            WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
+            WepSprite.Position = PrimaryEquipment[0].GunPos;
         }
     }
     public void SetSkills()
