@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BaseEquipment" load_steps=3 format=3 uid="uid://be7qr07d8kcvf"]
+
+[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_866ou"]
+[ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="1_xmsk5"]
+
+[resource]
+script = ExtResource("1_866ou")
+equipmentFlags = 128
+enhancements = null
+Icon = ExtResource("1_xmsk5")
+ItemId = -2
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
