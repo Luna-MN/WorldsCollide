@@ -93,11 +93,11 @@ public partial class FloorEquipmentDefault : Node2D
         var currentEquipment = ServerManager.NodeDictionary[Id].inventory.AllEquipment;
         Array.Resize(ref currentEquipment, currentEquipment.Length + 1);
         currentEquipment[currentEquipment.Length - 1] = equipment;
+        GD.Print(equipment.ResourceName);
         ServerManager.NodeDictionary[Id].inventory.AllEquipment = currentEquipment;
         //RPC that into the inv on the client
         var enhancmentIds = equipment.enhancements.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x)).ToArray();
-        var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList()
-            .First(x => x.ResourcePath == equipment.ResourcePath);
+        var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList().FindIndex(x => x.ResourceName == equipment.ResourceName);
         ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId);
         QueueFree();
     }

@@ -1,13 +1,31 @@
-[gd_resource type="Resource" script_class="BaseEquipment" load_steps=3 format=3 uid="uid://dcrn58i05jmtr"]
+[gd_resource type="Resource" script_class="BaseEquipment" load_steps=7 format=3 uid="uid://dcrn58i05jmtr"]
 
 [ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="1_510fn"]
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_pnni1"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="3_uhyga"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="4_e8g0n"]
+
+[sub_resource type="Resource" id="Resource_ql2h3"]
+script = ExtResource("4_e8g0n")
+MinValue = 1.0
+MaxValue = 100.0
+ClampValue = true
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_551ok"]
+resource_local_to_scene = true
+script = ExtResource("3_uhyga")
+stats = Dictionary[String, ExtResource("4_e8g0n")]({
+"Damage": SubResource("Resource_ql2h3")
+})
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [resource]
 resource_local_to_scene = true
 resource_name = "SimpleChest"
 script = ExtResource("1_pnni1")
 equipmentFlags = 8
+stats = SubResource("Resource_551ok")
 enhancements = null
 Icon = ExtResource("1_510fn")
 ItemId = 5
