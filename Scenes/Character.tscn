@@ -74,6 +74,7 @@ FloatingText = ExtResource("2_677pu")
 PositionSync = NodePath("CharacterSync")
 WepSprite = NodePath("GunPos")
 ShootPosition = NodePath("GunPos/ShootPos")
+GunPos = Vector2(-4, 9)
 characterStats = SubResource("Resource_4b18b")
 
 [node name="CharacterSync" type="MultiplayerSynchronizer" parent="."]

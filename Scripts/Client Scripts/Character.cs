@@ -26,6 +26,7 @@ public partial class Character : CharacterBody2D
     [Export]
     public EquipmentSlot[] EquipmentSlots;
     [Export] public Inventory inventory;
+    [Export] public Vector2 GunPos;
     [ExportSubgroup("Loot Drop")]
     [Export(PropertyHint.GroupEnable)] public bool DropLootOnDeath;
     [Export] public int Prestige = 1;
@@ -164,7 +165,7 @@ public partial class Character : CharacterBody2D
         if (PrimaryEquipment.Count > 0)
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
-            WepSprite.Position = PrimaryEquipment[0].GunPos;
+            WepSprite.Position = GunPos;
         }
     }
     public void SetSkills()

@@ -11,8 +11,6 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public int Damage;
     [Export] public int Range;
     [Export] public int AttackSpeed;
-    [Export] public Vector2 GunPos;
-    [Export] public Vector2 GunFlipped;
     [Export] public Vector2 ShootPos;
     [Export] public Vector2 FlippedPos;
     [Export] public SpriteFrames SpriteFrames;

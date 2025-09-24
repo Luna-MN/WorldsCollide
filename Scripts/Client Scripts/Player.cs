@@ -128,12 +128,12 @@ public partial class Player : Character
         if (inputSync.moveInput.X < 0)
         {
             Sprite.FlipH = true;
-            WepSprite.Position = PrimaryEquipment[0].GunFlipped;
+            WepSprite.Position = new Vector2(-GunPos.X, GunPos.Y);
         }
         else if (inputSync.moveInput.X > 0)
         {
             Sprite.FlipH = false;
-            WepSprite.Position = PrimaryEquipment[0].GunPos;
+            WepSprite.Position = GunPos;
         }
         
     }
