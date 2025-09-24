@@ -22,12 +22,12 @@ public partial class ServerRpc : Node2D
         GD.Print("New player created" + id);
     }
 
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
     public void UpdatePlayerEquipment(int id, int[] equipmentIds, Godot.Collections.Dictionary<int, int[]> enhancmentIds, int[] InvIds)
     {
         GD.Print(string.Join(", ", equipmentIds));
         GD.Print(string.Join(", ", InvIds));
-        GD.Print(string.Join(", ", enhancmentIds.Select(x => equipmentIds[x.Key] + "(" + string.Join("& ", x.Value) + ")")));
+        GD.Print(string.Join(", ", enhancmentIds.Select(x => equipmentIds[x.Key] + " (" + string.Join("& ", x.Value) + ")")));
         var equipment = equipmentIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x].Duplicate() as BaseEquipment : null).ToArray();
         foreach (var equipmentPair in enhancmentIds)
         {
