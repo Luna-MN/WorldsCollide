@@ -27,7 +27,7 @@ public partial class ServerRpc : Node2D
     {
         GD.Print(string.Join(", ", equipmentIds));
         GD.Print(string.Join(", ", InvIds));
-        GD.Print(string.Join(", ", enhancmentIds.Select(x => x.Key + " " + string.Join(", ", x.Value))));
+        GD.Print(string.Join(", ", enhancmentIds.Select(x => equipmentIds[x.Key] + "(" + string.Join("& ", x.Value) + ")")));
         var equipment = equipmentIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x].Duplicate() as BaseEquipment : null).ToArray();
         foreach (var equipmentPair in enhancmentIds)
         {
