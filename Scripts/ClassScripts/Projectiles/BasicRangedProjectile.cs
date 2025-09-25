@@ -4,7 +4,7 @@ using System;
 public partial class BasicRangedProjectile : Projectile
 {
     [Export]
-    bool deleteOnHit = true;
+    public bool deleteOnHit = true;
     public override void _PhysicsProcess(double delta)
     {
         if(!Multiplayer.IsServer()) return;

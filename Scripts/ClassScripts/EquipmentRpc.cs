@@ -71,12 +71,13 @@ public partial class EquipmentRpc : Node2D
     {
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
-        var bullet = Arrow.Instantiate<BasicRangedProjectile>();
-        bullet.MoveDirection = mousePos - Character.GlobalPosition;
-        bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
-        bullet.Id = id;
-        bullet.Name = id + "_Arrow";
-        bullet.obtainStats(Character);
-        ServerManager.spawner.AddChild(bullet, true);
+        var arrow = Arrow.Instantiate<BasicRangedProjectile>();
+        arrow.MoveDirection = mousePos - Character.GlobalPosition;
+        arrow.GlobalPosition = Character.ShootPosition.GlobalPosition;
+        arrow.Id = id;
+        arrow.Name = id + "_Arrow";
+        arrow.deleteOnHit = false;
+        arrow.obtainStats(Character);
+        ServerManager.spawner.AddChild(arrow, true);
     }
 }
