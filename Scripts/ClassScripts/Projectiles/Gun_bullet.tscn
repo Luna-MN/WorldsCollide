@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cydq0s5vt6ui2" path="res://Pirates/Equipment/Ammo/Gun_Bullet.png" id="2_fj72g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]
-size = Vector2(17.865, 7.28)
+size = Vector2(15.932499, 7.28)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iorkc"]
 properties/0/path = NodePath(".:rotation")
@@ -26,14 +26,14 @@ script = ExtResource("1_1h6f3")
 Area = NodePath("Area2D")
 
 [node name="MeshInstance2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1.1920929e-07)
+position = Vector2(2, 7.1054274e-15)
 scale = Vector2(1.0625001, 0.92187506)
 texture = ExtResource("2_fj72g")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 0)
+position = Vector2(1.9662497, 0)
 shape = SubResource("RectangleShape2D_iorkc")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
