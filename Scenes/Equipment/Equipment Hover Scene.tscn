@@ -5,12 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_gjvxm"]
 [ext_resource type="PackedScene" uid="uid://bhci5kut0hqr1" path="res://StatsPanel.tscn" id="3_2h24l"]
 
-[node name="EquipmentHover" type="Panel"]
+[node name="EquipmentHover" type="Panel" node_paths=PackedStringArray("ItemName", "ItemDescription", "ItemIcon")]
 offset_right = 300.0
 offset_bottom = 468.0
 mouse_filter = 2
 theme = ExtResource("1_peqw6")
 script = ExtResource("2_2h24l")
+ItemName = NodePath("Label")
+ItemDescription = NodePath("Label2")
+ItemIcon = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(145, 145)

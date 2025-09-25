@@ -11,6 +11,7 @@ metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [resource]
 resource_local_to_scene = true
+resource_name = "Simple Helm"
 script = ExtResource("1_866ou")
 equipmentFlags = 128
 stats = SubResource("Resource_8cwke")

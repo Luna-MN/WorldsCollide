@@ -3,6 +3,10 @@ using System;
 
 public partial class EquipmentHoverScene : Panel
 {
+    [Export] public RichTextLabel ItemName;
+    [Export] public RichTextLabel ItemDescription;
+    [Export] public Sprite2D ItemIcon;
+
     public override void _Process(double delta)
     {
         // Get the mouse position

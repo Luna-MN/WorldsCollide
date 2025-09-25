@@ -8,7 +8,7 @@ public partial class EquipmentUI : Panel
     [Export] public Area2D area;
     [Export] public Sprite2D Icon;
     [Export] public PackedScene HoverScene;
-    public Panel scene;
+    public EquipmentHoverScene scene;
     public bool mouseIn;
     public bool mouseClick;
     public bool JustCreated = true;
@@ -21,15 +21,27 @@ public partial class EquipmentUI : Panel
     {
         area.MouseEntered += () =>
         {
+            if (!mouseIn && scene == null)
+            {
+                scene = HoverScene.Instantiate<EquipmentHoverScene>();
+                scene.GlobalPosition = GetGlobalMousePosition();
+                scene.ItemIcon.Texture = Icon.Texture;
+                scene.ItemName.Text = AssignedEquipment.ResourceName;
+                scene.ItemDescription.Text =
+                    string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
+                TopUI.AddChild(scene);
+            }
             mouseIn = true;
-            scene = HoverScene.Instantiate<EquipmentHoverScene>();
-            scene.GlobalPosition = GetGlobalMousePosition();
-            TopUI.AddChild(scene);
         };
         area.MouseExited += () =>
         {
+            
             mouseIn = false;
-            scene.QueueFree();
+            if (scene != null)
+            {
+                scene.QueueFree();
+                scene = null;
+            }
         };
         area.AreaEntered += OnEquipSlotEnter;
         area.AreaExited += OnEquipSlotExit;
@@ -90,6 +102,8 @@ public partial class EquipmentUI : Panel
             if (MB.Pressed && mouseIn)
             {
                 TopUI.CallDeferred("add_child", this);
+                scene.QueueFree();
+                scene = null;
                 GetParent().RemoveChild(this);
                 TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                 mouseClick = true;
