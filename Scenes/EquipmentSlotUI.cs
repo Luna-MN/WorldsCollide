@@ -6,6 +6,7 @@ public partial class EquipmentSlotUI : Panel
     [Export]
     public Sprite2D IconSprite;
 
+    public EquipmentUI equip;
     [Export]
     public Texture2D Icon
     {

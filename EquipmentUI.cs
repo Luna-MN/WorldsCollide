@@ -72,6 +72,16 @@ public partial class EquipmentUI : Panel
                 TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
                 if (selectedSlot != null)
                 {
+                    if (selectedSlot.equip != null && selectedSlot.equip != this)
+                    {
+                        var equipThere = selectedSlot.equip;
+                        var invent = GameManager.player.inventory.AllEquipment.ToList();
+                        invent.Add(AssignedEquipment);
+                        GameManager.player.inventory.AllEquipment = invent.ToArray();
+                        grid.CallDeferred("add_child", equipThere);
+                        GetParent().RemoveChild(equipThere);
+                    }
+                    selectedSlot.equip = this;
                     GlobalPosition = selectedSlot.GlobalPosition;
                     GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = AssignedEquipment;
                     GD.Print("Equipment Assigned");
@@ -126,7 +136,7 @@ public partial class EquipmentUI : Panel
         if (body.GetParent() is EquipmentSlotUI)
         {
             var slot =  body.GetParent<EquipmentSlotUI>();
-            if((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0)
+            if ((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0)
             {
                 selectedSlot = body.GetParent<EquipmentSlotUI>();
             }
@@ -141,6 +151,10 @@ public partial class EquipmentUI : Panel
         }
         if (selectedSlot == body.GetParent<EquipmentSlotUI>())
         {
+            if (selectedSlot.equip == this)
+            {
+                selectedSlot.equip = null;
+            }
             selectedSlot = null;
         }
     }
