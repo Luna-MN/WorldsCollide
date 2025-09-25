@@ -17,6 +17,7 @@ public partial class BaseEquipment : Resource
     [Export]
     public Texture2D Icon;
     public float Quality;
+    public EquipmentGenerator.Rarity Rarity;
     [Export]
     public int ItemId;
     public virtual void OnEquip(Character character)

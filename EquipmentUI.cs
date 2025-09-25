@@ -27,6 +27,7 @@ public partial class EquipmentUI : Panel
                 scene.GlobalPosition = GetGlobalMousePosition();
                 scene.ItemIcon.Texture = Icon.Texture;
                 scene.ItemName.Text = AssignedEquipment.ResourceName;
+                scene.ItemName.Modulate = scene.TextColors[(int)AssignedEquipment.Rarity];
                 scene.ItemDescription.Text =
                     string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
                 TopUI.AddChild(scene);

@@ -30,7 +30,6 @@ resource_local_to_scene = true
 resource_name = "GunTest"
 script = ExtResource("2_i8l6m")
 WeaponName = "Gun"
-GunFlipped = Vector2(4, 9)
 ShootPos = Vector2(14.857, 3.429)
 FlippedPos = Vector2(14.857, -3.429)
 SpriteFrames = SubResource("SpriteFrames_h6cdl")

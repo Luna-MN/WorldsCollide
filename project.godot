@@ -31,6 +31,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="WorldsCollide"
 
+[gui]
+
+theme/custom_font="uid://c47oo2fgcps5v"
+
 [input]
 
 move_left={

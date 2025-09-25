@@ -20,7 +20,7 @@ public partial class Skill : Resource
         DynamicStatBoost
     }
     [ExportGroup("Passives")]
-    [Export]
+    [Export(PropertyHint.GroupEnable)]
     public bool IsPassive;
     [Export]
     public PassiveType passiveType;
@@ -40,7 +40,14 @@ public partial class Skill : Resource
     public float Damage = 10f;
     [Export]
     public float RangeTime = 1f;
-    
+
+    [ExportGroup("Enemy")] 
+    [Export(PropertyHint.GroupEnable)] public bool IsEnemy;
+    public int ExecuteValue;
+    public virtual void EnemySkillEvealuation()
+    {
+        // in here we can set the ExecuteValue based on what the enemy is doing and then execute the skill based on that 
+    }
     
     public enum RpcLocation
     {

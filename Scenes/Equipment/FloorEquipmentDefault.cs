@@ -98,7 +98,7 @@ public partial class FloorEquipmentDefault : Node2D
         //RPC that into the inv on the client
         var enhancmentIds = equipment.enhancements.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x)).ToArray();
         var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList().FindIndex(x => x.ResourceName == equipment.ResourceName);
-        ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId);
+        ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId, (int)equipment.Rarity);;
         QueueFree();
     }
 }

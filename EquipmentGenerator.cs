@@ -84,6 +84,7 @@ public partial class EquipmentGenerator : Node2D
                     var RandomEquipment = rng.RandiRange(0, GenerationEquipment.Count - 1);
                     GD.Print(RandomEquipment);
                     var equipment = GenerationEquipment[RandomEquipment];
+                    equipment.Rarity = ItemRarity;
                     // the number of enhancments is equal to the first number for the quality
                     var enhancmentsNum = (actualQuality / 1000) + 1;
                     // get all creatable enhancments based on flags and rarity level

@@ -6,7 +6,7 @@ public partial class EquipmentHoverScene : Panel
     [Export] public RichTextLabel ItemName;
     [Export] public RichTextLabel ItemDescription;
     [Export] public Sprite2D ItemIcon;
-
+    [Export] public Color[] TextColors;
     public override void _Process(double delta)
     {
         // Get the mouse position

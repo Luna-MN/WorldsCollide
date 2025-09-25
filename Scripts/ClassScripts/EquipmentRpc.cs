@@ -21,7 +21,7 @@ public partial class EquipmentRpc : Node2D
     // on ready dynamically load all equipment and enhancments into the arrays
 
     [Rpc(MultiplayerApi.RpcMode.Authority)]
-    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId)
+    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId, int Rarity)
     {
         GD.Print(equipmentId);
         GD.Print(string.Join(", ", EnhancmentIndexes));
@@ -30,6 +30,7 @@ public partial class EquipmentRpc : Node2D
         var eq = equipment[equipmentId].Duplicate() as BaseEquipment;
         eq.enhancements = EnhancmentIndexes.Select(x => Enhancments[x]).ToArray();
         eq.ItemId = ItemId;
+        eq.Rarity = (EquipmentGenerator.Rarity)Rarity;
         currentEquipment[currentEquipment.Length - 1] = eq;
         GameManager.player.inventory.AllEquipment = currentEquipment;
     }

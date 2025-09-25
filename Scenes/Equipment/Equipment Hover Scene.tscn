@@ -14,9 +14,10 @@ script = ExtResource("2_2h24l")
 ItemName = NodePath("Label")
 ItemDescription = NodePath("Label2")
 ItemIcon = NodePath("Sprite2D")
+TextColors = PackedColorArray(1, 1, 1, 1, 0.25653425, 0.55761296, 0.31080827, 1, 0.19305277, 0.6085371, 0.69346356, 1, 0.57410836, 0.24677557, 0.90400976, 1, 0.7789127, 0.24004218, 0.4294059, 1, 0.74883926, 0.38468656, 0.09962823, 1, 0.92292625, 0.20734173, 0.31199107, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(145, 145)
+position = Vector2(149, 134)
 scale = Vector2(6, 6)
 texture = ExtResource("2_gjvxm")
 
