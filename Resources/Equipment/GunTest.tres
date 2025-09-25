@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=8 format=3 uid="uid://d3m0yqvnhk5e6"]
+[gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=7 format=3 uid="uid://d3m0yqvnhk5e6"]
 
-[ext_resource type="Texture2D" uid="uid://bnvh5tkipjpfo" path="res://Pirates/Class1/CirclingShuriken.png" id="1_6snfv"]
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="2_i8l6m"]
 [ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="2_und8r"]
 [ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="3_h6cdl"]
@@ -35,6 +34,6 @@ FlippedPos = Vector2(14.857, -3.429)
 SpriteFrames = SubResource("SpriteFrames_h6cdl")
 equipmentFlags = 32
 enhancements = Array[Object]([SubResource("Resource_h6cdl"), SubResource("Resource_83v58")])
-Icon = ExtResource("1_6snfv")
+Icon = ExtResource("2_und8r")
 ItemId = 12
 metadata/_custom_type_script = "uid://rhuq6dqrqhyy"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=31 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
 [ext_resource type="Resource" uid="uid://dcrn58i05jmtr" path="res://Resources/Equipment/SimpleChest.tres" id="8_ukyrk"]
 [ext_resource type="Resource" uid="uid://be7qr07d8kcvf" path="res://Resources/Equipment/SimpleHelm.tres" id="9_ukyrk"]
+[ext_resource type="Resource" uid="uid://2kchbqsq2oad" path="res://Resources/Equipment/BowTest.tres" id="10_7dp3o"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="11_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://cjpmfq8vw5esg" path="res://Pirates/Class1/ComboDudeV2.png" id="12_ukyrk"]
 
@@ -90,7 +91,7 @@ metadata/_custom_type_script = "uid://c8xpcraad14yd"
 [sub_resource type="Resource" id="Resource_h4iuc"]
 resource_local_to_scene = true
 script = ExtResource("6_gymyn")
-AllEquipment = Array[Object]([SubResource("Resource_gymyn"), SubResource("Resource_pu2lt"), ExtResource("8_ukyrk"), ExtResource("9_ukyrk")])
+AllEquipment = Array[Object]([SubResource("Resource_gymyn"), SubResource("Resource_pu2lt"), ExtResource("8_ukyrk"), ExtResource("9_ukyrk"), ExtResource("10_7dp3o")])
 metadata/_custom_type_script = "uid://b25igrq5gmts2"
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
@@ -151,9 +152,9 @@ replication_config = SubResource("SceneReplicationConfig_v0iea")
 script = ExtResource("3_fkybt")
 
 [node name="GunPos" parent="." index="4"]
-position = Vector2(-9, 9)
+position = Vector2(-14, 9)
 scale = Vector2(0.875, 0.875)
 sprite_frames = null
 
 [node name="ShootPos" parent="GunPos" index="0"]
-position = Vector2(14.857143, -3.4285724)
+position = Vector2(3.4285727, 0)

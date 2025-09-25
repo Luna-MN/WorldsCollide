@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://ciqntsdkcedin"]
+[gd_scene load_steps=26 format=4 uid="uid://ciqntsdkcedin"]
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
 [ext_resource type="PackedScene" uid="uid://b14otrrm17vx6" path="res://Scenes/TestingDummy.tscn" id="2_5rbs6"]
@@ -10,38 +10,91 @@
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="4_t2vuu"]
 [ext_resource type="PackedScene" uid="uid://2o87ghb0ppc2" path="res://Scenes/skill_selection.tscn" id="5_0f5h7"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="5_lp1f3"]
-[ext_resource type="Resource" uid="uid://dcrn58i05jmtr" path="res://Resources/Equipment/SimpleChest.tres" id="6_lp1f3"]
+[ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="6_p30di"]
 [ext_resource type="Script" uid="uid://b5t0lykikc27d" path="res://Scenes/ChangeEquipment.cs" id="7_6xh1p"]
+[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="7_8c81w"]
 [ext_resource type="TileSet" uid="uid://cp5lj3c46on2n" path="res://Pirates/GrassTiles.tres" id="7_c264a"]
-[ext_resource type="Resource" uid="uid://be7qr07d8kcvf" path="res://Resources/Equipment/SimpleHelm.tres" id="7_p30di"]
 [ext_resource type="PackedScene" uid="uid://bada8pua2i38e" path="res://Scripts/Equipment/Equipment Selection.tscn" id="8_5rbs6"]
+[ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="8_fi7j4"]
 
-[sub_resource type="Resource" id="Resource_8c81w"]
+[sub_resource type="Resource" id="Resource_4v62a"]
 resource_local_to_scene = true
 script = ExtResource("4_t2vuu")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_fi7j4"]
+[sub_resource type="Resource" id="Resource_c2lnq"]
 resource_local_to_scene = true
 resource_name = "TestRes"
 script = ExtResource("3_ytmxh")
 equipmentFlags = 2047
-stats = SubResource("Resource_8c81w")
+stats = SubResource("Resource_4v62a")
 enhancements = null
 ItemId = 14
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_lv8gr"]
+script = ExtResource("7_8c81w")
+EnhancmentText = "This Is a Test Of the Text"
+metadata/_custom_type_script = "uid://k8whvj1c14xl"
+
+[sub_resource type="Resource" id="Resource_e8g0n"]
+script = ExtResource("7_8c81w")
+EnhancmentText = "This Is also a test
+"
+metadata/_custom_type_script = "uid://k8whvj1c14xl"
+
+[sub_resource type="Resource" id="Resource_ql2h3"]
+script = ExtResource("5_lp1f3")
+MinValue = 1.0
+MaxValue = 100.0
+ClampValue = true
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_dwn5r"]
+resource_local_to_scene = true
+script = ExtResource("4_t2vuu")
+stats = Dictionary[String, ExtResource("5_lp1f3")]({
+"Damage": SubResource("Resource_ql2h3")
+})
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_1vcy8"]
+resource_local_to_scene = true
+resource_name = "Simple Chest"
+script = ExtResource("3_ytmxh")
+equipmentFlags = 8
+stats = SubResource("Resource_dwn5r")
+enhancements = Array[Object]([SubResource("Resource_lv8gr"), SubResource("Resource_e8g0n")])
+Icon = ExtResource("6_p30di")
+ItemId = 5
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_8cwke"]
+script = ExtResource("4_t2vuu")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_65o0v"]
+resource_local_to_scene = true
+resource_name = "Simple Helm"
+script = ExtResource("3_ytmxh")
+equipmentFlags = 128
+stats = SubResource("Resource_8cwke")
+enhancements = Array[Object]([])
+Icon = ExtResource("8_fi7j4")
+ItemId = -2
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_5lt6y")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://ul6rh048aliv", "uid://cjwb7dl5et8f5", "uid://ilkueeb0cdpt", "uid://c0mq410gglmrp", "uid://bk7ppctm372s7", "uid://dft540hr27ugl")
+_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://ul6rh048aliv", "uid://cjwb7dl5et8f5", "uid://ilkueeb0cdpt", "uid://c0mq410gglmrp", "uid://bk7ppctm372s7", "uid://dft540hr27ugl", "uid://cim15fes2mfwa")
 spawn_path = NodePath(".")
 
 [node name="Dummy" parent="MultiplayerSpawner" instance=ExtResource("2_5rbs6")]
 position = Vector2(328, 176)
 DropLootOnDeath = true
-DroppableEquipment = Array[Object]([SubResource("Resource_fi7j4"), ExtResource("6_lp1f3"), ExtResource("7_p30di")])
+DroppableEquipment = Array[Object]([SubResource("Resource_c2lnq"), SubResource("Resource_1vcy8"), SubResource("Resource_65o0v")])
 EquipmentSpawner = ExtResource("3_201fe")
 
 [node name="Camera2D" type="Camera2D" parent="."]

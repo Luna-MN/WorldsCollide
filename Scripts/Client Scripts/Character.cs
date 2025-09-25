@@ -346,7 +346,16 @@ public partial class Character : CharacterBody2D
     public void DamageText(float damage)
     {
         var text = FloatingText.Instantiate<FloatingText>();
+        text.Modulate = new Color(1, 0.5f, 0.5f);
         text.text.Text = damage.ToString();
+        AddChild(text, true);
+    }
+
+    public void HealText(float heal)
+    {
+        var text = FloatingText.Instantiate<FloatingText>();
+        text.Modulate = new Color(0.5f, 1, 0.5f);
+        text.text.Text = heal.ToString();
         AddChild(text, true);
     }
     public virtual void TakeDamage(float damage, int attacker)

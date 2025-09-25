@@ -14,7 +14,8 @@ public partial class EquipmentRpc : Node2D
     [ExportGroup("Ranged Bullets")]
     [Export]
     public PackedScene Basic_Bullet;
-    
+    [Export]
+    public PackedScene Arrow;
     [ExportGroup("Swords")]
     [Export]
     public PackedScene Melee_Slash;
@@ -63,5 +64,19 @@ public partial class EquipmentRpc : Node2D
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
-    
+
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1,
+        TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+    public void Bow_LeftClick(int id)
+    {
+        var Character = ServerManager.NodeDictionary[id];
+        var mousePos = Character.inputSync.mousePosition;
+        var bullet = Arrow.Instantiate<BasicRangedProjectile>();
+        bullet.MoveDirection = mousePos - Character.GlobalPosition;
+        bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
+        bullet.Id = id;
+        bullet.Name = id + "_Arrow";
+        bullet.obtainStats(Character);
+        ServerManager.spawner.AddChild(bullet, true);
+    }
 }

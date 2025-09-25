@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkow3uekdikc4"]
+[gd_scene load_steps=13 format=3 uid="uid://dkow3uekdikc4"]
 
 [ext_resource type="Script" uid="uid://5u1rtibjq68g" path="res://Scripts/ClassScripts/EquipmentRpc.cs" id="1_13vvj"]
 [ext_resource type="PackedScene" uid="uid://cjwb7dl5et8f5" path="res://Scripts/ClassScripts/Projectiles/Gun_bullet.tscn" id="2_jsxp8"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://d3m0yqvnhk5e6" path="res://Resources/Equipment/GunTest.tres" id="4_m7y88"]
 [ext_resource type="Resource" uid="uid://dcrn58i05jmtr" path="res://Resources/Equipment/SimpleChest.tres" id="5_wb33k"]
 [ext_resource type="Resource" uid="uid://be7qr07d8kcvf" path="res://Resources/Equipment/SimpleHelm.tres" id="6_v2j6k"]
+[ext_resource type="Resource" uid="uid://2kchbqsq2oad" path="res://Resources/Equipment/BowTest.tres" id="7_hkt4a"]
+[ext_resource type="PackedScene" uid="uid://cim15fes2mfwa" path="res://Scripts/ClassScripts/Projectiles/bow_arrow.tscn" id="8_083uo"]
 
 [sub_resource type="Resource" id="Resource_m7y88"]
 script = ExtResource("2_v61qo")
@@ -22,6 +24,7 @@ metadata/_custom_type_script = "uid://k8whvj1c14xl"
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_13vvj")
 Enhancments = Array[Object]([SubResource("Resource_m7y88"), SubResource("Resource_wb33k")])
-equipment = Array[Object]([ExtResource("2_sq6ac"), ExtResource("4_m7y88"), ExtResource("5_wb33k"), ExtResource("6_v2j6k")])
+equipment = Array[Object]([ExtResource("2_sq6ac"), ExtResource("4_m7y88"), ExtResource("5_wb33k"), ExtResource("6_v2j6k"), ExtResource("7_hkt4a")])
 Basic_Bullet = ExtResource("2_jsxp8")
+Arrow = ExtResource("8_083uo")
 Melee_Slash = ExtResource("3_pubod")

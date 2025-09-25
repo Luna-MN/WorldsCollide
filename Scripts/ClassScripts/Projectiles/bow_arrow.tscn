@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cim15fes2mfwa"]
+
+[ext_resource type="PackedScene" uid="uid://cjwb7dl5et8f5" path="res://Scripts/ClassScripts/Projectiles/Gun_bullet.tscn" id="1_kij88"]
+[ext_resource type="Texture2D" uid="uid://dhaspoweysunj" path="res://Pirates/Equipment/Ammo/Bow_Arrow.png" id="2_i71q4"]
+
+[node name="Bow_Arrow" instance=ExtResource("1_kij88")]
+
+[node name="MeshInstance2D" parent="." index="0"]
+texture = ExtResource("2_i71q4")
