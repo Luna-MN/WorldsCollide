@@ -22,6 +22,11 @@ ClientRpc="*res://Scenes/ClientRpc.tscn"
 EquipmentRpc="*res://Scripts/ClassScripts/EquipmentRpc.tscn"
 ClassRpc="*res://Scenes/ClassRpc.tscn"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="WorldsCollide"

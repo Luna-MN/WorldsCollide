@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgnwv3s31cdbs"]
+[gd_scene load_steps=5 format=3 uid="uid://cgnwv3s31cdbs"]
 
 [ext_resource type="Script" uid="uid://bitvv64ynwy3i" path="res://EquipmentUI.cs" id="1_0xyv2"]
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_36ypc"]
+[ext_resource type="PackedScene" uid="uid://st53bnwcvead" path="res://Scenes/Equipment/Equipment Hover Scene.tscn" id="2_h2mxk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36ypc"]
 size = Vector2(89, 88)
@@ -17,6 +18,7 @@ mouse_filter = 2
 script = ExtResource("1_0xyv2")
 area = NodePath("Area2D")
 Icon = NodePath("Sprite2D")
+HoverScene = ExtResource("2_h2mxk")
 
 [node name="Area2D" type="Area2D" parent="."]
 

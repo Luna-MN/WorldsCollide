@@ -7,6 +7,8 @@ public partial class EquipmentUI : Panel
 {
     [Export] public Area2D area;
     [Export] public Sprite2D Icon;
+    [Export] public PackedScene HoverScene;
+    public Panel scene;
     public bool mouseIn;
     public bool mouseClick;
     public bool JustCreated = true;
@@ -20,10 +22,14 @@ public partial class EquipmentUI : Panel
         area.MouseEntered += () =>
         {
             mouseIn = true;
+            scene = HoverScene.Instantiate<EquipmentHoverScene>();
+            scene.GlobalPosition = GetGlobalMousePosition();
+            TopUI.AddChild(scene);
         };
         area.MouseExited += () =>
         {
             mouseIn = false;
+            scene.QueueFree();
         };
         area.AreaEntered += OnEquipSlotEnter;
         area.AreaExited += OnEquipSlotExit;
