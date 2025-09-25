@@ -113,8 +113,11 @@ public partial class EquipmentUI : Panel
             if (MB.Pressed && mouseIn)
             {
                 TopUI.CallDeferred("add_child", this);
-                scene.QueueFree();
-                scene = null;
+                if (scene != null)
+                {
+                    scene.QueueFree();
+                    scene = null;
+                }
                 GetParent().RemoveChild(this);
                 TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                 mouseClick = true;
