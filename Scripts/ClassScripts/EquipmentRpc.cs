@@ -20,7 +20,39 @@ public partial class EquipmentRpc : Node2D
     [Export]
     public PackedScene Melee_Slash;
     // on ready dynamically load all equipment and enhancments into the arrays
-
+    public override void _Ready()
+    {
+        var equipmentDir = DirAccess.Open("res://Resources/Equipment/");
+        if (equipmentDir != null)
+        {
+            equipmentDir.ListDirBegin();
+            var fileName = equipmentDir.GetNext();
+        
+            while (!string.IsNullOrEmpty(fileName))
+            {
+                if (!fileName.StartsWith(".") && fileName.EndsWith(".tres"))
+                {
+                    var fullPath = "res://Resources/Equipment/" + fileName;
+                    var loadedEquipment = ResourceLoader.Load(fullPath) as BaseEquipment;
+                    if (loadedEquipment != null)
+                    {
+                        var exists = equipment.ToList().FindIndex(x => x.ResourceName == loadedEquipment.ResourceName);
+                        if (exists == -1)
+                        {
+                            Array.Resize(ref equipment, equipment.Length + 1);
+                            equipment[equipment.Length - 1] = loadedEquipment;
+                        }
+                    }
+                }
+            
+                fileName = equipmentDir.GetNext();
+            }
+        
+            equipmentDir.ListDirEnd();
+            GD.Print(equipment.Length);
+        }
+    }
+    
     [Rpc(MultiplayerApi.RpcMode.Authority)]
     public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId, int Rarity)
     {
