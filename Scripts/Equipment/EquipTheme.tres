@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=15 format=4 uid="uid://dp87lkmt8ncyv"]
+[gd_resource type="Theme" load_steps=16 format=4 uid="uid://dp87lkmt8ncyv"]
 
 [ext_resource type="Texture2D" uid="uid://dwruhsq2fdjtr" path="res://Pirates/Equipment/Item_Holder_hud.png" id="1_0upkc"]
 [ext_resource type="FontFile" uid="uid://c47oo2fgcps5v" path="res://Peaberry-Base.otf" id="1_tccta"]
+[ext_resource type="FontFile" uid="uid://cmp4hsjv7mxe4" path="res://PeaberryMono.ttf" id="1_w5hcm"]
 [ext_resource type="Texture2D" uid="uid://spxtgq3qe4j7" path="res://Pirates/Equipment/Scalable Paper.png" id="2_tccta"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u7rpv"]
@@ -961,7 +962,7 @@ content_margin_bottom = 0.0
 
 [resource]
 Label/font_sizes/font_size = 12
-Label/fonts/font = ExtResource("1_tccta")
+Label/fonts/font = ExtResource("1_w5hcm")
 Panel/styles/invpanel = SubResource("StyleBoxTexture_u7rpv")
 Panel/styles/panel = SubResource("StyleBoxTexture_jiwcl")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
