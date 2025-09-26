@@ -49,7 +49,35 @@ public partial class EquipmentRpc : Node2D
             }
         
             equipmentDir.ListDirEnd();
-            GD.Print(equipment.Length);
+        }
+        
+        var EnhancmentsDir = DirAccess.Open("res://Resources/Enhancments/");
+        if (EnhancmentsDir != null)
+        {
+            EnhancmentsDir.ListDirBegin();
+            var fileName = EnhancmentsDir.GetNext();
+        
+            while (!string.IsNullOrEmpty(fileName))
+            {
+                if (!fileName.StartsWith(".") && fileName.EndsWith(".tres"))
+                {
+                    var fullPath = "res://Resources/Equipment/" + fileName;
+                    var enhancement = ResourceLoader.Load(fullPath) as BaseEnhancement;
+                    if (enhancement != null)
+                    {
+                        var exists = Enhancments.ToList().FindIndex(x => x.ResourceName == enhancement.ResourceName);
+                        if (exists == -1)
+                        {
+                            Array.Resize(ref Enhancments, Enhancments.Length + 1);
+                            Enhancments[equipment.Length - 1] = enhancement;
+                        }
+                    }
+                }
+            
+                fileName = EnhancmentsDir.GetNext();
+            }
+        
+            EnhancmentsDir.ListDirEnd();
         }
     }
     
