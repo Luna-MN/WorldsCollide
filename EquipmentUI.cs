@@ -30,6 +30,11 @@ public partial class EquipmentUI : Panel
                 scene.ItemName.Modulate = scene.TextColors[(int)AssignedEquipment.Rarity];
                 scene.ItemDescription.Text =
                     string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
+                if (AssignedEquipment is PrimaryWeapon)
+                {
+                    scene.wepStats.Visible = true;
+                }
+                
                 TopUI.AddChild(scene);
             }
             mouseIn = true;

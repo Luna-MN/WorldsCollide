@@ -7,6 +7,7 @@ public partial class EquipmentHoverScene : Panel
     [Export] public RichTextLabel ItemDescription;
     [Export] public Sprite2D ItemIcon;
     [Export] public Color[] TextColors;
+    [Export] public HBoxContainer wepStats;
     public override void _Process(double delta)
     {
         // Get the mouse position
