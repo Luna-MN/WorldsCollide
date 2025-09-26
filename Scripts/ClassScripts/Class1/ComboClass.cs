@@ -11,7 +11,7 @@ public partial class ComboClass : Player
         WaitTime = 0.05f
     };
     [Export] public float comboLossTime = 2.0f;
-    public List<int> hitList = new List<int>();
+    public List<string> hitList = new();
 
     public override void _Ready()
     {
@@ -23,11 +23,11 @@ public partial class ComboClass : Player
             hitList.Clear();
             currentCombo = 0;
         };
-        OnHit += b =>
+        OnHit += (b, f) =>
         {
-            if (b is Character && !hitList.Contains((b as Character).ID))
+            if (b is Character && !hitList.Contains(b.Name))
             {
-                hitList.Add((b as Character).ID);
+                hitList.Add(b.Name);
             }
             currentCombo++;
             comboTimer.Start(comboLossTime);
@@ -36,7 +36,7 @@ public partial class ComboClass : Player
         {
             if (b is Character)
             {
-                hitList.Remove((b as Character).ID);
+                hitList.Remove(b.Name);
             }
         };
     }

@@ -61,7 +61,7 @@ public partial class EquipmentRpc : Node2D
             {
                 if (!fileName.StartsWith(".") && fileName.EndsWith(".tres"))
                 {
-                    var fullPath = "res://Resources/Equipment/" + fileName;
+                    var fullPath = "res://Resources/Enhancments/" + fileName;
                     var enhancement = ResourceLoader.Load(fullPath) as BaseEnhancement;
                     if (enhancement != null)
                     {

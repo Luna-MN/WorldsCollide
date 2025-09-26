@@ -53,7 +53,7 @@ public partial class Projectile : Node2D
         if(!Multiplayer.IsServer()) return;
         if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Character bulletOwner)
         {
-            bulletOwner.CallOnHit(Body);
+            bulletOwner.CallOnHit(Body, Damage);
         }
 
         if (Body is Character hitChar)

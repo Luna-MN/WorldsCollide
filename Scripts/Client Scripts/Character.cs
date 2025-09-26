@@ -9,6 +9,7 @@ public partial class Character : CharacterBody2D
 {
     [Export]
     public bool IsDummy = false;
+    public bool isDead = false;
     public int ID;
     [Export]
     public PackedScene FloatingText;
@@ -44,9 +45,9 @@ public partial class Character : CharacterBody2D
     public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
 
     #region Passive Variables
-    public event Action<Node2D> OnHit;
-    public event Action<Node2D> OnHitSkill;
-    public event Action<Node2D> OnHitEquip;
+    public event Action<Node2D, float> OnHit;
+    public event Action<Node2D, float> OnHitSkill;
+    public event Action<Node2D, float> OnHitEquip;
     public event Action<Node2D> OnKill;
     public event Action<Node2D> OnKillSkill;
     public event Action<Node2D> OnKillEquip;
@@ -125,8 +126,8 @@ public partial class Character : CharacterBody2D
         {
             return;
         }
-        OnHit += b => OnHitSkill?.Invoke(b);
-        OnHit += b => OnHitEquip?.Invoke(b);
+        OnHit += (b, f) => OnHitSkill?.Invoke(b, f);
+        OnHit += (b, f) => OnHitEquip?.Invoke(b, f);
         
         OnKill += b => OnKillSkill?.Invoke(b);
         OnKill += b => OnKillEquip?.Invoke(b);
@@ -187,13 +188,13 @@ public partial class Character : CharacterBody2D
                 switch (skill.passiveType)
                 {
                     case Skill.PassiveType.OnHit:
-                        OnHit += _ => { info.Invoke(this, new object[] { }); };
+                        OnHitSkill += (b, f) => { info.Invoke(this, new object[] {b, f}); };
                         break;
                     case Skill.PassiveType.OnKill:
-                        OnKill += _ => { info.Invoke(this, new object[] { }); };
+                        OnKillSkill += _ => { info.Invoke(this, new object[] { }); };
                         break;
                     case Skill.PassiveType.OnDeath:
-                        OnDeath += _ => { info.Invoke(this, new object[] { }); };
+                        OnDeathSkill += _ => { info.Invoke(this, new object[] { }); };
                         break;
                     case Skill.PassiveType.OnMove:
                             SetUpTimer(skill, info, false, false);
@@ -253,9 +254,9 @@ public partial class Character : CharacterBody2D
         };
     }
     #region Passive Calls
-    public void CallOnHit(Node2D body)
+    public void CallOnHit(Node2D body, float damage)
     {
-        OnHit?.Invoke(body);
+        OnHit?.Invoke(body, damage);
     }
     public void CallOnKill(Node2D body)
     {
@@ -362,10 +363,9 @@ public partial class Character : CharacterBody2D
     {
         if (!Multiplayer.IsServer()) return;
         characterStats.stats["currentHealth"].Value -= damage;
-        GD.Print(damage);
-        GD.Print(characterStats.stats["currentHealth"].Value);
-        if (characterStats["currentHealth"] <= 0)
+        if (characterStats["currentHealth"] <= 0 & !isDead)
         {
+            isDead = true;
             OnDeath?.Invoke(this);
             ServerManager.NodeDictionary[attacker].CallOnKill(this);
             if (this is Player p)
