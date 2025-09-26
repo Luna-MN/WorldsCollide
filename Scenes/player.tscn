@@ -131,6 +131,9 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath("GunPos:position")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+properties/6/path = NodePath("AnimatedSprite2D:flip_h")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
 [node name="Player" node_paths=PackedStringArray("inputSync") instance=ExtResource("1_v0iea")]
 script = ExtResource("1_6t5aa")

@@ -176,6 +176,12 @@ public partial class Character : CharacterBody2D
         {
             waitTime = 1;
         }
+
+        if (attackTimer != null)
+        {
+            attackTimer.QueueFree();
+            attackTimer = null;
+        }
         attackTimer = new Timer()
         {
             Autostart = false,

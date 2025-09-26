@@ -5,7 +5,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_6k8mt"]
 font = ExtResource("2_f3tku")
-font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="FloatingText" type="Marker2D" node_paths=PackedStringArray("text")]
 scale = Vector2(0.7, 0.7)
