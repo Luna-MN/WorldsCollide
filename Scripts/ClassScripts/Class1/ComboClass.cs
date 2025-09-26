@@ -23,7 +23,7 @@ public partial class ComboClass : Player
             hitList.Clear();
             currentCombo = 0;
         };
-        OnHit += (b, f) =>
+        OnHit += (b, p, f) =>
         {
             if (b is Character && !hitList.Contains(b.Name))
             {

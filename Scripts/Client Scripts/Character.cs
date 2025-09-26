@@ -45,9 +45,9 @@ public partial class Character : CharacterBody2D
     public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
 
     #region Passive Variables
-    public event Action<Node2D, float> OnHit;
-    public event Action<Node2D, float> OnHitSkill;
-    public event Action<Node2D, float> OnHitEquip;
+    public event Action<Node2D, Projectile, float> OnHit;
+    public event Action<Node2D, Projectile, float> OnHitSkill;
+    public event Action<Node2D, Projectile, float> OnHitEquip;
     public event Action<Node2D> OnKill;
     public event Action<Node2D> OnKillSkill;
     public event Action<Node2D> OnKillEquip;
@@ -126,8 +126,8 @@ public partial class Character : CharacterBody2D
         {
             return;
         }
-        OnHit += (b, f) => OnHitSkill?.Invoke(b, f);
-        OnHit += (b, f) => OnHitEquip?.Invoke(b, f);
+        OnHit += (b, p, f) => OnHitSkill?.Invoke(b, p, f);
+        OnHit += (b, p, f) => OnHitEquip?.Invoke(b, p, f);
         
         OnKill += b => OnKillSkill?.Invoke(b);
         OnKill += b => OnKillEquip?.Invoke(b);
@@ -188,7 +188,7 @@ public partial class Character : CharacterBody2D
                 switch (skill.passiveType)
                 {
                     case Skill.PassiveType.OnHit:
-                        OnHitSkill += (b, f) => { info.Invoke(this, new object[] {b, f}); };
+                        OnHitSkill += (b, p, f) => { info.Invoke(this, new object[] {b, p, f}); };
                         break;
                     case Skill.PassiveType.OnKill:
                         OnKillSkill += _ => { info.Invoke(this, new object[] { }); };
@@ -254,9 +254,9 @@ public partial class Character : CharacterBody2D
         };
     }
     #region Passive Calls
-    public void CallOnHit(Node2D body, float damage)
+    public void CallOnHit(Node2D body, Projectile proj, float damage)
     {
-        OnHit?.Invoke(body, damage);
+        OnHit?.Invoke(body, proj, damage);
     }
     public void CallOnKill(Node2D body)
     {
@@ -344,11 +344,21 @@ public partial class Character : CharacterBody2D
         }
     }
 
-    public void DamageText(float damage)
+    public void DamageText(float damage, float amountOfTimes = 1)
     {
+        if (Multiplayer.IsServer())
+        {
+            GD.Print("Damage: " + damage);
+        }
+        string damageText = damage.ToString();
+        if (amountOfTimes != 1)
+        {
+            damageText = damageText + "x" + amountOfTimes;       
+        }
+        ServerManager.ClientRpcs.Rpc("FloatingText", damageText, GetPath().ToString(), new Color(1, 0.5f, 0.5f));
         var text = FloatingText.Instantiate<FloatingText>();
         text.Modulate = new Color(1, 0.5f, 0.5f);
-        text.text.Text = damage.ToString();
+        text.text.Text = damageText;
         AddChild(text, true);
     }
 

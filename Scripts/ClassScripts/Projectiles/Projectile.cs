@@ -16,7 +16,9 @@ public partial class Projectile : Node2D
     public float Speed = 400f;
     [Export]
     public float RangeTime = 2f;
-    
+
+    public float damageDone;
+    public float amountOfTimes = 1;
     protected Timer timer;
     
     public override void _Ready()
@@ -49,17 +51,19 @@ public partial class Projectile : Node2D
     protected virtual void OnBulletHit(Node2D Body)
     {
         if(Name.ToString().Contains(Body.Name.ToString())) return;
-        ((Character)Body).DamageText(Damage);
         if(!Multiplayer.IsServer()) return;
+
         if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Character bulletOwner)
         {
-            bulletOwner.CallOnHit(Body, Damage);
+            bulletOwner.CallOnHit(Body, this, Damage);
         }
 
         if (Body is Character hitChar)
         {
             hitChar.TakeDamage(Damage, (int)Id);
+            damageDone += Damage;
         }
+        ((Character)Body).DamageText(damageDone, amountOfTimes);
     }
 
     public void obtainStats(Character c)
