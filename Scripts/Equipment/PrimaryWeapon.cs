@@ -10,7 +10,7 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public bool HasRightClick;
     [Export] public int Damage;
     [Export] public int Range;
-    [Export] public int AttackSpeed;
+    [Export] public float AttackSpeed;
     [Export] public Vector2 ShootPos;
     [Export] public Vector2 FlippedPos;
     [Export] public SpriteFrames SpriteFrames;

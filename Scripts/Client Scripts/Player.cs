@@ -9,7 +9,7 @@ public partial class Player : Character
 {
     #region Input Handling
     public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
-    
+    public bool LeftPressed;
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
@@ -91,12 +91,21 @@ public partial class Player : Character
             ResetUI(TB5);
         }
 
-        if (@event is InputEventMouseButton Button && Button.Pressed)
+        if (@event is InputEventMouseButton Button)
         {
             if (Button.ButtonIndex == MouseButton.Left)
             {
-                LeftClick();
+                if (Button.Pressed)
+                {
+                    LeftPressed = true;
+                }
+                else
+                {
+                    LeftPressed = false;
+                }
+
             }
+            
         }
     }
 
@@ -135,7 +144,12 @@ public partial class Player : Character
             Sprite.FlipH = false;
             WepSprite.Position = GunPos;
         }
-        
+        if (AttackAvailable && LeftPressed)
+        {
+            LeftClick();
+            AttackAvailable = false;
+            attackTimer.Start();
+        }
     }
 
     protected virtual void SetUI(Button button)

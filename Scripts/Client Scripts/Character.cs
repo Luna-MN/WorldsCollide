@@ -17,6 +17,8 @@ public partial class Character : CharacterBody2D
     [Export] public MultiplayerSynchronizer PositionSync;
     [Export]
     protected string CharacterName = "Class1";
+    public bool AttackAvailable = true;
+    public Timer attackTimer;
     [Export]
     protected AnimatedSprite2D WepSprite;
     [Export]
@@ -163,11 +165,29 @@ public partial class Character : CharacterBody2D
                 equip.OnEquip(this);
             }
         }
+        double waitTime;
         if (PrimaryEquipment.Count > 0)
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
             WepSprite.Position = GunPos;
+            waitTime = (double)PrimaryEquipment[0]?.AttackSpeed;
         }
+        else
+        {
+            waitTime = 1;
+        }
+        attackTimer = new Timer()
+        {
+            Autostart = false,
+            OneShot = true,
+            WaitTime = waitTime,
+            Name = "Attack Timer"
+        };
+        attackTimer.Timeout += () =>
+        {
+            AttackAvailable = true;
+        };
+        AddChild(attackTimer);
     }
     public void SetSkills()
     {
