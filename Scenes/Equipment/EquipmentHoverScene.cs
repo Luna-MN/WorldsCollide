@@ -5,9 +5,12 @@ public partial class EquipmentHoverScene : Panel
 {
     [Export] public RichTextLabel ItemName;
     [Export] public RichTextLabel ItemDescription;
+    [Export] public RichTextLabel Quality;
     [Export] public Sprite2D ItemIcon;
     [Export] public Color[] TextColors;
     [Export] public HBoxContainer wepStats;
+    [Export] public RichTextLabel Attack, Speed, Range; // wep stats
+    
     public override void _Process(double delta)
     {
         // Get the mouse position

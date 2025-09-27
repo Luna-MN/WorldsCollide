@@ -30,9 +30,13 @@ public partial class EquipmentUI : Panel
                 scene.ItemName.Modulate = scene.TextColors[(int)AssignedEquipment.Rarity];
                 scene.ItemDescription.Text =
                     string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
-                if (AssignedEquipment is PrimaryWeapon)
+                scene.Quality.Text = AssignedEquipment.Quality.ToString();
+                if (AssignedEquipment is PrimaryWeapon p)
                 {
                     scene.wepStats.Visible = true;
+                    scene.Attack.Text = scene.Attack.Text.Replace("xx", p.Damage.ToString());
+                    scene.Speed.Text = scene.Speed.Text.Replace("xx", p.AttackSpeed.ToString());
+                    scene.Range.Text = scene.Range.Text.Replace("xx", p.Range.ToString());
                 }
                 
                 TopUI.AddChild(scene);

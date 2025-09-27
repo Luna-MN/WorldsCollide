@@ -73,7 +73,7 @@ public partial class EquipmentGenerator : Node2D
                 // get quality formula on notion if its annoying to read here
                 var quality = (Level * 50) + (Prestige) + ((float)Math.Pow(1.8, (int)ItemRarity) * 25);
                 // adjust quality to be between -100 and 100
-                var actualQuality = rng.RandiRange((int)Mathf.Min(0, quality-100), (int)quality+100);
+                var actualQuality = rng.RandiRange((int)Mathf.Max(0, quality-100), (int)quality+100);
                 
                 // generate floor item
                 var floorItem = FloorItem.Instantiate<FloorEquipmentDefault>();
@@ -85,6 +85,7 @@ public partial class EquipmentGenerator : Node2D
                     GD.Print(RandomEquipment);
                     var equipment = GenerationEquipment[RandomEquipment];
                     equipment.Rarity = ItemRarity;
+                    equipment.Quality = actualQuality;
                     // the number of enhancments is equal to the first number for the quality
                     var enhancmentsNum = (actualQuality / 1000) + 1;
                     // get all creatable enhancments based on flags and rarity level

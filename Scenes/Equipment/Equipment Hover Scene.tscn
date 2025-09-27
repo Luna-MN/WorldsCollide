@@ -5,24 +5,28 @@
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_gjvxm"]
 [ext_resource type="PackedScene" uid="uid://bhci5kut0hqr1" path="res://StatsPanel.tscn" id="3_2h24l"]
 
-[node name="EquipmentHover" type="Panel" node_paths=PackedStringArray("ItemName", "ItemDescription", "ItemIcon", "wepStats")]
+[node name="EquipmentHover" type="Panel" node_paths=PackedStringArray("ItemName", "ItemDescription", "Quality", "ItemIcon", "wepStats", "Attack", "Speed", "Range")]
 offset_right = 300.0
 offset_bottom = 497.0
 mouse_filter = 2
 theme = ExtResource("1_peqw6")
 script = ExtResource("2_2h24l")
-ItemName = NodePath("Label")
-ItemDescription = NodePath("Label2")
-ItemIcon = NodePath("Sprite2D")
+ItemName = NodePath("Item Name")
+ItemDescription = NodePath("Enhancments")
+Quality = NodePath("Quality")
+ItemIcon = NodePath("Icon")
 TextColors = PackedColorArray(1, 1, 1, 1, 0.25653425, 0.55761296, 0.31080827, 1, 0.19305277, 0.6085371, 0.69346356, 1, 0.57410836, 0.24677557, 0.90400976, 1, 0.7789127, 0.24004218, 0.4294059, 1, 0.74883926, 0.38468656, 0.09962823, 1, 0.92292625, 0.20734173, 0.31199107, 1)
-wepStats = NodePath("HBoxContainer")
+wepStats = NodePath("Wep Stats")
+Attack = NodePath("Wep Stats/Attack")
+Speed = NodePath("Wep Stats/Speed")
+Range = NodePath("Wep Stats/Range")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(146.8, 104)
 scale = Vector2(6, 6)
 texture = ExtResource("2_gjvxm")
 
-[node name="Label" type="RichTextLabel" parent="."]
+[node name="Item Name" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 55.335
 offset_top = 193.0
@@ -32,7 +36,7 @@ text = "Item Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="RichTextLabel" parent="."]
+[node name="Enhancments" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 357.225
@@ -42,7 +46,16 @@ text = "Enhancments"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="GridContainer" parent="."]
+[node name="Quality" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 16.0
+offset_right = 288.0
+offset_bottom = 34.0
+text = "9999"
+horizontal_alignment = 2
+
+[node name="Additive Stats" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 32.145
 offset_top = 279.89
@@ -50,16 +63,16 @@ offset_right = 266.325
 offset_bottom = 356.89
 columns = 3
 
-[node name="Panel3" parent="Label3" instance=ExtResource("3_2h24l")]
+[node name="Panel3" parent="Additive Stats" instance=ExtResource("3_2h24l")]
 layout_mode = 2
 
-[node name="Panel5" parent="Label3" instance=ExtResource("3_2h24l")]
+[node name="Panel5" parent="Additive Stats" instance=ExtResource("3_2h24l")]
 layout_mode = 2
 
-[node name="Panel6" parent="Label3" instance=ExtResource("3_2h24l")]
+[node name="Panel6" parent="Additive Stats" instance=ExtResource("3_2h24l")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Wep Stats" type="HBoxContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(1.19, 3.96)
 layout_mode = 0
@@ -68,23 +81,23 @@ offset_top = 229.805
 offset_right = 290.045
 offset_bottom = 269.8062
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="Attack" type="RichTextLabel" parent="Wep Stats"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Attack
-10"
+xx"
 horizontal_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer"]
+[node name="Speed" type="RichTextLabel" parent="Wep Stats"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Speed
-0.5"
+xx"
 horizontal_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer"]
+[node name="Range" type="RichTextLabel" parent="Wep Stats"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Range
-15"
+xx"
 horizontal_alignment = 1

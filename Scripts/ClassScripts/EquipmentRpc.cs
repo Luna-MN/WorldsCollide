@@ -82,7 +82,7 @@ public partial class EquipmentRpc : Node2D
     }
     
     [Rpc(MultiplayerApi.RpcMode.Authority)]
-    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId, int Rarity)
+    public void AddEquipmentToInv(int[] EnhancmentIndexes, int equipmentId, int ItemId, int Rarity, float quality)
     {
         GD.Print(equipmentId);
         GD.Print(string.Join(", ", EnhancmentIndexes));
@@ -92,6 +92,7 @@ public partial class EquipmentRpc : Node2D
         eq.enhancements = EnhancmentIndexes.Select(x => Enhancments[x]).ToArray();
         eq.ItemId = ItemId;
         eq.Rarity = (EquipmentGenerator.Rarity)Rarity;
+        eq.Quality = quality;
         currentEquipment[currentEquipment.Length - 1] = eq;
         GameManager.player.inventory.AllEquipment = currentEquipment;
     }
