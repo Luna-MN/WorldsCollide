@@ -17,19 +17,26 @@ public partial class Character : CharacterBody2D
     [Export] public MultiplayerSynchronizer PositionSync;
     [Export]
     protected string CharacterName = "Class1";
-    public bool AttackAvailable = true;
-    public Timer attackTimer;
+    public bool Attack1Available = true;
+    public Timer attack1Timer;
+    public bool Attack2Available = true;
+    public Timer attack2Timer;
     [Export]
     protected AnimatedSprite2D WepSprite;
     [Export]
+    protected AnimatedSprite2D OffHandSprite;
+    [Export]
     protected AnimatedSprite2D Sprite;
     [Export] public Node2D ShootPosition;
+    [Export] public Node2D OffHandShootPosition;
     public List<PrimaryWeapon> PrimaryEquipment = new();
+    public List<PrimaryWeapon> SecondaryEquipment = new();
     [ExportGroup("Equipment")]
     [Export]
     public EquipmentSlot[] EquipmentSlots;
     [Export] public Inventory inventory;
     [Export] public Vector2 GunPos;
+    [Export] public Vector2 OffHandPos;
     [ExportSubgroup("Loot Drop")]
     [Export(PropertyHint.GroupEnable)] public bool DropLootOnDeath;
     [Export] public int Prestige = 1;
@@ -156,7 +163,13 @@ public partial class Character : CharacterBody2D
     }
     public void equipAll()
     {
+        if (WepSprite.SpriteFrames != null)
+        {
+            WepSprite.Visible = false;
+        }
+
         PrimaryEquipment.Clear();
+        SecondaryEquipment.Clear();
         var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).Where(x => x != null).ToList();
         if (equipment.Count > 0)
         {
@@ -170,6 +183,7 @@ public partial class Character : CharacterBody2D
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
             WepSprite.Position = GunPos;
+            WepSprite.Visible = true;
             waitTime = (double)PrimaryEquipment[0]?.AttackSpeed;
         }
         else
@@ -177,23 +191,52 @@ public partial class Character : CharacterBody2D
             waitTime = 1;
         }
 
-        if (attackTimer != null)
+        if (attack1Timer != null)
         {
-            attackTimer.QueueFree();
-            attackTimer = null;
+            attack1Timer.QueueFree();
+            attack1Timer = null;
         }
-        attackTimer = new Timer()
+        attack1Timer = new Timer()
         {
             Autostart = false,
             OneShot = true,
             WaitTime = waitTime,
-            Name = "Attack Timer"
+            Name = "Attack 1 Timer"
         };
-        attackTimer.Timeout += () =>
+        attack1Timer.Timeout += () =>
         {
-            AttackAvailable = true;
+            Attack1Available = true;
         };
-        AddChild(attackTimer);
+        AddChild(attack1Timer);
+        
+        if (SecondaryEquipment.Count > 0)
+        {
+            OffHandSprite.SpriteFrames = SecondaryEquipment[0].SpriteFrames;
+            OffHandSprite.Position = OffHandPos;
+            waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
+        }
+        else
+        {
+            waitTime = 1;
+        }
+        
+        if (attack2Timer != null)
+        {
+            attack2Timer.QueueFree();
+            attack2Timer = null;
+        }
+        attack2Timer = new Timer()
+        {
+            Autostart = false,
+            OneShot = true,
+            WaitTime = waitTime,
+            Name = "Attack 2 Timer"
+        };
+        attack2Timer.Timeout += () =>
+        {
+            Attack2Available = true;
+        };
+        AddChild(attack2Timer);
     }
     public void SetSkills()
     {
@@ -314,6 +357,20 @@ public partial class Character : CharacterBody2D
         {
             var RandomEquipment = new Random().Next(0, PrimaryEquipment.Count);
             PrimaryEquipment[RandomEquipment].Left_Click();
+        }
+    }
+
+    protected virtual void RightClick()
+    {
+        if (SecondaryEquipment.Count == 0) return;
+        if (SecondaryEquipment.Count == 1)
+        {
+            SecondaryEquipment[0].Right_Click();
+        }
+        else
+        {
+            var RandomEquipment = new Random().Next(0, SecondaryEquipment.Count);
+            SecondaryEquipment[RandomEquipment].Right_Click();
         }
     }
     #endregion

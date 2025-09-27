@@ -10,6 +10,7 @@ public partial class Player : Character
     #region Input Handling
     public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
     public bool LeftPressed;
+    public bool RightPressed;
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
@@ -105,7 +106,18 @@ public partial class Player : Character
                 }
 
             }
-            
+
+            if (Button.ButtonIndex == MouseButton.Right)
+            {
+                if (Button.Pressed)
+                {
+                    RightPressed = true;
+                }
+                else
+                {
+                    RightPressed = false;
+                }
+            }
         }
     }
 
@@ -113,42 +125,83 @@ public partial class Player : Character
     {
         base._Process(delta);
         if (GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) return;
-        WepSprite.LookAt(inputSync.mousePosition);
-        if (WepSprite.RotationDegrees > 360)
-        {
-            WepSprite.RotationDegrees -= 360;
-        }
-        if (WepSprite.RotationDegrees < 0)
-        {
-            WepSprite.RotationDegrees += 360;       
-        }
-
-        if (WepSprite.RotationDegrees > 90 && WepSprite.RotationDegrees < 270)
-        {
-            WepSprite.FlipV = true;
-            ShootPosition.Position = PrimaryEquipment[0].ShootPos;
-        }
-        else
-        {
-            WepSprite.FlipV = false;       
-            ShootPosition.Position = PrimaryEquipment[0].FlippedPos;       
-        }
-
         if (inputSync.moveInput.X < 0)
         {
             Sprite.FlipH = true;
-            WepSprite.Position = new Vector2(-GunPos.X, GunPos.Y);
         }
         else if (inputSync.moveInput.X > 0)
         {
             Sprite.FlipH = false;
-            WepSprite.Position = GunPos;
+
         }
-        if (AttackAvailable && LeftPressed)
+        if (WepSprite.SpriteFrames != null && PrimaryEquipment.Count > 0)
+        {
+            WepSprite.Position = Sprite.FlipH ? new Vector2(-GunPos.X, GunPos.Y) : GunPos;
+            
+            WepSprite.LookAt(inputSync.mousePosition);
+            if (WepSprite.RotationDegrees > 360)
+            {
+                WepSprite.RotationDegrees -= 360;
+            }
+
+            if (WepSprite.RotationDegrees < 0)
+            {
+                WepSprite.RotationDegrees += 360;
+            }
+
+            if (WepSprite.RotationDegrees > 90 && WepSprite.RotationDegrees < 270)
+            {
+                WepSprite.FlipV = true;
+                ShootPosition.Position = PrimaryEquipment[0].ShootPos;
+            }
+            else
+            {
+                WepSprite.FlipV = false;
+                ShootPosition.Position = PrimaryEquipment[0].FlippedPos;
+            }
+        }
+        if (OffHandSprite.SpriteFrames != null && SecondaryEquipment.Count > 0)
+        {
+            OffHandSprite.Position = Sprite.FlipH ? new Vector2(-OffHandPos.X, OffHandPos.Y) : OffHandPos;
+            
+            OffHandSprite.LookAt(inputSync.mousePosition);
+            if (OffHandSprite.RotationDegrees > 360)
+            {
+                OffHandSprite.RotationDegrees -= 360;
+            }
+
+            if (OffHandSprite.RotationDegrees < 0)
+            {
+                OffHandSprite.RotationDegrees += 360;
+            }
+
+            if (OffHandSprite.RotationDegrees > 90 && OffHandSprite.RotationDegrees < 270)
+            {
+                OffHandSprite.FlipV = true;
+                OffHandShootPosition.Position = SecondaryEquipment[0].ShootPos;
+            }
+            else
+            {
+                OffHandSprite.FlipV = false;
+                OffHandShootPosition.Position = SecondaryEquipment[0].FlippedPos;
+            }
+        }
+        
+        
+        
+        
+        if (Attack1Available && LeftPressed)
         {
             LeftClick();
-            AttackAvailable = false;
-            attackTimer.Start();
+            Attack1Available = false;
+            attack1Timer.Start();
+        }
+
+        if (Attack2Available && RightPressed)
+        {
+            RightClick();
+            Attack2Available = false;
+            attack2Timer.Start();
         }
     }
 

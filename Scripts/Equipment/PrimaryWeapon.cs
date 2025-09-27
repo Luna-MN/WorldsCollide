@@ -14,10 +14,16 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public Vector2 ShootPos;
     [Export] public Vector2 FlippedPos;
     [Export] public SpriteFrames SpriteFrames;
-    
     public override void OnEquip(Character character)
     {
-        character.PrimaryEquipment.Add(this);
+        if ((character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags & Flags.AbilityFlags.MainHand) != 0)
+        {
+            character.PrimaryEquipment.Add(this);
+        }
+        else if((character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags & Flags.AbilityFlags.OffHand) != 0)
+        {
+            character.SecondaryEquipment.Add(this);
+        }
         base.OnEquip(character);
     }
 
@@ -28,7 +34,14 @@ public partial class PrimaryWeapon : BaseEquipment
 
     public void Right_Click()
     {
-        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID);
+        if (!HasRightClick)
+        {
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID, 1);
+        }
+        else
+        {
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID);
+        }
     }
     
 }

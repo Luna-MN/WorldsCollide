@@ -146,9 +146,17 @@ public partial class EquipmentUI : Panel
 
     public void OnEquipSlotEnter(Node2D body)
     {
-        if (body.GetParent() is EquipmentSlotUI)
+        if (body.GetParent() is EquipmentSlotUI slot)
         {
-            var slot =  body.GetParent<EquipmentSlotUI>();
+            if (selectedSlot != null && selectedSlot != slot)
+            {
+                GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
+                if (selectedSlot.equip == this)
+                {
+                    selectedSlot.equip = null;
+                }
+                selectedSlot = null;
+            }
             if ((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0)
             {
                 selectedSlot = body.GetParent<EquipmentSlotUI>();

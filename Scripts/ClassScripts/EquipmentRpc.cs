@@ -110,7 +110,26 @@ public partial class EquipmentRpc : Node2D
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
-    
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+    public void Gun_LeftClick(int id, int rightClick)
+    {
+        var Character = ServerManager.NodeDictionary[id];
+        var mousePos = Character.inputSync.mousePosition;
+        var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
+        bullet.MoveDirection = mousePos - Character.GlobalPosition;
+        if (rightClick == 1)
+        {
+            bullet.GlobalPosition = Character.OffHandShootPosition.GlobalPosition;
+        }
+        else
+        {
+            bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
+        }
+        bullet.Id = id;
+        bullet.Name = id + "_Bullet";
+        bullet.obtainStats(Character);
+        ServerManager.spawner.AddChild(bullet, true);
+    }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void SlashingSword_LeftClick(int id)
     {

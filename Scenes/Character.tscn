@@ -68,11 +68,12 @@ size = Vector2(30.7692, 32.6923)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vdqda"]
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync", "WepSprite", "Sprite", "ShootPosition")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync", "WepSprite", "OffHandSprite", "Sprite", "ShootPosition")]
 script = ExtResource("1_0y7nr")
 FloatingText = ExtResource("2_677pu")
 PositionSync = NodePath("CharacterSync")
 WepSprite = NodePath("GunPos")
+OffHandSprite = NodePath("OffHandPos")
 Sprite = NodePath("AnimatedSprite2D")
 ShootPosition = NodePath("GunPos/ShootPos")
 GunPos = Vector2(-4, 9)
@@ -95,3 +96,8 @@ shape = SubResource("RectangleShape2D_onrkg")
 sprite_frames = SubResource("SpriteFrames_vdqda")
 
 [node name="ShootPos" type="Node2D" parent="GunPos"]
+
+[node name="OffHandPos" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vdqda")
+
+[node name="ShootPos" type="Node2D" parent="OffHandPos"]

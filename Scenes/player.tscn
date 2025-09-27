@@ -135,12 +135,14 @@ properties/6/path = NodePath("AnimatedSprite2D:flip_h")
 properties/6/spawn = true
 properties/6/replication_mode = 2
 
-[node name="Player" node_paths=PackedStringArray("inputSync") instance=ExtResource("1_v0iea")]
+[node name="Player" node_paths=PackedStringArray("inputSync", "OffHandShootPosition") instance=ExtResource("1_v0iea")]
 script = ExtResource("1_6t5aa")
 inputSync = NodePath("InputSync")
+OffHandShootPosition = NodePath("OffHandPos/ShootPos")
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_qqcod"), SubResource("Resource_4b18b"), SubResource("Resource_peemv"), SubResource("Resource_omicx"), SubResource("Resource_v7dgu"), SubResource("Resource_8au8k"), SubResource("Resource_p3cti")])
 inventory = SubResource("Resource_h4iuc")
 GunPos = Vector2(-9, 9)
+OffHandPos = Vector2(20, 9)
 skills = Array[Object]([null, null, null, null, null, null])
 UltSkill = SubResource("Resource_ukyrk")
 characterStats = SubResource("Resource_f1ek2")
