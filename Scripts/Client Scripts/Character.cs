@@ -171,7 +171,10 @@ public partial class Character : CharacterBody2D
         {
             WepSprite.Visible = false;
         }
-
+        if (OffHandSprite.SpriteFrames != null)
+        {
+            OffHandSprite.Visible = false;       
+        }
         PrimaryEquipment.Clear();
         SecondaryEquipment.Clear();
         var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).Where(x => x != null).ToList();
@@ -213,10 +216,15 @@ public partial class Character : CharacterBody2D
         };
         AddChild(attack1Timer);
         
-        if (SecondaryEquipment.Count > 0)
+        if (SecondaryEquipment.Count > 0 && !SecondaryEquipment[0].TwoHandedMode)
         {
             OffHandSprite.SpriteFrames = SecondaryEquipment[0].SpriteFrames;
             OffHandSprite.Position = OffHandPos;
+            OffHandSprite.Visible = true;
+            waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
+        }
+        else if (SecondaryEquipment.Count > 0 && SecondaryEquipment[0].TwoHandedMode)
+        {
             waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
         }
         if (waitTime <= 0)

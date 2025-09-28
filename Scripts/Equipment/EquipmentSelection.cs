@@ -39,6 +39,16 @@ public partial class EquipmentSelection : Panel
                     obj.Icon.Texture = slot.EquippedEquipment.Icon;
                 }
                 obj.selectedSlot = EquipmentSlots[GameManager.player.EquipmentSlots.ToList().IndexOf(slot)];
+                obj.selectedSlot.equip = obj;
+                if (slot.EquippedEquipment is PrimaryWeapon { TwoHandedMode: true })
+                {
+                    var otherIndex = GameManager.player.EquipmentSlots.ToList().IndexOf(slot) == 0 ? 1 : 0;
+                    EquipmentSlots[otherIndex].Blocked = true;
+                    obj.dummy = obj.DummyScene.Instantiate<DummySlot>();
+                    obj.dummy.Icon.Texture = obj.Icon.Texture;
+                    AddChild(obj.dummy);
+                    obj.dummy.GlobalPosition = EquipmentSlots[otherIndex].GlobalPosition;
+                }
                 AddChild(obj);
                 obj.GlobalPosition = obj.selectedSlot.GlobalPosition;
             }

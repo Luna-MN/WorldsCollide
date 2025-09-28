@@ -74,81 +74,177 @@ public partial class EquipmentUI : Panel
     {
         if (JustCreated)
         {
-            return; 
+            return;
         }
+
         if (@event is InputEventMouseButton MB)
         {
-            if (!MB.Pressed && mouseClick)
+            var equippable = true;
+            if (AssignedEquipment is PrimaryWeapon p)
             {
-                mouseClick = false;
-                TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
-                // Add equipment to slot
-                if (selectedSlot != null)
+                if (MB.ButtonIndex == MouseButton.Left && !MB.Pressed && mouseClick)
                 {
-                    if (selectedSlot.equip != null && selectedSlot.equip != this)
+                    mouseClick = false;
+                    TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
+                    // this is two handed handling, so you can't equip a two handed wep if there is already we other wep attached
+                    if (TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot) == 0)
                     {
-                        var equipThere = selectedSlot.equip;
-                        equipThere.JustCreated = true;
-                        equipThere.timer.Start();
-                        if (equipThere.dummy != null)
+                        if (!p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand))
                         {
-                            equipThere.dummy.QueueFree();
+                            if (TopUI.EquipmentSlots[1].equip != null)
+                            {
+                                equippable = false;
+                            }
                         }
-                        var invent = GameManager.player.inventory.AllEquipment.ToList();
-                        invent.Add(AssignedEquipment);
-                        GameManager.player.inventory.AllEquipment = invent.ToArray();
-                        grid.CallDeferred("add_child", equipThere);
-                        GetParent().RemoveChild(equipThere);
                     }
-                    //one handed wep
-                    selectedSlot.equip = this;
-                    GlobalPosition = selectedSlot.GlobalPosition;
-                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = AssignedEquipment;
-                    List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
-                    inv.Remove(AssignedEquipment);
-                    GameManager.player.inventory.AllEquipment = inv.ToArray();
-                    // If assigning to main hand then we check if the wep is 2 handed, if so then we add a dummy panel to the offhand slot and block it
-                    if (TopUI.EquipmentSlots.ToList().FindIndex(x => x == selectedSlot) == 0 && (AssignedEquipment.equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
+                    else if (TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot) == 1)
                     {
-                        TopUI.EquipmentSlots[1].Blocked = true;
-                        dummy = DummyScene.Instantiate<DummySlot>();
-                        dummy.Icon.Texture = Icon.Texture;
-                        TopUI.AddChild(dummy);
-                        dummy.GlobalPosition = TopUI.EquipmentSlots[1].GlobalPosition;
-                    }
-                }
-                // Remove from equipment slot
-                else
-                {
-                    List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
-                    List<int> equipIds = inv.Select(x => x.ItemId).ToList();
-                    
-                    // it is finding other peices of equipment with the same base resource, might need to add an ID system
-                    if (!equipIds.Contains(AssignedEquipment.ItemId))
-                    {
-                        if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
+                        if (!p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
                         {
-                            GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment).EquippedEquipment = null;
+                            if (TopUI.EquipmentSlots[0].equip != null)
+                            {
+                                equippable = false;
+                            }
+                        }
+                    }
+
+                    // Add equipment to slot
+                    if (selectedSlot != null && equippable)
+                    {
+                        // remove from old
+                        if (selectedSlot.equip != null && selectedSlot.equip != this)
+                        {
+                            var equipThere = selectedSlot.equip;
+                            equipThere.JustCreated = true;
+                            equipThere.timer.Start();
+                            if (equipThere.dummy != null)
+                            {
+                                equipThere.dummy.QueueFree();
+                            }
+
+                            var invent = GameManager.player.inventory.AllEquipment.ToList();
+                            invent.Add(AssignedEquipment);
+                            GameManager.player.inventory.AllEquipment = invent.ToArray();
+                            grid.CallDeferred("add_child", equipThere);
+                            GetParent().RemoveChild(equipThere);
                         }
 
-                        inv.Add(AssignedEquipment);
+                        //one handed wep
+                        selectedSlot.equip = this;
+                        GlobalPosition = selectedSlot.GlobalPosition;
+                        GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)]
+                            .EquippedEquipment = AssignedEquipment;
+                        List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                        inv.Remove(AssignedEquipment);
                         GameManager.player.inventory.AllEquipment = inv.ToArray();
+                        // I need to add an if statement that says if its a flexible wep and the other slot already has something in it make it one handed mode
+                        // If assigning to main hand then we check if the wep is 2 handed, if so then we add a dummy panel to the offhand slot and block it
+                        var thisIndex = TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot);
+                        if ((thisIndex == 0 || thisIndex == 1) &&
+                            (AssignedEquipment.equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
+                        {
+                            int otherIndex = thisIndex == 0 ? 1 : 0;
+                            if (TopUI.EquipmentSlots[otherIndex].equip == null)
+                            {
+                                ((PrimaryWeapon)AssignedEquipment).TwoHandedMode = true;
+                                TopUI.EquipmentSlots[otherIndex].Blocked = true;
+                                dummy = DummyScene.Instantiate<DummySlot>();
+                                dummy.Icon.Texture = Icon.Texture;
+                                TopUI.AddChild(dummy);
+                                dummy.GlobalPosition = TopUI.EquipmentSlots[otherIndex].GlobalPosition;
+                            }
+                        }
                     }
-                    grid.CallDeferred("add_child", this);
-                    GetParent().RemoveChild(this);
+                    // Remove from equipment slot
+                    else
+                    {
+                        List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                        List<int> equipIds = inv.Select(x => x.ItemId).ToList();
+
+                        // it is finding other peices of equipment with the same base resource, might need to add an ID system
+                        if (!equipIds.Contains(AssignedEquipment.ItemId))
+                        {
+                            if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment)
+                                .Any(x => x == AssignedEquipment))
+                            {
+                                GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment)
+                                    .EquippedEquipment = null;
+                            }
+
+                            inv.Add(AssignedEquipment);
+                            GameManager.player.inventory.AllEquipment = inv.ToArray();
+                        }
+
+                        grid.CallDeferred("add_child", this);
+                        GetParent().RemoveChild(this);
+                    }
                 }
-            }
-            if (MB.Pressed && mouseIn)
-            {
-                TopUI.CallDeferred("add_child", this);
-                if (scene != null)
+
+                if (MB.ButtonIndex == MouseButton.Left && MB.Pressed && mouseIn)
                 {
-                    scene.QueueFree();
-                    scene = null;
+                    TopUI.CallDeferred("add_child", this);
+                    if (scene != null)
+                    {
+                        scene.QueueFree();
+                        scene = null;
+                    }
+
+                    GetParent().RemoveChild(this);
+                    TopUI.EquipmentSlots
+                        .Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)]
+                            .equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList()
+                        .ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
+                    mouseClick = true;
                 }
-                GetParent().RemoveChild(this);
-                TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
-                mouseClick = true;
+
+                if (MB.ButtonIndex == MouseButton.Right && MB.Pressed)
+                {
+                    // if its assigned to a slot
+                    if (selectedSlot != null && !mouseClick)
+                    {
+                        // if its a two handed wep
+                        var thisIndex = TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot);
+                        if ((!AssignedEquipment.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand) &&
+                             thisIndex == 0) ||
+                            (!AssignedEquipment.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand) && thisIndex == 1))
+                        {
+                            return;
+                        }
+
+                        if ((thisIndex == 0 || thisIndex == 1) &&
+                            (AssignedEquipment.equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
+                        {
+                            var wep = AssignedEquipment as PrimaryWeapon;
+                            // check if there a dummy panel
+                            if (dummy != null)
+                            {
+
+                                // remove dummy and set to one handed
+                                dummy.QueueFree();
+                                dummy = null;
+                                TopUI.EquipmentSlots[1].Blocked = false;
+                                wep.TwoHandedMode = false;
+                            }
+                            // if there isn't a dummy panel
+                            else
+                            {
+                                // check if there is anything in the other slot
+                                int otherIndex = thisIndex == 0 ? 1 : 0;
+                                // check if other index slot is empty
+                                if (TopUI.EquipmentSlots[otherIndex].equip == null)
+                                {
+                                    // if it is empty then set to two handed mode
+                                    wep.TwoHandedMode = true;
+                                    TopUI.EquipmentSlots[otherIndex].Blocked = true;
+                                    dummy = DummyScene.Instantiate<DummySlot>();
+                                    dummy.Icon.Texture = Icon.Texture;
+                                    TopUI.AddChild(dummy);
+                                    dummy.GlobalPosition = TopUI.EquipmentSlots[otherIndex].GlobalPosition;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
