@@ -17,7 +17,7 @@ public partial class Flags : Node
         Gloves       = 1L << 8,
         Legs       = 1L << 9,
         Belt       = 1L << 10,
-        
+        TwoHanded   = 1L << 11,
     }
     [Flags]
     public enum PassiveType : long

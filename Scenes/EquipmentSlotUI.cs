@@ -7,6 +7,7 @@ public partial class EquipmentSlotUI : Panel
     public Sprite2D IconSprite;
 
     public EquipmentUI equip;
+    public bool Blocked;
     [Export]
     public Texture2D Icon
     {

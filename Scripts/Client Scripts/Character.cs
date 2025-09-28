@@ -163,6 +163,10 @@ public partial class Character : CharacterBody2D
     }
     public void equipAll()
     {
+        OnHitEquip = null;
+        OnKillEquip = null;
+        OnDeathEquip = null;
+        OnStatCalcEquip = null;
         if (WepSprite.SpriteFrames != null)
         {
             WepSprite.Visible = false;
@@ -178,7 +182,7 @@ public partial class Character : CharacterBody2D
                 equip.OnEquip(this);
             }
         }
-        double waitTime;
+        double waitTime = 1;
         if (PrimaryEquipment.Count > 0)
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
@@ -186,7 +190,7 @@ public partial class Character : CharacterBody2D
             WepSprite.Visible = true;
             waitTime = (double)PrimaryEquipment[0]?.AttackSpeed;
         }
-        else
+        if (waitTime <= 0)
         {
             waitTime = 1;
         }
@@ -215,7 +219,7 @@ public partial class Character : CharacterBody2D
             OffHandSprite.Position = OffHandPos;
             waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
         }
-        else
+        if (waitTime <= 0)
         {
             waitTime = 1;
         }

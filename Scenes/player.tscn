@@ -18,7 +18,7 @@
 [sub_resource type="Resource" id="Resource_fd4e3"]
 script = ExtResource("4_8erm5")
 EquippedEquipment = ExtResource("3_gymyn")
-equipmentFlags = 32
+equipmentFlags = 2080
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
 [sub_resource type="Resource" id="Resource_qqcod"]

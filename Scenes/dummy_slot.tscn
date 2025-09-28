@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcedvr4vxb7rq"]
+
+[ext_resource type="Script" uid="uid://cu8psvqg2vxae" path="res://DummySlot.cs" id="1_0y4ge"]
+
+[node name="DummySlot" type="Panel" node_paths=PackedStringArray("Icon")]
+custom_minimum_size = Vector2(90, 90)
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+pivot_offset = Vector2(45, 45)
+mouse_filter = 2
+script = ExtResource("1_0y4ge")
+Icon = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(45, 45)
+scale = Vector2(2.781, 2.781)
