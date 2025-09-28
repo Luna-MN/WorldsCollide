@@ -45,6 +45,7 @@ offset_right = -24.0
 offset_bottom = -14.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 text = "Apply"
 
 [node name="GridContainer" type="ScrollContainer" parent="."]
@@ -57,9 +58,11 @@ offset_top = 23.0
 offset_right = -24.0
 offset_bottom = 438.0
 grow_horizontal = 0
+mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="GridContainer"]
 layout_mode = 2
+mouse_filter = 2
 columns = 3
 
 [node name="Slot0" parent="." instance=ExtResource("3_56myr")]

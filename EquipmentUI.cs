@@ -104,7 +104,6 @@ public partial class EquipmentUI : Panel
                     selectedSlot.equip = this;
                     GlobalPosition = selectedSlot.GlobalPosition;
                     GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = AssignedEquipment;
-                    GD.Print("Equipment Assigned");
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
                     inv.Remove(AssignedEquipment);
                     GameManager.player.inventory.AllEquipment = inv.ToArray();
@@ -166,17 +165,17 @@ public partial class EquipmentUI : Panel
     {
         if (body.GetParent() is EquipmentSlotUI slot && !JustCreated)
         {
-            if (selectedSlot != null && selectedSlot != slot)
-            {
-                GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
-                if (selectedSlot.equip == this)
-                {
-                    selectedSlot.equip = null;
-                }
-                selectedSlot = null;
-            }
             if ((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0 && !slot.Blocked)
             {
+                if (selectedSlot != null && selectedSlot != slot)
+                {
+                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
+                    if (selectedSlot.equip == this)
+                    {
+                        selectedSlot.equip = null;
+                    }
+                    selectedSlot = null;
+                }
                 selectedSlot = body.GetParent<EquipmentSlotUI>();
                 GD.Print("Selected Slot = " + TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot));
             }
