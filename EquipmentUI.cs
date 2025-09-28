@@ -82,7 +82,7 @@ public partial class EquipmentUI : Panel
             var equippable = true;
             if (AssignedEquipment is PrimaryWeapon p)
             {
-                if (MB.ButtonIndex == MouseButton.Left && !MB.Pressed && mouseClick)
+                if (MB.ButtonIndex == MouseButton.Left && !MB.Pressed && mouseClick && mouseIn)
                 {
                     mouseClick = false;
                     TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
@@ -140,8 +140,7 @@ public partial class EquipmentUI : Panel
                         // I need to add an if statement that says if its a flexible wep and the other slot already has something in it make it one handed mode
                         // If assigning to main hand then we check if the wep is 2 handed, if so then we add a dummy panel to the offhand slot and block it
                         var thisIndex = TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot);
-                        if ((thisIndex == 0 || thisIndex == 1) &&
-                            (AssignedEquipment.equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
+                        if ((thisIndex == 0 || thisIndex == 1) && (AssignedEquipment.equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
                         {
                             int otherIndex = thisIndex == 0 ? 1 : 0;
                             if (TopUI.EquipmentSlots[otherIndex].equip == null)
@@ -151,7 +150,9 @@ public partial class EquipmentUI : Panel
                                 dummy = DummyScene.Instantiate<DummySlot>();
                                 dummy.Icon.Texture = Icon.Texture;
                                 TopUI.AddChild(dummy);
-                                dummy.GlobalPosition = TopUI.EquipmentSlots[otherIndex].GlobalPosition;
+                                dummy.GlobalPosition = GlobalPosition;
+                                var dTween = dummy.CreateTween();
+                                dTween.TweenProperty(dummy, "global_position", TopUI.EquipmentSlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
                             }
                         }
                     }
@@ -164,11 +165,9 @@ public partial class EquipmentUI : Panel
                         // it is finding other peices of equipment with the same base resource, might need to add an ID system
                         if (!equipIds.Contains(AssignedEquipment.ItemId))
                         {
-                            if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment)
-                                .Any(x => x == AssignedEquipment))
+                            if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
                             {
-                                GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment)
-                                    .EquippedEquipment = null;
+                                GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment).EquippedEquipment = null;
                             }
 
                             inv.Add(AssignedEquipment);
@@ -190,10 +189,7 @@ public partial class EquipmentUI : Panel
                     }
 
                     GetParent().RemoveChild(this);
-                    TopUI.EquipmentSlots
-                        .Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)]
-                            .equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList()
-                        .ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
+                    TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                     mouseClick = true;
                 }
 
@@ -220,10 +216,15 @@ public partial class EquipmentUI : Panel
                             {
 
                                 // remove dummy and set to one handed
-                                dummy.QueueFree();
-                                dummy = null;
-                                TopUI.EquipmentSlots[1].Blocked = false;
-                                wep.TwoHandedMode = false;
+                                var dTween = dummy.CreateTween();
+                                dTween.TweenProperty(dummy, "global_position", GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
+                                dTween.Finished += () =>
+                                {
+                                    dummy.QueueFree();
+                                    dummy = null;
+                                    TopUI.EquipmentSlots[1].Blocked = false;
+                                    wep.TwoHandedMode = false;
+                                };
                             }
                             // if there isn't a dummy panel
                             else
@@ -239,7 +240,9 @@ public partial class EquipmentUI : Panel
                                     dummy = DummyScene.Instantiate<DummySlot>();
                                     dummy.Icon.Texture = Icon.Texture;
                                     TopUI.AddChild(dummy);
-                                    dummy.GlobalPosition = TopUI.EquipmentSlots[otherIndex].GlobalPosition;
+                                    dummy.GlobalPosition = GlobalPosition;
+                                    var dTween = dummy.CreateTween();
+                                    dTween.TweenProperty(dummy, "global_position", TopUI.EquipmentSlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
                                 }
                             }
                         }
