@@ -16,7 +16,12 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public SpriteFrames SpriteFrames;
     public override void OnEquip(Character character)
     {
-        if ((character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags & Flags.AbilityFlags.MainHand) != 0)
+        if ((character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
+        {
+            character.PrimaryEquipment.Add(this);
+            character.SecondaryEquipment.Add(this);
+        }
+        else if ((character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags & Flags.AbilityFlags.MainHand) != 0)
         {
             character.PrimaryEquipment.Add(this);
         }
