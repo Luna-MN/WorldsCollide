@@ -13,7 +13,7 @@ public partial class BaseEquipment : Resource
     [ExportGroup("Enhancements")]
     [Export(PropertyHint.ResourceType)]
     public BaseEnhancement[] enhancements;
-    
+    [Export] public Vector2 Scale = new Vector2(0.875f, 0.875f);
     [Export]
     public Texture2D Icon;
     public float Quality;

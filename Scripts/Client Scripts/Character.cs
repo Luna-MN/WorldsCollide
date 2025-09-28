@@ -191,6 +191,7 @@ public partial class Character : CharacterBody2D
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
             WepSprite.Position = GunPos;
             WepSprite.Visible = true;
+            WepSprite.Scale = PrimaryEquipment[0].Scale;
             waitTime = (double)PrimaryEquipment[0]?.AttackSpeed;
         }
         if (waitTime <= 0)
@@ -221,6 +222,7 @@ public partial class Character : CharacterBody2D
             OffHandSprite.SpriteFrames = SecondaryEquipment[0].SpriteFrames;
             OffHandSprite.Position = OffHandPos;
             OffHandSprite.Visible = true;
+            OffHandSprite.Scale = SecondaryEquipment[0].Scale;
             waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
         }
         else if (SecondaryEquipment.Count > 0 && SecondaryEquipment[0].TwoHandedMode)
