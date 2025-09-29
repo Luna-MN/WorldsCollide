@@ -17,17 +17,17 @@ public partial class PrimaryWeapon : BaseEquipment
     public bool TwoHandedMode;
     public override void OnEquip(Character character)
     {
-        if (equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded))
+        if (equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded) && TwoHandedMode)
         {
             GD.Print("Is Two Handed");
             character.PrimaryEquipment.Add(this);
             character.SecondaryEquipment.Add(this);
         }
-        else if (equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand))
+        else if (equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand) && character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand))
         {
             character.PrimaryEquipment.Add(this);
         }
-        else if(equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
+        else if(equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand) && character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment == this).equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
         {
             character.SecondaryEquipment.Add(this);
         }
