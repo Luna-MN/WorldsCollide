@@ -90,6 +90,7 @@ public partial class EquipmentSelection : Panel
             }
 
             GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", GameManager.LocalID,equippedIds.ToArray() ,EqippedIds, invIds.ToArray());
+            GameManager.UIOpen = false;
             QueueFree();
         };
     }

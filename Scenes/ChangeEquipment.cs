@@ -14,6 +14,7 @@ public partial class ChangeEquipment : Button
     private void onButtonPressed()
     {
         if (EquipmentPanel != null) return;
+        GameManager.UIOpen = true;
         EquipmentPanel = EquipmentUI.Instantiate<EquipmentSelection>();
         EquipmentPanel.openButton = this;
         GetParent().AddChild(EquipmentPanel);

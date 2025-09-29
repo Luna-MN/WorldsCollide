@@ -11,4 +11,5 @@ public static class GameManager
     public static EquipmentRpc EquipmentRpcs;
     public static Camera2D camera;
     public static Player player;
+    public static bool UIOpen;
 }

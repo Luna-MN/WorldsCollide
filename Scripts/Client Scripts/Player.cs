@@ -123,6 +123,10 @@ public partial class Player : Character
 
     public override void _Process(double delta)
     {
+        if (GameManager.UIOpen)
+        {
+            return;
+        }
         base._Process(delta);
         if (GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) return;
         if (inputSync.moveInput.X < 0)
@@ -190,18 +194,18 @@ public partial class Player : Character
         
         
         
-        if (Attack1Available && LeftPressed)
+        if (Attack1Available && LeftPressed && PrimaryEquipment.Count > 0)
         {
             LeftClick();
-            Attack1Available = false;
-            attack1Timer.Start();
+            Attack1Available = PrimaryEquipment[0].Reset(PrimaryEquipment[0].LeftType);
+            attack1Timer?.Start();
         }
 
-        if (Attack2Available && RightPressed)
+        if (Attack2Available && RightPressed && SecondaryEquipment.Count > 0)
         {
             RightClick();
-            Attack2Available = false;
-            attack2Timer.Start();
+            Attack2Available = SecondaryEquipment[0].Reset(SecondaryEquipment[0].RightType);
+            attack2Timer?.Start();
         }
     }
 

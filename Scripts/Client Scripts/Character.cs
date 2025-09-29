@@ -191,18 +191,12 @@ public partial class Character : CharacterBody2D
                 equip.OnEquip(this);
             }
         }
-        double waitTime = 1;
         if (PrimaryEquipment.Count > 0)
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
             WepSprite.Position = GunPos;
             WepSprite.Visible = true;
             WepSprite.Scale = PrimaryEquipment[0].Scale;
-            waitTime = (double)PrimaryEquipment[0]?.AttackSpeed;
-        }
-        if (waitTime <= 0)
-        {
-            waitTime = 1;
         }
 
         if (attack1Timer != null)
@@ -210,34 +204,23 @@ public partial class Character : CharacterBody2D
             attack1Timer.QueueFree();
             attack1Timer = null;
         }
-        attack1Timer = new Timer()
+
+        if (PrimaryEquipment.Count > 0)
         {
-            Autostart = false,
-            OneShot = true,
-            WaitTime = waitTime,
-            Name = "Attack 1 Timer"
-        };
-        attack1Timer.Timeout += () =>
-        {
-            Attack1Available = true;
-        };
-        AddChild(attack1Timer);
-        
+            attack1Timer = PrimaryEquipment[0]?.CreateTimer(PrimaryEquipment[0].LeftType);
+            if (attack1Timer != null)
+            {
+                attack1Timer.Timeout += () => { Attack1Available = true; };
+                AddChild(attack1Timer);
+            }
+        }
+
         if (SecondaryEquipment.Count > 0 && !SecondaryEquipment[0].TwoHandedMode)
         {
             OffHandSprite.SpriteFrames = SecondaryEquipment[0].SpriteFrames;
             OffHandSprite.Position = OffHandPos;
             OffHandSprite.Visible = true;
             OffHandSprite.Scale = SecondaryEquipment[0].Scale;
-            waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
-        }
-        else if (SecondaryEquipment.Count > 0 && SecondaryEquipment[0].TwoHandedMode)
-        {
-            waitTime = (double)SecondaryEquipment[0]?.AttackSpeed;
-        }
-        if (waitTime <= 0)
-        {
-            waitTime = 1;
         }
         
         if (attack2Timer != null)
@@ -245,18 +228,16 @@ public partial class Character : CharacterBody2D
             attack2Timer.QueueFree();
             attack2Timer = null;
         }
-        attack2Timer = new Timer()
+
+        if (SecondaryEquipment.Count > 0)
         {
-            Autostart = false,
-            OneShot = true,
-            WaitTime = waitTime,
-            Name = "Attack 2 Timer"
-        };
-        attack2Timer.Timeout += () =>
-        {
-            Attack2Available = true;
-        };
-        AddChild(attack2Timer);
+            attack2Timer = SecondaryEquipment[0]?.CreateTimer(SecondaryEquipment[0].RightType);
+            if (attack2Timer != null)
+            {
+                attack2Timer.Timeout += () => { Attack2Available = true; };
+                AddChild(attack2Timer);
+            }
+        }
     }
     public void SetSkills()
     {

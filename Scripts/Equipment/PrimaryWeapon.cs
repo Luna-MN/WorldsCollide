@@ -5,6 +5,14 @@ using System.Linq;
 [GlobalClass]
 public partial class PrimaryWeapon : BaseEquipment
 {
+    public enum WepeonType
+    {
+        None,
+        Projectile,
+        Slash,
+        Beam
+        // Add Others Here
+    }
     [Export] public string WeaponName;
     [Export] public string Description;
     [Export] public bool HasRightClick;
@@ -14,6 +22,8 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public Vector2 ShootPos;
     [Export] public Vector2 FlippedPos;
     [Export] public SpriteFrames SpriteFrames;
+    [Export] public WepeonType LeftType;
+    [Export] public WepeonType RightType;
     public bool TwoHandedMode;
     public override void OnEquip(Character character)
     {
@@ -50,5 +60,34 @@ public partial class PrimaryWeapon : BaseEquipment
             GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID);
         }
     }
-    
+
+    public bool Reset(WepeonType type)
+    {
+        switch (type)
+        {
+            case WepeonType.Projectile:
+            case WepeonType.Slash:
+                return false;
+            case WepeonType.Beam:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public Timer CreateTimer(WepeonType type)
+    {
+        if (type == WepeonType.Beam)
+        {
+            return null;
+        }
+
+        return new Timer()
+        {
+            Autostart = false,
+            OneShot = true,
+            WaitTime = AttackSpeed,
+            Name = "Attack Timer"
+        };
+    }
 }
