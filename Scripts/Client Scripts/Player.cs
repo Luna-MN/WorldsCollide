@@ -98,32 +98,23 @@ public partial class Player : Character
             {
                 if (Button.Pressed)
                 {
-                    LeftEvent = true;
-                    // Make Charge Attacks work
                     if (PrimaryEquipment.Count > 0)
                     {
-                        if (PrimaryEquipment[0].StartTimerOnClick(PrimaryEquipment[0].LeftType))
+                        var attack = PrimaryEquipment.First().Attack(this, true, PrimaryEquipment.First().LeftType, PrimaryWeapon.EventAction.click);
+                        if (attack)
                         {
-                            LeftEvent = false;
-                            Attack1Available = false;
-                            attack1Timer?.Start();
+                            LeftClick();
                         }
                     }
                 }
                 else
                 {
-                    LeftEvent = false;
-                    // Make Charge Attacks work
                     if (PrimaryEquipment.Count > 0)
                     {
-                        if (PrimaryEquipment[0].StartTimerOnClick(PrimaryEquipment[0].LeftType))
+                        var attack = PrimaryEquipment.First().Attack(this, true, PrimaryEquipment.First().LeftType, PrimaryWeapon.EventAction.unclick);
+                        if (attack)
                         {
-                            if (attack1Timer.IsStopped())
-                            {
-                                LeftEvent = true;
-                            }
-                            Attack1Available = true;
-                            attack1Timer?.Stop();
+                            LeftClick();
                         }
                     }
                 }
@@ -134,32 +125,24 @@ public partial class Player : Character
             {
                 if (Button.Pressed)
                 {
-                    RightEvent = true;
-                    // Make Charge Attacks work
                     if (SecondaryEquipment.Count > 0)
                     {
-                        if (SecondaryEquipment[0].StartTimerOnClick(SecondaryEquipment[0].LeftType))
+                        var attack = SecondaryEquipment.First().Attack(this, false, SecondaryEquipment.First().RightType, PrimaryWeapon.EventAction.click);
+                        if (attack)
                         {
-                            RightEvent = false;
-                            Attack2Available = false;
-                            attack2Timer?.Start();
+                            RightClick();
                         }
                     }
+
                 }
                 else
                 {
-                    RightEvent = false;
-                    // Make Charge Attacks work
                     if (SecondaryEquipment.Count > 0)
                     {
-                        if (SecondaryEquipment[0].StartTimerOnClick(SecondaryEquipment[0].LeftType))
+                        var attack = SecondaryEquipment.First().Attack(this, false, SecondaryEquipment.First().RightType, PrimaryWeapon.EventAction.unclick);
+                        if (attack)
                         {
-                            if (attack2Timer.IsStopped())
-                            {
-                                RightEvent = true;
-                            }
-                            Attack2Available = true;
-                            attack2Timer?.Stop();
+                            RightClick();
                         }
                     }
                 }
@@ -242,25 +225,19 @@ public partial class Player : Character
         
         if (Attack1Available && LeftEvent && PrimaryEquipment.Count > 0)
         {
-            LeftClick();
-            // If its a beam we don't want to reset it on click, other weps can be added to this as well
-            Attack1Available = PrimaryEquipment[0].Reset(PrimaryEquipment[0].LeftType);
-            // If its a charge wep we don't want to reset the timer when we click
-            if (PrimaryEquipment[0].StartTimerOnReset(PrimaryEquipment[0].LeftType))
+            var attack = PrimaryEquipment.First().Attack(this, true, PrimaryEquipment.First().LeftType, PrimaryWeapon.EventAction.fire);
+            if (attack)
             {
-                attack1Timer?.Start();
+                LeftClick();
             }
         }
 
         if (Attack2Available && RightEvent && SecondaryEquipment.Count > 0)
         {
-            RightClick();
-            // If its a beam we don't want to reset it on click, other weps can be added to this as well
-            Attack2Available = SecondaryEquipment[0].Reset(SecondaryEquipment[0].RightType);
-            // If its a charge wep we don't want to reset the timer when we click
-            if (SecondaryEquipment[0].StartTimerOnReset(SecondaryEquipment[0].RightType))
+            var attack = SecondaryEquipment.First().Attack(this, false, SecondaryEquipment.First().RightType, PrimaryWeapon.EventAction.fire);
+            if (attack)
             {
-                attack2Timer?.Start();
+                RightClick();
             }
         }
     }

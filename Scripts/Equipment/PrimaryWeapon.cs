@@ -14,6 +14,14 @@ public partial class PrimaryWeapon : BaseEquipment
         Charge
         // Add Others Here
     }
+
+    public enum EventAction
+    {
+        click,
+        unclick,
+        fire,
+        
+    }
     [Export] public string WeaponName;
     [Export] public string Description;
     [Export] public bool HasRightClick;
@@ -106,6 +114,104 @@ public partial class PrimaryWeapon : BaseEquipment
         if (type == WepeonType.Charge)
         {
             return true;
+        }
+        return false;
+    }
+
+    public bool Attack(Player c, bool primary, WepeonType type, EventAction action)
+    {
+        ref Timer timer = ref c.attack1Timer;
+        ref bool AttackAvailable = ref c.Attack1Available; 
+        ref bool Event = ref c.LeftEvent;
+        if (primary)
+        {
+            timer = ref c.attack1Timer;
+            AttackAvailable = ref c.Attack1Available; 
+            Event = ref c.LeftEvent;
+        }
+        else
+        {
+            timer = ref c.attack2Timer;
+            AttackAvailable = ref c.Attack2Available; 
+            Event = ref c.RightEvent;
+        }
+        switch (type)
+        {
+            case WepeonType.Projectile:
+                if (action == EventAction.click)
+                {
+                    Event = true;
+                }
+                else if (action == EventAction.unclick)
+                {
+                    Event = false;
+                }
+                else if (action == EventAction.fire)
+                {
+                    AttackAvailable = false;
+                    timer?.Start();
+                    return true;
+                }
+
+                break;
+            case WepeonType.Slash:
+                if (action == EventAction.click)           
+                {                                          
+                    Event = true;                          
+                }                                          
+                else if (action == EventAction.unclick)    
+                {                                          
+                    Event = false;                         
+                }                                          
+                else if (action == EventAction.fire)       
+                {                                          
+                    AttackAvailable = false;               
+                    timer?.Start();                        
+                    return true;                           
+                }                                          
+                break;
+            case WepeonType.Beam:
+                if (action == EventAction.click)
+                {
+                    AttackAvailable = true;
+                    Event = true;
+                }
+                else if (action == EventAction.fire)
+                {
+                    return true;
+                }
+                break;
+            case WepeonType.Charge:
+                if (action == EventAction.click)
+                {
+                    Event = false;
+                    timer?.Start();
+                }
+                else if (action == EventAction.unclick)
+                {
+                    if (timer.IsStopped())
+                    {
+                        return true;
+                    }
+                    timer?.Stop();
+                }
+                break;
+            default:
+                if (action == EventAction.click)
+                {
+                    Event = true;
+                }
+                else if (action == EventAction.unclick)
+                {
+                    Event = false;
+                }
+                else if (action == EventAction.fire)
+                {
+                    AttackAvailable = false;
+                    timer?.Start();
+                    return true;
+                }
+                break;
         }
         return false;
     }

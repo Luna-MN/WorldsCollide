@@ -365,7 +365,6 @@ public partial class Character : CharacterBody2D
             PrimaryEquipment[RandomEquipment].Left_Click();
         }
     }
-
     protected virtual void RightClick()
     {
         if (SecondaryEquipment.Count == 0) return;
