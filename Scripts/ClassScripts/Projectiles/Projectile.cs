@@ -60,10 +60,9 @@ public partial class Projectile : Node2D
 
         if (Body is Character hitChar)
         {
-            hitChar.TakeDamage(Damage, (int)Id);
-            damageDone += Damage;
+            hitChar.TakeDamage(Damage * amountOfTimes, (int)Id);
         }
-        ((Character)Body).DamageText(damageDone, amountOfTimes);
+        ((Character)Body).DamageText(Damage, amountOfTimes);
     }
 
     public void obtainStats(Character c)
