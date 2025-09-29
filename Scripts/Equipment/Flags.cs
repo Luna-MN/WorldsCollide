@@ -30,5 +30,6 @@ public partial class Flags : Node
         StatBoost        = 1L << 5,
         OnTimerTimeout   = 1L << 6,
         DynamicStatBoost = 1L << 7,
+        OnCrit           = 1L << 8,
     }
 }

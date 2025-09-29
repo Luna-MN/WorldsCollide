@@ -66,6 +66,9 @@ public partial class Character : CharacterBody2D
     public event Action OnStatCalc;
     public event Action OnStatCalcSkill;
     public event Action OnStatCalcEquip;
+    public event Action<Node2D> OnCrit;
+    public event Action<Node2D> OnCritSkill;
+    public event Action<Node2D> OnCritEquip;
     protected  List<Timer> PassiveMoveTimers = new List<Timer>();
     protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
@@ -146,6 +149,9 @@ public partial class Character : CharacterBody2D
 
         OnStatCalc += () => OnStatCalcSkill?.Invoke();
         OnStatCalc += () => OnStatCalcEquip?.Invoke();
+        
+        OnCrit += b => OnCritSkill?.Invoke(b);
+        OnCrit += b => OnCritEquip?.Invoke(b);
         
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
@@ -344,6 +350,11 @@ public partial class Character : CharacterBody2D
     public void CallOnKill(Node2D body)
     {
         OnKill?.Invoke(body);
+    }
+
+    public void CallOnCrit(Node2D body)
+    {
+        OnCrit?.Invoke(body);
     }
     #endregion
     public override void _PhysicsProcess(double delta)

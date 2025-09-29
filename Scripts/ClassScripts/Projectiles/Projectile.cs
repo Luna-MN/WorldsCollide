@@ -20,6 +20,7 @@ public partial class Projectile : Node2D
     public float damageDone;
     public float amountOfTimes = 1;
     protected Timer timer;
+    private bool crit;
     
     public override void _Ready()
     {
@@ -56,6 +57,10 @@ public partial class Projectile : Node2D
         if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Character bulletOwner)
         {
             bulletOwner.CallOnHit(Body, this, Damage);
+            if (crit)
+            {
+                bulletOwner.CallOnCrit(Body);
+            }
         }
 
         if (Body is Character hitChar)
@@ -72,6 +77,7 @@ public partial class Projectile : Node2D
         if (rng.Randf() < c.characterStats["critChance"])
         {
             Damage *= c.characterStats["critDamage"];
+            crit = true;
         }
     }
 }
