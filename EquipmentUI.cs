@@ -39,6 +39,39 @@ public partial class EquipmentUI : Panel
                     scene.Attack.Text = scene.Attack.Text.Replace("xx", p.Damage.ToString());
                     scene.Speed.Text = scene.Speed.Text.Replace("xx", p.AttackSpeed.ToString());
                     scene.Range.Text = scene.Range.Text.Replace("xx", p.Range.ToString());
+                    scene.Handedness.Visible = true;
+                    if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
+                    {
+                        scene.Handedness.Text = "Flexible, Both";
+                    }
+                    else if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand))
+                    {
+                        scene.Handedness.Text = "Flexible, Main Hand";
+                    }
+                    else if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
+                    {
+                        scene.Handedness.Text = "Flexible, Off Hand";
+                    }
+                    else if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded))
+                    {
+                        scene.Handedness.Text = "Two Handed";
+                    }
+                    else if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
+                    {
+                        scene.Handedness.Text = "Both Handed";
+                    }
+                    else if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand))
+                    {
+                        scene.Handedness.Text = "Main Hand";
+                    }
+                    else if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
+                    {
+                        scene.Handedness.Text = "Off Hand";
+                    }
+                    else
+                    {
+                        scene.Handedness.Text = "ERROR";
+                    }
                 }
                 
                 TopUI.AddChild(scene);

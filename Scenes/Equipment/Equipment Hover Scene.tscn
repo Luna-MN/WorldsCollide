@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_gjvxm"]
 [ext_resource type="PackedScene" uid="uid://bhci5kut0hqr1" path="res://StatsPanel.tscn" id="3_2h24l"]
 
-[node name="EquipmentHover" type="Panel" node_paths=PackedStringArray("ItemName", "ItemDescription", "Quality", "ItemIcon", "wepStats", "Attack", "Speed", "Range")]
+[node name="EquipmentHover" type="Panel" node_paths=PackedStringArray("ItemName", "ItemDescription", "Quality", "ItemIcon", "wepStats", "Attack", "Speed", "Range", "Handedness")]
 offset_right = 300.0
 offset_bottom = 497.0
 mouse_filter = 2
@@ -20,6 +20,7 @@ wepStats = NodePath("Wep Stats")
 Attack = NodePath("Wep Stats/Attack")
 Speed = NodePath("Wep Stats/Speed")
 Range = NodePath("Wep Stats/Range")
+Handedness = NodePath("Handedness")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(146.8, 104)
@@ -77,9 +78,9 @@ visible = false
 custom_minimum_size = Vector2(1.19, 3.96)
 layout_mode = 0
 offset_left = 12.045
-offset_top = 229.805
+offset_top = 244.11
 offset_right = 290.045
-offset_bottom = 269.8062
+offset_bottom = 284.11194
 
 [node name="Attack" type="RichTextLabel" parent="Wep Stats"]
 custom_minimum_size = Vector2(90, 0)
@@ -101,3 +102,14 @@ layout_mode = 2
 text = "Range
 xx"
 horizontal_alignment = 1
+
+[node name="Handedness" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 58.5
+offset_top = 220.77
+offset_right = 235.59
+offset_bottom = 239.77003
+text = "Flexible, Main Hand"
+horizontal_alignment = 1
+vertical_alignment = 1

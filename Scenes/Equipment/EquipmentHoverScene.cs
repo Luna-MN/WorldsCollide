@@ -9,7 +9,7 @@ public partial class EquipmentHoverScene : Panel
     [Export] public Sprite2D ItemIcon;
     [Export] public Color[] TextColors;
     [Export] public HBoxContainer wepStats;
-    [Export] public RichTextLabel Attack, Speed, Range; // wep stats
+    [Export] public RichTextLabel Attack, Speed, Range, Handedness; // wep stats
     
     public override void _Process(double delta)
     {
