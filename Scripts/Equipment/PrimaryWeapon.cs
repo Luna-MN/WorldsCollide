@@ -10,7 +10,8 @@ public partial class PrimaryWeapon : BaseEquipment
         None,
         Projectile,
         Slash,
-        Beam
+        Beam,
+        Charge
         // Add Others Here
     }
     [Export] public string WeaponName;
@@ -60,7 +61,7 @@ public partial class PrimaryWeapon : BaseEquipment
             GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID);
         }
     }
-
+    // this decides weather the attack available flag should be reset when the gun is fired 
     public bool Reset(WepeonType type)
     {
         switch (type)
@@ -74,7 +75,7 @@ public partial class PrimaryWeapon : BaseEquipment
                 return false;
         }
     }
-
+    // some weps we don't want to have a timer and want to be attack-available on other conditions
     public Timer CreateTimer(WepeonType type)
     {
         if (type == WepeonType.Beam)
@@ -89,5 +90,23 @@ public partial class PrimaryWeapon : BaseEquipment
             WaitTime = AttackSpeed,
             Name = "Attack Timer"
         };
+    }
+    // This gets called when you fire
+    public bool StartTimerOnReset(WepeonType type)
+    {
+        if (type == WepeonType.Charge)
+        {
+            return false;
+        }
+        return true;
+    }
+    // this gets called when you click
+    public bool StartTimerOnClick(WepeonType type)
+    {
+        if (type == WepeonType.Charge)
+        {
+            return true;
+        }
+        return false;
     }
 }

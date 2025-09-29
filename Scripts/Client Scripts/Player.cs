@@ -9,8 +9,8 @@ public partial class Player : Character
 {
     #region Input Handling
     public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
-    public bool LeftPressed;
-    public bool RightPressed;
+    public bool LeftEvent;
+    public bool RightEvent;
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
@@ -98,11 +98,34 @@ public partial class Player : Character
             {
                 if (Button.Pressed)
                 {
-                    LeftPressed = true;
+                    LeftEvent = true;
+                    // Make Charge Attacks work
+                    if (PrimaryEquipment.Count > 0)
+                    {
+                        if (PrimaryEquipment[0].StartTimerOnClick(PrimaryEquipment[0].LeftType))
+                        {
+                            LeftEvent = false;
+                            Attack1Available = false;
+                            attack1Timer?.Start();
+                        }
+                    }
                 }
                 else
                 {
-                    LeftPressed = false;
+                    LeftEvent = false;
+                    // Make Charge Attacks work
+                    if (PrimaryEquipment.Count > 0)
+                    {
+                        if (PrimaryEquipment[0].StartTimerOnClick(PrimaryEquipment[0].LeftType))
+                        {
+                            if (attack1Timer.IsStopped())
+                            {
+                                LeftEvent = true;
+                            }
+                            Attack1Available = true;
+                            attack1Timer?.Stop();
+                        }
+                    }
                 }
 
             }
@@ -111,11 +134,34 @@ public partial class Player : Character
             {
                 if (Button.Pressed)
                 {
-                    RightPressed = true;
+                    RightEvent = true;
+                    // Make Charge Attacks work
+                    if (SecondaryEquipment.Count > 0)
+                    {
+                        if (SecondaryEquipment[0].StartTimerOnClick(SecondaryEquipment[0].LeftType))
+                        {
+                            RightEvent = false;
+                            Attack2Available = false;
+                            attack2Timer?.Start();
+                        }
+                    }
                 }
                 else
                 {
-                    RightPressed = false;
+                    RightEvent = false;
+                    // Make Charge Attacks work
+                    if (SecondaryEquipment.Count > 0)
+                    {
+                        if (SecondaryEquipment[0].StartTimerOnClick(SecondaryEquipment[0].LeftType))
+                        {
+                            if (attack2Timer.IsStopped())
+                            {
+                                RightEvent = true;
+                            }
+                            Attack2Available = true;
+                            attack2Timer?.Stop();
+                        }
+                    }
                 }
             }
         }
@@ -194,18 +240,28 @@ public partial class Player : Character
         
         
         
-        if (Attack1Available && LeftPressed && PrimaryEquipment.Count > 0)
+        if (Attack1Available && LeftEvent && PrimaryEquipment.Count > 0)
         {
             LeftClick();
+            // If its a beam we don't want to reset it on click, other weps can be added to this as well
             Attack1Available = PrimaryEquipment[0].Reset(PrimaryEquipment[0].LeftType);
-            attack1Timer?.Start();
+            // If its a charge wep we don't want to reset the timer when we click
+            if (PrimaryEquipment[0].StartTimerOnReset(PrimaryEquipment[0].LeftType))
+            {
+                attack1Timer?.Start();
+            }
         }
 
-        if (Attack2Available && RightPressed && SecondaryEquipment.Count > 0)
+        if (Attack2Available && RightEvent && SecondaryEquipment.Count > 0)
         {
             RightClick();
+            // If its a beam we don't want to reset it on click, other weps can be added to this as well
             Attack2Available = SecondaryEquipment[0].Reset(SecondaryEquipment[0].RightType);
-            attack2Timer?.Start();
+            // If its a charge wep we don't want to reset the timer when we click
+            if (SecondaryEquipment[0].StartTimerOnReset(SecondaryEquipment[0].RightType))
+            {
+                attack2Timer?.Start();
+            }
         }
     }
 
