@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=7 format=3 uid="uid://d3m0yqvnhk5e6"]
 
 [ext_resource type="Resource" uid="uid://bqabth1btdvqe" path="res://Resources/Enhancments/_1.tres" id="2_h6cdl"]
-[ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="2_i8l6m"]
+[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="2_i8l6m"]
 [ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="2_und8r"]
-[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="3_h6cdl"]
+[ext_resource type="Script" uid="uid://cg13tcehio2of" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="3_h6cdl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h6cdl"]
 resource_local_to_scene = true

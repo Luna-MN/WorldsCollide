@@ -63,11 +63,13 @@ public partial class Projectile : Node2D
             }
         }
 
+        var modifiedDamage = Damage;
         if (Body is Character hitChar)
         {
             hitChar.TakeDamage(Damage * amountOfTimes, (int)Id);
+            modifiedDamage = Damage * hitChar.characterStats["armour"];
         }
-        ((Character)Body).DamageText(Damage, amountOfTimes);
+        ((Character)Body).DamageText(modifiedDamage, amountOfTimes);
     }
 
     public void obtainStats(Character c)
