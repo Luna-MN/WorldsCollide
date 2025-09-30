@@ -23,28 +23,34 @@ public partial class ServerRpc : Node2D
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-    public void UpdatePlayerEquipment(int id, int[] equipmentIds, Godot.Collections.Dictionary<int, int[]> enhancmentIds, int[] InvIds)
+    public void UpdatePlayerEquipment(int id, int[] equipmentIds, int[] InvIds)
     {
+        var player = ServerManager.NodeDictionary[id];
         GD.Print(string.Join(", ", equipmentIds));
         GD.Print(string.Join(", ", InvIds));
-        GD.Print(string.Join(", ", enhancmentIds.Select(x => equipmentIds[x.Key] + " (" + string.Join("& ", x.Value) + ")")));
-        var equipment = equipmentIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x].Duplicate() as BaseEquipment : null).ToArray();
-        foreach (var equipmentPair in enhancmentIds)
+        var equipment = new List<BaseEquipment>();
+        var inv = new List<BaseEquipment>();
+        var allEquipment = player.inventory.AllEquipment.ToList();
+        allEquipment.AddRange(player.EquipmentSlots.Where(x => x.EquippedEquipment != null).Select(x => x.EquippedEquipment));
+        var allEquipmentIds = allEquipment.Select(x => x.ItemId).ToList();
+        foreach (var equipId in equipmentIds)
         {
-            if (equipmentIds[equipmentPair.Key] == -1) continue;
-            var enhancments = equipmentPair.Value.Select(x => ServerManager.EquipmentRpcs.Enhancments[x]).ToArray();
-            equipment[equipmentPair.Key].enhancements = enhancments;
+            if(equipId == -1) continue;
+            var equip = allEquipment.Find(x => x.ItemId == equipId);
+            if (allEquipmentIds.Contains(equipId))
+            {
+                player.EquipmentSlots[equipmentIds.ToList().IndexOf(equipId)].EquippedEquipment = equip;
+            }
         }
-        var Inv = InvIds.Select(x => x != -1 ? ServerManager.EquipmentRpcs.equipment[x].Duplicate() as BaseEquipment : null).ToArray();
-        
-        var player = ServerManager.NodeDictionary[id];
-        foreach (EquipmentSlot equipmentSlot in player.EquipmentSlots)
+        List<BaseEquipment> Inven = new();
+        foreach (var invId in InvIds)
         {
-            var index = player.EquipmentSlots.ToList().IndexOf(equipmentSlot);
-            if (index == -1) continue;
-            equipmentSlot.EquippedEquipment = equipment[index];
+            if (allEquipmentIds.Contains(invId))
+            {
+                Inven.Add(allEquipment.Find(x => x.ItemId == invId));
+            }
         }
-        player.inventory.AllEquipment = Inv;
+        player.inventory.AllEquipment = Inven.ToArray();
         player.equipAll();
     }
     #endregion

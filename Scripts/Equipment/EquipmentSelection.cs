@@ -58,39 +58,20 @@ public partial class EquipmentSelection : Panel
         {
             openButton.EquipmentPanel = null; 
             GameManager.player.equipAll();
-            
-            var invIds = new List<int>();
-            foreach (var equipment in GameManager.player.inventory.AllEquipment)
-            {
-                var item = GameManager.EquipmentRpcs.equipment.ToList().First(x => x.ResourceName.Contains(equipment.ResourceName));
-                invIds.Add(GameManager.EquipmentRpcs.equipment.ToList().IndexOf(item));
-            }
-            var equippedIds = new List<int>();
-            var enhancements = new List<List<int>>();
+            var invIds = GameManager.player.inventory.AllEquipment.Select(x => x.ItemId).ToList();
+            List<int> equippedIds = new();
             foreach (var slot in GameManager.player.EquipmentSlots)
             {
-                var slotIndex = GameManager.player.EquipmentSlots.ToList().IndexOf(slot);
                 if (slot.EquippedEquipment != null)
                 {
-                    var item = GameManager.EquipmentRpcs.equipment.ToList().First(x => x.ResourceName.Contains(slot.EquippedEquipment.ResourceName));
-                    var enhancmentsTemp = new List<int>();
-                    item.enhancements.ToList().ForEach(x => enhancmentsTemp.Add(GameManager.EquipmentRpcs.Enhancments.ToList().FindIndex(y => y.ResourceName == x.ResourceName)));
-                    enhancements.Add(enhancmentsTemp);
-                    equippedIds.Add(GameManager.EquipmentRpcs.equipment.ToList().IndexOf(item));
+                    equippedIds.Add(slot.EquippedEquipment.ItemId);
                 }
                 else
                 {
                     equippedIds.Add(-1);
-                    enhancements.Add(new List<int>());
                 }
             }
-            Godot.Collections.Dictionary<int, int[]> EqippedIds = new Godot.Collections.Dictionary<int, int[]>();
-            for (var i = 0; i < equippedIds.Count; i++)
-            {
-                EqippedIds.Add(i, enhancements[i].ToArray());
-            }
-
-            GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", GameManager.LocalID,equippedIds.ToArray() ,EqippedIds, invIds.ToArray());
+            GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", Multiplayer.GetUniqueId(), equippedIds.ToArray() ,invIds.ToArray());
             GameManager.UIOpen = false;
             QueueFree();
         };

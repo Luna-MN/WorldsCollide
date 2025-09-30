@@ -17,5 +17,5 @@ equipmentFlags = 128
 stats = SubResource("Resource_8cwke")
 enhancements = Array[Object]([])
 Icon = ExtResource("1_xmsk5")
-ItemId = -2
+ItemId = 8
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
