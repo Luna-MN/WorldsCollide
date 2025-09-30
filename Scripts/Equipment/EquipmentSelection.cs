@@ -10,6 +10,7 @@ public partial class EquipmentSelection : Panel
     [Export] public EquipmentSlotUI[] EquipmentSlots;
     [Export] public Button CloseButton;
     public ChangeEquipment openButton;
+    public bool pickedUp = false;
     
     public override void _Ready()
     {

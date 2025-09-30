@@ -19,6 +19,7 @@ resource_local_to_scene = true
 resource_name = "Bow"
 script = ExtResource("1_ccnuq")
 WeaponName = "Bow"
+AttackSpeed = 1.0
 ShootPos = Vector2(3.5, 0)
 FlippedPos = Vector2(-3.5, 0)
 SpriteFrames = SubResource("SpriteFrames_q5f65")

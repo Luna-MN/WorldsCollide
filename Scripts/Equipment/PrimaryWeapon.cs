@@ -90,7 +90,7 @@ public partial class PrimaryWeapon : BaseEquipment
         {
             return null;
         }
-
+        
         return new Timer()
         {
             Autostart = false,

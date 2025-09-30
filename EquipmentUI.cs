@@ -118,6 +118,7 @@ public partial class EquipmentUI : Panel
                 if (MB.ButtonIndex == MouseButton.Left && !MB.Pressed && mouseClick && mouseIn)
                 {
                     mouseClick = false;
+                    TopUI.pickedUp = false;
                     TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
                     // this is two handed handling, so you can't equip a two handed wep if there is already we other wep attached
                     if (TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot) == 0)
@@ -214,6 +215,10 @@ public partial class EquipmentUI : Panel
 
                 if (MB.ButtonIndex == MouseButton.Left && MB.Pressed && mouseIn)
                 {
+                    if (TopUI.pickedUp)
+                    {
+                        return;
+                    }
                     TopUI.CallDeferred("add_child", this);
                     if (scene != null)
                     {
@@ -224,6 +229,7 @@ public partial class EquipmentUI : Panel
                     GetParent().RemoveChild(this);
                     TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                     mouseClick = true;
+                    TopUI.pickedUp = true;
                 }
 
                 if (MB.ButtonIndex == MouseButton.Right && MB.Pressed)
