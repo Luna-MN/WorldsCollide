@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="BaseEquipment" load_steps=10 format=3 uid="uid://dcrn58i05jmtr"]
 
 [ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="1_510fn"]
-[ext_resource type="Script" uid="uid://73ibnv5rsxp8" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_pnni1"]
-[ext_resource type="Script" uid="uid://cg13tcehio2of" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="2_e8g0n"]
-[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="3_uhyga"]
-[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="4_e8g0n"]
+[ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_pnni1"]
+[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="2_e8g0n"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="3_uhyga"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="4_e8g0n"]
 
 [sub_resource type="Resource" id="Resource_lv8gr"]
 script = ExtResource("2_e8g0n")

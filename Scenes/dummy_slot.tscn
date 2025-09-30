@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcedvr4vxb7rq"]
 
-[ext_resource type="Script" uid="uid://dpgh5d4vx5306" path="res://DummySlot.cs" id="1_0y4ge"]
+[ext_resource type="Script" uid="uid://cu8psvqg2vxae" path="res://DummySlot.cs" id="1_0y4ge"]
 
 [node name="DummySlot" type="Panel" node_paths=PackedStringArray("Icon")]
 custom_minimum_size = Vector2(90, 90)

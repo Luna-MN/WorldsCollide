@@ -22,6 +22,18 @@ ClientRpc="*res://Scenes/ClientRpc.tscn"
 EquipmentRpc="*res://Scripts/ClassScripts/EquipmentRpc.tscn"
 ClassRpc="*res://Scenes/ClassRpc.tscn"
 
+[debug]
+
+settings/physics_interpolation/enable_warnings=false
+gdscript/warnings/enable=false
+gdscript/warnings/exclude_addons=false
+gdscript/warnings/renamed_in_godot_4_hint=false
+gdscript/warnings/unassigned_variable=0
+gdscript/warnings/unassigned_variable_op_assign=0
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_local_constant=0
+gdscript/warnings/unused_private_class_variable=0
+
 [display]
 
 window/stretch/mode="canvas_items"
