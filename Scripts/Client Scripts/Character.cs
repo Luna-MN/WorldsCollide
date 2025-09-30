@@ -334,31 +334,13 @@ public partial class Character : CharacterBody2D
     }
     #region Inputs
     #region Equipment
-    protected virtual void LeftClick()
+    protected virtual void LeftClick(PrimaryWeapon equip)
     {
-        if(PrimaryEquipment.Count == 0) return;
-        if (PrimaryEquipment.Count == 1)
-        {
-            PrimaryEquipment[0].Left_Click();
-        }
-        else
-        {
-            var RandomEquipment = new Random().Next(0, PrimaryEquipment.Count);
-            PrimaryEquipment[RandomEquipment].Left_Click();
-        }
+        equip.Left_Click();
     }
-    protected virtual void RightClick()
+    protected virtual void RightClick(PrimaryWeapon equip)
     {
-        if (SecondaryEquipment.Count == 0) return;
-        if (SecondaryEquipment.Count == 1)
-        {
-            SecondaryEquipment[0].Right_Click();
-        }
-        else
-        {
-            var RandomEquipment = new Random().Next(0, SecondaryEquipment.Count);
-            SecondaryEquipment[RandomEquipment].Right_Click();
-        }
+        equip.Right_Click();
     }
     #endregion
     #region skill stuff

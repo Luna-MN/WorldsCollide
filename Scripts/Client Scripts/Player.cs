@@ -105,7 +105,7 @@ public partial class Player : Character
                             var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.click);
                             if (attack)
                             {
-                                LeftClick();
+                                LeftClick(wep);
                             }
                         }
 
@@ -120,7 +120,7 @@ public partial class Player : Character
                             var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.unclick);
                             if (attack)
                             {
-                                LeftClick();
+                                LeftClick(wep);
                             }
                         }
                     }
@@ -141,7 +141,7 @@ public partial class Player : Character
                                 var attack = SecondaryEquipment.First().Attack(this, false, wep.Attacks[1], PrimaryWeapon.EventAction.click);
                                 if (attack)
                                 {
-                                    RightClick();
+                                    RightClick(wep);
                                 }
                             }
                             else
@@ -149,7 +149,7 @@ public partial class Player : Character
                                 var attack = SecondaryEquipment.First().Attack(this, false, wep.Attacks[0], PrimaryWeapon.EventAction.click);
                                 if (attack)
                                 {
-                                    RightClick();
+                                    RightClick(wep);
                                 }
                             }
 
@@ -166,7 +166,7 @@ public partial class Player : Character
                             var attack = wep.Attack(this, false, wep.Attacks[1], PrimaryWeapon.EventAction.unclick);
                             if (attack)
                             {
-                                RightClick();
+                                RightClick(wep);
                             }
                         }
                         else
@@ -174,7 +174,7 @@ public partial class Player : Character
                             var attack = wep.Attack(this, false, wep.Attacks[0], PrimaryWeapon.EventAction.unclick);
                             if (attack)
                             {
-                                RightClick();
+                                RightClick(wep);
                             }
                         }
                     }
@@ -264,7 +264,7 @@ public partial class Player : Character
                     var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.fire);
                     if (attack)
                     {
-                        LeftClick();
+                        LeftClick(wep);
                     } 
                 }
             }
@@ -281,7 +281,7 @@ public partial class Player : Character
                         var attack = wep.Attack(this, false, wep.Attacks[1], PrimaryWeapon.EventAction.fire);
                         if (attack)
                         {
-                            RightClick();
+                            RightClick(wep);
                         }
                     }
                 }
@@ -293,7 +293,7 @@ public partial class Player : Character
                     var attack = wep.Attack(this, false, wep.Attacks[0], PrimaryWeapon.EventAction.fire);
                     if (attack)
                     {
-                        RightClick();
+                        RightClick(wep);
                     } 
                 }
             }

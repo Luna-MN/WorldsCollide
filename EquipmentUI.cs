@@ -36,9 +36,9 @@ public partial class EquipmentUI : Panel
                 if (AssignedEquipment is PrimaryWeapon p)
                 {
                     scene.wepStats.Visible = true;
-                    scene.Attack.Text = scene.Attack.Text.Replace("xx", p.Damage.ToString());
-                    scene.Speed.Text = scene.Speed.Text.Replace("xx", p.AttackSpeed.ToString());
-                    scene.Range.Text = scene.Range.Text.Replace("xx", p.Range.ToString());
+                    scene.Attack.Text = scene.Attack.Text.Replace("xx", p.Attacks[0].stats["Damage"].ToString());
+                    scene.Speed.Text = scene.Speed.Text.Replace("xx", p.Attacks[0].stats["AttackSpeed"].ToString());
+                    scene.Range.Text = scene.Range.Text.Replace("xx", p.Attacks[0].stats["Range"].ToString());
                     scene.Handedness.Visible = true;
                     if (p.equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand) && p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
                     {

@@ -98,7 +98,7 @@ public partial class EquipmentRpc : Node2D
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Gun_LeftClick(int id)
+    public void Gun_LeftClick(int id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
@@ -107,11 +107,14 @@ public partial class EquipmentRpc : Node2D
         bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
+        var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
+        bullet.Damage = attack.stats["Damage"];
+        bullet.RangeTime = attack.stats["Range"];
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Gun_LeftClick(int id, int rightClick)
+    public void Gun_LeftClick(int id, int equipmentId, int rightClick)
     {
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
@@ -127,11 +130,14 @@ public partial class EquipmentRpc : Node2D
         }
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
+        var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
+        bullet.Damage = attack.stats["Damage"];
+        bullet.RangeTime = attack.stats["Range"];
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void SlashingSword_LeftClick(int id)
+    public void SlashingSword_LeftClick(int id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
@@ -141,13 +147,16 @@ public partial class EquipmentRpc : Node2D
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
         bullet.character = Character;
+        var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
+        bullet.Damage = attack.stats["Damage"];
+        bullet.RangeTime = attack.stats["Range"];
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1,
         TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Bow_LeftClick(int id)
+    public void Bow_LeftClick(int id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
         var mousePos = Character.inputSync.mousePosition;
@@ -157,6 +166,9 @@ public partial class EquipmentRpc : Node2D
         arrow.Id = id;
         arrow.Name = id + "_Arrow";
         arrow.deleteOnHit = false;
+        var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
+        arrow.Damage = attack.stats["Damage"];
+        arrow.RangeTime = attack.stats["Range"];
         arrow.obtainStats(Character);
         ServerManager.spawner.AddChild(arrow, true);
     }

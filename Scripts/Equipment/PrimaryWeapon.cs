@@ -26,9 +26,6 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public string WeaponName;
     [Export] public string Description;
     [Export] public bool HasRightClick;
-    [Export] public int Damage;
-    [Export] public int Range;
-    [Export] public float AttackSpeed;
     [Export] public Vector2 ShootPos;
     [Export] public Vector2 FlippedPos;
     [Export] public SpriteFrames SpriteFrames;
@@ -77,18 +74,18 @@ public partial class PrimaryWeapon : BaseEquipment
 
     public void Left_Click()
     {
-        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID);
+        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID, ItemId);
     }
 
     public void Right_Click()
     {
         if (!HasRightClick)
         {
-            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID, 1);
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID, ItemId, 1);
         }
         else
         {
-            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID);
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID, ItemId);
         }
     }
     // this decides weather the attack available flag should be reset when the gun is fired 
