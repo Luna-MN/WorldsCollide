@@ -131,7 +131,7 @@ public partial class EquipmentGenerator : Node2D
                     Mathf.Cos(randomAngle) * radius,
                     Mathf.Sin(randomAngle) * radius
                 );
-                floorItem.equipment.ItemId = rng.RandiRange(0, 1000000000);
+                floorItem.equipment.ItemId = (int)(new RandomNumberGenerator()).Randi();
                 GetParent().AddChild(floorItem, true);
             }
             else
