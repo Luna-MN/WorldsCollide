@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3ts5stf1nvhk"]
 
-[ext_resource type="Script" uid="uid://w5u5pnkr1nan" path="res://Scripts/Client Scripts/ClientRpc.cs" id="1_xgku1"]
+[ext_resource type="Script" uid="uid://brleq5dplqaa" path="res://Scripts/Client Scripts/ClientRpc.cs" id="1_xgku1"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_a3adf"]
 
 [node name="ClientRpc" type="Node2D"]

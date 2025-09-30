@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://dkow3uekdikc4"]
 
-[ext_resource type="Script" uid="uid://debo0nt1ykerh" path="res://Scripts/ClassScripts/EquipmentRpc.cs" id="1_13vvj"]
+[ext_resource type="Script" uid="uid://5u1rtibjq68g" path="res://Scripts/ClassScripts/EquipmentRpc.cs" id="1_13vvj"]
 [ext_resource type="PackedScene" uid="uid://cjwb7dl5et8f5" path="res://Scripts/ClassScripts/Projectiles/Gun_bullet.tscn" id="2_jsxp8"]
 [ext_resource type="Resource" uid="uid://cmqpexfhmr6p4" path="res://Resources/Equipment/TestEquipment.tres" id="2_sq6ac"]
-[ext_resource type="Script" uid="uid://cg13tcehio2of" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="2_v61qo"]
+[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="2_v61qo"]
 [ext_resource type="PackedScene" uid="uid://ul6rh048aliv" path="res://Scripts/ClassScripts/Projectiles/Melee_Slash.tscn" id="3_pubod"]
 [ext_resource type="Resource" uid="uid://d3m0yqvnhk5e6" path="res://Resources/Equipment/GunTest.tres" id="4_m7y88"]
 [ext_resource type="Resource" uid="uid://dcrn58i05jmtr" path="res://Resources/Equipment/SimpleChest.tres" id="5_wb33k"]

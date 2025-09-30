@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cjtw53hfqy2nj"]
 
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="1_5hfvt"]
-[ext_resource type="Script" uid="uid://y5csa3y2a6h4" path="res://Scripts/ClassScripts/Skill.cs" id="2_exi17"]
+[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_exi17"]
 
 [resource]
 script = ExtResource("2_exi17")

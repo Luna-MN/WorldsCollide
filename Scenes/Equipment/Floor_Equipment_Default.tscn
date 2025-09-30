@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b35u54ttw2jyu" path="res://Pirates/Equipment/Slots/FloorEquipmentIcon-Sheet.png" id="1_sy55v"]
 [ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="1_tppd4"]
-[ext_resource type="Script" uid="uid://47pp1dplvd4l" path="res://Scenes/Equipment/FloorEquipmentDefault.cs" id="1_w51j1"]
+[ext_resource type="Script" uid="uid://8wxyrn2kcaqm" path="res://Scenes/Equipment/FloorEquipmentDefault.cs" id="1_w51j1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w51j1"]
 resource_local_to_scene = true
