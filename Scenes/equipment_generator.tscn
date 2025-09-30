@@ -1,21 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh43r4421n8lf"]
+[gd_scene load_steps=3 format=3 uid="uid://bh43r4421n8lf"]
 
-[ext_resource type="Script" uid="uid://bltv4ms4d08ny" path="res://EquipmentGenerator.cs" id="1_t3mdg"]
+[ext_resource type="Script" uid="uid://boidq25cavsww" path="res://EquipmentGenerator.cs" id="1_t3mdg"]
 [ext_resource type="PackedScene" uid="uid://dft540hr27ugl" path="res://Scenes/Equipment/Floor_Equipment_Default.tscn" id="2_tijhj"]
-[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="3_sihwv"]
-
-[sub_resource type="Resource" id="Resource_dvmq2"]
-script = ExtResource("3_sihwv")
-EnhancmentFlags = 2047
-metadata/_custom_type_script = "uid://k8whvj1c14xl"
-
-[sub_resource type="Resource" id="Resource_w0e7m"]
-script = ExtResource("3_sihwv")
-metadata/_custom_type_script = "uid://k8whvj1c14xl"
-
-[sub_resource type="Resource" id="Resource_vdytm"]
-script = ExtResource("3_sihwv")
-metadata/_custom_type_script = "uid://k8whvj1c14xl"
 
 [node name="Equipment Generator" type="Node2D"]
 script = ExtResource("1_t3mdg")
@@ -29,4 +15,3 @@ Colors = Dictionary[int, PackedColorArray]({
 5: PackedColorArray(0.60282344, 0.34143898, 0.22153416, 1, 0.6404545, 0.3425008, 0.07726411, 1, 0.8159104, 0.35701352, 1.92523e-07, 1, 0.76842856, 0.3567929, 0.13036689, 1, 0.76626, 0.35811785, 0.14669088, 1),
 6: PackedColorArray(0.57467085, 0.056786306, 4.813075e-08, 1, 0.6860819, 0.07639635, 0, 1, 0.8745098, 0.10980392, 0, 1, 0.9948266, 0.21601215, 3.85046e-07, 1, 0, 0, 0, 1)
 })
-Enhancments = Array[Object]([SubResource("Resource_dvmq2"), SubResource("Resource_w0e7m"), SubResource("Resource_vdytm")])

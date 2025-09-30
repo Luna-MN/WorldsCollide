@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ul6rh048aliv"]
 
-[ext_resource type="Script" uid="uid://cwhoc82uvr2f6" path="res://Scripts/ClassScripts/Projectiles/Melee_Slash.cs" id="1_77rmr"]
+[ext_resource type="Script" uid="uid://ckuswqpaxjoao" path="res://Scripts/ClassScripts/Projectiles/Melee_Slash.cs" id="1_77rmr"]
 [ext_resource type="Texture2D" uid="uid://c6tk8oq131bj5" path="res://Pirates/swords slash.png" id="2_3vyc8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]

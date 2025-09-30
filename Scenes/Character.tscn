@@ -1,61 +1,62 @@
 [gd_scene load_steps=18 format=3 uid="uid://d2podqpoej8hm"]
 
-[ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
+[ext_resource type="Script" uid="uid://b25fkhy4lbqtd" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
 [ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="3_677pu"]
-[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="3_vdqda"]
-[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="4_xloa1"]
+[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="3_vdqda"]
+[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="4_xloa1"]
 
-[sub_resource type="Resource" id="Resource_qf43b"]
+[sub_resource type="Resource" id="Resource_vdqda"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "armour"
 
-[sub_resource type="Resource" id="Resource_blayf"]
+[sub_resource type="Resource" id="Resource_xloa1"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "critChance"
 DisplayValue = 0.5
 
-[sub_resource type="Resource" id="Resource_4pow8"]
+[sub_resource type="Resource" id="Resource_peemv"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "critDamage"
 DisplayValue = 1.25
 
-[sub_resource type="Resource" id="Resource_5qtvi"]
+[sub_resource type="Resource" id="Resource_omicx"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "currentHealth"
 DisplayValue = 10000.0
 
-[sub_resource type="Resource" id="Resource_6kgav"]
+[sub_resource type="Resource" id="Resource_8au8k"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "damageIncrease"
 DisplayValue = 1.1
 
-[sub_resource type="Resource" id="Resource_vmxlg"]
+[sub_resource type="Resource" id="Resource_p3cti"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "itemFind"
 DisplayValue = 1.0
 
-[sub_resource type="Resource" id="Resource_lb5d5"]
+[sub_resource type="Resource" id="Resource_fgiha"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "maxHealth"
 DisplayValue = 10000.0
 
-[sub_resource type="Resource" id="Resource_u363e"]
+[sub_resource type="Resource" id="Resource_6s7kk"]
+resource_local_to_scene = true
 script = ExtResource("4_xloa1")
-_name = "speed"
 DisplayValue = 300.0
 
 [sub_resource type="Resource" id="Resource_4b18b"]
+resource_local_to_scene = true
 script = ExtResource("3_vdqda")
 stats = Dictionary[String, ExtResource("4_xloa1")]({
-"armour": SubResource("Resource_qf43b"),
-"critChance": SubResource("Resource_blayf"),
-"critDamage": SubResource("Resource_4pow8"),
-"currentHealth": SubResource("Resource_5qtvi"),
-"damageIncrease": SubResource("Resource_6kgav"),
-"itemFind": SubResource("Resource_vmxlg"),
-"maxHealth": SubResource("Resource_lb5d5"),
-"speed": SubResource("Resource_u363e")
+"armour": SubResource("Resource_vdqda"),
+"critChance": SubResource("Resource_xloa1"),
+"critDamage": SubResource("Resource_peemv"),
+"currentHealth": SubResource("Resource_omicx"),
+"damageIncrease": SubResource("Resource_8au8k"),
+"itemFind": SubResource("Resource_p3cti"),
+"maxHealth": SubResource("Resource_fgiha"),
+"speed": SubResource("Resource_6s7kk")
 })
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]

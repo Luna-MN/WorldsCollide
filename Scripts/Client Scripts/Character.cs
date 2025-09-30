@@ -460,7 +460,8 @@ public partial class Character : CharacterBody2D
     public virtual void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        characterStats.stats["currentHealth"].Value -= damage;
+        damage *= characterStats["armour"];
+        characterStats["currentHealth"] -= damage;
         if (characterStats["currentHealth"] <= 0 & !isDead)
         {
             isDead = true;
@@ -477,7 +478,6 @@ public partial class Character : CharacterBody2D
                 QueueFree();
             }
         }
-
         if (DropLootOnDeath)
         {
             AddPlayersToDropLoot(attacker);

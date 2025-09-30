@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjwb7dl5et8f5"]
 
-[ext_resource type="Script" uid="uid://8x1il0bn1asu" path="res://Scripts/ClassScripts/Projectiles/BasicRangedProjectile.cs" id="1_1h6f3"]
+[ext_resource type="Script" uid="uid://vjerp0ggdpr1" path="res://Scripts/ClassScripts/Projectiles/BasicRangedProjectile.cs" id="1_1h6f3"]
 [ext_resource type="Texture2D" uid="uid://cydq0s5vt6ui2" path="res://Pirates/Equipment/Ammo/Gun_Bullet.png" id="2_fj72g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iorkc"]

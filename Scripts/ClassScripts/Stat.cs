@@ -7,7 +7,7 @@ using System.Reflection;
 [GlobalClass]
 public partial class Stat : Resource
 {
-    [Export]
+    
     private string _name;
     private float _value = 0.0f;
     //might be useful, depends on how complicated we make formulas
@@ -16,17 +16,19 @@ public partial class Stat : Resource
     //priority-ed list - main calculation runs at priority 10
     private List<(string, Func<float, float>, int)> _funcs = new ();
     private MethodInfo _calcFunction;
-    private MethodInfo _setValidationFunction;
+    private MethodInfo _validationFunction;
+    [Export]
     public string Name
     {
         get => _name;
+        set => setName(value);
     }
     //value indexer returns the calculated value
     //allows setting
     public float Value
     {
         get => calculation();
-        set => _value = (float)(_setValidationFunction?.Invoke(null, [value])?? _value);
+        set => _value = (float)(_validationFunction?.Invoke(null, [value])?? _value);
     }
     //display value indexer returns the value straight
     //allows setting
@@ -34,7 +36,7 @@ public partial class Stat : Resource
     public float DisplayValue
     {
         get => _value;
-        set => _value = (float)(_setValidationFunction?.Invoke(null, [value]) ?? _value);
+        set => _value = (float)(_validationFunction?.Invoke(null, [value]) ?? _value);
     }
     [ExportGroup("Value Clamp")]
     [Export]
@@ -44,33 +46,32 @@ public partial class Stat : Resource
     [Export(PropertyHint.GroupEnable)]
     public bool ClampValue;
     //default constructor for godot
-    private Stat()
-    {
-        _name = "Default Crappy Stupid Stat";
-        _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
-        _setValidationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
-        Value = 0.0f;
-    }
+    private Stat() : this("defaultStat", 0.0f) { }
     //constructor for use
     public Stat(string name, float startingValue)
     {
-        StatConstructor(name, startingValue);
+        if (name == "defaultStat" || name == "")
+        {
+            name = ResourceName;
+        }
+        setName(name);
+        Value = startingValue;
     }
-    public void StatConstructor(string name, float startingValue)
+    private void setName(string name)
     {
         _name = name;
+        GD.Print($"Stat name: {_name}");
         try
         {
             //[stat name]Vaildation = validation on setting a value
-            _setValidationFunction = typeof(StatMaths).GetMethod(name + "Vaildation", BindingFlags.Static | BindingFlags.Public);
-            if (_setValidationFunction == null)
-                _setValidationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+            _validationFunction = typeof(StatMaths).GetMethod(name + "Validation", BindingFlags.Static | BindingFlags.Public);
+            if (_validationFunction == null)
+                _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
             
         }
         catch (Exception e)
         {
-            _setValidationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
-            
+            _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
         }
         try
         {
@@ -83,7 +84,6 @@ public partial class Stat : Resource
         {
             _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
         }
-        Value = startingValue;
     }
     //adding functions to priority-ed list - add in priority order
     public void addFunc(string name, Func<float, float> func, int priority)
@@ -109,6 +109,7 @@ public partial class Stat : Resource
     //do the math - loop through list - running the calculation at 10
     private float calculation()
     {
+        GD.Print($"{Name} calculating : {_calcFunction?.Name} : {_validationFunction?.Name}");
         float v = _value;
         bool calcRun = false;
         if (_funcs.Count != 0)
@@ -139,6 +140,7 @@ public partial class Stat : Resource
         {
             v = (float)(_calcFunction?.Invoke(null, [v])?? v);
         }
+        GD.Print($"{Name} calculated : {v}");
         return v;
     }
 }

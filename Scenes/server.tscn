@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b70sv8dflvf0o"]
 
-[ext_resource type="Script" uid="uid://ciyiiruer81yq" path="res://Scripts/Server Scripts/Server.cs" id="1_mdagj"]
-[ext_resource type="PackedScene" uid="uid://br8pl4apoykdi" path="res://Scenes/TrainingDummy.tscn" id="2_mdagj"]
+[ext_resource type="Script" uid="uid://7epffkxm00jv" path="res://Scripts/Server Scripts/Server.cs" id="1_mdagj"]
+[ext_resource type="PackedScene" uid="uid://b14otrrm17vx6" path="res://Scenes/TestingDummy.tscn" id="2_mdagj"]
 
 [node name="Server" type="Node"]
 script = ExtResource("1_mdagj")
