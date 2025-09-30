@@ -89,6 +89,20 @@ public partial class FloorEquipmentDefault : Node2D
         {
             return;
         }
+        var equipIDS = ServerManager.NodeDictionary[Id].inventory.AllEquipment.Select(x => x.ItemId).ToList();
+        var equippedIDS = ServerManager.NodeDictionary[Id].EquipmentSlots.Where(x => x.EquippedEquipment != null).Select(x => x.EquippedEquipment.ItemId).ToList();
+        equipIDS.AddRange(equippedIDS);
+        while (true)
+        {
+            if (equipIDS.Contains(equipment.ItemId))
+            {
+                equipment.ItemId = (int)(new RandomNumberGenerator()).Randi();
+            }
+            else
+            {
+                break;
+            }
+        }
         // add item to player inventory (server)
         var currentEquipment = ServerManager.NodeDictionary[Id].inventory.AllEquipment;
         Array.Resize(ref currentEquipment, currentEquipment.Length + 1);
