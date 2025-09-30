@@ -1,9 +1,32 @@
-[gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=7 format=3 uid="uid://d3m0yqvnhk5e6"]
+[gd_resource type="Resource" script_class="PrimaryWeapon" load_steps=13 format=3 uid="uid://d3m0yqvnhk5e6"]
 
+[ext_resource type="Script" uid="uid://cc4tw3qw2fv7d" path="res://Scripts/Equipment/AttackData.cs" id="1_83v58"]
 [ext_resource type="Resource" uid="uid://bqabth1btdvqe" path="res://Resources/Enhancments/_1.tres" id="2_h6cdl"]
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="2_i8l6m"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="2_mtu2a"]
 [ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="2_und8r"]
 [ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="3_h6cdl"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="3_lk061"]
+
+[sub_resource type="Resource" id="Resource_mtu2a"]
+script = ExtResource("3_lk061")
+Name = "Attack Speed"
+DisplayValue = 0.5
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_j8781"]
+script = ExtResource("2_mtu2a")
+stats = Dictionary[String, ExtResource("3_lk061")]({
+"AttackSpeed": SubResource("Resource_mtu2a")
+})
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_p7sjl"]
+resource_local_to_scene = true
+script = ExtResource("1_83v58")
+stats = SubResource("Resource_j8781")
+type = 1
+metadata/_custom_type_script = "uid://cc4tw3qw2fv7d"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h6cdl"]
 resource_local_to_scene = true
@@ -25,6 +48,7 @@ metadata/_custom_type_script = "uid://k8whvj1c14xl"
 resource_local_to_scene = true
 resource_name = "GunTest"
 script = ExtResource("2_i8l6m")
+Attacks = Array[Object]([SubResource("Resource_p7sjl")])
 WeaponName = "Gun"
 AttackSpeed = 0.5
 ShootPos = Vector2(14.857, 3.429)
@@ -32,6 +56,7 @@ FlippedPos = Vector2(14.857, -3.429)
 SpriteFrames = SubResource("SpriteFrames_h6cdl")
 LeftType = 1
 RightType = 1
+Stats = null
 equipmentFlags = 96
 enhancements = Array[Object]([ExtResource("2_h6cdl"), SubResource("Resource_83v58")])
 Icon = ExtResource("2_und8r")

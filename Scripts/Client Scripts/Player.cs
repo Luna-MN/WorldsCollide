@@ -100,21 +100,28 @@ public partial class Player : Character
                 {
                     if (PrimaryEquipment.Count > 0)
                     {
-                        var attack = PrimaryEquipment.First().Attack(this, true, PrimaryEquipment.First().LeftType, PrimaryWeapon.EventAction.click);
-                        if (attack)
+                        foreach (var wep in PrimaryEquipment)
                         {
-                            LeftClick();
+                            var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.click);
+                            if (attack)
+                            {
+                                LeftClick();
+                            }
                         }
+
                     }
                 }
                 else
                 {
                     if (PrimaryEquipment.Count > 0)
                     {
-                        var attack = PrimaryEquipment.First().Attack(this, true, PrimaryEquipment.First().LeftType, PrimaryWeapon.EventAction.unclick);
-                        if (attack)
+                        foreach (var wep in PrimaryEquipment)
                         {
-                            LeftClick();
+                            var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.unclick);
+                            if (attack)
+                            {
+                                LeftClick();
+                            }
                         }
                     }
                 }
@@ -127,22 +134,48 @@ public partial class Player : Character
                 {
                     if (SecondaryEquipment.Count > 0)
                     {
-                        var attack = SecondaryEquipment.First().Attack(this, false, SecondaryEquipment.First().RightType, PrimaryWeapon.EventAction.click);
-                        if (attack)
+                        foreach (var wep in SecondaryEquipment)
                         {
-                            RightClick();
+                            if (wep.Attacks.Length > 1)
+                            {
+                                var attack = SecondaryEquipment.First().Attack(this, false, wep.Attacks[1], PrimaryWeapon.EventAction.click);
+                                if (attack)
+                                {
+                                    RightClick();
+                                }
+                            }
+                            else
+                            {
+                                var attack = SecondaryEquipment.First().Attack(this, false, wep.Attacks[0], PrimaryWeapon.EventAction.click);
+                                if (attack)
+                                {
+                                    RightClick();
+                                }
+                            }
+
                         }
                     }
 
                 }
                 else
                 {
-                    if (SecondaryEquipment.Count > 0)
+                    foreach (var wep in SecondaryEquipment)
                     {
-                        var attack = SecondaryEquipment.First().Attack(this, false, SecondaryEquipment.First().RightType, PrimaryWeapon.EventAction.unclick);
-                        if (attack)
+                        if (wep.Attacks.Length > 1)
                         {
-                            RightClick();
+                            var attack = wep.Attack(this, false, wep.Attacks[1], PrimaryWeapon.EventAction.unclick);
+                            if (attack)
+                            {
+                                RightClick();
+                            }
+                        }
+                        else
+                        {
+                            var attack = wep.Attack(this, false, wep.Attacks[0], PrimaryWeapon.EventAction.unclick);
+                            if (attack)
+                            {
+                                RightClick();
+                            }
                         }
                     }
                 }
@@ -219,25 +252,50 @@ public partial class Player : Character
                 OffHandShootPosition.Position = SecondaryEquipment[0].FlippedPos;
             }
         }
-        
-        
-        
-        
-        if (Attack1Available && LeftEvent && PrimaryEquipment.Count > 0)
+
+
+
+        foreach (var wep in PrimaryEquipment)
         {
-            var attack = PrimaryEquipment.First().Attack(this, true, PrimaryEquipment.First().LeftType, PrimaryWeapon.EventAction.fire);
-            if (attack)
+            if (wep.Attacks[0].Event)
             {
-                LeftClick();
+                if (wep.Attacks[0].Available)
+                {
+                    var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.fire);
+                    if (attack)
+                    {
+                        LeftClick();
+                    } 
+                }
             }
         }
-
-        if (Attack2Available && RightEvent && SecondaryEquipment.Count > 0)
+        
+        foreach (var wep in SecondaryEquipment)
         {
-            var attack = SecondaryEquipment.First().Attack(this, false, SecondaryEquipment.First().RightType, PrimaryWeapon.EventAction.fire);
-            if (attack)
+            if (wep.Attacks.Length > 1)
             {
-                RightClick();
+                if (wep.Attacks[1].Event)
+                {
+                    if (wep.Attacks[1].Available)
+                    {
+                        var attack = wep.Attack(this, false, wep.Attacks[1], PrimaryWeapon.EventAction.fire);
+                        if (attack)
+                        {
+                            RightClick();
+                        }
+                    }
+                }
+            }
+            else if (wep.Attacks[0].Event)
+            {
+                if (wep.Attacks[0].Available)
+                {
+                    var attack = wep.Attack(this, false, wep.Attacks[0], PrimaryWeapon.EventAction.fire);
+                    if (attack)
+                    {
+                        RightClick();
+                    } 
+                }
             }
         }
     }

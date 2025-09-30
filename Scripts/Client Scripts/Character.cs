@@ -204,16 +204,7 @@ public partial class Character : CharacterBody2D
             attack1Timer.QueueFree();
             attack1Timer = null;
         }
-
-        if (PrimaryEquipment.Count > 0)
-        {
-            attack1Timer = PrimaryEquipment[0]?.CreateTimer(PrimaryEquipment[0].LeftType);
-            if (attack1Timer != null)
-            {
-                attack1Timer.Timeout += () => { Attack1Available = true; };
-                AddChild(attack1Timer);
-            }
-        }
+        
 
         if (SecondaryEquipment.Count > 0 && !SecondaryEquipment[0].TwoHandedMode)
         {
@@ -228,16 +219,7 @@ public partial class Character : CharacterBody2D
             attack2Timer.QueueFree();
             attack2Timer = null;
         }
-
-        if (SecondaryEquipment.Count > 0)
-        {
-            attack2Timer = SecondaryEquipment[0]?.CreateTimer(SecondaryEquipment[0].RightType);
-            if (attack2Timer != null)
-            {
-                attack2Timer.Timeout += () => { Attack2Available = true; };
-                AddChild(attack2Timer);
-            }
-        }
+        
     }
     public void SetSkills()
     {

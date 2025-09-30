@@ -22,6 +22,7 @@ public partial class PrimaryWeapon : BaseEquipment
         fire,
         
     }
+    [Export] public AttackData[] Attacks;
     [Export] public string WeaponName;
     [Export] public string Description;
     [Export] public bool HasRightClick;
@@ -33,9 +34,30 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public SpriteFrames SpriteFrames;
     [Export] public WepeonType LeftType;
     [Export] public WepeonType RightType;
+    [Export] public Stats[] Stats;
     public bool TwoHandedMode;
     public override void OnEquip(Character character)
     {
+        if (Attacks.Length < 0)
+        {
+            return;
+        }
+        
+
+        foreach (var Data in Attacks)
+        {
+            Data.attackTimer = CreateTimer(Data);
+            if (Data.attackTimer != null)
+            {
+                Data.attackTimer.Timeout += () => { Data.Available = true; };
+                character.AddChild(Data.attackTimer);
+                if (Reset(Data.type))
+                {
+                    Data.attackTimer.Start();
+                }
+            }
+        }
+        
         if (equipmentFlags.HasFlag(Flags.AbilityFlags.TwoHanded) && TwoHandedMode)
         {
             GD.Print("Is Two Handed");
@@ -84,9 +106,9 @@ public partial class PrimaryWeapon : BaseEquipment
         }
     }
     // some weps we don't want to have a timer and want to be attack-available on other conditions
-    public Timer CreateTimer(WepeonType type)
+    public Timer CreateTimer(AttackData attack)
     {
-        if (type == WepeonType.Beam)
+        if (attack.type == WepeonType.Beam)
         {
             return null;
         }
@@ -95,7 +117,7 @@ public partial class PrimaryWeapon : BaseEquipment
         {
             Autostart = false,
             OneShot = true,
-            WaitTime = AttackSpeed,
+            WaitTime = attack.stats["AttackSpeed"],
             Name = "Attack Timer"
         };
     }
@@ -118,24 +140,13 @@ public partial class PrimaryWeapon : BaseEquipment
         return false;
     }
 
-    public bool Attack(Player c, bool primary, WepeonType type, EventAction action)
+    public bool Attack(Player c, bool primary, AttackData attack, EventAction action)
     {
-        ref Timer timer = ref c.attack1Timer;
-        ref bool AttackAvailable = ref c.Attack1Available; 
-        ref bool Event = ref c.LeftEvent;
-        if (primary)
-        {
-            timer = ref c.attack1Timer;
-            AttackAvailable = ref c.Attack1Available; 
-            Event = ref c.LeftEvent;
-        }
-        else
-        {
-            timer = ref c.attack2Timer;
-            AttackAvailable = ref c.Attack2Available; 
-            Event = ref c.RightEvent;
-        }
-        switch (type)
+        GD.Print(attack.type + " " + Attacks.ToList().IndexOf(attack));
+        ref var timer = ref attack.attackTimer;
+        ref var Event = ref attack.Event;
+        ref var AttackAvailable = ref attack.Available;
+        switch (attack.type)
         {
             case WepeonType.Projectile:
                 if (action == EventAction.click)
@@ -149,6 +160,7 @@ public partial class PrimaryWeapon : BaseEquipment
                 else if (action == EventAction.fire)
                 {
                     AttackAvailable = false;
+                    GD.Print("Attacking");
                     timer?.Start();
                     return true;
                 }
@@ -175,6 +187,11 @@ public partial class PrimaryWeapon : BaseEquipment
                 {
                     AttackAvailable = true;
                     Event = true;
+                }
+                if (action == EventAction.unclick)
+                {
+                    AttackAvailable = false;
+                    Event = false;
                 }
                 else if (action == EventAction.fire)
                 {
