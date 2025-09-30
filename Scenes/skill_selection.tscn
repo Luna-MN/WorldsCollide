@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dm1evqmmype2t" path="res://Scenes/Skill Select Button.tscn" id="1_3n5v1"]
 [ext_resource type="Theme" uid="uid://dp87lkmt8ncyv" path="res://Scripts/Equipment/EquipTheme.tres" id="1_egfwk"]
-[ext_resource type="Script" uid="uid://ctqrrxigldjdc" path="res://Scenes/SkillSelection.cs" id="1_ldqvr"]
+[ext_resource type="Script" uid="uid://cmvo2vacsr4fm" path="res://Scenes/SkillSelection.cs" id="1_ldqvr"]
 [ext_resource type="PackedScene" uid="uid://c7t0krqqvdpeo" path="res://Scenes/skill.tscn" id="2_jberl"]
 
 [node name="Skill Selection" type="Panel" node_paths=PackedStringArray("SkillGrid", "ApplyButton", "SkillsSelected")]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cgnwv3s31cdbs"]
 
-[ext_resource type="Script" uid="uid://bitvv64ynwy3i" path="res://EquipmentUI.cs" id="1_0xyv2"]
+[ext_resource type="Script" uid="uid://bbapl8lsoc4mp" path="res://EquipmentUI.cs" id="1_0xyv2"]
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_36ypc"]
 [ext_resource type="PackedScene" uid="uid://st53bnwcvead" path="res://Scenes/Equipment/Equipment Hover Scene.tscn" id="2_h2mxk"]
 [ext_resource type="PackedScene" uid="uid://bcedvr4vxb7rq" path="res://Scenes/dummy_slot.tscn" id="3_vjoob"]

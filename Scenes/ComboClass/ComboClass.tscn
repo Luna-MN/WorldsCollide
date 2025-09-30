@@ -1,17 +1,26 @@
-[gd_scene load_steps=23 format=3 uid="uid://c0mq410gglmrp"]
+[gd_scene load_steps=45 format=3 uid="uid://c0mq410gglmrp"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_xwqy6"]
-[ext_resource type="Script" uid="uid://rri2tc5c1g4w" path="res://Scripts/ClassScripts/Class1/ComboClass.cs" id="2_4n5jn"]
+[ext_resource type="Script" uid="uid://dpxd3cqudjc36" path="res://Scripts/ClassScripts/Class1/ComboClass.cs" id="2_4n5jn"]
 [ext_resource type="Resource" uid="uid://bji6slmaq3lpr" path="res://Scenes/ComboClass/Skill1.tres" id="2_s36wo"]
 [ext_resource type="Resource" uid="uid://d3m0yqvnhk5e6" path="res://Resources/Equipment/GunTest.tres" id="3_wjewu"]
 [ext_resource type="Resource" uid="uid://cej67nfm0xwtk" path="res://Scenes/ComboClass/Skill2.tres" id="3_xwqy6"]
-[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_h5fo3"]
+[ext_resource type="Script" uid="uid://516f76be8hhp" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_h5fo3"]
 [ext_resource type="Resource" uid="uid://dfhi6dul4vcra" path="res://Scenes/ComboClass/Skill3.tres" id="4_s36wo"]
+[ext_resource type="Script" uid="uid://73ibnv5rsxp8" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_11pvb"]
 [ext_resource type="Resource" uid="uid://cjtw53hfqy2nj" path="res://Scenes/ComboClass/Skill4.tres" id="5_s36wo"]
+[ext_resource type="Script" uid="uid://dc4io0muyrm2t" path="res://Scripts/ClassScripts/Stats.cs" id="6_bs7qb"]
 [ext_resource type="Resource" uid="uid://vd7ocqvg6pfa" path="res://Scenes/ComboClass/Skill5.tres" id="6_txpl1"]
+[ext_resource type="Script" uid="uid://diw8cijd3d6q3" path="res://Scripts/ClassScripts/Stat.cs" id="7_ata2w"]
 [ext_resource type="Resource" uid="uid://xougc64oq7qh" path="res://Scenes/ComboClass/Skill6.tres" id="7_txpl1"]
+[ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="8_qphq5"]
+[ext_resource type="Script" uid="uid://cg13tcehio2of" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="9_i2r8i"]
 [ext_resource type="Resource" uid="uid://d1qg7816o6cbp" path="res://Resources/DefaultStats.tres" id="10_4psm2"]
-[ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="11_nhdph"]
+[ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="10_c432e"]
+[ext_resource type="Texture2D" uid="uid://c4de7wmvqt1m7" path="res://Pirates/Equipment/Primary/Bow.png" id="11_6hna0"]
+[ext_resource type="Script" uid="uid://y5csa3y2a6h4" path="res://Scripts/ClassScripts/Skill.cs" id="11_nhdph"]
+[ext_resource type="Script" uid="uid://dokk7cx2pflnk" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="12_i42g7"]
+[ext_resource type="Script" uid="uid://cy3pvgilxl1kh" path="res://Scripts/Equipment/Inventory.cs" id="13_8betd"]
 
 [sub_resource type="Resource" id="Resource_fd4e3"]
 script = ExtResource("4_h5fo3")
@@ -61,6 +70,115 @@ script = ExtResource("4_h5fo3")
 equipmentFlags = 16
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
+[sub_resource type="Resource" id="Resource_b7l1h"]
+resource_local_to_scene = true
+script = ExtResource("6_bs7qb")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_1rihm"]
+resource_local_to_scene = true
+resource_name = "TestRes"
+script = ExtResource("5_11pvb")
+equipmentFlags = 2047
+stats = SubResource("Resource_b7l1h")
+enhancements = null
+ItemId = 14
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_p4lgj"]
+resource_local_to_scene = true
+resource_name = "TestRes"
+script = ExtResource("5_11pvb")
+equipmentFlags = 2047
+stats = SubResource("Resource_b7l1h")
+enhancements = null
+ItemId = 15
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_lv8gr"]
+script = ExtResource("9_i2r8i")
+EnhancmentText = "This Is a Test Of the Text"
+metadata/_custom_type_script = "uid://k8whvj1c14xl"
+
+[sub_resource type="Resource" id="Resource_e8g0n"]
+script = ExtResource("9_i2r8i")
+EnhancmentText = "This Is also a test
+"
+metadata/_custom_type_script = "uid://k8whvj1c14xl"
+
+[sub_resource type="Resource" id="Resource_ql2h3"]
+script = ExtResource("7_ata2w")
+MinValue = 1.0
+MaxValue = 100.0
+ClampValue = true
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_7e6fu"]
+resource_local_to_scene = true
+script = ExtResource("6_bs7qb")
+stats = Dictionary[String, ExtResource("7_ata2w")]({
+"Damage": SubResource("Resource_ql2h3")
+})
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_lcdno"]
+resource_local_to_scene = true
+resource_name = "Simple Chest"
+script = ExtResource("5_11pvb")
+equipmentFlags = 8
+stats = SubResource("Resource_7e6fu")
+enhancements = Array[Object]([SubResource("Resource_lv8gr"), SubResource("Resource_e8g0n")])
+Icon = ExtResource("8_qphq5")
+ItemId = 5
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="Resource" id="Resource_8cwke"]
+script = ExtResource("6_bs7qb")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_3e0yv"]
+resource_local_to_scene = true
+resource_name = "Simple Helm"
+script = ExtResource("5_11pvb")
+equipmentFlags = 128
+stats = SubResource("Resource_8cwke")
+enhancements = Array[Object]([])
+Icon = ExtResource("10_c432e")
+ItemId = -2
+metadata/_custom_type_script = "uid://c8xpcraad14yd"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5f65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_6hna0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_7iels"]
+resource_local_to_scene = true
+resource_name = "Bow"
+script = ExtResource("12_i42g7")
+WeaponName = "Bow"
+AttackSpeed = 1.0
+ShootPos = Vector2(3.5, 0)
+FlippedPos = Vector2(-3.5, 0)
+SpriteFrames = SubResource("SpriteFrames_q5f65")
+LeftType = 1
+equipmentFlags = 2081
+enhancements = null
+Icon = ExtResource("11_6hna0")
+metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
+
+[sub_resource type="Resource" id="Resource_b8af8"]
+resource_local_to_scene = true
+script = ExtResource("13_8betd")
+AllEquipment = Array[Object]([SubResource("Resource_1rihm"), SubResource("Resource_p4lgj"), SubResource("Resource_lcdno"), SubResource("Resource_3e0yv"), SubResource("Resource_7iels")])
+metadata/_custom_type_script = "uid://b25igrq5gmts2"
+
 [sub_resource type="Resource" id="Resource_pehvv"]
 script = ExtResource("11_nhdph")
 metadata/_custom_type_script = "uid://y5csa3y2a6h4"
@@ -72,6 +190,7 @@ scale = Vector2(0.997732, 1)
 script = ExtResource("2_4n5jn")
 comboLossTime = 2.0
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_i42g7"), SubResource("Resource_8betd"), SubResource("Resource_gslls"), SubResource("Resource_0casc"), SubResource("Resource_3pwyk"), SubResource("Resource_a6gn8"), SubResource("Resource_d6rbg")])
+inventory = SubResource("Resource_b8af8")
 skills = Array[Object]([ExtResource("2_s36wo"), ExtResource("3_xwqy6"), ExtResource("4_s36wo"), ExtResource("5_s36wo"), ExtResource("6_txpl1"), ExtResource("7_txpl1")])
 UltSkill = SubResource("Resource_pehvv")
 characterStats = ExtResource("10_4psm2")

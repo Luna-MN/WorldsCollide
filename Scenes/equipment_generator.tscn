@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh43r4421n8lf"]
 
-[ext_resource type="Script" uid="uid://bltv4ms4d08ny" path="res://EquipmentGenerator.cs" id="1_t3mdg"]
+[ext_resource type="Script" uid="uid://boidq25cavsww" path="res://EquipmentGenerator.cs" id="1_t3mdg"]
 [ext_resource type="PackedScene" uid="uid://dft540hr27ugl" path="res://Scenes/Equipment/Floor_Equipment_Default.tscn" id="2_tijhj"]
 
 [node name="Equipment Generator" type="Node2D"]

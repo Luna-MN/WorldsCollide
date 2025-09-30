@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm1evqmmype2t"]
 
-[ext_resource type="Script" uid="uid://dl412n3qovvt1" path="res://Scenes/SkillUI.cs" id="1_j0hcr"]
+[ext_resource type="Script" uid="uid://c5pq8uydrtxum" path="res://Scenes/SkillUI.cs" id="1_j0hcr"]
 
 [node name="Skill Select" type="Panel"]
 custom_minimum_size = Vector2(135, 135)
