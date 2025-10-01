@@ -13,7 +13,7 @@ public partial class SkillSelection : Panel
     [Export]
     public SkillUI[] SkillsSelected;
     public SkillUIPanel[] SkillPanels;
-    public SkillUIPanel PressedSkill = null;
+    public SkillUIPanel PressedSkill;
     public SkillUI pressedSelectSkill;
     public ChangeSkills ChangeSkillsButton;
     public override void _Ready()
@@ -28,15 +28,17 @@ public partial class SkillSelection : Panel
             {
                 if (pressedSelectSkill != null)
                 {
+                    if(PressedSkill != null) PressedSkill.SelfModulate = new Color(1, 1, 1);
                     pressedSelectSkill.selectedSkill = createdSkill;
                     pressedSelectSkill.Icon = createdSkill.Icon;
-                    createdSkill.Modulate = new Color(1, 1, 1);
+                    createdSkill.SelfModulate = new Color(1, 1, 1);
                     pressedSelectSkill.UpdateButton();
                     pressedSelectSkill = null;
                 }
                 else
                 {
-                    createdSkill.Modulate = new Color(0, 0, 1);
+                    if (PressedSkill != null) PressedSkill.SelfModulate = new Color(1, 1, 1);
+                    createdSkill.SelfModulate = new Color(0, 0, 1);
                     PressedSkill = createdSkill;
                 }
             };
@@ -48,7 +50,7 @@ public partial class SkillSelection : Panel
             {
                 if (PressedSkill != null)
                 {
-                    PressedSkill.Modulate = new Color(1, 1, 1);
+                    PressedSkill.SelfModulate = new Color(1, 1, 1);
                     skill.Icon = PressedSkill.Icon;
                     skill.selectedSkill = PressedSkill;
                     skill.UpdateButton();

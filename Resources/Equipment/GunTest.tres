@@ -64,7 +64,6 @@ resource_name = "GunTest"
 script = ExtResource("2_i8l6m")
 Attacks = Array[Object]([SubResource("Resource_p7sjl")])
 WeaponName = "Gun"
-AttackSpeed = 0.5
 ShootPos = Vector2(14.857, 3.429)
 FlippedPos = Vector2(14.857, -3.429)
 SpriteFrames = SubResource("SpriteFrames_h6cdl")

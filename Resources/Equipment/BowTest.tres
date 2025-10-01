@@ -58,7 +58,6 @@ resource_name = "Bow"
 script = ExtResource("1_ccnuq")
 Attacks = Array[Object]([SubResource("Resource_bfsng")])
 WeaponName = "Bow"
-AttackSpeed = 1.0
 ShootPos = Vector2(3.5, 0)
 FlippedPos = Vector2(-3.5, 0)
 SpriteFrames = SubResource("SpriteFrames_q5f65")
