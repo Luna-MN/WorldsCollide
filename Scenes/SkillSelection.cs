@@ -20,12 +20,14 @@ public partial class SkillSelection : Panel
     {
         foreach (var skill in GameManager.player.skills)
         {
+            // create a skill panel for each skill
             var createdSkill = skillUIPanel.Instantiate<SkillUIPanel>();
             createdSkill.SkillName = skill.Name;
             createdSkill.Icon = skill.Icon;
             createdSkill.skillIndex = GameManager.player.skills.ToList().IndexOf(skill);
             createdSkill.GetButton().ButtonDown += () =>
             {
+                // if you have pressed a skill at the top but not a selected a skill to assign it to
                 if (pressedSelectSkill != null)
                 {
                     if(PressedSkill != null) PressedSkill.SelfModulate = new Color(1, 1, 1);
@@ -35,6 +37,7 @@ public partial class SkillSelection : Panel
                     pressedSelectSkill.UpdateButton();
                     pressedSelectSkill = null;
                 }
+                // if you haven't got anything selected
                 else
                 {
                     if (PressedSkill != null) PressedSkill.SelfModulate = new Color(1, 1, 1);
@@ -46,6 +49,7 @@ public partial class SkillSelection : Panel
         }
         foreach (SkillUI skill in SkillsSelected)
         {
+            // assign a skill to a slot
             skill.GetButton().ButtonDown += () =>
             {
                 if (PressedSkill != null)
@@ -56,6 +60,7 @@ public partial class SkillSelection : Panel
                     skill.UpdateButton();
                     PressedSkill = null;
                 }
+                // select a slot
                 else
                 {
                     pressedSelectSkill = skill;
