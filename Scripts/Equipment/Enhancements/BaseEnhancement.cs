@@ -1,9 +1,12 @@
 using Godot;
 using System;
+
 [Tool]
 [GlobalClass]
 public partial class BaseEnhancement : Resource
 {
+    [Export]
+    public string Name;
     [Export(PropertyHint.MultilineText, "if you put {Value} it will replace with the value")]
     public string EnhancmentText;
     [Export]
@@ -18,8 +21,11 @@ public partial class BaseEnhancement : Resource
     [Export] public float MaxValue;
     public virtual void Enhance(Character character)
     {
-        //add what you want it to do here
-        // so like character.OnHit += something
+        if (Name == null)
+        {
+            return;
+        }
+        GameManager.Enhancments.GetType().GetMethod(Name).Invoke(GameManager.Enhancments, new object[] { character });
     }
 
     public string GetDescription()

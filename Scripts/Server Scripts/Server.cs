@@ -41,6 +41,7 @@ public partial class Server : Node2D
         ServerManager.ClassRpcs = GetNode<ClassRpc>("/root/ClassRpc");
         ServerManager.EquipmentRpcs = GetNode<EquipmentRpc>("/root/EquipmentRpc");
         ServerManager.spawner = GetParent().GetNode<MultiplayerSpawner>("MultiplayerSpawner");
+        GameManager.Enhancments = GetParent().GetNode<Enhancments>("/root/Enhancment");
         Multiplayer.MultiplayerPeer = Network;
     }
 

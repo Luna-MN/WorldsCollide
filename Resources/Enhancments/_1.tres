@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="One" load_steps=2 format=3 uid="uid://bqabth1btdvqe"]
+[gd_resource type="Resource" script_class="BaseEnhancement" load_steps=2 format=3 uid="uid://bqabth1btdvqe"]
 
-[ext_resource type="Script" uid="uid://bg7cx4iij3ngc" path="res://Scripts/Equipment/Enhancements/OnHit/One.cs" id="1_pihx5"]
+[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="1_pihx5"]
 
 [resource]
 script = ExtResource("1_pihx5")
+Name = "One"
 EnhancmentText = "On Hit Deal Damage Again"
+EnhancmentFlags = 4095
 metadata/_custom_type_script = "uid://bg7cx4iij3ngc"

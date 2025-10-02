@@ -21,6 +21,7 @@ ServerRpc="*res://Scenes/ServerRpc.tscn"
 ClientRpc="*res://Scenes/ClientRpc.tscn"
 EquipmentRpc="*res://Scripts/ClassScripts/EquipmentRpc.tscn"
 ClassRpc="*res://Scenes/ClassRpc.tscn"
+Enhancment="*res://Scenes/Equipment/enhancments.tscn"
 
 [debug]
 
