@@ -15,12 +15,13 @@ public partial class ClientRpc : Node2D
     }
 
     [Rpc(MultiplayerApi.RpcMode.Authority, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void FloatingText(string text, string nodePath, Color color)
+    public void FloatingText(float value, float multiplier, string nodePath, Color color)
     {
         var floatingText = FloatingTextScene.Instantiate<FloatingText>();
         var node = GetNode(nodePath);
         floatingText.Modulate = color;
-        floatingText.text.Text = text;
+        floatingText.value = value;
+        floatingText.multiplier = multiplier;
         node.AddChild(floatingText, true);
     }
     #endregion

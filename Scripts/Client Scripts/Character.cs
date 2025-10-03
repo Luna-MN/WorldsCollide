@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 
 [GlobalClass]
 public partial class Character : CharacterBody2D
@@ -407,10 +408,11 @@ public partial class Character : CharacterBody2D
         {
             damageText = damageText + "x" + amountOfTimes;       
         }
-        ServerManager.ClientRpcs.Rpc("FloatingText", damageText, GetPath().ToString(), new Color(1, 0.5f, 0.5f));
+        ServerManager.ClientRpcs.Rpc("FloatingText", damage, amountOfTimes , GetPath().ToString(), new Color(1, 0.5f, 0.5f));
         var text = FloatingText.Instantiate<FloatingText>();
         text.Modulate = new Color(1, 0.5f, 0.5f);
-        text.text.Text = damageText;
+        text.value = damage;
+        text.multiplier = amountOfTimes;
         AddChild(text, true);
     }
 
@@ -418,7 +420,7 @@ public partial class Character : CharacterBody2D
     {
         var text = FloatingText.Instantiate<FloatingText>();
         text.Modulate = new Color(0.5f, 1, 0.5f);
-        text.text.Text = heal.ToString();
+        text.value = heal;
         AddChild(text, true);
     }
     public virtual void TakeDamage(float damage, int attacker)

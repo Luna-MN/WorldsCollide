@@ -85,6 +85,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Wep Stats" type="HBoxContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(1.19, 3.96)
 layout_mode = 0
 offset_left = 41.17
@@ -114,6 +115,7 @@ xx"
 horizontal_alignment = 1
 
 [node name="Handedness" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 74.485
 offset_top = 284.36
