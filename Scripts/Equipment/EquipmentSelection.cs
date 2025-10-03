@@ -51,7 +51,7 @@ public partial class EquipmentSelection : Panel
                     obj.dummy.GlobalPosition = EquipmentSlots[otherIndex].GlobalPosition;
                 }
                 AddChild(obj);
-                obj.GlobalPosition = obj.selectedSlot.GlobalPosition;
+                obj.GlobalPosition = obj.selectedSlot.GlobalPosition - new Vector2(1, 0);
             }
         }
         CloseButton.ButtonDown += () =>

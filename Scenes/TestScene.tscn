@@ -17,18 +17,18 @@
 [ext_resource type="PackedScene" uid="uid://bada8pua2i38e" path="res://Scripts/Equipment/Equipment Selection.tscn" id="8_5rbs6"]
 [ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="8_fi7j4"]
 
-[sub_resource type="Resource" id="Resource_p30di"]
+[sub_resource type="Resource" id="Resource_fi7j4"]
 resource_local_to_scene = true
 resource_name = "Simple Chest"
 script = ExtResource("4_t2vuu")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_8c81w"]
+[sub_resource type="Resource" id="Resource_4v62a"]
 resource_local_to_scene = true
 resource_name = "TestRes"
 script = ExtResource("3_ytmxh")
 equipmentFlags = 2047
-stats = SubResource("Resource_p30di")
+stats = SubResource("Resource_fi7j4")
 enhancements = null
 Icon = ExtResource("8_fi7j4")
 ItemId = 14
@@ -52,7 +52,7 @@ MaxValue = 100.0
 ClampValue = true
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_fi7j4"]
+[sub_resource type="Resource" id="Resource_c2lnq"]
 resource_local_to_scene = true
 script = ExtResource("4_t2vuu")
 stats = Dictionary[String, ExtResource("5_lp1f3")]({
@@ -60,12 +60,12 @@ stats = Dictionary[String, ExtResource("5_lp1f3")]({
 })
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_4v62a"]
+[sub_resource type="Resource" id="Resource_dwn5r"]
 resource_local_to_scene = true
 resource_name = "Simple Chest"
 script = ExtResource("3_ytmxh")
 equipmentFlags = 8
-stats = SubResource("Resource_fi7j4")
+stats = SubResource("Resource_c2lnq")
 enhancements = Array[Object]([SubResource("Resource_lv8gr"), SubResource("Resource_e8g0n")])
 Icon = ExtResource("6_p30di")
 ItemId = 5
@@ -75,7 +75,7 @@ metadata/_custom_type_script = "uid://c8xpcraad14yd"
 script = ExtResource("4_t2vuu")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_c2lnq"]
+[sub_resource type="Resource" id="Resource_1vcy8"]
 resource_local_to_scene = true
 resource_name = "Simple Helm"
 script = ExtResource("3_ytmxh")
@@ -86,65 +86,65 @@ Icon = ExtResource("8_fi7j4")
 ItemId = -2
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
 
-[sub_resource type="Resource" id="Resource_dwn5r"]
+[sub_resource type="Resource" id="Resource_65o0v"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "armour"
 
-[sub_resource type="Resource" id="Resource_1vcy8"]
+[sub_resource type="Resource" id="Resource_o5yho"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "critChance"
 DisplayValue = 0.05
 
-[sub_resource type="Resource" id="Resource_65o0v"]
+[sub_resource type="Resource" id="Resource_w2urx"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "critDamage"
 DisplayValue = 1.25
 
-[sub_resource type="Resource" id="Resource_o5yho"]
+[sub_resource type="Resource" id="Resource_l6hhx"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "currentHealth"
 DisplayValue = 100.0
 
-[sub_resource type="Resource" id="Resource_w2urx"]
+[sub_resource type="Resource" id="Resource_kjcbk"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "damageIncrease"
 DisplayValue = 1.1
 
-[sub_resource type="Resource" id="Resource_l6hhx"]
+[sub_resource type="Resource" id="Resource_837su"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "itemFind"
 DisplayValue = 1.0
 
-[sub_resource type="Resource" id="Resource_kjcbk"]
+[sub_resource type="Resource" id="Resource_e2ukc"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "maxHealth"
 DisplayValue = 100.0
 
-[sub_resource type="Resource" id="Resource_837su"]
+[sub_resource type="Resource" id="Resource_pmm3y"]
 resource_local_to_scene = true
 script = ExtResource("5_lp1f3")
 Name = "speed"
 DisplayValue = 300.0
 
-[sub_resource type="Resource" id="Resource_e2ukc"]
+[sub_resource type="Resource" id="Resource_ujmjp"]
 resource_local_to_scene = true
 script = ExtResource("4_t2vuu")
 stats = Dictionary[String, ExtResource("5_lp1f3")]({
-"armour": SubResource("Resource_dwn5r"),
-"critChance": SubResource("Resource_1vcy8"),
-"critDamage": SubResource("Resource_65o0v"),
-"currentHealth": SubResource("Resource_o5yho"),
-"damageIncrease": SubResource("Resource_w2urx"),
-"itemFind": SubResource("Resource_l6hhx"),
-"maxHealth": SubResource("Resource_kjcbk"),
-"speed": SubResource("Resource_837su")
+"armour": SubResource("Resource_65o0v"),
+"critChance": SubResource("Resource_o5yho"),
+"critDamage": SubResource("Resource_w2urx"),
+"currentHealth": SubResource("Resource_l6hhx"),
+"damageIncrease": SubResource("Resource_kjcbk"),
+"itemFind": SubResource("Resource_837su"),
+"maxHealth": SubResource("Resource_e2ukc"),
+"speed": SubResource("Resource_pmm3y")
 })
 
 [node name="Node2D2" type="Node2D"]
@@ -157,9 +157,9 @@ spawn_path = NodePath(".")
 [node name="Dummy" parent="MultiplayerSpawner" instance=ExtResource("2_5rbs6")]
 position = Vector2(328, 176)
 DropLootOnDeath = true
-DroppableEquipment = Array[Object]([SubResource("Resource_8c81w"), SubResource("Resource_4v62a"), SubResource("Resource_c2lnq")])
+DroppableEquipment = Array[Object]([SubResource("Resource_4v62a"), SubResource("Resource_dwn5r"), SubResource("Resource_1vcy8")])
 EquipmentSpawner = ExtResource("3_201fe")
-characterStats = SubResource("Resource_e2ukc")
+characterStats = SubResource("Resource_ujmjp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_8k7wh")

@@ -167,7 +167,7 @@ public partial class EquipmentUI : Panel
 
                     //one handed wep
                     selectedSlot.equip = this;
-                    GlobalPosition = selectedSlot.GlobalPosition;
+                    GlobalPosition = selectedSlot.GlobalPosition - new Vector2(1, 0);
                     GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)]
                         .EquippedEquipment = AssignedEquipment;
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
@@ -298,6 +298,7 @@ public partial class EquipmentUI : Panel
         {
             GlobalPosition = GetGlobalMousePosition() + new Vector2(-45, -45);
         }
+        Scale = new Vector2(0.75f, 0.75f);
     }
 
     public void OnEquipSlotEnter(Node2D body)

@@ -8,20 +8,20 @@
 [ext_resource type="Texture2D" uid="uid://cthlp6i84npo6" path="res://Pirates/Equipment/Slots/EquipmentSlot_MainHand.png" id="4_fn6ck"]
 [ext_resource type="Texture2D" uid="uid://ft43whqwtdu5" path="res://Pirates/Equipment/Slots/EquipmentSlot_Chestpeice.png" id="4_g4amf"]
 [ext_resource type="Texture2D" uid="uid://bpmq6q010btsl" path="res://Pirates/Equipment/Slots/EquipmentSlot_Legs.png" id="5_alyoc"]
-[ext_resource type="StyleBox" uid="uid://b3txk3kwult20" path="res://Scripts/Equipment/ItemPanel.tres" id="5_jiwcl"]
 [ext_resource type="Texture2D" uid="uid://byt2f0ok3jcn6" path="res://Pirates/Equipment/Slots/EquipmentSlot_OffHand.png" id="5_l8aht"]
 [ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_7f453"]
 [ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="8_4qi71"]
 [ext_resource type="Texture2D" uid="uid://dwpmpieyjslq6" path="res://Pirates/Equipment/Slots/EquipmentSlot_Gloves.png" id="8_fn6ck"]
+[ext_resource type="Texture2D" uid="uid://stb1qctfv2uw" path="res://Pirates/Header1.png" id="14_u7rpv"]
 
 [node name="EquipmentSelection" type="Panel" node_paths=PackedStringArray("EquipmentGrid", "EquipmentSlots", "CloseButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 75.0
-offset_top = 70.0
+offset_top = 18.0
 offset_right = -77.0
-offset_bottom = -78.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -39,10 +39,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -76.0
-offset_top = -45.0
-offset_right = -24.0
-offset_bottom = -14.0
+offset_left = -143.0
+offset_top = -186.0
+offset_right = -85.0
+offset_bottom = -155.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Apply"
@@ -52,10 +52,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -441.0
-offset_top = 23.0
-offset_right = -24.0
-offset_bottom = 438.0
+offset_left = -463.0
+offset_top = 64.0
+offset_right = -93.0
+offset_bottom = 422.0
 grow_horizontal = 0
 mouse_filter = 2
 
@@ -66,73 +66,77 @@ columns = 3
 
 [node name="Slot0" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 325.0
-offset_top = 385.0
-offset_right = 414.0
-offset_bottom = 471.0
-theme = ExtResource("1_elo4j")
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 316.0
+offset_top = 374.0
+offset_right = 405.0
+offset_bottom = 460.0
 Icon = ExtResource("4_fn6ck")
 
 [node name="Slot1" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 420.0
-offset_top = 385.0
-offset_right = 509.0
-offset_bottom = 471.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 390.0
+offset_top = 374.0
+offset_right = 479.0
+offset_bottom = 460.0
 Icon = ExtResource("5_l8aht")
 
 [node name="Slot2" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 175.0
-offset_top = 10.0
-offset_right = 264.0
-offset_bottom = 96.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 211.0
+offset_top = 119.0
+offset_right = 300.0
+offset_bottom = 205.0
 Icon = ExtResource("4_alyoc")
 
 [node name="Slot3" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 120.0
-offset_right = 139.0
-offset_bottom = 206.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 125.0
+offset_top = 193.0
+offset_right = 214.0
+offset_bottom = 279.0
 Icon = ExtResource("4_g4amf")
 
 [node name="Slot4" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 240.0
-offset_right = 139.0
-offset_bottom = 326.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 124.0
+offset_top = 265.0
+offset_right = 213.0
+offset_bottom = 351.0
 Icon = ExtResource("5_alyoc")
 
 [node name="Slot5" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 120.0
-offset_right = 389.0
-offset_bottom = 206.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 296.0
+offset_top = 191.0
+offset_right = 385.0
+offset_bottom = 277.0
 Icon = ExtResource("8_fn6ck")
 
 [node name="Slot6" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 240.0
-offset_right = 389.0
-offset_bottom = 326.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 296.0
+offset_top = 269.0
+offset_right = 385.0
+offset_bottom = 355.0
 Icon = ExtResource("7_7f453")
 
 [node name="Slot7" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 175.0
-offset_top = 350.0
-offset_right = 264.0
-offset_bottom = 436.0
-theme_override_styles/panel = ExtResource("5_jiwcl")
+offset_left = 211.0
+offset_top = 338.0
+offset_right = 300.0
+offset_bottom = 424.0
 Icon = ExtResource("8_4qi71")
+
+[node name="Header1" type="Sprite2D" parent="."]
+position = Vector2(269.00003, 88)
+scale = Vector2(1.8241651, 1.1400001)
+texture = ExtResource("14_u7rpv")
+
+[node name="Label" type="Label" parent="Header1"]
+offset_left = -55.916016
+offset_top = -17.543858
+offset_right = 75.65103
+offset_bottom = 14.035084
+scale = Vector2(1.26, 1.9)
+text = "Equipment"

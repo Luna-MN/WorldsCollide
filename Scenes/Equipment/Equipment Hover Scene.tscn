@@ -1,15 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://st53bnwcvead"]
+[gd_scene load_steps=7 format=3 uid="uid://st53bnwcvead"]
 
-[ext_resource type="Theme" uid="uid://dp87lkmt8ncyv" path="res://Scripts/Equipment/EquipTheme.tres" id="1_peqw6"]
+[ext_resource type="Texture2D" uid="uid://mnxs7s80v46g" path="res://Pirates/Scroll3.png" id="1_gjvxm"]
 [ext_resource type="Script" uid="uid://bs21atfwxf8xc" path="res://Scenes/Equipment/EquipmentHoverScene.cs" id="2_2h24l"]
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_gjvxm"]
 [ext_resource type="PackedScene" uid="uid://bhci5kut0hqr1" path="res://StatsPanel.tscn" id="3_2h24l"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2h24l"]
+texture = ExtResource("1_gjvxm")
+texture_margin_left = 132.0
+texture_margin_top = 165.0
+texture_margin_right = 134.0
+texture_margin_bottom = 165.0
+region_rect = Rect2(-2, 0, 278, 340)
+
+[sub_resource type="Theme" id="Theme_elo8b"]
+Panel/styles/panel = SubResource("StyleBoxTexture_2h24l")
+
 [node name="EquipmentHover" type="Panel" node_paths=PackedStringArray("ItemName", "ItemDescription", "Quality", "ItemIcon", "wepStats", "Attack", "Speed", "Range", "Handedness")]
-offset_right = 300.0
-offset_bottom = 497.0
+offset_right = 351.0
+offset_bottom = 599.0
 mouse_filter = 2
-theme = ExtResource("1_peqw6")
+theme = SubResource("Theme_elo8b")
 script = ExtResource("2_2h24l")
 ItemName = NodePath("Item Name")
 ItemDescription = NodePath("Enhancments")
@@ -23,45 +34,45 @@ Range = NodePath("Wep Stats/Range")
 Handedness = NodePath("Handedness")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(146.8, 104)
-scale = Vector2(6, 6)
+position = Vector2(175, 160)
+scale = Vector2(4, 3.911)
 texture = ExtResource("2_gjvxm")
 
 [node name="Item Name" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 55.335
-offset_top = 193.0
-offset_right = 240.02496
-offset_bottom = 221.0
+offset_left = 85.0
+offset_top = 217.725
+offset_right = 269.68997
+offset_bottom = 245.725
 text = "Item Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Quality" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 237.0
-offset_top = 16.0
-offset_right = 288.0
-offset_bottom = 34.0
+offset_left = 264.0
+offset_top = 82.0
+offset_right = 315.0
+offset_bottom = 100.0
 text = "9999"
 horizontal_alignment = 2
 
 [node name="Enhancments" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 367.0
-offset_right = 282.0
-offset_bottom = 466.0
+offset_left = 45.0
+offset_top = 402.0
+offset_right = 312.0
+offset_bottom = 501.0
 text = "Enhancments"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Additive Stats" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 32.145
-offset_top = 279.89
-offset_right = 266.325
-offset_bottom = 356.89
+offset_left = 61.72
+offset_top = 303.17
+offset_right = 295.90005
+offset_bottom = 380.17
 columns = 3
 
 [node name="Panel3" parent="Additive Stats" instance=ExtResource("3_2h24l")]
@@ -74,13 +85,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Wep Stats" type="HBoxContainer" parent="."]
-visible = false
 custom_minimum_size = Vector2(1.19, 3.96)
 layout_mode = 0
-offset_left = 12.045
-offset_top = 244.11
-offset_right = 290.045
-offset_bottom = 284.11194
+offset_left = 41.17
+offset_top = 250.73
+offset_right = 319.16998
+offset_bottom = 284.472
 
 [node name="Attack" type="RichTextLabel" parent="Wep Stats"]
 custom_minimum_size = Vector2(90, 0)
@@ -104,12 +114,11 @@ xx"
 horizontal_alignment = 1
 
 [node name="Handedness" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 58.5
-offset_top = 220.77
-offset_right = 235.59
-offset_bottom = 239.77003
+offset_left = 74.485
+offset_top = 284.36
+offset_right = 285.5047
+offset_bottom = 303.36
 text = "Flexible, Main Hand"
 horizontal_alignment = 1
 vertical_alignment = 1

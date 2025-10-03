@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhci5kut0hqr1"]
 
-[ext_resource type="Theme" uid="uid://dp87lkmt8ncyv" path="res://Scripts/Equipment/EquipTheme.tres" id="1_2mmkt"]
+[ext_resource type="Theme" uid="uid://dl5ejn2cpa5tt" path="res://Scenes/EquipmentSlot.tres" id="1_2mmkt"]
 
 [node name="Panel" type="Panel"]
 custom_minimum_size = Vector2(75, 75)

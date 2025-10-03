@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm1evqmmype2t"]
+[gd_scene load_steps=3 format=3 uid="uid://dm1evqmmype2t"]
 
+[ext_resource type="Theme" uid="uid://dl5ejn2cpa5tt" path="res://Scenes/EquipmentSlot.tres" id="1_ie48h"]
 [ext_resource type="Script" uid="uid://dl412n3qovvt1" path="res://Scenes/SkillUI.cs" id="1_j0hcr"]
 
 [node name="Skill Select" type="Panel"]
@@ -8,6 +9,7 @@ offset_right = 135.0
 offset_bottom = 135.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
+theme = ExtResource("1_ie48h")
 script = ExtResource("1_j0hcr")
 
 [node name="Button" type="Button" parent="."]
