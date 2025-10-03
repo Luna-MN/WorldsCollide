@@ -52,6 +52,8 @@ public partial class FloatingText : Marker2D
         tween.TweenProperty(this, "scale", new Vector2(2, 2), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
         tween.TweenProperty(this, "scale", new Vector2(0.5f, 0.5f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
         await ToSignal(tween, Tween.SignalName.Finished); 
+        // if there is no text already above the character tween linearly out and back in, then combine the mult and value into real value
+        // else queue free and add the value * mult to the character text that already exists
         QueueFree();
     }
 
