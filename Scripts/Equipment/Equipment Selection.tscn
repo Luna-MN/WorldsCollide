@@ -12,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_7f453"]
 [ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="8_4qi71"]
 [ext_resource type="Texture2D" uid="uid://dwpmpieyjslq6" path="res://Pirates/Equipment/Slots/EquipmentSlot_Gloves.png" id="8_fn6ck"]
-[ext_resource type="Texture2D" uid="uid://stb1qctfv2uw" path="res://Pirates/Header1.png" id="14_u7rpv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_elo4j"]
 
 [node name="EquipmentSelection" type="Panel" node_paths=PackedStringArray("EquipmentGrid", "EquipmentSlots", "CloseButton")]
 anchors_preset = 15
@@ -128,15 +129,13 @@ offset_right = 300.0
 offset_bottom = 424.0
 Icon = ExtResource("8_4qi71")
 
-[node name="Header1" type="Sprite2D" parent="."]
-position = Vector2(269.00003, 88)
-scale = Vector2(1.8241651, 1.1400001)
-texture = ExtResource("14_u7rpv")
-
-[node name="Label" type="Label" parent="Header1"]
-offset_left = -55.916016
-offset_top = -17.543858
-offset_right = 75.65103
-offset_bottom = 14.035084
-scale = Vector2(1.26, 1.9)
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.7019608, 0.5568628, 0.44705883, 1)
+layout_mode = 0
+offset_left = 169.0
+offset_top = 62.0
+offset_right = 293.0
+offset_bottom = 85.0
+scale = Vector2(1.86, 1.86)
 text = "Equipment"
+label_settings = SubResource("LabelSettings_elo4j")
