@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjfsajtpy6q03"
-path="res://.godot/imported/About.png-79be026045f767617ba310e0cf69e923.ctex"
+uid="uid://7osnldvtnh0a"
+path="res://.godot/imported/Line.png-0aa63f82a44f7ff5a97ae101ae4e09e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/About.png"
-dest_files=["res://.godot/imported/About.png-79be026045f767617ba310e0cf69e923.ctex"]
+source_file="res://Pirates/Book Stuff/Line.png"
+dest_files=["res://.godot/imported/Line.png-0aa63f82a44f7ff5a97ae101ae4e09e8.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://spxtgq3qe4j7"
-path="res://.godot/imported/Scalable Paper.png-31ab73f788edcae798c5ad0942c82bbf.ctex"
+uid="uid://c653bacg80ssl"
+path="res://.godot/imported/EquipmentUI.png-b4c80f8afc80a08397fc21f71f40cf33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/Equipment/Scalable Paper.png"
-dest_files=["res://.godot/imported/Scalable Paper.png-31ab73f788edcae798c5ad0942c82bbf.ctex"]
+source_file="res://Pirates/Book Stuff/EquipmentUI.png"
+dest_files=["res://.godot/imported/EquipmentUI.png-b4c80f8afc80a08397fc21f71f40cf33.ctex"]
 
 [params]
 

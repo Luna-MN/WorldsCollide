@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb1m44x833m4w"
-path="res://.godot/imported/EquipmentSlot.png-52f26c69bbc42d5f3e9d046505dd3e46.ctex"
+uid="uid://dwruhsq2fdjtr"
+path="res://.godot/imported/Item_Holder_hud.png-f7bcb8d6ea6e5c0be73dc53fbaa2d2c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/Equipment/EquipmentSlot.png"
-dest_files=["res://.godot/imported/EquipmentSlot.png-52f26c69bbc42d5f3e9d046505dd3e46.ctex"]
+source_file="res://Pirates/Book Stuff/Item_Holder_hud.png"
+dest_files=["res://.godot/imported/Item_Holder_hud.png-f7bcb8d6ea6e5c0be73dc53fbaa2d2c7.ctex"]
 
 [params]
 

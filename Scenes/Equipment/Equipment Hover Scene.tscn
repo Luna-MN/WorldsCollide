@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://st53bnwcvead"]
 
-[ext_resource type="Texture2D" uid="uid://mnxs7s80v46g" path="res://Pirates/Scroll3.png" id="1_gjvxm"]
+[ext_resource type="Texture2D" uid="uid://mnxs7s80v46g" path="res://Pirates/Book Stuff/Scroll3.png" id="1_gjvxm"]
 [ext_resource type="Script" uid="uid://bs21atfwxf8xc" path="res://Scenes/Equipment/EquipmentHoverScene.cs" id="2_2h24l"]
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_gjvxm"]
 [ext_resource type="PackedScene" uid="uid://bhci5kut0hqr1" path="res://StatsPanel.tscn" id="3_2h24l"]

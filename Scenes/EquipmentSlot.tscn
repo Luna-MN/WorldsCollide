@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cty5igj15kppt"]
 
-[ext_resource type="Texture2D" uid="uid://bb1m44x833m4w" path="res://Pirates/Equipment/EquipmentSlot.png" id="1_7uml2"]
+[ext_resource type="Texture2D" uid="uid://bb1m44x833m4w" path="res://Pirates/Book Stuff/EquipmentSlot.png" id="1_7uml2"]
 [ext_resource type="Script" uid="uid://cnhjg83han757" path="res://Scenes/EquipmentSlotUI.cs" id="1_i7ckq"]
 [ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="2_ei0t3"]
 [ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="3_mj7oj"]

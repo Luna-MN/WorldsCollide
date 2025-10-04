@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c7t0krqqvdpeo"]
 
 [ext_resource type="Script" uid="uid://cd65r4iwpokqx" path="res://Scenes/SkillUIPanel.cs" id="1_86x3w"]
-[ext_resource type="Texture2D" uid="uid://brtcumbgynkyv" path="res://Pirates/Blank.png" id="1_lfkld"]
+[ext_resource type="Texture2D" uid="uid://brtcumbgynkyv" path="res://Pirates/Book Stuff/Blank.png" id="1_lfkld"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="1_uc8rf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_msnbu"]

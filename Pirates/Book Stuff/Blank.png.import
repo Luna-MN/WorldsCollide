@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mnxs7s80v46g"
-path="res://.godot/imported/Scroll3.png-b6737bcf6e8c867f813fb8d3aad966c1.ctex"
+uid="uid://brtcumbgynkyv"
+path="res://.godot/imported/Blank.png-b4876d00f90f8b733718930602765768.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/Scroll3.png"
-dest_files=["res://.godot/imported/Scroll3.png-b6737bcf6e8c867f813fb8d3aad966c1.ctex"]
+source_file="res://Pirates/Book Stuff/Blank.png"
+dest_files=["res://.godot/imported/Blank.png-b4876d00f90f8b733718930602765768.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=16 format=4 uid="uid://dp87lkmt8ncyv"]
 
-[ext_resource type="Texture2D" uid="uid://dwruhsq2fdjtr" path="res://Pirates/Equipment/Item_Holder_hud.png" id="1_0upkc"]
+[ext_resource type="Texture2D" uid="uid://dwruhsq2fdjtr" path="res://Pirates/Book Stuff/Item_Holder_hud.png" id="1_0upkc"]
 [ext_resource type="FontFile" uid="uid://c47oo2fgcps5v" path="res://Peaberry-Base.otf" id="1_tccta"]
 [ext_resource type="FontFile" uid="uid://cmp4hsjv7mxe4" path="res://PeaberryMono.ttf" id="1_w5hcm"]
-[ext_resource type="Texture2D" uid="uid://bwx1ha0pwscvf" path="res://Pirates/Book.png" id="3_w5hcm"]
+[ext_resource type="Texture2D" uid="uid://bwx1ha0pwscvf" path="res://Pirates/Book Stuff/Book.png" id="3_w5hcm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u7rpv"]
 texture = ExtResource("1_0upkc")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bada8pua2i38e"]
+[gd_scene load_steps=21 format=3 uid="uid://bada8pua2i38e"]
 
 [ext_resource type="Script" uid="uid://cf18wdlg8is68" path="res://Scripts/Equipment/EquipmentSelection.cs" id="1_56myr"]
 [ext_resource type="Theme" uid="uid://dp87lkmt8ncyv" path="res://Scripts/Equipment/EquipTheme.tres" id="1_elo4j"]
@@ -12,6 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_7f453"]
 [ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="8_4qi71"]
 [ext_resource type="Texture2D" uid="uid://dwpmpieyjslq6" path="res://Pirates/Equipment/Slots/EquipmentSlot_Gloves.png" id="8_fn6ck"]
+[ext_resource type="Texture2D" uid="uid://5jxjo6k3pex0" path="res://Pirates/Book Stuff/Header.png" id="8_wxmjs"]
+[ext_resource type="Texture2D" uid="uid://dho2xhi8flved" path="res://Pirates/Book Stuff/Star.png" id="9_7cgc1"]
+[ext_resource type="Texture2D" uid="uid://bflschn4ws80y" path="res://Pirates/Book Stuff/Side2.png" id="13_wxmjs"]
+[ext_resource type="Texture2D" uid="uid://bdu5pvmvu2um5" path="res://Pirates/Book Stuff/Side3.png" id="14_12pyo"]
+[ext_resource type="Texture2D" uid="uid://cvjgj5d7vr62n" path="res://Pirates/Book Stuff/Side1.png" id="17_gjx4u"]
+[ext_resource type="Texture2D" uid="uid://4q7irl2uhtt3" path="res://Pirates/Book Stuff/Side4.png" id="18_12pyo"]
+[ext_resource type="Texture2D" uid="uid://bkbreb2a7snck" path="res://Pirates/Book Stuff/ItemShadow.png" id="19_mmty0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elo4j"]
 
@@ -19,10 +26,10 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 75.0
-offset_top = 18.0
-offset_right = -77.0
-offset_bottom = -9.0
+offset_left = 52.0
+offset_top = 8.0
+offset_right = -100.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -33,6 +40,59 @@ EquipmentGrid = NodePath("GridContainer/GridContainer")
 EquipmentSlots = [NodePath("Slot0"), NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3"), NodePath("Slot4"), NodePath("Slot5"), NodePath("Slot6"), NodePath("Slot7")]
 CloseButton = NodePath("Button")
 
+[node name="UIElements" type="CanvasGroup" parent="."]
+position = Vector2(-52.285, -8.02)
+
+[node name="Side2" type="Sprite2D" parent="UIElements"]
+position = Vector2(142, 449)
+texture = ExtResource("13_wxmjs")
+
+[node name="Side3" type="Sprite2D" parent="UIElements"]
+position = Vector2(506.3, 157.09)
+texture = ExtResource("14_12pyo")
+
+[node name="Side1" type="Sprite2D" parent="UIElements"]
+position = Vector2(585.69, 97.93)
+texture = ExtResource("17_gjx4u")
+
+[node name="Side4" type="Sprite2D" parent="UIElements"]
+position = Vector2(943, 439)
+texture = ExtResource("18_12pyo")
+
+[node name="Header" type="Sprite2D" parent="UIElements"]
+position = Vector2(305, 96)
+texture = ExtResource("8_wxmjs")
+
+[node name="Star" type="Sprite2D" parent="UIElements"]
+position = Vector2(215, 389)
+texture = ExtResource("9_7cgc1")
+
+[node name="Star2" type="Sprite2D" parent="UIElements"]
+position = Vector2(467, 262)
+texture = ExtResource("9_7cgc1")
+
+[node name="Star3" type="Sprite2D" parent="UIElements"]
+position = Vector2(217, 184)
+texture = ExtResource("9_7cgc1")
+
+[node name="Star4" type="Sprite2D" parent="UIElements"]
+position = Vector2(390, 175)
+texture = ExtResource("9_7cgc1")
+
+[node name="Star5" type="Sprite2D" parent="UIElements"]
+position = Vector2(149, 300)
+texture = ExtResource("9_7cgc1")
+
+[node name="Label" type="Label" parent="UIElements"]
+modulate = Color(0.7019608, 0.5568628, 0.44705883, 1)
+offset_left = 221.0
+offset_top = 70.0
+offset_right = 345.0
+offset_bottom = 93.0
+scale = Vector2(1.86, 1.86)
+text = "Equipment"
+label_settings = SubResource("LabelSettings_elo4j")
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -40,13 +100,20 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = -186.0
-offset_right = -85.0
-offset_bottom = -155.0
+offset_left = -115.0
+offset_top = -140.0
+offset_right = -57.0
+offset_bottom = -109.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Apply"
+
+[node name="ItemShadow" type="Sprite2D" parent="."]
+position = Vector2(729.09485, 259)
+scale = Vector2(1.2658699, 1.0921737)
+texture = ExtResource("19_mmty0")
+region_enabled = true
+region_rect = Rect2(0, 1, 264, 148)
 
 [node name="GridContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -54,8 +121,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -463.0
-offset_top = 64.0
-offset_right = -93.0
+offset_top = 85.0
+offset_right = -116.0
 offset_bottom = 422.0
 grow_horizontal = 0
 mouse_filter = 2
@@ -68,75 +135,64 @@ columns = 4
 
 [node name="Slot0" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 316.0
-offset_top = 374.0
-offset_right = 405.0
-offset_bottom = 460.0
+offset_left = 301.0
+offset_top = 371.0
+offset_right = 390.0
+offset_bottom = 457.0
 Icon = ExtResource("4_fn6ck")
 
 [node name="Slot1" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 390.0
-offset_top = 374.0
-offset_right = 479.0
-offset_bottom = 460.0
+offset_left = 375.0
+offset_top = 371.0
+offset_right = 464.0
+offset_bottom = 457.0
 Icon = ExtResource("5_l8aht")
 
 [node name="Slot2" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 211.0
-offset_top = 119.0
-offset_right = 300.0
-offset_bottom = 205.0
+offset_left = 215.0
+offset_top = 131.0
+offset_right = 304.0
+offset_bottom = 217.0
 Icon = ExtResource("4_alyoc")
 
 [node name="Slot3" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 125.0
-offset_top = 193.0
-offset_right = 214.0
-offset_bottom = 279.0
+offset_left = 129.0
+offset_top = 205.0
+offset_right = 218.0
+offset_bottom = 291.0
 Icon = ExtResource("4_g4amf")
 
 [node name="Slot4" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 124.0
-offset_top = 265.0
-offset_right = 213.0
-offset_bottom = 351.0
+offset_left = 128.0
+offset_top = 277.0
+offset_right = 217.0
+offset_bottom = 363.0
 Icon = ExtResource("5_alyoc")
 
 [node name="Slot5" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 296.0
-offset_top = 191.0
-offset_right = 385.0
-offset_bottom = 277.0
+offset_left = 300.0
+offset_top = 203.0
+offset_right = 389.0
+offset_bottom = 289.0
 Icon = ExtResource("8_fn6ck")
 
 [node name="Slot6" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 296.0
-offset_top = 269.0
-offset_right = 385.0
-offset_bottom = 355.0
+offset_left = 300.0
+offset_top = 281.0
+offset_right = 389.0
+offset_bottom = 367.0
 Icon = ExtResource("7_7f453")
 
 [node name="Slot7" parent="." instance=ExtResource("3_56myr")]
 layout_mode = 0
-offset_left = 211.0
-offset_top = 338.0
-offset_right = 300.0
-offset_bottom = 424.0
+offset_left = 215.0
+offset_top = 350.0
+offset_right = 304.0
+offset_bottom = 436.0
 Icon = ExtResource("8_4qi71")
-
-[node name="Label" type="Label" parent="."]
-modulate = Color(0.7019608, 0.5568628, 0.44705883, 1)
-layout_mode = 0
-offset_left = 169.0
-offset_top = 62.0
-offset_right = 293.0
-offset_bottom = 85.0
-scale = Vector2(1.86, 1.86)
-text = "Equipment"
-label_settings = SubResource("LabelSettings_elo4j")

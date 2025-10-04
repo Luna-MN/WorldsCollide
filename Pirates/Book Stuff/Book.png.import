@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uu27x66tbar1"
-path="res://.godot/imported/Box.png-1b60b45ceb3434fbf0da7dc5387bc423.ctex"
+uid="uid://bwx1ha0pwscvf"
+path="res://.godot/imported/Book.png-20d6de76114ec4c8bcf3b9bc9b6357d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/Equipment/Box.png"
-dest_files=["res://.godot/imported/Box.png-1b60b45ceb3434fbf0da7dc5387bc423.ctex"]
+source_file="res://Pirates/Book Stuff/Book.png"
+dest_files=["res://.godot/imported/Book.png-20d6de76114ec4c8bcf3b9bc9b6357d8.ctex"]
 
 [params]
 

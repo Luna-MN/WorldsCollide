@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwx1ha0pwscvf"
-path="res://.godot/imported/Book.png-e05d6d0adb834e971e7e4f73d46250bc.ctex"
+uid="uid://s33n70fp4qse"
+path="res://.godot/imported/Frame1right.png-48f4e070f1129f512bc91eab05f1f449.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/Book.png"
-dest_files=["res://.godot/imported/Book.png-e05d6d0adb834e971e7e4f73d46250bc.ctex"]
+source_file="res://Pirates/Book Stuff/Frame1right.png"
+dest_files=["res://.godot/imported/Frame1right.png-48f4e070f1129f512bc91eab05f1f449.ctex"]
 
 [params]
 
