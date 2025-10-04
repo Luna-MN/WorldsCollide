@@ -77,11 +77,10 @@ public partial class EquipmentUI : Panel
                 TopUI.AddChild(scene);
             }
             mouseIn = true;
-            GD.Print(mouseIn);
+            GD.Print(mouseIn + " " + AssignedEquipment.ResourceName);
         };
         area.MouseExited += () =>
         {
-
             mouseIn = false;
             GD.Print(mouseIn);
             if (scene != null)
@@ -114,13 +113,14 @@ public partial class EquipmentUI : Panel
 
         if (@event is InputEventMouseButton MB)
         {
-            var equippable = true;
             if (MB.ButtonIndex == MouseButton.Left && !MB.Pressed && mouseClick && mouseIn)
             {
+                mouseIn = false;
                 mouseClick = false;
                 TopUI.pickedUp = false;
                 TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
                 // this is two handed handling, so you can't equip a two handed wep if there is already we other wep attached
+                var equippable = true;
                 if (TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot) == 0)
                 {
                     var p = (PrimaryWeapon)AssignedEquipment;
@@ -221,13 +221,12 @@ public partial class EquipmentUI : Panel
                 {
                     return;
                 }
-                TopUI.CallDeferred("add_child", this);
                 if (scene != null)
                 {
                     scene.QueueFree();
                     scene = null;
                 }
-
+                TopUI.CallDeferred("add_child", this);
                 GetParent().RemoveChild(this);
                 TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                 mouseClick = true;
@@ -297,6 +296,11 @@ public partial class EquipmentUI : Panel
         if (mouseClick)
         {
             GlobalPosition = GetGlobalMousePosition() + new Vector2(-45, -45);
+        }
+        if (!mouseIn && scene != null)
+        {
+            scene.QueueFree();
+            scene = null;
         }
         Scale = new Vector2(0.75f, 0.75f);
     }

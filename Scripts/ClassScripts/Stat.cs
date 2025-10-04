@@ -60,7 +60,7 @@ public partial class Stat : Resource
     private void setName(string name)
     {
         _name = name;
-        GD.Print($"Stat name: {_name}");
+        // GD.Print($"Stat name: {_name}");
         try
         {
             //[stat name]Vaildation = validation on setting a value
@@ -109,7 +109,7 @@ public partial class Stat : Resource
     //do the math - loop through list - running the calculation at 10
     private float calculation()
     {
-        GD.Print($"{Name} calculating : {_calcFunction?.Name} : {_validationFunction?.Name}");
+        // GD.Print($"{Name} calculating : {_calcFunction?.Name} : {_validationFunction?.Name}");
         float v = _value;
         bool calcRun = false;
         if (_funcs.Count != 0)
@@ -140,7 +140,7 @@ public partial class Stat : Resource
         {
             v = (float)(_calcFunction?.Invoke(null, [v])?? v);
         }
-        GD.Print($"{Name} calculated : {v}");
+        // GD.Print($"{Name} calculated : {v}");
         return v;
     }
 }
