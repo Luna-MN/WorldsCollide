@@ -45,7 +45,7 @@ public partial class Character : CharacterBody2D
     public List<int> PlayerIds = new();
     [Export]
     public PackedScene EquipmentSpawner;
-    
+    public FloatingText RunningTotal;
     [ExportGroup("Skills")]
     [Export(PropertyHint.ResourceType)]
     public Skill[] skills;
@@ -413,6 +413,7 @@ public partial class Character : CharacterBody2D
         text.Modulate = new Color(1, 0.5f, 0.5f);
         text.value = damage;
         text.multiplier = amountOfTimes;
+        text.character = this;
         AddChild(text, true);
     }
 

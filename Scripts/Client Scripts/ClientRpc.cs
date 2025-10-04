@@ -22,6 +22,7 @@ public partial class ClientRpc : Node2D
         floatingText.Modulate = color;
         floatingText.value = value;
         floatingText.multiplier = multiplier;
+        floatingText.character = (Character)node;
         node.AddChild(floatingText, true);
     }
     #endregion
