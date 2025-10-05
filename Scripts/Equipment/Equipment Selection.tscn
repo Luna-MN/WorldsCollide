@@ -40,55 +40,53 @@ EquipmentGrid = NodePath("GridContainer/GridContainer")
 EquipmentSlots = [NodePath("Slot0"), NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3"), NodePath("Slot4"), NodePath("Slot5"), NodePath("Slot6"), NodePath("Slot7")]
 CloseButton = NodePath("Button")
 
-[node name="UIElements" type="CanvasGroup" parent="."]
-position = Vector2(-52.285, -8.02)
-
-[node name="Side2" type="Sprite2D" parent="UIElements"]
-position = Vector2(142, 449)
+[node name="Side2" type="Sprite2D" parent="."]
+position = Vector2(89.715, 440.98)
 texture = ExtResource("13_wxmjs")
 
-[node name="Side3" type="Sprite2D" parent="UIElements"]
-position = Vector2(506.3, 157.09)
+[node name="Side3" type="Sprite2D" parent="."]
+position = Vector2(454.01498, 149.06999)
 texture = ExtResource("14_12pyo")
 
-[node name="Side1" type="Sprite2D" parent="UIElements"]
-position = Vector2(585.69, 97.93)
+[node name="Side1" type="Sprite2D" parent="."]
+position = Vector2(533.405, 89.91)
 texture = ExtResource("17_gjx4u")
 
-[node name="Side4" type="Sprite2D" parent="UIElements"]
-position = Vector2(943, 439)
+[node name="Side4" type="Sprite2D" parent="."]
+position = Vector2(890.715, 430.98)
 texture = ExtResource("18_12pyo")
 
-[node name="Header" type="Sprite2D" parent="UIElements"]
-position = Vector2(305, 96)
+[node name="Header" type="Sprite2D" parent="."]
+position = Vector2(264.415, 85.740005)
 texture = ExtResource("8_wxmjs")
 
-[node name="Star" type="Sprite2D" parent="UIElements"]
-position = Vector2(215, 389)
+[node name="Star" type="Sprite2D" parent="."]
+position = Vector2(162.715, 380.98)
 texture = ExtResource("9_7cgc1")
 
-[node name="Star2" type="Sprite2D" parent="UIElements"]
-position = Vector2(467, 262)
+[node name="Star2" type="Sprite2D" parent="."]
+position = Vector2(414.715, 253.98001)
 texture = ExtResource("9_7cgc1")
 
-[node name="Star3" type="Sprite2D" parent="UIElements"]
-position = Vector2(217, 184)
+[node name="Star3" type="Sprite2D" parent="."]
+position = Vector2(164.715, 175.98)
 texture = ExtResource("9_7cgc1")
 
-[node name="Star4" type="Sprite2D" parent="UIElements"]
-position = Vector2(390, 175)
+[node name="Star4" type="Sprite2D" parent="."]
+position = Vector2(337.715, 166.98)
 texture = ExtResource("9_7cgc1")
 
-[node name="Star5" type="Sprite2D" parent="UIElements"]
-position = Vector2(149, 300)
+[node name="Star5" type="Sprite2D" parent="."]
+position = Vector2(96.715, 291.98)
 texture = ExtResource("9_7cgc1")
 
-[node name="Label" type="Label" parent="UIElements"]
+[node name="Label" type="Label" parent="."]
 modulate = Color(0.7019608, 0.5568628, 0.44705883, 1)
-offset_left = 221.0
-offset_top = 70.0
-offset_right = 345.0
-offset_bottom = 93.0
+layout_mode = 0
+offset_left = 156.29288
+offset_top = 59.157623
+offset_right = 280.29324
+offset_bottom = 82.15762
 scale = Vector2(1.86, 1.86)
 text = "Equipment"
 label_settings = SubResource("LabelSettings_elo4j")
@@ -134,22 +132,26 @@ mouse_filter = 2
 columns = 4
 
 [node name="Slot0" parent="." instance=ExtResource("3_56myr")]
-layout_mode = 0
-offset_left = 301.0
-offset_top = 371.0
-offset_right = 390.0
-offset_bottom = 457.0
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 301.70862
+offset_top = 370.79715
+offset_right = 390.70862
+offset_bottom = 456.79715
 Icon = ExtResource("4_fn6ck")
 
 [node name="Slot1" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
-offset_left = 375.0
+offset_left = 371.0
 offset_top = 371.0
-offset_right = 464.0
+offset_right = 460.0
 offset_bottom = 457.0
 Icon = ExtResource("5_l8aht")
 
 [node name="Slot2" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
 offset_left = 215.0
 offset_top = 131.0
@@ -158,6 +160,7 @@ offset_bottom = 217.0
 Icon = ExtResource("4_alyoc")
 
 [node name="Slot3" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
 offset_left = 129.0
 offset_top = 205.0
@@ -166,6 +169,7 @@ offset_bottom = 291.0
 Icon = ExtResource("4_g4amf")
 
 [node name="Slot4" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
 offset_left = 128.0
 offset_top = 277.0
@@ -174,6 +178,7 @@ offset_bottom = 363.0
 Icon = ExtResource("5_alyoc")
 
 [node name="Slot5" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
 offset_left = 300.0
 offset_top = 203.0
@@ -182,6 +187,7 @@ offset_bottom = 289.0
 Icon = ExtResource("8_fn6ck")
 
 [node name="Slot6" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
 offset_left = 300.0
 offset_top = 281.0
@@ -190,6 +196,7 @@ offset_bottom = 367.0
 Icon = ExtResource("7_7f453")
 
 [node name="Slot7" parent="." instance=ExtResource("3_56myr")]
+clip_contents = true
 layout_mode = 0
 offset_left = 215.0
 offset_top = 350.0

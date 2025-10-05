@@ -18,7 +18,7 @@ size = Vector2(90.5, 89)
 shader = ExtResource("3_mj7oj")
 shader_parameter/palette_array_size = 2
 shader_parameter/input_palette_array = PackedColorArray(0.1764706, 0.14509805, 0.19215687, 1, 0.13333334, 0.105882354, 0.14509805, 1)
-shader_parameter/output_palette_array = PackedColorArray(0.7019608, 0.5568628, 0.44705883, 1, 0.50562125, 0.3839209, 0.29088184, 1)
+shader_parameter/output_palette_array = PackedColorArray(0.7019608, 0.5568628, 0.44705883, 1, 0.7019608, 0.5568628, 0.44705883, 1)
 
 [node name="Slot" type="Panel" node_paths=PackedStringArray("IconSprite")]
 offset_left = -34.365
