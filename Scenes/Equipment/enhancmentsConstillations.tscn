@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://bf40n57vebate"]
+[gd_scene load_steps=2 format=3 uid="uid://bf40n57vebate"]
 
-[node name="Enhancments" type="Node2D"]
+[ext_resource type="Script" uid="uid://c05nebm6er3me" path="res://Scenes/Equipment/EnhancmentsConstillations.cs" id="1_qc3ay"]
+
+[node name="Enhancments" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qc3ay")
