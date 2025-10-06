@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ttfjlp028nq3"]
+
+[ext_resource type="Texture2D" uid="uid://dho2xhi8flved" path="res://Pirates/Book Stuff/Star.png" id="1_nhvyw"]
+[ext_resource type="Script" uid="uid://bx2w0ehg8nfs7" path="res://Scenes/Equipment/EnhancmentStar.cs" id="2_3qe4l"]
+
+[node name="TextureRect" type="TextureRect"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("1_nhvyw")
+script = ExtResource("2_3qe4l")

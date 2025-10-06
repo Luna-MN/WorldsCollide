@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf40n57vebate"]
+[gd_scene load_steps=3 format=3 uid="uid://bf40n57vebate"]
 
 [ext_resource type="Script" uid="uid://c05nebm6er3me" path="res://Scenes/Equipment/EnhancmentsConstillations.cs" id="1_qc3ay"]
+[ext_resource type="PackedScene" uid="uid://ttfjlp028nq3" path="res://Scenes/Equipment/EnhancmentStar.tscn" id="2_y8myp"]
 
 [node name="Enhancments" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_qc3ay")
+star = ExtResource("2_y8myp")
