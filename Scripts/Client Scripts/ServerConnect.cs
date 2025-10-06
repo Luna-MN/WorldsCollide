@@ -3,8 +3,7 @@ using System;
 
 public partial class ServerConnect : Node2D
 {
-    [Export]
-    public PackedScene Player;
+    [Export] public string ClassName;
     private ENetMultiplayerPeer Server;
     
     public override void _Ready()

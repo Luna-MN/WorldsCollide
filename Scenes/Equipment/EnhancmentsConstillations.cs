@@ -8,6 +8,10 @@ public partial class EnhancmentsConstillations : Control
     [Export] public ConstillationData constellation;
     public override void _Ready()
     {
-        
+        foreach (var slot in constellation.ConstillationSlots)
+        {
+            var createdSlot = star.Instantiate();
+            AddChild(createdSlot);
+        }
     }
 }

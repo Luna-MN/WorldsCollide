@@ -3,5 +3,6 @@ using System;
 
 public partial class ConstillationSlotData : Resource
 {
-    [Export] public EnhancmentStarData Star;
+    [Export] public BaseEnhancement Star;
+    [Export] public int[] connectionIndexes;
 }
