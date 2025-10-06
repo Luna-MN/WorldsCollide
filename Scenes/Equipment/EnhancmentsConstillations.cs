@@ -6,10 +6,12 @@ public partial class EnhancmentsConstillations : Control
 {
     [Export] public PackedScene star;
     [Export] public ConstillationData constellation;
+    [Export] public int padding = 10;
     public List<EnhancmentStar> stars = new();
     
     private ConstellationLines lineDrawer;
     private Random random = new Random();
+    
 
     public override void _Ready()
     {
@@ -24,8 +26,8 @@ public partial class EnhancmentsConstillations : Control
             createdSlot.data = slot;
             
             createdSlot.Position = new Vector2(
-                random.Next(0, (int)Size.X),
-                random.Next(0, (int)Size.Y)
+                random.Next(padding, (int)Size.X - padding),
+                random.Next(padding, (int)Size.Y - padding)
             );
 
             stars.Add(createdSlot);
