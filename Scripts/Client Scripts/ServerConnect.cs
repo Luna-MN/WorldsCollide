@@ -14,6 +14,7 @@ public partial class ServerConnect : Node2D
         GameManager.ClassRpcs = GetNode<ClassRpc>("/root/ClassRpc");
         GameManager.EquipmentRpcs = GetNode<EquipmentRpc>("/root/EquipmentRpc");
         GameManager.Enhancments = GetParent().GetNode<Enhancments>("/root/Enhancment");
+        Multiplayer.ConnectedToServer += PlayerConnect;
         Connect();
     }
     private async void Connect()
@@ -33,5 +34,9 @@ public partial class ServerConnect : Node2D
     private void ConnectionFailed()
     {
         GD.Print("Failed");
+    }
+    private void PlayerConnect()
+    {
+        GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId(), "ComboClass");
     }
 }

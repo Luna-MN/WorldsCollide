@@ -5,16 +5,15 @@ using Godot;
 
 public partial class ServerRpc : Node2D
 {
-    [Export]
-    public PackedScene Player;
     
     #region Server RPCs
     // Server -> Create a player with a given Id
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-    public void CreateNewPlayer(int id)
+    public void CreateNewPlayer(int id, string className)
     {
         if(id == GameManager.LocalID) return;
-        var newPlayer = Player.Instantiate<Player>();
+        var classScene = ResourceLoader.Load<PackedScene>("res://Scenes/Classes/" + className + ".tscn", "PackedScene");
+        var newPlayer = classScene.Instantiate<Player>();
         newPlayer.Name = id.ToString();
         
         ServerManager.spawner.AddChild(newPlayer, true);
