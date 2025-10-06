@@ -1,15 +1,22 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
-public partial class EnhancmentStarLine : Line2D
+public partial class ConstellationLines : Control
 {
-    public EnhancmentStar startStar;
-    public EnhancmentStar endStar;
+    public List<EnhancmentStar> stars = new();
+    public List<(int start, int end)> connections = new();
 
-    public override void _Process(double delta)
+    public override void _Draw()
     {
-        if(startStar == null || endStar == null) return;
-        AddPoint(startStar.GlobalPosition);
-        AddPoint(endStar.GlobalPosition);
+        foreach (var (start, end) in connections)
+        {
+            if (start < stars.Count && end < stars.Count)
+            {
+                var startPos = stars[start].Position + stars[start].Size / 2; // Center of star
+                var endPos = stars[end].Position + stars[end].Size / 2;
+                
+                DrawLine(startPos, endPos, Colors.White, 2.0f);
+            }
+        }
     }
 }
