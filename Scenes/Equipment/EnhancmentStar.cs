@@ -3,5 +3,5 @@ using System;
 
 public partial class EnhancmentStar : TextureRect
 {
-    public ConstillationSlotData data;
+    public ConstillationSlotData data; 
 }
