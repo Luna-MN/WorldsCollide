@@ -5,12 +5,13 @@ uniform vec2 point_a = vec2(0.1, 0.1);
 uniform vec2 point_b = vec2(0.9, 0.9);
 uniform float thickness = 1.0;
 uniform float pixel_size = 32.0;
+uniform float node_scale = 1.0;
 
 // Gradient settings
 uniform bool use_gradient = false;
-uniform vec4 color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 gradient   : source_color = vec4(1.0, 0.0, 0.0, 1.0);
-uniform float gradient_steps = 8.0; // how many color steps to quantize
+uniform vec4 color : source_color = vec4(1.0);
+uniform vec4 gradient : source_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform float gradient_steps = 8.0;
 
 // Texture options
 uniform bool use_texture = false;
@@ -22,10 +23,14 @@ uniform float texture_offset = 0.0;
 uniform float time_factor = 0.0;
 
 void fragment() {
-    // Grid snapping
-    vec2 grid_uv = floor(UV * pixel_size) / pixel_size;
-    vec2 A = floor(point_a * pixel_size) / pixel_size;
-    vec2 B = floor(point_b * pixel_size) / pixel_size;
+    // ❗ Scale compensation
+    // When the node is scaled up, each UV covers more screen pixels.
+    // Divide pixel_size by the node scale to preserve pixel density.
+    float scaled_pixel_size = pixel_size / (1.0/node_scale);
+
+    vec2 grid_uv = floor(UV * scaled_pixel_size) / scaled_pixel_size;
+    vec2 A = floor(point_a * scaled_pixel_size) / scaled_pixel_size;
+    vec2 B = floor(point_b * scaled_pixel_size) / scaled_pixel_size;
 
     // Line math
     vec2 AB = B - A;
@@ -34,24 +39,21 @@ void fragment() {
     float t = clamp(dot(AP, AB) / dot(AB, AB), 0.0, 1.0);
     vec2 closest = A + AB * t;
 
-    float dist = length((grid_uv - closest) * pixel_size);
+    // Divide by node_scale again to keep constant thickness in pixels
+    float dist = length((grid_uv - closest) * pixel_size / (1.0/node_scale));
     if (dist >= thickness) discard;
 
-    // if use_gradient is true apply a Gradient to the pixels
-    vec4 col;
+    // Color / gradient
+    vec4 col = color;
     if (use_gradient) {
-        // Quantize gradient position to discrete steps
         float quant_t = floor(t * gradient_steps) / (gradient_steps - 1.0);
         col = mix(color, gradient, quant_t);
-    } else {
-        col = color;
     }
 
-    // same as gradient but it takes its color from a texture (works with animations)
+    // Texture option
     if (use_texture) {
         float tex_x = fract((t * texture_scale + texture_offset + time_factor));
-        vec2 tex_uv = vec2(tex_x, 0.5);
-        vec4 tex_col = texture(line_texture, tex_uv);
+        vec4 tex_col = texture(line_texture, vec2(tex_x, 0.5));
         col *= tex_col;
     }
 
