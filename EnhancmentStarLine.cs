@@ -5,6 +5,12 @@ public partial class ConstellationLines : Control
 {
     public List<EnhancmentStar> stars = new();
     public List<(int start, int end)> connections = new();
+    
+    public override void _Ready()
+    {
+        // Create a material with no filtering for pixelated effect
+        SetTextureFilter(TextureFilterEnum.Nearest);
+    }
 
     public override void _Draw()
     {
