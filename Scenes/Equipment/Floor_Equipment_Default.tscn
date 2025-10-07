@@ -34,7 +34,7 @@ DestroyArea = NodePath("Destroy Area")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_w51j1")
-scale = Vector2(1.75, 1.75)
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("3_w51j1")
 frame = 4
 frame_progress = 0.667271

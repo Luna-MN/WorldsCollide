@@ -72,6 +72,7 @@ RightType = 1
 Stats = null
 equipmentFlags = 96
 enhancements = Array[Object]([ExtResource("2_h6cdl"), SubResource("Resource_83v58")])
+Scale = Vector2(1, 1)
 Icon = ExtResource("2_und8r")
 ItemId = 12
 metadata/_custom_type_script = "uid://rhuq6dqrqhyy"

@@ -159,7 +159,6 @@ script = ExtResource("3_fkybt")
 
 [node name="GunPos" parent="." index="4"]
 position = Vector2(-14, 9)
-scale = Vector2(0.875, 0.875)
 sprite_frames = SubResource("SpriteFrames_7dp3o")
 
 [node name="ShootPos" parent="GunPos" index="0"]
