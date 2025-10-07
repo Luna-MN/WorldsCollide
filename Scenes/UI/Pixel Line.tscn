@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://d15omp016sv8h"]
+
+[ext_resource type="Shader" uid="uid://cscu2ajxagsvh" path="res://Scenes/Equipment/PixelArtUILine.gdshader" id="1_3b62w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_va8x6"]
+shader = ExtResource("1_3b62w")
+shader_parameter/point_a = Vector2(0, 0)
+shader_parameter/point_b = Vector2(1, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/pixel_size = 32.0
+shader_parameter/use_gradient = false
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/gradient = Color(1, 0, 0, 1)
+shader_parameter/gradient_steps = 8.0
+shader_parameter/use_texture = false
+shader_parameter/texture_scale = 1.0
+shader_parameter/texture_offset = 0.0
+shader_parameter/time_factor = 0.0
+
+[node name="PixelLine" type="ColorRect"]
+material = SubResource("ShaderMaterial_va8x6")
+offset_right = 1.0
+offset_bottom = 0.99999994
+scale = Vector2(32, 32)
