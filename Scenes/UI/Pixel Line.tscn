@@ -6,10 +6,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_va8x6"]
 shader = ExtResource("1_3b62w")
 shader_parameter/point_a = Vector2(0, 0)
-shader_parameter/point_b = Vector2(0.0049699997, 0.002995)
+shader_parameter/point_b = Vector2(0.23775639, 0.14524907)
 shader_parameter/thickness = 1.0
 shader_parameter/pixel_size = 32.0
-shader_parameter/node_scale = 1000.0
+shader_parameter/node_scale = 23.89
 shader_parameter/use_gradient = false
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/gradient = Color(1, 0, 0, 1)
@@ -21,11 +21,11 @@ shader_parameter/time_factor = 0.0
 
 [node name="PixelLine" type="ColorRect"]
 material = SubResource("ShaderMaterial_va8x6")
-offset_right = 1000.0
-offset_bottom = 1000.0
+offset_right = 23.89
+offset_bottom = 23.89
 scale = Vector2(32, 32)
 color = Color(0, 0, 0, 1)
 script = ExtResource("2_o7450")
-end = Vector2(4.97, 2.995)
+end = Vector2(5.68, 3.47)
 color = Color(0, 0, 0, 1)
 thickness = 1.0
