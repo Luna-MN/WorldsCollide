@@ -1,6 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://buh6puqb5qiva"]
+[gd_scene load_steps=6 format=3 uid="uid://buh6puqb5qiva"]
 
+[ext_resource type="Shader" uid="uid://g6vnlpej3cb3" path="res://Pirates/UI/ParalaxStars.gdshader" id="1_el3mx"]
 [ext_resource type="Texture2D" uid="uid://bvutf58m7uvm7" path="res://Pirates/UI/Test.png" id="1_lv54k"]
+[ext_resource type="Texture2D" uid="uid://btcmey0frd5vu" path="res://Pirates/UI/Slot.png" id="2_3tvjr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6101"]
+shader = ExtResource("1_el3mx")
+shader_parameter/star_density = 59.3330023433175
+shader_parameter/parallax_scale = Vector2(0.05, 0.05)
+shader_parameter/star_color = Color(1, 1, 1, 1)
+shader_parameter/star_size = 0.04
+shader_parameter/star_brightness = 0.5
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tvjr"]
 texture = ExtResource("1_lv54k")
@@ -19,10 +29,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_y6101")
 layout_mode = 0
-offset_left = 34.0
-offset_top = 21.0
-offset_right = 330.0
-offset_bottom = 244.5
+offset_left = 54.0
+offset_top = 40.0
+offset_right = 350.0
+offset_bottom = 263.5
 scale = Vector2(2, 2)
 theme_override_styles/panel = SubResource("StyleBoxTexture_3tvjr")
+
+[node name="Slot" type="Sprite2D" parent="."]
+position = Vector2(333, 117)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3tvjr")
