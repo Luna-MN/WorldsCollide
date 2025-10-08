@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://buh6puqb5qiva"]
+
+[ext_resource type="Texture2D" uid="uid://bvutf58m7uvm7" path="res://Pirates/UI/Test.png" id="1_lv54k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tvjr"]
+texture = ExtResource("1_lv54k")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 21.0
+offset_right = 330.0
+offset_bottom = 244.5
+scale = Vector2(2, 2)
+theme_override_styles/panel = SubResource("StyleBoxTexture_3tvjr")
