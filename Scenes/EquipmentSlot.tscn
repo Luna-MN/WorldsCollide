@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cty5igj15kppt"]
+[gd_scene load_steps=6 format=3 uid="uid://cty5igj15kppt"]
 
 [ext_resource type="Texture2D" uid="uid://btcmey0frd5vu" path="res://Pirates/UI/Slot.png" id="1_7uml2"]
 [ext_resource type="Script" uid="uid://cnhjg83han757" path="res://Scenes/EquipmentSlotUI.cs" id="1_i7ckq"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mj7oj"]
 texture = ExtResource("1_7uml2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7uml2"]
+size = Vector2(32, 32)
 
 [node name="Slot" type="Panel" node_paths=PackedStringArray("IconSprite")]
 offset_left = -16.0
@@ -21,4 +24,13 @@ IconSprite = NodePath("Sprite")
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
+mouse_filter = 2
 texture = ExtResource("2_ei0t3")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_7uml2")
+debug_color = Color(0.11372549, 0, 0.29411766, 0)

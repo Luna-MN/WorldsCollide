@@ -15,6 +15,7 @@ public partial class MovableObject : Panel
     public Vector2 MaxSize = new Vector2(1000, 1000);
     public bool mouseInMove;
     public bool mouseInScale;
+    public bool mouseInScaleStore;
     private bool isDragging;
     private bool isScaling;
     private Vector2 dragOffset;
@@ -43,11 +44,21 @@ public partial class MovableObject : Panel
             {
                 mouseInScale = false;
             }
+            else
+            {
+                mouseInScaleStore = true;
+            }
         };
     }
 
     public override void _Process(double delta)
     {
+        //stop scaling when leave and stop scaling
+        if (mouseInScaleStore && !isScaling)
+        {
+            mouseInScaleStore = false;
+            mouseInScale = false;
+        }
         // Handle dragging
         if (mouseInMove && Input.IsMouseButtonPressed(MouseButton.Left) && !isScaling)
         {

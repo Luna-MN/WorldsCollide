@@ -1,17 +1,116 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4nj0a3tkc87i"]
+[gd_scene load_steps=11 format=3 uid="uid://d4nj0a3tkc87i"]
 
 [ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_dm4x5"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_dpn8l"]
+[ext_resource type="Shader" uid="uid://g6vnlpej3cb3" path="res://Pirates/UI/ParalaxStars.gdshader" id="2_pbm4g"]
+[ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="4_vblko"]
+[ext_resource type="Texture2D" uid="uid://ft43whqwtdu5" path="res://Pirates/Equipment/Slots/EquipmentSlot_Chestpeice.png" id="5_erlru"]
+[ext_resource type="Texture2D" uid="uid://dwpmpieyjslq6" path="res://Pirates/Equipment/Slots/EquipmentSlot_Gloves.png" id="6_xpbi6"]
+[ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_aebpt"]
+[ext_resource type="Texture2D" uid="uid://bpmq6q010btsl" path="res://Pirates/Equipment/Slots/EquipmentSlot_Legs.png" id="8_7jhf7"]
+[ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="9_iqkdq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vblko"]
+shader = ExtResource("2_pbm4g")
+shader_parameter/star_density = 64.666002596635
+shader_parameter/parallax_scale = Vector2(0.05, 0.05)
+shader_parameter/star_color = Color(1, 1, 1, 1)
+shader_parameter/star_size = 0.07
+shader_parameter/star_brightness = 1.585
 
 [node name="UIPanel" instance=ExtResource("1_dm4x5")]
+material = SubResource("ShaderMaterial_vblko")
 offset_left = 0.0
 offset_top = 0.0
-offset_right = 245.0
-offset_bottom = 213.5
+offset_right = 225.0
+offset_bottom = 239.5
+MinSize = Vector2(225, 230)
 
-[node name="Slot" parent="." index="2" instance=ExtResource("2_dpn8l")]
-layout_mode = 0
-offset_left = 94.0
-offset_top = 16.0
-offset_right = 126.0
-offset_bottom = 48.0
+[node name="Move" parent="." index="0"]
+custom_minimum_size = Vector2(0, 19.5)
+anchors_preset = 10
+anchor_left = 0.0
+anchor_right = 1.0
+offset_left = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Head" parent="." index="2" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.5
+offset_top = 32.0
+offset_right = 16.5
+offset_bottom = 64.0
+grow_horizontal = 2
+Icon = ExtResource("4_vblko")
+
+[node name="Chest" parent="." index="3" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.4
+anchor_bottom = 0.4
+offset_left = 40.0
+offset_top = -15.800003
+offset_right = 71.99998
+offset_bottom = 16.19999
+grow_vertical = 2
+Icon = ExtResource("5_erlru")
+
+[node name="Hands" parent="." index="4" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 0.4
+offset_left = -75.0
+offset_top = -15.800003
+offset_right = -43.0
+offset_bottom = 16.199982
+grow_horizontal = 0
+grow_vertical = 2
+Icon = ExtResource("6_xpbi6")
+
+[node name="Hands2" parent="." index="5" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.65
+anchor_right = 1.0
+anchor_bottom = 0.65
+offset_left = -75.0
+offset_top = -17.649994
+offset_right = -43.0
+offset_bottom = 14.350006
+grow_horizontal = 0
+grow_vertical = 2
+Icon = ExtResource("7_aebpt")
+
+[node name="Hands3" parent="." index="6" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.65
+anchor_bottom = 0.65
+offset_left = 40.0
+offset_top = -17.649994
+offset_right = 72.0
+offset_bottom = 14.350006
+grow_horizontal = 0
+grow_vertical = 2
+Icon = ExtResource("8_7jhf7")
+
+[node name="Hands4" parent="." index="7" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -56.214996
+offset_bottom = -24.214996
+grow_horizontal = 2
+grow_vertical = 0
+Icon = ExtResource("9_iqkdq")
