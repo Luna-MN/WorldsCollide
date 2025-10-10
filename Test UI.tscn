@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://buh6puqb5qiva"]
+[gd_scene load_steps=2 format=3 uid="uid://buh6puqb5qiva"]
 
-[ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_3tvjr"]
-[ext_resource type="Texture2D" uid="uid://btcmey0frd5vu" path="res://Pirates/UI/Slot.png" id="2_3tvjr"]
+[ext_resource type="PackedScene" uid="uid://d4nj0a3tkc87i" path="res://Pirates/UI/EquipmentSlots.tscn" id="1_lv54k"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,14 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" parent="." instance=ExtResource("1_3tvjr")]
+[node name="UIPanel" parent="." instance=ExtResource("1_lv54k")]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 294.0
-offset_bottom = 227.5
-
-[node name="Slot" type="Sprite2D" parent="."]
-position = Vector2(286, 133)
-scale = Vector2(2, 2)
-texture = ExtResource("2_3tvjr")
+offset_left = 5.0
+offset_right = 250.0

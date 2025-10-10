@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4nj0a3tkc87i"]
+
+[ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_dm4x5"]
+[ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_dpn8l"]
+
+[node name="UIPanel" instance=ExtResource("1_dm4x5")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 245.0
+offset_bottom = 213.5
+
+[node name="Slot" parent="." index="2" instance=ExtResource("2_dpn8l")]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 16.0
+offset_right = 126.0
+offset_bottom = 48.0

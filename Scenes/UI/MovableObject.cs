@@ -18,6 +18,7 @@ public partial class MovableObject : Panel
     private bool isDragging;
     private bool isScaling;
     private Vector2 dragOffset;
+    private Vector2 scaleOffset;
 
     public override void _Ready()
     {
@@ -72,11 +73,13 @@ public partial class MovableObject : Panel
             if (!isScaling)
             {
                 isScaling = true;
+
+                scaleOffset = Size - GetLocalMousePosition();
             }
             
             // Get mouse position relative to this panel's position
             var mousePos = GetLocalMousePosition();
-            var localMousePos = mousePos - GlobalPosition;
+            var localMousePos = mousePos + scaleOffset;
             
             // The new size should be where the mouse is relative to the top-left corner
             var newSize = localMousePos;
