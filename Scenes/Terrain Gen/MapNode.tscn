@@ -29,6 +29,7 @@ custom_data_layer_0/type = 4
 sources/1 = SubResource("TileSetAtlasSource_jqchq")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bdn0v"]
+resource_name = "PinkT"
 texture = ExtResource("3_5bnpg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -48,6 +49,7 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pmgn8"]
+resource_name = "BlackT"
 texture = ExtResource("4_jqchq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -67,6 +69,7 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_age63"]
+resource_name = "PinkWhite"
 texture = ExtResource("3_ksyrc")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -87,6 +90,7 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v00iy"]
+resource_name = "BlackWhite"
 texture = ExtResource("4_5bnpg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -107,6 +111,7 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aia56"]
+resource_name = "WhiteT"
 texture = ExtResource("7_hkts0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -126,6 +131,7 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hkts0"]
+resource_name = "GreenT"
 texture = ExtResource("8_jqchq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
