@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4nj0a3tkc87i"]
+[gd_scene load_steps=13 format=3 uid="uid://d4nj0a3tkc87i"]
 
 [ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_dm4x5"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_dpn8l"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://m68k5upt48yj" path="res://Pirates/Equipment/Slots/EquipmentSlot_Belt.png" id="7_aebpt"]
 [ext_resource type="Texture2D" uid="uid://bpmq6q010btsl" path="res://Pirates/Equipment/Slots/EquipmentSlot_Legs.png" id="8_7jhf7"]
 [ext_resource type="Texture2D" uid="uid://h2epcw0eqjov" path="res://Pirates/Equipment/Slots/EquipmentSlot_Boots.png" id="9_iqkdq"]
+[ext_resource type="Texture2D" uid="uid://cthlp6i84npo6" path="res://Pirates/Equipment/Slots/EquipmentSlot_MainHand.png" id="10_3ajl0"]
+[ext_resource type="Texture2D" uid="uid://byt2f0ok3jcn6" path="res://Pirates/Equipment/Slots/EquipmentSlot_OffHand.png" id="11_ra4fy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vblko"]
 shader = ExtResource("2_pbm4g")
@@ -74,7 +76,7 @@ grow_horizontal = 0
 grow_vertical = 2
 Icon = ExtResource("6_xpbi6")
 
-[node name="Hands2" parent="." index="5" instance=ExtResource("2_dpn8l")]
+[node name="Belt" parent="." index="5" instance=ExtResource("2_dpn8l")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -89,7 +91,7 @@ grow_horizontal = 0
 grow_vertical = 2
 Icon = ExtResource("7_aebpt")
 
-[node name="Hands3" parent="." index="6" instance=ExtResource("2_dpn8l")]
+[node name="Legs" parent="." index="6" instance=ExtResource("2_dpn8l")]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.65
@@ -102,7 +104,7 @@ grow_horizontal = 0
 grow_vertical = 2
 Icon = ExtResource("8_7jhf7")
 
-[node name="Hands4" parent="." index="7" instance=ExtResource("2_dpn8l")]
+[node name="Feet" parent="." index="7" instance=ExtResource("2_dpn8l")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -114,3 +116,29 @@ offset_bottom = -24.214996
 grow_horizontal = 2
 grow_vertical = 0
 Icon = ExtResource("9_iqkdq")
+
+[node name="Feet2" parent="." index="8" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 1.0
+anchor_right = 0.25
+anchor_bottom = 1.0
+offset_top = -43.225006
+offset_bottom = -11.225006
+grow_horizontal = 2
+grow_vertical = 0
+Icon = ExtResource("10_3ajl0")
+
+[node name="Feet3" parent="." index="9" instance=ExtResource("2_dpn8l")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 1.0
+anchor_right = 0.75
+anchor_bottom = 1.0
+offset_top = -43.225006
+offset_bottom = -11.225006
+grow_horizontal = 2
+grow_vertical = 0
+Icon = ExtResource("11_ra4fy")
