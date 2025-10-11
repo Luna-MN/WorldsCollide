@@ -6,4 +6,6 @@ public partial class UiController : Control
     public bool pickedUp;
     public EquipmentSlots EquipmentSlots;
     public InventoryGrid InventoryGrid;
+    [Export]
+    public Control DragLayer;
 }

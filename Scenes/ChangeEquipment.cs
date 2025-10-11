@@ -23,5 +23,10 @@ public partial class ChangeEquipment : Button
         EquipmentPanel = EquipmentSlotsUI.Instantiate<EquipmentSlots>();
         UiController.EquipmentSlots = EquipmentPanel;
         UiController.AddChild(EquipmentPanel);
+        UiController.MoveChild(EquipmentPanel, 0);
+        InventoryPanel = EquipmentGridUI.Instantiate<InventoryGrid>();
+        UiController.InventoryGrid = InventoryPanel;
+        UiController.AddChild(InventoryPanel);
+        UiController.MoveChild(InventoryPanel, 0);
     }
 }

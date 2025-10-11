@@ -10,13 +10,21 @@ public partial class InventoryGrid : MovableObject
     public UiController UiController;
     public override void _Ready()
     {
+        base._Ready();
         UiController = GetParent<UiController>();
         UiController.InventoryGrid = this;
         foreach (var item in GameManager.player.inventory.AllEquipment)
         {
             var obj = Item.Instantiate<EquipmentUI>();
             obj.AssignedEquipment = item;
+            obj.UiController = GetParent<UiController>();
+            if (item.Icon != null)
+            {
+                obj.Icon.Texture = item.Icon;
+            }
+
             Grid.AddChild(obj);
+            
         }
     }
 }

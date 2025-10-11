@@ -24,3 +24,4 @@ mouse_filter = 2
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer" index="0"]
 custom_minimum_size = Vector2(270, 185.855)
 layout_mode = 2
+columns = 7

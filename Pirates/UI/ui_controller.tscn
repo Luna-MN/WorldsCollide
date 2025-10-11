@@ -2,11 +2,26 @@
 
 [ext_resource type="Script" uid="uid://cs2k6cushs37i" path="res://UiController.cs" id="1_1w42p"]
 
-[node name="UIController" type="Control"]
+[node name="UIController" type="Control" node_paths=PackedStringArray("DragLayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -3.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1w42p")
+DragLayer = NodePath("DragLayer")
+
+[node name="DragLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -572.5
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+mouse_filter = 2
