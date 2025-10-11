@@ -13,6 +13,7 @@ public partial class EquipmentSlots : MovableObject
     public UiController UiController;
     public override void _Ready()
     {
+        base._Ready();
         UiController = GetParent<UiController>();
         UiController.EquipmentSlots = this;
         var slots = GameManager.player.EquipmentSlots;
@@ -24,6 +25,9 @@ public partial class EquipmentSlots : MovableObject
                 equipment.AssignedEquipment = slots[i].EquippedEquipment;
                 equipment.GlobalPosition = UISlots[i].GlobalPosition;
                 equipment.UiController = GetParent<UiController>();
+                equipment.selectedSlot = UISlots[i];
+                equipment.StartingPos = equipment.selectedSlot;
+                UiController.AddChild(equipment);
             }
         }
     }

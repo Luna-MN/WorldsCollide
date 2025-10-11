@@ -18,7 +18,7 @@ public partial class EquipmentSelection : Panel
         {
             var obj = EquipmentScene.Instantiate<EquipmentUI>();
             obj.AssignedEquipment = equipment;
-            obj.grid = EquipmentGrid;
+            //obj.grid = EquipmentGrid;
             // obj.UiController = this;
             if (equipment.Icon != null)
             {
@@ -33,7 +33,7 @@ public partial class EquipmentSelection : Panel
             {
                 var obj = EquipmentScene.Instantiate<EquipmentUI>();
                 obj.AssignedEquipment = slot.EquippedEquipment;
-                obj.grid = EquipmentGrid;
+                //obj.grid = EquipmentGrid;
                 // obj.UiController = this;
                 if (slot.EquippedEquipment.Icon != null)
                 {

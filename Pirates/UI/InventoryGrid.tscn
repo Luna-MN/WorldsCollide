@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://balvacu5sqtc1"]
+[gd_scene load_steps=4 format=3 uid="uid://balvacu5sqtc1"]
 
 [ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_om663"]
+[ext_resource type="Script" uid="uid://ca6bo71syvqk7" path="res://Pirates/UI/InventoryGrid.cs" id="2_xqj0v"]
+[ext_resource type="PackedScene" uid="uid://cgnwv3s31cdbs" path="res://Scenes/EquipmentUI.tscn" id="3_s2r4q"]
 
-[node name="UIPanel" instance=ExtResource("1_om663")]
+[node name="UIPanel" node_paths=PackedStringArray("Grid") instance=ExtResource("1_om663")]
+script = ExtResource("2_xqj0v")
+Item = ExtResource("3_s2r4q")
+Grid = NodePath("ScrollContainer/GridContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." index="2"]
 layout_mode = 1
@@ -14,6 +19,7 @@ offset_top = 20.0
 offset_right = 136.17499
 offset_bottom = 206.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer" index="0"]
 custom_minimum_size = Vector2(270, 185.855)

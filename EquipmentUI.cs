@@ -245,7 +245,7 @@ public partial class EquipmentUI : Panel
                 }
                 UiController.CallDeferred("add_child", this);
                 GetParent().RemoveChild(this);
-                UiController.EquipmentSlots.UISlots.Where(x => (GameManager.player.EquipmentSlots[UiController.EquipmentSlots.UISlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
+                UiController.EquipmentSlots?.UISlots.Where(x => (GameManager.player.EquipmentSlots[UiController.EquipmentSlots.UISlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                 mouseClick = true;
                 UiController.pickedUp = true;
             }
@@ -314,12 +314,17 @@ public partial class EquipmentUI : Panel
         {
             GlobalPosition = GetGlobalMousePosition() + new Vector2(-45, -45);
         }
+        else if (selectedSlot != null)
+        {
+            GlobalPosition = selectedSlot.GlobalPosition;
+        }
         if (!mouseIn && scene != null)
         {
             scene.QueueFree();
             scene = null;
         }
         Scale = new Vector2(0.75f, 0.75f);
+        
     }
 
     public void OnEquipSlotEnter(Node2D body)
