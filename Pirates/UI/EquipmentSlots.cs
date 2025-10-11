@@ -23,7 +23,7 @@ public partial class EquipmentSlots : MovableObject
                 var equipment = EquipmentUI.Instantiate<EquipmentUI>();
                 equipment.AssignedEquipment = slots[i].EquippedEquipment;
                 equipment.GlobalPosition = UISlots[i].GlobalPosition;
-                equipment.TopUI = GetParent<UiController>();
+                equipment.UiController = GetParent<UiController>();
             }
         }
     }
