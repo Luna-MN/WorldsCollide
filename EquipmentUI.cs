@@ -323,8 +323,6 @@ public partial class EquipmentUI : Panel
             scene.QueueFree();
             scene = null;
         }
-        Scale = new Vector2(0.75f, 0.75f);
-        
     }
 
     public void OnEquipSlotEnter(Node2D body)
