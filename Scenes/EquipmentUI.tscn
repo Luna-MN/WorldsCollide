@@ -7,14 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://bcedvr4vxb7rq" path="res://Scenes/dummy_slot.tscn" id="3_vjoob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36ypc"]
-size = Vector2(89, 89)
+size = Vector2(32, 32)
 
 [node name="Equipment" type="Panel" node_paths=PackedStringArray("area", "Icon")]
-custom_minimum_size = Vector2(90, 90)
-offset_left = -45.0
-offset_top = -45.0
-offset_right = 45.0
-offset_bottom = 45.0
+custom_minimum_size = Vector2(32, 32)
+offset_left = 12.77
+offset_top = 13.9
+offset_right = 44.77
+offset_bottom = 45.9
+scale = Vector2(2, 2)
 pivot_offset = Vector2(45, 45)
 mouse_filter = 2
 theme = ExtResource("1_n1j1a")
@@ -27,14 +28,12 @@ DummyScene = ExtResource("3_vjoob")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(44.5, 44.5)
+position = Vector2(16, 15.5)
 shape = SubResource("RectangleShape2D_36ypc")
 debug_color = Color(0, 0.6, 0.69803923, 0.05490196)
 
 [node name="Texture" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 1.0
-offset_right = 45.5
-offset_bottom = 44.000008
-scale = Vector2(2, 2)
+offset_right = 32.0
+offset_bottom = 32.0
 texture = ExtResource("2_36ypc")

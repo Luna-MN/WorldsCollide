@@ -19,6 +19,7 @@ public partial class EquipmentUI : Panel
     public EquipmentSlotUI selectedSlot;
     public UiController UiController;
     public BaseEquipment AssignedEquipment;
+    public Vector2 DragOffset;
     public override void _Ready()
     {
         area.MouseEntered += () =>
@@ -243,6 +244,7 @@ public partial class EquipmentUI : Panel
                 {
                     StartingPos = selectedSlot;
                 }
+                DragOffset = GetGlobalMousePosition() - GlobalPosition;
                 UiController.CallDeferred("add_child", this);
                 GetParent().RemoveChild(this);
                 UiController.EquipmentSlots?.UISlots.Where(x => (GameManager.player.EquipmentSlots[UiController.EquipmentSlots.UISlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
@@ -312,7 +314,7 @@ public partial class EquipmentUI : Panel
     {
         if (mouseClick)
         {
-            GlobalPosition = GetGlobalMousePosition() + new Vector2(-45, -45);
+            GlobalPosition = GetGlobalMousePosition() - DragOffset;
         }
         else if (selectedSlot != null)
         {
