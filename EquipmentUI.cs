@@ -9,6 +9,7 @@ public partial class EquipmentUI : Panel
     [Export] public Sprite2D Icon;
     [Export] public PackedScene HoverScene;
     [Export] public PackedScene DummyScene;
+    public EquipmentSlotUI StartingPos;
     public DummySlot dummy;
     public EquipmentHoverScene scene;
     public bool mouseIn;
@@ -16,7 +17,6 @@ public partial class EquipmentUI : Panel
     public bool JustCreated = true;
     public Timer timer;
     public EquipmentSlotUI selectedSlot;
-    public GridContainer grid;
     public UiController UiController;
     public BaseEquipment AssignedEquipment;
     public override void _Ready()
@@ -25,13 +25,13 @@ public partial class EquipmentUI : Panel
         {
             if (!mouseIn && scene == null)
             {
+                // on hover scene
                 scene = HoverScene.Instantiate<EquipmentHoverScene>();
                 scene.GlobalPosition = GetGlobalMousePosition();
                 scene.ItemIcon.Texture = Icon.Texture;
                 scene.ItemName.Text = AssignedEquipment.ResourceName;
                 scene.ItemName.Modulate = scene.TextColors[(int)AssignedEquipment.Rarity];
-                scene.ItemDescription.Text =
-                    string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
+                scene.ItemDescription.Text = string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
                 scene.Quality.Text = AssignedEquipment.Quality.ToString();
                 if (AssignedEquipment is PrimaryWeapon p)
                 {
@@ -106,6 +106,7 @@ public partial class EquipmentUI : Panel
 
     public override void _Input(InputEvent @event)
     {
+        // stop from calling for 0.5 s when spawning
         if (JustCreated)
         {
             return;
@@ -113,6 +114,7 @@ public partial class EquipmentUI : Panel
 
         if (@event is InputEventMouseButton MB)
         {
+            // Drop Item
             if (MB.ButtonIndex == MouseButton.Left && !MB.Pressed && mouseClick && mouseIn && UiController.EquipmentSlots != null)
             {
                 mouseIn = false;
@@ -161,7 +163,7 @@ public partial class EquipmentUI : Panel
                         var invent = GameManager.player.inventory.AllEquipment.ToList();
                         invent.Add(AssignedEquipment);
                         GameManager.player.inventory.AllEquipment = invent.ToArray();
-                        grid.CallDeferred("add_child", equipThere);
+                        UiController.InventoryGrid.Grid.CallDeferred("add_child", equipThere);
                         GetParent().RemoveChild(equipThere);
                     }
 
@@ -195,26 +197,37 @@ public partial class EquipmentUI : Panel
                 // Remove from equipment slot
                 else
                 {
-                    List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
-                    List<int> equipIds = inv.Select(x => x.ItemId).ToList();
-
-                    // it is finding other peices of equipment with the same base resource, might need to add an ID system
-                    if (!equipIds.Contains(AssignedEquipment.ItemId))
+                    // if the grid does exist and we are not inside a slot, add it to the grid
+                    if (UiController.InventoryGrid != null)
                     {
-                        if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
+                        List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
+                        List<int> equipIds = inv.Select(x => x.ItemId).ToList();
+
+                        // it is finding other peices of equipment with the same base resource, might need to add an ID system
+                        if (!equipIds.Contains(AssignedEquipment.ItemId))
                         {
-                            GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment).EquippedEquipment = null;
+                            if (GameManager.player.EquipmentSlots.Select(x => x.EquippedEquipment).Any(x => x == AssignedEquipment))
+                            {
+                                GameManager.player.EquipmentSlots.First(x => x.EquippedEquipment == AssignedEquipment).EquippedEquipment = null;
+                            }
+
+                            inv.Add(AssignedEquipment);
+                            GameManager.player.inventory.AllEquipment = inv.ToArray();
                         }
 
-                        inv.Add(AssignedEquipment);
-                        GameManager.player.inventory.AllEquipment = inv.ToArray();
+                        UiController.InventoryGrid.Grid.CallDeferred("add_child", this);
+                        GetParent().RemoveChild(this);
                     }
-
-                    grid.CallDeferred("add_child", this);
-                    GetParent().RemoveChild(this);
+                    // If grid doesn't exist add it back to the slot the drag started from
+                    else if(StartingPos != null)
+                    {
+                        GameManager.player.EquipmentSlots[UiController.EquipmentSlots.UISlots.ToList().IndexOf(StartingPos)].EquippedEquipment = AssignedEquipment;
+                        GlobalPosition = StartingPos.GlobalPosition;
+                        StartingPos = null;
+                    }
                 }
             }
-
+            // start the drag
             if (MB.ButtonIndex == MouseButton.Left && MB.Pressed && mouseIn)
             {
                 if (UiController.pickedUp)
@@ -225,6 +238,10 @@ public partial class EquipmentUI : Panel
                 {
                     scene.QueueFree();
                     scene = null;
+                }
+                if (selectedSlot != null)
+                {
+                    StartingPos = selectedSlot;
                 }
                 UiController.CallDeferred("add_child", this);
                 GetParent().RemoveChild(this);

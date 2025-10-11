@@ -22,10 +22,8 @@ region_rect = Rect2(0, 0, 32, 32)
 
 [node name="UIPanel" type="Panel" node_paths=PackedStringArray("MoveArea", "ScaleArea")]
 material = SubResource("ShaderMaterial_y6101")
-offset_left = 36.0
-offset_top = 29.0
-offset_right = 330.0
-offset_bottom = 256.5
+offset_right = 294.0
+offset_bottom = 227.5
 scale = Vector2(2, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_3tvjr")
