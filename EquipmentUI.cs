@@ -6,7 +6,7 @@ using System.Linq;
 public partial class EquipmentUI : Panel
 {
     [Export] public Area2D area;
-    [Export] public Sprite2D Icon;
+    [Export] public TextureRect Icon;
     [Export] public PackedScene HoverScene;
     [Export] public PackedScene DummyScene;
     public EquipmentSlotUI StartingPos;
