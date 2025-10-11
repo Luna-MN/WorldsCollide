@@ -17,7 +17,7 @@ public partial class EquipmentUI : Panel
     public Timer timer;
     public EquipmentSlotUI selectedSlot;
     public GridContainer grid;
-    public EquipmentSelection TopUI;
+    public UiController TopUI;
     public BaseEquipment AssignedEquipment;
     public override void _Ready()
     {
@@ -118,26 +118,26 @@ public partial class EquipmentUI : Panel
                 mouseIn = false;
                 mouseClick = false;
                 TopUI.pickedUp = false;
-                TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
+                TopUI.EquipmentSlots.UISlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.UISlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(1, 1, 1));
                 // this is two handed handling, so you can't equip a two handed wep if there is already we other wep attached
                 var equippable = true;
-                if (TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot) == 0)
+                if (TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot) == 0)
                 {
                     var p = (PrimaryWeapon)AssignedEquipment;
                     if (!p.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand))
                     {
-                        if (TopUI.EquipmentSlots[1].equip != null)
+                        if (TopUI.EquipmentSlots.UISlots[1].equip != null)
                         {
                             equippable = false;
                         }
                     }
                 }
-                else if (TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot) == 1)
+                else if (TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot) == 1)
                 {
                     var p = (PrimaryWeapon)AssignedEquipment;
                     if (!p.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand))
                     {
-                        if (TopUI.EquipmentSlots[0].equip != null)
+                        if (TopUI.EquipmentSlots.UISlots[0].equip != null)
                         {
                             equippable = false;
                         }
@@ -168,27 +168,27 @@ public partial class EquipmentUI : Panel
                     //one handed wep
                     selectedSlot.equip = this;
                     GlobalPosition = selectedSlot.GlobalPosition;
-                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)]
+                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot)]
                         .EquippedEquipment = AssignedEquipment;
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
                     inv.Remove(AssignedEquipment);
                     GameManager.player.inventory.AllEquipment = inv.ToArray();
                     // I need to add an if statement that says if its a flexible wep and the other slot already has something in it make it one handed mode
                     // If assigning to main hand then we check if the wep is 2 handed, if so then we add a dummy panel to the offhand slot and block it
-                    var thisIndex = TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot);
+                    var thisIndex = TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot);
                     if ((thisIndex == 0 || thisIndex == 1) && (AssignedEquipment.equipmentFlags & Flags.AbilityFlags.TwoHanded) != 0)
                     {
                         int otherIndex = thisIndex == 0 ? 1 : 0;
-                        if (TopUI.EquipmentSlots[otherIndex].equip == null)
+                        if (TopUI.EquipmentSlots.UISlots[otherIndex].equip == null)
                         {
                             ((PrimaryWeapon)AssignedEquipment).TwoHandedMode = true;
-                            TopUI.EquipmentSlots[otherIndex].Blocked = true;
+                            TopUI.EquipmentSlots.UISlots[otherIndex].Blocked = true;
                             dummy = DummyScene.Instantiate<DummySlot>();
                             dummy.Icon.Texture = Icon.Texture;
                             TopUI.AddChild(dummy);
                             dummy.GlobalPosition = GlobalPosition;
                             var dTween = dummy.CreateTween();
-                            dTween.TweenProperty(dummy, "global_position", TopUI.EquipmentSlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
+                            dTween.TweenProperty(dummy, "global_position", TopUI.EquipmentSlots.UISlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
                         }
                     }
                 }
@@ -228,7 +228,7 @@ public partial class EquipmentUI : Panel
                 }
                 TopUI.CallDeferred("add_child", this);
                 GetParent().RemoveChild(this);
-                TopUI.EquipmentSlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
+                TopUI.EquipmentSlots.UISlots.Where(x => (GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.UISlots.ToList().IndexOf(x)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0).ToList().ForEach(x => x.Modulate = new Color(0, 0.5f, 1));
                 mouseClick = true;
                 TopUI.pickedUp = true;
             }
@@ -239,7 +239,7 @@ public partial class EquipmentUI : Panel
                 if (selectedSlot != null && !mouseClick)
                 {
                     // if its a two handed wep
-                    var thisIndex = TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot);
+                    var thisIndex = TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot);
                     if ((!AssignedEquipment.equipmentFlags.HasFlag(Flags.AbilityFlags.MainHand) &&
                          thisIndex == 0) ||
                         (!AssignedEquipment.equipmentFlags.HasFlag(Flags.AbilityFlags.OffHand) && thisIndex == 1))
@@ -262,7 +262,7 @@ public partial class EquipmentUI : Panel
                             {
                                 dummy.QueueFree();
                                 dummy = null;
-                                TopUI.EquipmentSlots[1].Blocked = false;
+                                TopUI.EquipmentSlots.UISlots[1].Blocked = false;
                                 wep.TwoHandedMode = false;
                             };
                         }
@@ -272,17 +272,17 @@ public partial class EquipmentUI : Panel
                             // check if there is anything in the other slot
                             int otherIndex = thisIndex == 0 ? 1 : 0;
                             // check if other index slot is empty
-                            if (TopUI.EquipmentSlots[otherIndex].equip == null)
+                            if (TopUI.EquipmentSlots.UISlots[otherIndex].equip == null)
                             {
                                 // if it is empty then set to two handed mode
                                 wep.TwoHandedMode = true;
-                                TopUI.EquipmentSlots[otherIndex].Blocked = true;
+                                TopUI.EquipmentSlots.UISlots[otherIndex].Blocked = true;
                                 dummy = DummyScene.Instantiate<DummySlot>();
                                 dummy.Icon.Texture = Icon.Texture;
                                 TopUI.AddChild(dummy);
                                 dummy.GlobalPosition = GlobalPosition;
                                 var dTween = dummy.CreateTween();
-                                dTween.TweenProperty(dummy, "global_position", TopUI.EquipmentSlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
+                                dTween.TweenProperty(dummy, "global_position", TopUI.EquipmentSlots.UISlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
                             }
                         }
                     }
@@ -309,11 +309,11 @@ public partial class EquipmentUI : Panel
     {
         if (body.GetParent() is EquipmentSlotUI slot && !JustCreated)
         {
-            if ((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0 && !slot.Blocked)
+            if ((GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.UISlots.ToList().IndexOf(slot)].equipmentFlags & AssignedEquipment.equipmentFlags) != 0 && !slot.Blocked)
             {
                 if (selectedSlot != null && selectedSlot != slot)
                 {
-                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
+                    GameManager.player.EquipmentSlots[TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot)].EquippedEquipment = null;
                     if (selectedSlot.equip == this)
                     {
                         selectedSlot.equip = null;
@@ -321,7 +321,7 @@ public partial class EquipmentUI : Panel
                     selectedSlot = null;
                 }
                 selectedSlot = body.GetParent<EquipmentSlotUI>();
-                GD.Print("Selected Slot = " + TopUI.EquipmentSlots.ToList().IndexOf(selectedSlot));
+                GD.Print("Selected Slot = " + TopUI.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot));
             }
         }
     }
@@ -341,7 +341,7 @@ public partial class EquipmentUI : Panel
                 {
                     dummy.QueueFree();
                     dummy = null;
-                    TopUI.EquipmentSlots[1].Blocked = false;
+                    TopUI.EquipmentSlots.UISlots[1].Blocked = false;
                 }
                 selectedSlot.equip = null;
             }

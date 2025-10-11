@@ -13,4 +13,5 @@ public static class GameManager
     public static Player player;
     public static bool UIOpen;
     public static Enhancments Enhancments;
+    public static EquipmentSlots EquipmentSlots;
 }

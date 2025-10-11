@@ -9,8 +9,12 @@ public partial class EquipmentSlots : MovableObject
     public EquipmentSlotUI[] UISlots;
     [Export] 
     public PackedScene EquipmentUI;
+    
+    public UiController UiController;
     public override void _Ready()
     {
+        UiController = GetParent<UiController>();
+        UiController.EquipmentSlots = this;
         var slots = GameManager.player.EquipmentSlots;
         for (int i = 0; i < slots.Length; i++)
         {
@@ -19,8 +23,13 @@ public partial class EquipmentSlots : MovableObject
                 var equipment = EquipmentUI.Instantiate<EquipmentUI>();
                 equipment.AssignedEquipment = slots[i].EquippedEquipment;
                 equipment.GlobalPosition = UISlots[i].GlobalPosition;
-                
+                equipment.TopUI = GetParent<UiController>();
             }
         }
+    }
+
+    public override void _ExitTree()
+    {
+        UiController.EquipmentSlots = null;
     }
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://d4nj0a3tkc87i"]
+[gd_scene load_steps=14 format=3 uid="uid://d4nj0a3tkc87i"]
 
 [ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_dm4x5"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_dpn8l"]
 [ext_resource type="Shader" uid="uid://g6vnlpej3cb3" path="res://Pirates/UI/ParalaxStars.gdshader" id="2_pbm4g"]
+[ext_resource type="Script" uid="uid://cn3pkiidbj86b" path="res://Pirates/UI/EquipmentSlots.cs" id="3_ra4fy"]
 [ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="4_vblko"]
 [ext_resource type="Texture2D" uid="uid://ft43whqwtdu5" path="res://Pirates/Equipment/Slots/EquipmentSlot_Chestpeice.png" id="5_erlru"]
 [ext_resource type="Texture2D" uid="uid://dwpmpieyjslq6" path="res://Pirates/Equipment/Slots/EquipmentSlot_Gloves.png" id="6_xpbi6"]
@@ -26,7 +27,7 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 225.0
 offset_bottom = 239.5
-MinSize = Vector2(225, 230)
+script = ExtResource("3_ra4fy")
 
 [node name="Move" parent="." index="0"]
 custom_minimum_size = Vector2(0, 19.5)
@@ -117,7 +118,7 @@ grow_horizontal = 2
 grow_vertical = 0
 Icon = ExtResource("9_iqkdq")
 
-[node name="Feet2" parent="." index="8" instance=ExtResource("2_dpn8l")]
+[node name="Main Hand" parent="." index="8" instance=ExtResource("2_dpn8l")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -130,7 +131,7 @@ grow_horizontal = 2
 grow_vertical = 0
 Icon = ExtResource("10_3ajl0")
 
-[node name="Feet3" parent="." index="9" instance=ExtResource("2_dpn8l")]
+[node name="Off Hand" parent="." index="9" instance=ExtResource("2_dpn8l")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
