@@ -27,6 +27,7 @@ public partial class EquipmentSlots : MovableObject
                 equipment.UiController = GetParent<UiController>();
                 equipment.selectedSlot = UISlots[i];
                 equipment.StartingPos = equipment.selectedSlot;
+                equipment.SlotAssigned = true;
                 equipment.Icon.Texture = equipment.AssignedEquipment.Icon;
                 UiController.AddChild(equipment);
             }

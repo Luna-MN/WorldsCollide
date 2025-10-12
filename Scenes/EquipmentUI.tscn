@@ -11,12 +11,11 @@ size = Vector2(32, 32)
 
 [node name="Equipment" type="Panel" node_paths=PackedStringArray("area", "Icon")]
 custom_minimum_size = Vector2(32, 32)
-offset_left = 12.77
-offset_top = 13.9
-offset_right = 44.77
-offset_bottom = 45.9
-scale = Vector2(2, 2)
-pivot_offset = Vector2(45, 45)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(16, 16)
 mouse_filter = 2
 theme = ExtResource("1_n1j1a")
 script = ExtResource("1_0xyv2")

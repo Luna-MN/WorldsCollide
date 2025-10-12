@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cgnwv3s31cdbs" path="res://Scenes/EquipmentUI.tscn" id="3_s2r4q"]
 
 [node name="UIPanel" node_paths=PackedStringArray("Grid") instance=ExtResource("1_om663")]
+scale = Vector2(1, 1)
 script = ExtResource("2_xqj0v")
 Item = ExtResource("3_s2r4q")
 Grid = NodePath("ScrollContainer/GridContainer")

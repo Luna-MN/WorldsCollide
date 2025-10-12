@@ -15,6 +15,7 @@ public partial class EquipmentUI : Panel
     public bool mouseIn;
     public bool mouseClick;
     public bool JustCreated = true;
+    public bool SlotAssigned;
     public Timer timer;
     public EquipmentSlotUI selectedSlot;
     public UiController UiController;
@@ -150,6 +151,7 @@ public partial class EquipmentUI : Panel
                 // Add equipment to slot
                 if (selectedSlot != null && equippable)
                 {
+                    SlotAssigned = true;
                     // remove from old
                     if (selectedSlot.equip != null && selectedSlot.equip != this)
                     {
@@ -198,6 +200,7 @@ public partial class EquipmentUI : Panel
                 // Remove from equipment slot
                 else
                 {
+                    SlotAssigned = false;
                     // if the grid does exist and we are not inside a slot, add it to the grid
                     if (UiController.InventoryGrid != null)
                     {
@@ -316,7 +319,8 @@ public partial class EquipmentUI : Panel
         {
             GlobalPosition = GetGlobalMousePosition() - DragOffset;
         }
-        else if (selectedSlot != null)
+        // this is causing problems when you drag the inv over the slots add a bool or somthing that checks if this item is assigned to a slot
+        else if (selectedSlot != null && SlotAssigned)
         {
             GlobalPosition = selectedSlot.GlobalPosition;
         }

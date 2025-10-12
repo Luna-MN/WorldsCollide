@@ -26,6 +26,7 @@ shader_parameter/star_brightness = 1.585
 material = SubResource("ShaderMaterial_vblko")
 offset_right = 176.5
 offset_bottom = 239.5
+scale = Vector2(1, 1)
 script = ExtResource("3_ra4fy")
 UISlots = [NodePath("Main Hand"), NodePath("Off Hand"), NodePath("Head"), NodePath("Chest"), NodePath("Legs"), NodePath("Hands"), NodePath("Belt"), NodePath("Feet")]
 EquipmentUI = ExtResource("4_5tecy")

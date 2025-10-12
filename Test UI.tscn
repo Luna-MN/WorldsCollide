@@ -14,4 +14,6 @@ mouse_filter = 2
 [node name="UIPanel" parent="." instance=ExtResource("1_lv54k")]
 layout_mode = 0
 offset_left = 5.0
-offset_right = 250.0
+offset_right = 245.0
+offset_bottom = 261.0
+scale = Vector2(1, 1)
