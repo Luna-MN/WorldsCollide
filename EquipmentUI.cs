@@ -152,6 +152,9 @@ public partial class EquipmentUI : Panel
                 if (selectedSlot != null && equippable)
                 {
                     SlotAssigned = true;
+                    // this statement will add this to the list of objects that should be queuefree'd when you close the slots UI
+                    UiController.EquipmentSlots.equipments.Add(this);
+                    UiController.InventoryGrid.equipments.Remove(this);
                     // remove from old
                     if (selectedSlot.equip != null && selectedSlot.equip != this)
                     {
@@ -169,9 +172,7 @@ public partial class EquipmentUI : Panel
                         UiController.InventoryGrid.Grid.CallDeferred("add_child", equipThere);
                         GetParent().RemoveChild(equipThere);
                     }
-                    // this statement will add this to the list of objects that should be queuefree'd when you close the slots UI
-                    UiController.EquipmentSlots.equipments.Add(this);
-                    UiController.EquipmentSlots.equipments.Remove(this);
+
                     //one handed wep
                     selectedSlot.equip = this;
                     GlobalPosition = selectedSlot.GlobalPosition;
@@ -202,10 +203,10 @@ public partial class EquipmentUI : Panel
                 // Remove from equipment slot
                 else
                 {
-                    SlotAssigned = false;
                     // if the grid does exist and we are not inside a slot, add it to the grid
                     if (UiController.InventoryGrid != null)
                     {
+                        SlotAssigned = false;
                         List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
                         List<int> equipIds = inv.Select(x => x.ItemId).ToList();
 

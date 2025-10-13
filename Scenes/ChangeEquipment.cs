@@ -18,7 +18,7 @@ public partial class ChangeEquipment : Button
 
     private void onButtonPressed()
     {
-        if (EquipmentPanel != null) return;
+        if (UiController.EquipmentSlots != null) return;
         GameManager.UIOpen = true;
         EquipmentPanel = EquipmentSlotsUI.Instantiate<EquipmentSlots>();
         UiController.EquipmentSlots = EquipmentPanel;
