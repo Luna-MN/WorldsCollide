@@ -169,7 +169,9 @@ public partial class EquipmentUI : Panel
                         UiController.InventoryGrid.Grid.CallDeferred("add_child", equipThere);
                         GetParent().RemoveChild(equipThere);
                     }
-
+                    // this statement will add this to the list of objects that should be queuefree'd when you close the slots UI
+                    UiController.EquipmentSlots.equipments.Add(this);
+                    UiController.EquipmentSlots.equipments.Remove(this);
                     //one handed wep
                     selectedSlot.equip = this;
                     GlobalPosition = selectedSlot.GlobalPosition;
@@ -218,7 +220,10 @@ public partial class EquipmentUI : Panel
                             inv.Add(AssignedEquipment);
                             GameManager.player.inventory.AllEquipment = inv.ToArray();
                         }
-
+                        // this will remove this item from the list of items to be queue freed when you close the equipment slots
+                        UiController.EquipmentSlots.equipments.Remove(this);
+                        UiController.InventoryGrid.equipments.Add(this);
+                        
                         UiController.InventoryGrid.Grid.CallDeferred("add_child", this);
                         GetParent().RemoveChild(this);
                     }

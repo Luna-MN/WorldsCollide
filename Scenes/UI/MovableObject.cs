@@ -7,6 +7,7 @@ public partial class MovableObject : Panel
 {
     [Export] public Control MoveArea;
     [Export] public Control ScaleArea;
+    [Export] public Button CloseButton;
     [Export] public Vector2 MinSize = new Vector2(50, 50);
     [Export] public Vector2 MaxSize = new Vector2(1000, 1000);
     public bool mouseInMove;
@@ -40,8 +41,15 @@ public partial class MovableObject : Panel
                 mouseInScaleStore = true;
             }
         };
+        CloseButton.ButtonDown += () => { Close(); };
     }
-
+    /// <summary>
+    /// This will be called when the UI object is closed, use it to clean up and then call base
+    /// </summary>
+    public virtual void Close()
+    {
+        QueueFree();
+    }
     public override void _Process(double delta)
     {
         //stop scaling when leave and stop scaling

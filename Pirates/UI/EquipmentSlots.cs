@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 [GlobalClass]
@@ -11,6 +12,8 @@ public partial class EquipmentSlots : MovableObject
     public PackedScene EquipmentUI;
     
     public UiController UiController;
+    
+    public List<EquipmentUI> equipments = new();
     public override void _Ready()
     {
         base._Ready();
@@ -29,11 +32,21 @@ public partial class EquipmentSlots : MovableObject
                 equipment.StartingPos = equipment.selectedSlot;
                 equipment.SlotAssigned = true;
                 equipment.Icon.Texture = equipment.AssignedEquipment.Icon;
+                equipment.Name = equipment.AssignedEquipment.ItemId.ToString();
+                equipments.Add(equipment);
                 UiController.AddChild(equipment);
             }
         }
     }
 
+    public override void Close()
+    {
+        foreach (var equip in equipments)
+        {
+            equip.QueueFree();
+        }
+        base.Close();
+    }
     public override void _ExitTree()
     {
         UiController.EquipmentSlots = null;

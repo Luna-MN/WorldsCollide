@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class InventoryGrid : MovableObject
 {
@@ -8,6 +9,7 @@ public partial class InventoryGrid : MovableObject
     [Export]
     public GridContainer Grid;
     public UiController UiController;
+    public List<EquipmentUI> equipments = new();
     public override void _Ready()
     {
         base._Ready();
@@ -22,9 +24,18 @@ public partial class InventoryGrid : MovableObject
             {
                 obj.Icon.Texture = item.Icon;
             }
-
+            equipments.Add(obj);
             Grid.AddChild(obj);
             
         }
+    }
+
+    public override void Close()
+    {
+        foreach (var equip in equipments)
+        {
+            equip.QueueFree();
+        }
+        base.Close();
     }
 }
