@@ -19,10 +19,15 @@ public partial class MovableObject : Panel
     private Vector2 dragOffset;
     private Vector2 scaleOffset;
     private UiController uiController;
+    public Vector2 SpawnPosition = Vector2.Inf;
     public override void _Ready()
     {
+        if (SpawnPosition == Vector2.Inf)
+        {
+            SpawnPosition = GetViewportRect().Size / 2;
+        }
         // Prevent spawning on top of other MovableObjects
-        JustifyCentre();
+        JustifyPosition(SpawnPosition);
 
         MoveArea.MouseEntered += () => { mouseInMove = true; };
         MoveArea.MouseExited += () =>
@@ -46,14 +51,13 @@ public partial class MovableObject : Panel
         };
         CloseButton.ButtonDown += () => { Close(); };
     }
-    private void JustifyCentre()
+    private void JustifyPosition(Vector2 idealPosition)
     {
         uiController = GetParent<UiController>();
         if (uiController?.Objects == null) return;
 
         // Start from the center of the screen
         var viewportSize = GetViewportRect().Size;
-        var idealPosition = (viewportSize - Size) / 2;
         
         // If no overlap at ideal position, use it
         var idealRect = new Rect2(idealPosition, Size);
