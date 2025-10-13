@@ -45,6 +45,22 @@ public partial class EquipmentSlots : MovableObject
         {
             equip.QueueFree();
         }
+        GameManager.player.equipAll();
+        var invIds = GameManager.player.inventory.AllEquipment.Select(x => x.ItemId).ToList();
+        List<int> equippedIds = new();
+        foreach (var slot in GameManager.player.EquipmentSlots)
+        {
+            if (slot.EquippedEquipment != null)
+            {
+                equippedIds.Add(slot.EquippedEquipment.ItemId);
+            }
+            else
+            {
+                equippedIds.Add(-1);
+            }
+        }
+        GameManager.ServerRpcs.RpcId(1, "UpdatePlayerEquipment", Multiplayer.GetUniqueId(), equippedIds.ToArray() ,invIds.ToArray());
+        GameManager.UIOpen = false;
         base.Close();
     }
     public override void _ExitTree()
