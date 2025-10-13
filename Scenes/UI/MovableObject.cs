@@ -22,7 +22,7 @@ public partial class MovableObject : Panel
     public override void _Ready()
     {
         // Prevent spawning on top of other MovableObjects
-        AdjustPositionToAvoidOverlap();
+        JustifyCentre();
 
         MoveArea.MouseEntered += () => { mouseInMove = true; };
         MoveArea.MouseExited += () =>
@@ -46,48 +46,100 @@ public partial class MovableObject : Panel
         };
         CloseButton.ButtonDown += () => { Close(); };
     }
-    private void AdjustPositionToAvoidOverlap()
+    private void JustifyCentre()
     {
         uiController = GetParent<UiController>();
         if (uiController?.Objects == null) return;
 
         // Start from the center of the screen
         var viewportSize = GetViewportRect().Size;
-        var startPosition = (viewportSize - Size) / 2;
-    
-        var currentRect = new Rect2(startPosition, Size);
-        const int offset = 30; // Offset distance when overlapping
-        int attempts = 0;
-        const int maxAttempts = 20;
-
-        while (attempts < maxAttempts)
+        var idealPosition = (viewportSize - Size) / 2;
+        
+        // If no overlap at ideal position, use it
+        var idealRect = new Rect2(idealPosition, Size);
+        bool hasOverlap = false;
+        
+        foreach (var obj in uiController.Objects)
         {
-            bool overlapping = false;
-        
-            foreach (var obj in uiController.Objects)
-            {
-                if (obj == this) continue;
+            if (obj == this) continue;
             
-                var otherRect = new Rect2(obj.GlobalPosition, obj.Size);
-                if (currentRect.Intersects(otherRect))
-                {
-                    overlapping = true;
-                    // Move to the right and down
-                    currentRect.Position += new Vector2(offset, 0);
-                    break;
-                }
-            }
-        
-            if (!overlapping)
+            var otherRect = new Rect2(obj.GlobalPosition, obj.Size);
+            if (idealRect.Intersects(otherRect))
             {
-                GlobalPosition = currentRect.Position;
+                hasOverlap = true;
                 break;
             }
-        
-            attempts++;
         }
+        
+        if (!hasOverlap)
+        {
+            GlobalPosition = idealPosition;
+            uiController.Objects.Add(this);
+            return;
+        }
+        
+        // Find closest non-overlapping position using spiral pattern
+        Vector2 bestPosition = idealPosition;
+        float bestDistance = float.MaxValue;
+        const int stepSize = 10; // How fine the search grid is
+        const int maxRadius = 500; // Maximum search distance from center
+        
+        for (int radius = stepSize; radius <= maxRadius; radius += stepSize)
+        {
+            // Check positions in a square pattern around the ideal position
+            for (int x = -radius; x <= radius; x += stepSize)
+            {
+                for (int y = -radius; y <= radius; y += stepSize)
+                {
+                    // Only check positions on the perimeter of current radius
+                    if (Mathf.Abs(x) != radius && Mathf.Abs(y) != radius) continue;
+                    
+                    var testPosition = idealPosition + new Vector2(x, y);
+                    var testRect = new Rect2(testPosition, Size);
+                    
+                    // Check if position is within viewport
+                    if (testPosition.X < 0 || testPosition.Y < 0 || 
+                        testPosition.X + Size.X > viewportSize.X || 
+                        testPosition.Y + Size.Y > viewportSize.Y)
+                        continue;
+                    
+                    // Check for overlaps
+                    bool overlapping = false;
+                    foreach (var obj in uiController.Objects)
+                    {
+                        if (obj == this) continue;
+                        
+                        var otherRect = new Rect2(obj.GlobalPosition, obj.Size);
+                        if (testRect.Intersects(otherRect))
+                        {
+                            overlapping = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!overlapping)
+                    {
+                        float distance = testPosition.DistanceTo(idealPosition);
+                        if (distance < bestDistance)
+                        {
+                            bestDistance = distance;
+                            bestPosition = testPosition;
+                        }
+                    }
+                }
+            }
+            
+            // If we found a valid position, use it
+            if (bestDistance < float.MaxValue)
+            {
+                break;
+            }
+        }
+        
+        GlobalPosition = bestPosition;
         uiController.Objects.Add(this);
     }
+
 
 
     /// <summary>
