@@ -65,6 +65,7 @@ public partial class EquipmentSlots : MovableObject
     }
     public override void _ExitTree()
     {
+        base._ExitTree();
         UiController.EquipmentSlots = null;
     }
 }

@@ -18,9 +18,12 @@ public partial class MovableObject : Panel
     private bool isScaling;
     private Vector2 dragOffset;
     private Vector2 scaleOffset;
-
+    private UiController uiController;
     public override void _Ready()
     {
+        // Prevent spawning on top of other MovableObjects
+        AdjustPositionToAvoidOverlap();
+
         MoveArea.MouseEntered += () => { mouseInMove = true; };
         MoveArea.MouseExited += () =>
         {
@@ -43,6 +46,50 @@ public partial class MovableObject : Panel
         };
         CloseButton.ButtonDown += () => { Close(); };
     }
+    private void AdjustPositionToAvoidOverlap()
+    {
+        uiController = GetParent<UiController>();
+        if (uiController?.Objects == null) return;
+
+        // Start from the center of the screen
+        var viewportSize = GetViewportRect().Size;
+        var startPosition = (viewportSize - Size) / 2;
+    
+        var currentRect = new Rect2(startPosition, Size);
+        const int offset = 30; // Offset distance when overlapping
+        int attempts = 0;
+        const int maxAttempts = 20;
+
+        while (attempts < maxAttempts)
+        {
+            bool overlapping = false;
+        
+            foreach (var obj in uiController.Objects)
+            {
+                if (obj == this) continue;
+            
+                var otherRect = new Rect2(obj.GlobalPosition, obj.Size);
+                if (currentRect.Intersects(otherRect))
+                {
+                    overlapping = true;
+                    // Move to the right and down
+                    currentRect.Position += new Vector2(offset, 0);
+                    break;
+                }
+            }
+        
+            if (!overlapping)
+            {
+                GlobalPosition = currentRect.Position;
+                break;
+            }
+        
+            attempts++;
+        }
+        uiController.Objects.Add(this);
+    }
+
+
     /// <summary>
     /// This will be called when the UI object is closed, use it to clean up and then call base
     /// </summary>
@@ -117,5 +164,10 @@ public partial class MovableObject : Panel
         {
             isScaling = false;
         }
+    }
+
+    public override void _ExitTree()
+    {
+        uiController.Objects.Remove(this);
     }
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class UiController : Control
 {
@@ -8,4 +9,5 @@ public partial class UiController : Control
     public InventoryGrid InventoryGrid;
     [Export]
     public Control DragLayer;
+    public List<MovableObject> Objects = new();
 }
