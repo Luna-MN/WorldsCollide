@@ -132,12 +132,6 @@ public partial class MovableObject : Panel
                     }
                 }
             }
-            
-            // If we found a valid position, use it
-            if (bestDistance < float.MaxValue)
-            {
-                break;
-            }
         }
         
         GlobalPosition = bestPosition;
