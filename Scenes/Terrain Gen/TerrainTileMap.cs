@@ -75,6 +75,26 @@ public partial class TerrainTileMap : TileMapLayer
 		CallDeferred("updateInternalTile", [coords]);
 	}
 	
+	/// <summary>
+	/// Sets Multiple tiles on the calculation layer, then updates the display layers
+	/// </summary>
+	/// <param name="coords">An Array of Tile Map Coordinates</param>
+	/// <param name="sourceId">An Array of Atlas Source IDs</param>
+	/// <param name="atlasCoords">An Array of Atlas Coordinates</param>
+	/// <param name="alternativeTile">An Array of Alternative Tile Indexes</param>
+	public void SetInternalTiles(Vector2I[] coords, int[] sourceId, Vector2I[] atlasCoords, int[] alternativeTile)
+	{
+		if (coords.Length != sourceId.Length && atlasCoords.Length != alternativeTile.Length && coords.Length != alternativeTile.Length) return;
+		for (int i = 0; i < coords.Length; i++)
+		{
+			getTileMapLayer(0).SetCell(coords[i], sourceId[i], atlasCoords[i], alternativeTile[i]);
+		}
+		foreach (var t in coords)
+		{
+			CallDeferred("updateInternalTile", [t]);
+		}
+		
+	}
 	
 	/// <summary>
 	/// Gets the corresponding tilemap layer. 0 gets the calculation layer.
