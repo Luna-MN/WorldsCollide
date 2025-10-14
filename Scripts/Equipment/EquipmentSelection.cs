@@ -56,7 +56,6 @@ public partial class EquipmentSelection : Panel
         }
         CloseButton.ButtonDown += () =>
         {
-            openButton.EquipmentPanel = null; 
             GameManager.player.equipAll();
             var invIds = GameManager.player.inventory.AllEquipment.Select(x => x.ItemId).ToList();
             List<int> equippedIds = new();

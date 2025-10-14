@@ -30,6 +30,12 @@ public partial class InventoryGrid : MovableObject
         }
     }
 
+    public override void _ExitTree()
+    {
+        UiController.InventoryGrid = null;
+        base._ExitTree();
+    }
+
     public override void Close()
     {
         foreach (var equip in equipments)

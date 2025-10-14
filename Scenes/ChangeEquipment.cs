@@ -6,11 +6,7 @@ public partial class ChangeEquipment : Button
     [Export]
     public PackedScene EquipmentSlotsUI;
     [Export]
-    public PackedScene EquipmentGridUI;
-    [Export]
     public UiController UiController;
-    public EquipmentSlots EquipmentPanel;
-    public InventoryGrid InventoryPanel;
     public override void _Ready()
     {
         ButtonDown += onButtonPressed;
@@ -20,13 +16,8 @@ public partial class ChangeEquipment : Button
     {
         if (UiController.EquipmentSlots != null) return;
         GameManager.UIOpen = true;
-        EquipmentPanel = EquipmentSlotsUI.Instantiate<EquipmentSlots>();
-        UiController.EquipmentSlots = EquipmentPanel;
-        UiController.AddChild(EquipmentPanel);
-        UiController.MoveChild(EquipmentPanel, 0);
-        InventoryPanel = EquipmentGridUI.Instantiate<InventoryGrid>();
-        UiController.InventoryGrid = InventoryPanel;
-        UiController.AddChild(InventoryPanel);
-        UiController.MoveChild(InventoryPanel, 0);
+        UiController.EquipmentSlots = EquipmentSlotsUI.Instantiate<EquipmentSlots>();
+        UiController.AddChild(UiController.EquipmentSlots);
+        UiController.MoveChild(UiController.EquipmentSlots, 0);
     }
 }
