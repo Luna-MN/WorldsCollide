@@ -43,6 +43,40 @@ public partial class TerrainTileMap : TileMapLayer
 	private Dictionary<string, int> TextNameToID = new();
 	
 	/// <summary>
+	/// Sets up the Atlas ID dictionary using Atlas Name. Runs update all and sets up changed listening.
+	/// </summary>
+	public override void _Ready()
+	{
+		var j = getTileMapLayer(1).TileSet.GetSourceCount();
+		for (int i = 0; i < j; i++)
+		{
+			var id = getTileMapLayer(1).TileSet.GetSourceId(i);
+			var name = getTileMapLayer(1).TileSet.GetSource(id).GetName();
+			TextNameToID.Add(name, id);
+			GD.Print($"{name} : {id}");
+		}
+
+		// updateAll();
+		getTileMapLayer(0).Changed += limitUpdates;
+		getTileMapLayer(0).Changed += () => GD.Print("haha");
+		// updateInternalTile(new Vector2I(4, -5));
+	}
+	
+	/// <summary>
+	/// Sets the tile on the calculation layer, then updates the display layers 
+	/// </summary>
+	/// <param name="coords">Tile Map Coordinates</param>
+	/// <param name="sourceId">Atlas Source ID</param>
+	/// <param name="atlasCoords">Atlas Coordinates</param>
+	/// <param name="alternativeTile">Alternative Tile Index</param>
+	public void SetInternalTile(Vector2I coords, int sourceId = -1, Vector2I? atlasCoords = null, int alternativeTile = 0)
+	{
+		getTileMapLayer(0).SetCell(coords, sourceId, atlasCoords, alternativeTile);
+		CallDeferred("updateInternalTile", [coords]);
+	}
+	
+	
+	/// <summary>
 	/// Gets the corresponding tilemap layer. 0 gets the calculation layer.
 	/// </summary>
 	/// <param name="i">number of layer to get</param>
@@ -65,34 +99,19 @@ public partial class TerrainTileMap : TileMapLayer
 				return null;
 		}
 	}
-	
-	/// <summary>
-	/// Sets up the Atlas ID dictionary using Atlas Name. Runs update all and sets up changed listening.
-	/// </summary>
-	public override void _Ready()
-	{
-		var j = getTileMapLayer(1).TileSet.GetSourceCount();
-		for (int i = 0; i < j; i++)
-		{
-			var id = getTileMapLayer(1).TileSet.GetSourceId(i);
-			var name = getTileMapLayer(1).TileSet.GetSource(id).GetName();
-			TextNameToID.Add(name, id);
-			GD.Print($"{name} : {id}");
-		}
 
-		updateAll();
-		Changed += limitUpdates;
-		// updateInternalTile(new Vector2I(4, -5));
-	}
-	
 	///<summary>
 	///Called on change to limit number of times remaking the grid
 	///</summary>
 	private void limitUpdates()
 	{
 		//call update all deferred so it can update bulk changes at once
-		ignoreRemake = true;
-		CallDeferred("UpdateAll");
+		if (!ignoreRemake)
+		{
+			GD.Print("limit updates");
+			CallDeferred("updateAll");
+			ignoreRemake = true;
+		}
 	}
 	
 	///<summary>
@@ -123,7 +142,7 @@ public partial class TerrainTileMap : TileMapLayer
 	///Updates the 4 display layer cells based on Calculation Layer
 	///</summary>
 	///<param name="coord"> Coordinate on Calculation layer</param>
-	public void updateInternalTile(Vector2I coord)
+	private void updateInternalTile(Vector2I coord)
 	{
 		//if coord changes need to edit coord around to coord -1 -1
 		foreach (var mod in internalToDisplay)
@@ -136,7 +155,7 @@ public partial class TerrainTileMap : TileMapLayer
 	///Updates a single display layer cell
 	/// </summary>
 	/// <param name="coord"> Coordinate on Display layer</param>
-	public void setDisplayTile(Vector2I coord)
+	private void setDisplayTile(Vector2I coord)
 	{
 		string[] neighbours = new string[4];
 		for (int i = 0; i < displayToInternal.Length; i++)
@@ -164,11 +183,18 @@ public partial class TerrainTileMap : TileMapLayer
 		if (neighbours.Length != 4) return;
 		TileInfo[] tiles = colourGroupsToAtlasID(neighbours);
 		// if (tiles.Length > 1) GD.Print(coord);
+		
 		for (int i = 0; i < tiles.Length; i++)
 		{
 			TileMapLayer tml = getTileMapLayer(i + 1);
 			//deal with alternative tiles
 			tml.SetCell(coord, tiles[i].atlasID, tiles[i].atlasCoord);
+		}
+
+		for (int i = tiles.Length; i < 4; i++)
+		{
+			TileMapLayer tml = getTileMapLayer(i + 1);
+			tml.SetCell(coord);
 		}
 	}
 	
