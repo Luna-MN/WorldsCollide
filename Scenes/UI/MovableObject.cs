@@ -149,7 +149,7 @@ public partial class MovableObject : Panel
     }
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("left_click"))
+        if (Input.IsActionJustPressed("left_click") && GetRect().HasPoint(GetGlobalMousePosition()))
         {
             GetParent().MoveChild(this, uiController.Objects.Count - 1);
         }
