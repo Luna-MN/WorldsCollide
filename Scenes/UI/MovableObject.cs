@@ -149,6 +149,11 @@ public partial class MovableObject : Panel
     }
     public override void _Process(double delta)
     {
+        if (Input.IsActionJustPressed("left_click"))
+        {
+            GetParent().MoveChild(this, uiController.Objects.Count - 1);
+        }
+        
         //stop scaling when leave and stop scaling
         if (mouseInScaleStore && !isScaling)
         {
