@@ -73,6 +73,10 @@ public partial class TerrainTileMap : TileMapLayer
 	{
 		getTileMapLayer(0).SetCell(coords, sourceId, atlasCoords, alternativeTile);
 		CallDeferred("updateInternalTile", [coords]);
+		if (Multiplayer.IsServer())
+		{
+			ServerManager.ClientRpcs.Rpc("ChangeClientTerrainTile", coords, sourceId, atlasCoords??new Vector2I(), alternativeTile);
+		}
 	}
 	
 	/// <summary>
@@ -93,7 +97,17 @@ public partial class TerrainTileMap : TileMapLayer
 		{
 			CallDeferred("updateInternalTile", [t]);
 		}
-		
+		if (Multiplayer.IsServer())
+		{
+			Vector2[] v2Coords = new Vector2[coords.Length];
+			Vector2[] v2AtlasCoords = new Vector2[atlasCoords.Length];
+			for (int i = 0; i < coords.Length; i++)
+			{
+				v2Coords[i] = coords[i];
+				v2AtlasCoords[i] = atlasCoords[i];
+			}
+			ServerManager.ClientRpcs.Rpc("ChangeClientTerrainTiles", v2Coords, sourceId, v2AtlasCoords, alternativeTile);
+		}
 	}
 	
 	/// <summary>
