@@ -17,11 +17,8 @@ public partial class Character : CharacterBody2D
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
     [Export]
+    // mostly for RPC this will be used to call the RPC of the skills on the server (CharacterName)_(SkillName) is the function that will be called
     protected string CharacterName = "Class1";
-    public bool Attack1Available = true;
-    public Timer attack1Timer;
-    public bool Attack2Available = true;
-    public Timer attack2Timer;
     [Export]
     protected AnimatedSprite2D WepSprite;
     [Export]
@@ -199,12 +196,6 @@ public partial class Character : CharacterBody2D
             WepSprite.Visible = true;
             WepSprite.Scale = PrimaryEquipment[0].Scale;
         }
-
-        if (attack1Timer != null)
-        {
-            attack1Timer.QueueFree();
-            attack1Timer = null;
-        }
         
 
         if (SecondaryEquipment.Count > 0 && !SecondaryEquipment[0].TwoHandedMode)
@@ -213,12 +204,6 @@ public partial class Character : CharacterBody2D
             OffHandSprite.Position = OffHandPos;
             OffHandSprite.Visible = true;
             OffHandSprite.Scale = SecondaryEquipment[0].Scale;
-        }
-        
-        if (attack2Timer != null)
-        {
-            attack2Timer.QueueFree();
-            attack2Timer = null;
         }
         
     }

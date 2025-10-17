@@ -93,9 +93,21 @@ public partial class ClassRpc : Node2D
         }
     #endregion
 
-    #region Class2
+    #region Gunslinger
 
-    
+        public void Gunslinger_Skill1()
+        {
+            
+        }
 
+        public void Gunslinger_Skill2()
+        {
+            
+        }
+        
+        public void Gunslinger_Skill3()
+        {
+            
+        }
     #endregion
 }
