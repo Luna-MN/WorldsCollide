@@ -69,11 +69,12 @@ public partial class TerrainTileMap : TileMapLayer
 	/// <param name="sourceId">Atlas Source ID</param>
 	/// <param name="atlasCoords">Atlas Coordinates</param>
 	/// <param name="alternativeTile">Alternative Tile Index</param>
-	public void SetInternalTile(Vector2I coords, int sourceId = -1, Vector2I? atlasCoords = null, int alternativeTile = 0)
+	/// <param name="sendToClient">If changing the server, whether it should send the change to the client</param>
+	public void SetInternalTile(Vector2I coords, int sourceId = -1, Vector2I? atlasCoords = null, int alternativeTile = 0, bool sendToClient = true)
 	{
 		getTileMapLayer(0).SetCell(coords, sourceId, atlasCoords, alternativeTile);
 		CallDeferred("updateInternalTile", [coords]);
-		if (Multiplayer.IsServer())
+		if (Multiplayer.IsServer() && sendToClient)
 		{
 			ServerManager.ClientRpcs.Rpc("ChangeClientTerrainTile", coords, sourceId, atlasCoords??new Vector2I(), alternativeTile);
 		}
@@ -86,7 +87,8 @@ public partial class TerrainTileMap : TileMapLayer
 	/// <param name="sourceId">An Array of Atlas Source IDs</param>
 	/// <param name="atlasCoords">An Array of Atlas Coordinates</param>
 	/// <param name="alternativeTile">An Array of Alternative Tile Indexes</param>
-	public void SetInternalTiles(Vector2I[] coords, int[] sourceId, Vector2I[] atlasCoords, int[] alternativeTile)
+	/// <param name="sendToClient">If changing the server, whether it should send the change to the client</param>
+	public void SetInternalTiles(Vector2I[] coords, int[] sourceId, Vector2I[] atlasCoords, int[] alternativeTile, bool sendToClient = true)
 	{
 		if (coords.Length != sourceId.Length && atlasCoords.Length != alternativeTile.Length && coords.Length != alternativeTile.Length) return;
 		for (int i = 0; i < coords.Length; i++)
@@ -97,7 +99,7 @@ public partial class TerrainTileMap : TileMapLayer
 		{
 			CallDeferred("updateInternalTile", [t]);
 		}
-		if (Multiplayer.IsServer())
+		if (Multiplayer.IsServer() && sendToClient)
 		{
 			Vector2[] v2Coords = new Vector2[coords.Length];
 			Vector2[] v2AtlasCoords = new Vector2[atlasCoords.Length];
