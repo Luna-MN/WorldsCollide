@@ -6,6 +6,8 @@ public partial class CapTrap : Node2D
 {
     [Export]
     public Area2D Area;
+    [Export]
+    public AnimatedSprite2D GunSpot;
     public PrimaryWeapon wep;
     public Character owner;
     private List<Character> targets = new();
@@ -13,6 +15,7 @@ public partial class CapTrap : Node2D
     {
         Area.BodyEntered += OnTrapEnter;    
         Area.BodyExited += OnTrapExit;
+        GunSpot.SpriteFrames = wep.SpriteFrames;
     }
 
     private void OnTrapEnter(Node2D body)

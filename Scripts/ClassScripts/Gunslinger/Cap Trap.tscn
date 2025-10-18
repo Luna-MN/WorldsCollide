@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv8oarxftvhtq"]
+[gd_scene load_steps=6 format=3 uid="uid://bv8oarxftvhtq"]
 
 [ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="1_1bicw"]
+[ext_resource type="Script" uid="uid://c08j4udmmmrlp" path="res://Scripts/ClassScripts/Gunslinger/CapTrap.cs" id="1_6gotn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6gotn"]
 animations = [{
@@ -19,6 +20,8 @@ radius = 271.0166
 [sub_resource type="SpriteFrames" id="SpriteFrames_1bicw"]
 
 [node name="Cap Trap" type="Node2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_6gotn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -5)
