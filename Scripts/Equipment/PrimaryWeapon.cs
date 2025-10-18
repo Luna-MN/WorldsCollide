@@ -109,14 +109,23 @@ public partial class PrimaryWeapon : BaseEquipment
         {
             return null;
         }
-        
-        return new Timer()
+        var time = attack.stats["AttackSpeed"];
+        if (attack.attackTimer != null)
         {
-            Autostart = false,
-            OneShot = true,
-            WaitTime = attack.stats["AttackSpeed"],
-            Name = "Attack Timer"
-        };
+            attack.attackTimer.Stop();
+            attack.attackTimer.WaitTime = time;
+            return attack.attackTimer;
+        }
+        else
+        {
+            return new Timer()
+            {
+                Autostart = false,
+                OneShot = true,
+                WaitTime = time,
+                Name = "Attack Timer"
+            };
+        }
     }
     // This gets called when you fire
     public bool StartTimerOnReset(WepeonType type)

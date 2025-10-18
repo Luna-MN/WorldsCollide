@@ -8,50 +8,47 @@ using System.Text.Json;
 [GlobalClass]
 public partial class Character : CharacterBody2D
 {
-    [Export]
-    public bool IsDummy = false;
+    [Export] public bool IsDummy = false;
     public bool isDead = false;
     public int ID;
-    [Export]
-    public PackedScene FloatingText;
+    [Export] public PackedScene FloatingText;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
+
     [Export]
     // mostly for RPC this will be used to call the RPC of the skills on the server (CharacterName)_(SkillName) is the function that will be called
     protected string CharacterName = "Class1";
-    [Export]
-    protected AnimatedSprite2D WepSprite;
-    [Export]
-    protected AnimatedSprite2D OffHandSprite;
-    [Export]
-    protected AnimatedSprite2D Sprite;
+
+    [Export] protected AnimatedSprite2D WepSprite;
+    [Export] protected AnimatedSprite2D OffHandSprite;
+    [Export] protected AnimatedSprite2D Sprite;
     [Export] public Node2D ShootPosition;
     [Export] public Node2D OffHandShootPosition;
     public List<PrimaryWeapon> PrimaryEquipment = new();
     public List<PrimaryWeapon> SecondaryEquipment = new();
-    [ExportGroup("Equipment")]
-    [Export]
-    public EquipmentSlot[] EquipmentSlots;
+    [ExportGroup("Equipment")] [Export] public EquipmentSlot[] EquipmentSlots;
     [Export] public Inventory inventory;
     [Export] public Vector2 GunPos;
     [Export] public Vector2 OffHandPos;
-    [ExportSubgroup("Loot Drop")]
-    [Export(PropertyHint.GroupEnable)] public bool DropLootOnDeath;
+
+    [ExportSubgroup("Loot Drop")] [Export(PropertyHint.GroupEnable)]
+    public bool DropLootOnDeath;
+
     [Export] public int Prestige = 1;
     [Export(PropertyHint.ResourceType)] public BaseEquipment[] DroppableEquipment;
     public List<int> PlayerIds = new();
-    [Export]
-    public PackedScene EquipmentSpawner;
+    [Export] public PackedScene EquipmentSpawner;
     public FloatingText RunningTotal;
-    [ExportGroup("Skills")]
-    [Export(PropertyHint.ResourceType)]
-    public Skill[] skills;
-    [Export(PropertyHint.ResourceType)]
-    public Skill UltSkill;
 
-    public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3};
+    [ExportGroup("Skills")] [Export(PropertyHint.ResourceType)]
+    public Skill[] skills;
+
+    [Export(PropertyHint.ResourceType)] public Skill UltSkill;
+
+    public List<int> selectedSkillIndexes = new List<int>() { 0, 1, 2, 3 };
 
     #region Passive Variables
+
     public event Action<Node2D, Projectile, float> OnHit;
     public event Action<Node2D, Projectile, float> OnHitSkill;
     public event Action<Node2D, Projectile, float> OnHitEquip;
@@ -70,93 +67,43 @@ public partial class Character : CharacterBody2D
     public event Action OnFire;
     public event Action OnFireSkill;
     public event Action OnFireEquip;
-    protected  List<Timer> PassiveMoveTimers = new List<Timer>();
-    protected  List<Timer> PassiveTimers = new List<Timer>();
+    protected List<Timer> PassiveMoveTimers = new List<Timer>();
+    protected List<Timer> PassiveTimers = new List<Timer>();
+
     #endregion
+
     #region Player Properties
-    
-    [ExportGroup("Stats")]
-    [Export]
-    public Stats characterStats;
+
+    [ExportGroup("Stats")] [Export] public Stats characterStats;
     [Export] public int Level;
-    
-    #region StatMirrors
-            /*
-            [Export] public float Speed
-            {
-                get => characterStats["Speed", "d"];
-                set => characterStats["Speed"] = value;
-            }
 
-            [Export] public float CurrentHealth
-            {
-                get => characterStats["CurrentHealth", "d"];
-                set => characterStats["CurrentHealth"] = value;
-            }
-
-            [Export] public float MaxHealth
-            {
-                get => characterStats["MaxHealth", "d"];
-                set => characterStats["MaxHealth"] = value;
-            }
-
-            [Export] public float Armour
-            {
-                get => characterStats["Armour", "d"];
-                set => characterStats["Armour"] = value;
-            }
-
-            [Export] public float DamageIncrease
-            {
-                get => characterStats["DamageIncrease", "d"];
-                set => characterStats["DamageIncrease"] = value;
-            }
-
-            [Export] public float ItemFind
-            {
-                get => characterStats["ItemFind", "d"];
-                set => characterStats["ItemFind"] = value;
-            }
-
-            [Export] public float CritChance
-            {
-                get => characterStats["CritChance", "d"];
-                set => characterStats["CritChance"] = value;
-            }
-
-            [Export] public float CritDamage
-            {
-                get => characterStats["CritDamage", "d"];
-                set => characterStats["CritDamage"] = value;
-            }
-            */
-
-        #endregion
     #endregion
+
     public override void _EnterTree()
     {
         if (IsDummy)
         {
             return;
         }
+
         OnHit += (b, p, f) => OnHitSkill?.Invoke(b, p, f);
         OnHit += (b, p, f) => OnHitEquip?.Invoke(b, p, f);
-        
+
         OnKill += b => OnKillSkill?.Invoke(b);
         OnKill += b => OnKillEquip?.Invoke(b);
-        
+
         OnDeath += b => OnDeathSkill?.Invoke(b);
         OnDeath += b => OnDeathEquip?.Invoke(b);
 
         OnStatCalc += () => OnStatCalcSkill?.Invoke();
         OnStatCalc += () => OnStatCalcEquip?.Invoke();
-        
+
         OnCrit += b => OnCritSkill?.Invoke(b);
         OnCrit += b => OnCritEquip?.Invoke(b);
-        
+
         OnFire += () => OnFireSkill?.Invoke();
         OnFire += () => OnFireEquip?.Invoke();
-        
+
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
     }
@@ -167,10 +114,12 @@ public partial class Character : CharacterBody2D
         {
             OnDeath += DropLoot;
         }
+
         if (IsDummy) return;
         SetSkills();
         equipAll();
     }
+
     public void equipAll()
     {
         OnHitEquip = null;
@@ -181,10 +130,12 @@ public partial class Character : CharacterBody2D
         {
             WepSprite.Visible = false;
         }
+
         if (OffHandSprite.SpriteFrames != null)
         {
-            OffHandSprite.Visible = false;       
+            OffHandSprite.Visible = false;
         }
+
         PrimaryEquipment.Clear();
         SecondaryEquipment.Clear();
         var equipment = EquipmentSlots.Select(x => x.EquippedEquipment).Where(x => x != null).ToList();
@@ -195,6 +146,7 @@ public partial class Character : CharacterBody2D
                 equip.OnEquip(this);
             }
         }
+
         if (PrimaryEquipment.Count > 0)
         {
             WepSprite.SpriteFrames = PrimaryEquipment[0].SpriteFrames;
@@ -202,7 +154,7 @@ public partial class Character : CharacterBody2D
             WepSprite.Visible = true;
             WepSprite.Scale = PrimaryEquipment[0].Scale;
         }
-        
+
 
         if (SecondaryEquipment.Count > 0 && !SecondaryEquipment[0].TwoHandedMode)
         {
@@ -211,28 +163,31 @@ public partial class Character : CharacterBody2D
             OffHandSprite.Visible = true;
             OffHandSprite.Scale = SecondaryEquipment[0].Scale;
         }
-        
+
     }
+
     public void SetSkills()
     {
         OnHitSkill = null;
         OnDeathSkill = null;
         OnKillSkill = null;
-        PassiveMoveTimers.ForEach(x => x.QueueFree());;
+        PassiveMoveTimers.ForEach(x => x.QueueFree());
         PassiveMoveTimers.Clear();
-        PassiveTimers.ForEach(x => x.QueueFree());;
+        PassiveTimers.ForEach(x => x.QueueFree());
         PassiveTimers.Clear();
         foreach (var skill in skills)
         {
-            if(!selectedSkillIndexes.Contains(skills.ToList().IndexOf(skill))) continue;
+            if (!selectedSkillIndexes.Contains(skills.ToList().IndexOf(skill))) continue;
             if (skill.IsPassive)
             {
-                var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy );
-                
+                var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1),
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                    BindingFlags.FlattenHierarchy);
+
                 switch (skill.passiveType)
                 {
                     case Skill.PassiveType.OnHit:
-                        OnHitSkill += (b, p, f) => { info.Invoke(this, new object[] {b, p, f}); };
+                        OnHitSkill += (b, p, f) => { info.Invoke(this, new object[] { b, p, f }); };
                         break;
                     case Skill.PassiveType.OnKill:
                         OnKillSkill += _ => { info.Invoke(this, new object[] { }); };
@@ -241,21 +196,24 @@ public partial class Character : CharacterBody2D
                         OnDeathSkill += _ => { info.Invoke(this, new object[] { }); };
                         break;
                     case Skill.PassiveType.OnMove:
-                            SetUpTimer(skill, info, false, false);
+                        SetUpTimer(skill, info, false, false);
                         break;
                     case Skill.PassiveType.OnTimerTimeout:
-                            SetUpTimer(skill, info, true, false);
+                        SetUpTimer(skill, info, true, false);
                         break;
                     case Skill.PassiveType.StatBoost:
-                            var fieldInfo = GetType().GetField(skill.PassiveStat, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
-                            StatBoost(fieldInfo, skill.PassiveValue);
+                        var fieldInfo = GetType().GetField(skill.PassiveStat,
+                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                            BindingFlags.FlattenHierarchy);
+                        StatBoost(fieldInfo, skill.PassiveValue);
                         break;
                     case Skill.PassiveType.DynamicStatBoost:
-                            OnStatCalcSkill += () => { info.Invoke(this, new object[] { }); };
+                        OnStatCalcSkill += () => { info.Invoke(this, new object[] { }); };
                         break;
                 }
             }
         }
+        equipAll();
     }
 
     protected void SetUpTimer(Skill skill, MethodInfo info, bool autostart, bool oneShot)
@@ -287,7 +245,7 @@ public partial class Character : CharacterBody2D
         // i don't think this works anymore
         stat?.SetValue(this, (float)stat?.GetValue(this)! + value);
     }
-    protected Node ResolveRpcNode(Skill.RpcLocation loc)
+protected Node ResolveRpcNode(Skill.RpcLocation loc)
     {
         return loc switch
         {
