@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv8oarxftvhtq"]
+
+[ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="1_1bicw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gotn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1bicw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bicw"]
+radius = 271.0166
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bicw"]
+
+[node name="Cap Trap" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_6gotn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1bicw")
+
+[node name="GunPos" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.005, -12.57)
+sprite_frames = SubResource("SpriteFrames_1bicw")
+
+[node name="ShootPos" type="Node2D" parent="GunPos"]
+position = Vector2(3.4285727, 0)
