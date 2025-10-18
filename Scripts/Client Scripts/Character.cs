@@ -67,6 +67,9 @@ public partial class Character : CharacterBody2D
     public event Action<Node2D> OnCrit;
     public event Action<Node2D> OnCritSkill;
     public event Action<Node2D> OnCritEquip;
+    public event Action OnFire;
+    public event Action OnFireSkill;
+    public event Action OnFireEquip;
     protected  List<Timer> PassiveMoveTimers = new List<Timer>();
     protected  List<Timer> PassiveTimers = new List<Timer>();
     #endregion
@@ -150,6 +153,9 @@ public partial class Character : CharacterBody2D
         
         OnCrit += b => OnCritSkill?.Invoke(b);
         OnCrit += b => OnCritEquip?.Invoke(b);
+        
+        OnFire += () => OnFireSkill?.Invoke();
+        OnFire += () => OnFireEquip?.Invoke();
         
         SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
@@ -304,6 +310,11 @@ public partial class Character : CharacterBody2D
     public void CallOnCrit(Node2D body)
     {
         OnCrit?.Invoke(body);
+    }
+
+    public void CallOnFire()
+    {
+        OnFire?.Invoke();   
     }
     #endregion
     public override void _PhysicsProcess(double delta)

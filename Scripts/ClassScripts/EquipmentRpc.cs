@@ -101,6 +101,7 @@ public partial class EquipmentRpc : Node2D
     public void Gun_LeftClick(int id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
+        Character.CallOnFire();
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
@@ -117,6 +118,7 @@ public partial class EquipmentRpc : Node2D
     public void Gun_LeftClick(int id, int equipmentId, int rightClick)
     {
         var Character = ServerManager.NodeDictionary[id];
+        Character.CallOnFire();
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
@@ -140,6 +142,7 @@ public partial class EquipmentRpc : Node2D
     public void SlashingSword_LeftClick(int id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
+        Character.CallOnFire();
         var mousePos = Character.inputSync.mousePosition;
         var bullet = Melee_Slash.Instantiate<Melee_Slash>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
@@ -159,6 +162,7 @@ public partial class EquipmentRpc : Node2D
     public void Bow_LeftClick(int id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
+        Character.CallOnFire();
         var mousePos = Character.inputSync.mousePosition;
         var arrow = Arrow.Instantiate<BasicRangedProjectile>();
         arrow.MoveDirection = mousePos - Character.GlobalPosition;
