@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using Godot.NativeInterop;
 
 public static class StatMaths
@@ -37,12 +38,8 @@ public static class StatMaths
     /// <returns>A speed Between 100 and 1000</returns>
     public static float speedValidation(float v)
     {
-        if (v < 100)
-            return 100;
-        if (v > 1000)
-            return 1000;
+        v = Math.Clamp(v, 100, 1000);
         return v;
-
     }
     
     /// <summary>

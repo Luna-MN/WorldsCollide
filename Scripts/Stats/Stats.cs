@@ -86,11 +86,11 @@ public partial class Stats : Resource
     /// <param name="funcName">Function Name - must be unique</param>
     /// <param name="func">The function itself</param>
     /// <param name="priority">Priority of the stat - when it should run in the stream</param>
-    public void addFunc(string statName, string funcName, Func<float, float> func, int priority)
+    public void addFunc(string id, string statName, string funcName, Func<float, float> func, int priority)
     {
         if (stats.TryGetValue(statName, out var stat))
         {
-            stat.addFunc(funcName, func, priority);
+            stat.addFunc(id, funcName, func, priority);
         }
     }
     /// <summary>
@@ -98,11 +98,11 @@ public partial class Stats : Resource
     /// </summary>
     /// <param name="statName">Stat Name</param>
     /// <param name="funcName">Function Name</param>
-    public void removeFunc(string statName, string funcName)
+    public void removeFunc(string id, string statName, string funcName)
     {
         if (stats.TryGetValue(statName, out var stat))
         {
-            stat.removeFunc(funcName);
+            stat.removeFunc(id, funcName);
         }
     }
 }
