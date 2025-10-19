@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cy0wb20rhvwn2" path="res://Pirates/UI/skill_button.tscn" id="3_62rtm"]
 
 [node name="UIPanel" instance=ExtResource("1_t5v4h")]
-offset_right = 400.5
+offset_right = 315.5
+offset_bottom = 207.0
 
 [node name="Control" type="Control" parent="." index="3"]
 layout_mode = 1

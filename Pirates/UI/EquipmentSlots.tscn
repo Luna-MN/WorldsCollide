@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4nj0a3tkc87i"]
+[gd_scene load_steps=13 format=3 uid="uid://d4nj0a3tkc87i"]
 
 [ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_dm4x5"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_dpn8l"]
-[ext_resource type="Shader" uid="uid://g6vnlpej3cb3" path="res://Pirates/UI/ParalaxStars.gdshader" id="2_pbm4g"]
 [ext_resource type="Script" uid="uid://cn3pkiidbj86b" path="res://Pirates/UI/EquipmentSlots.cs" id="3_ra4fy"]
 [ext_resource type="PackedScene" uid="uid://cgnwv3s31cdbs" path="res://Scenes/EquipmentUI.tscn" id="4_5tecy"]
 [ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="4_vblko"]
@@ -14,16 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cthlp6i84npo6" path="res://Pirates/Equipment/Slots/EquipmentSlot_MainHand.png" id="10_3ajl0"]
 [ext_resource type="Texture2D" uid="uid://byt2f0ok3jcn6" path="res://Pirates/Equipment/Slots/EquipmentSlot_OffHand.png" id="11_ra4fy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vblko"]
-shader = ExtResource("2_pbm4g")
-shader_parameter/star_density = 64.666002596635
-shader_parameter/parallax_scale = Vector2(0.05, 0.05)
-shader_parameter/star_color = Color(1, 1, 1, 1)
-shader_parameter/star_size = 0.07
-shader_parameter/star_brightness = 1.585
-
 [node name="UIPanel" node_paths=PackedStringArray("UISlots") instance=ExtResource("1_dm4x5")]
-material = SubResource("ShaderMaterial_vblko")
 offset_right = 176.5
 offset_bottom = 239.5
 scale = Vector2(1, 1)

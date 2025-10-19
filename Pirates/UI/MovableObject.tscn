@@ -6,11 +6,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y6101"]
 shader = ExtResource("1_314re")
-shader_parameter/star_density = 59.3330023433175
-shader_parameter/parallax_scale = Vector2(0.05, 0.05)
+shader_parameter/star_density = 85.334003578365
+shader_parameter/parallax_scale = Vector2(0.16, 0.05)
 shader_parameter/star_color = Color(1, 1, 1, 1)
-shader_parameter/star_size = 0.04
-shader_parameter/star_brightness = 0.5
+shader_parameter/star_size = 0.21
+shader_parameter/star_brightness = 0.84
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tvjr"]
 texture = ExtResource("2_8f4b3")

@@ -48,7 +48,7 @@ public partial class PixelLine : ColorRect
         // Compute normalized endpoints (0..1)
         Vector2 normalizedStart = UseNormalizedEndpoints ? StartUV : start / size;
         Vector2 normalizedEnd   = UseNormalizedEndpoints ? EndUV   : end   / size;
-
+        
         // Clamp to safe 0..1 range
         normalizedStart = new Vector2(Mathf.Clamp(normalizedStart.X, 0f, 1f), Mathf.Clamp(normalizedStart.Y, 0f, 1f));
         normalizedEnd   = new Vector2(Mathf.Clamp(normalizedEnd.X,   0f, 1f), Mathf.Clamp(normalizedEnd.Y,   0f, 1f));
