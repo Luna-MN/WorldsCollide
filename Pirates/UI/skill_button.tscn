@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cy0wb20rhvwn2"]
 
-[ext_resource type="Texture2D" uid="uid://btcmey0frd5vu" path="res://Pirates/UI/Slot.png" id="1_e0fid"]
+[ext_resource type="Texture2D" uid="uid://i6lcqmrjr3jd" path="res://Pirates/UI/SkillButton.png" id="1_e0fid"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hq2b"]
 texture = ExtResource("1_e0fid")
