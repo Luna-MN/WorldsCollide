@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dacp5ruwwujby"
-path="res://.godot/imported/TX Tileset Grass.png-7d5b8511ef85481e0c1b0265b74e65ba.ctex"
+uid="uid://dnw0bx0682q7t"
+path="res://.godot/imported/Tile Sheet BlackT.png-4e5a9e7ada5a9f2f053f05667f13a645.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pirates/TX Tileset Grass.png"
-dest_files=["res://.godot/imported/TX Tileset Grass.png-7d5b8511ef85481e0c1b0265b74e65ba.ctex"]
+source_file="res://Pirates/Terrain Gen/Tile Sheet BlackT.png"
+dest_files=["res://.godot/imported/Tile Sheet BlackT.png-4e5a9e7ada5a9f2f053f05667f13a645.ctex"]
 
 [params]
 

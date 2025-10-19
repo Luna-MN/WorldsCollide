@@ -15,17 +15,17 @@ public partial class Stats : Resource
     //getter setter for stats
     public float this[string i]
     {
-        set => setValue(i, value);
-        get => getValue(i);
+        set => SetValue(i, value);
+        get => GetCalcValue(i);
     }
     //getter setter for display value stats
     public float this[string i, string s]
     {
-        get => s.ToLower()=="d"? getDisplayValue(i): getValue(i);
-        set => setValue(i, value);
+        get => s.ToLower()=="d"? GetDisplayValue(i): GetCalcValue(i);
+        set => SetValue(i, value);
     }
     //set adds if nonexistent
-    public void setValue(string name, float value)
+    public void SetValue(string name, float value)
     {
         if (!stats.TryGetValue(name, out var stat))
         {
@@ -37,13 +37,13 @@ public partial class Stats : Resource
         }
     }
     //get adds if nonexistent - default value = 0 could be edited by vaildation functions
-    public float getValue(string name)
+    public float GetCalcValue(string name)
     {
         float value;
         if (!stats.TryGetValue(name, out var stat))
         {
-            setValue(name, 0.0f);
-            value = getValue(name);
+            SetValue(name, 0.0f);
+            value = GetCalcValue(name);
         }
         else
         {
@@ -54,7 +54,7 @@ public partial class Stats : Resource
         return value;
     }
     //display value getter
-    public float getDisplayValue(string name)
+    public float GetDisplayValue(string name)
     {
         return stats[name].DisplayValue;
     }
