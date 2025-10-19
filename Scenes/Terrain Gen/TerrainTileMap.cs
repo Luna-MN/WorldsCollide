@@ -217,13 +217,13 @@ public partial class TerrainTileMap : TileMapLayer
 	{
 		// error if not 4 in length
 		if (neighbours.Length != 4) return;
-		TileInfo[] tiles = colourGroupsToAtlasID(neighbours);
+		TileInfo[] tiles = colourGroupsToAtlasInfo(neighbours);
 		// if (tiles.Length > 1) GD.Print(coord);
 		
 		for (int i = 0; i < tiles.Length; i++)
 		{
 			TileMapLayer tml = getTileMapLayer(i + 1);
-			//deal with alternative tiles
+			//Todo: deal with alternative tiles
 			tml.SetCell(coord, tiles[i].atlasID, tiles[i].atlasCoord);
 		}
 
@@ -239,7 +239,7 @@ public partial class TerrainTileMap : TileMapLayer
 	///</summary>
 	///<param name="neighbours">The neighbours using calculation layer names. Length 4</param>
 	/// <returns>Array of (max 4) tiles needed to create the neighbour relation across the 4 display layers</returns>
-	private TileInfo[] colourGroupsToAtlasID(string[] neighbours)
+	private TileInfo[] colourGroupsToAtlasInfo(string[] neighbours)
 	{
 		string[] names;
 		int id;
@@ -282,7 +282,7 @@ public partial class TerrainTileMap : TileMapLayer
 							n[j] = "T";
 						}
 					}
-					tis.AddRange(colourGroupsToAtlasID(n));
+					tis.AddRange(colourGroupsToAtlasInfo(n));
 				}
 				return tis.ToArray();
 				
