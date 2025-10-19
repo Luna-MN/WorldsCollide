@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6tuodf5rlvv7"]
+
+[ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Scripts/Client Scripts/Camera.cs" id="1_khmn4"]
+[ext_resource type="Script" uid="uid://b6i5bobwio7fp" path="res://Scenes/SkillOnScreen.cs" id="2_cis8b"]
+[ext_resource type="Script" uid="uid://qinaso0i8icb" path="res://Scripts/Client Scripts/ChangeSkills.cs" id="3_scjhc"]
+[ext_resource type="PackedScene" uid="uid://2o87ghb0ppc2" path="res://Scenes/skill_selection.tscn" id="4_e5gfk"]
+[ext_resource type="Script" uid="uid://b5t0lykikc27d" path="res://Scenes/ChangeEquipment.cs" id="5_cdix4"]
+[ext_resource type="PackedScene" uid="uid://d4nj0a3tkc87i" path="res://Pirates/UI/EquipmentSlots.tscn" id="6_yntpq"]
+[ext_resource type="Script" uid="uid://c1ggu17meuh2w" path="res://Scenes/InventoryOpen.cs" id="7_2ailg"]
+[ext_resource type="PackedScene" uid="uid://balvacu5sqtc1" path="res://Pirates/UI/InventoryGrid.tscn" id="8_v1x18"]
+[ext_resource type="PackedScene" uid="uid://dxrpbmeto0ib" path="res://Pirates/UI/ui_controller.tscn" id="9_8oka3"]
+
+[node name="Camera2D" type="Camera2D"]
+script = ExtResource("1_khmn4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+custom_minimum_size = Vector2(-6.915, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(25.695, 27.055)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="1" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "1"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("2_cis8b")
+
+[node name="2" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "2"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("2_cis8b")
+
+[node name="3" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "3"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("2_cis8b")
+
+[node name="4" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "4"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("2_cis8b")
+
+[node name="5" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+text = "5"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("2_cis8b")
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 1
+text = "Change Skills"
+script = ExtResource("3_scjhc")
+SkillUI = ExtResource("4_e5gfk")
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control" node_paths=PackedStringArray("UiController")]
+layout_mode = 0
+offset_top = 34.615
+offset_right = 155.0
+offset_bottom = 65.615
+mouse_filter = 1
+text = "Change Equipment"
+script = ExtResource("5_cdix4")
+EquipmentSlotsUI = ExtResource("6_yntpq")
+UiController = NodePath("../UIController")
+
+[node name="Button3" type="Button" parent="CanvasLayer/Control" node_paths=PackedStringArray("UiController")]
+layout_mode = 0
+offset_top = 76.615005
+offset_right = 168.0
+offset_bottom = 107.615005
+mouse_filter = 1
+text = "Inventory"
+script = ExtResource("7_2ailg")
+InventoryUI = ExtResource("8_v1x18")
+UiController = NodePath("../UIController")
+
+[node name="UIController" parent="CanvasLayer/Control" instance=ExtResource("9_8oka3")]
+layout_mode = 1
+mouse_filter = 2
