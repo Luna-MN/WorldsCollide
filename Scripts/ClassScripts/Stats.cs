@@ -12,19 +12,32 @@ public partial class Stats : Resource
     public Stats()
     {
     }
-    //getter setter for stats
+    /// <summary>
+    /// Gets The calculated value
+    /// Sets the value
+    /// </summary>
+    /// <param name="i">String name of stat</param>
     public float this[string i]
     {
         set => SetValue(i, value);
         get => GetCalcValue(i);
     }
-    //getter setter for display value stats
+    /// <summary>
+    /// Gets the display value or the normal value
+    /// Sets the value
+    /// </summary>
+    /// <param name="i">String name of stat</param>
+    /// <param name="s">D for display value anything else for other value</param>
     public float this[string i, string s]
     {
         get => s.ToLower()=="d"? GetDisplayValue(i): GetCalcValue(i);
         set => SetValue(i, value);
     }
-    //set adds if nonexistent
+    /// <summary>
+    /// Sets Value of a stat, creates it if non-existent
+    /// </summary>
+    /// <param name="name">Stat Name</param>
+    /// <param name="value">Value to set it to</param>
     public void SetValue(string name, float value)
     {
         if (!stats.TryGetValue(name, out var stat))
@@ -33,10 +46,14 @@ public partial class Stats : Resource
         }
         else
         {
-            stat.Value = value;
+            stat.CalcValue = value;
         }
     }
-    //get adds if nonexistent - default value = 0 could be edited by vaildation functions
+    /// <summary>
+    /// Get Calculated Value of a stat
+    /// </summary>
+    /// <param name="name">Stat Name</param>
+    /// <returns>Calculation Value of a stat</returns>
     public float GetCalcValue(string name)
     {
         float value;
@@ -47,18 +64,28 @@ public partial class Stats : Resource
         }
         else
         {
-            value = stat.Value;
+            value = stat.CalcValue;
         }
         //GD.Print("getting " + name + ": " + value);
         
         return value;
     }
-    //display value getter
+    /// <summary>
+    /// Gets display value of a stat
+    /// </summary>
+    /// <param name="name">Stat Name</param>
+    /// <returns>Display Value of a stat - no Calculation applied</returns>
     public float GetDisplayValue(string name)
     {
         return stats[name].DisplayValue;
     }
-    //add a function to a stat's calculation order
+    /// <summary>
+    /// Adds a function to a stats calculation stream
+    /// </summary>
+    /// <param name="statName">Stat Name</param>
+    /// <param name="funcName">Function Name - must be unique</param>
+    /// <param name="func">The function itself</param>
+    /// <param name="priority">Priority of the stat - when it should run in the stream</param>
     public void addFunc(string statName, string funcName, Func<float, float> func, int priority)
     {
         if (stats.TryGetValue(statName, out var stat))
@@ -66,7 +93,11 @@ public partial class Stats : Resource
             stat.addFunc(funcName, func, priority);
         }
     }
-    //remove a function
+    /// <summary>
+    /// Remove a function from a stream
+    /// </summary>
+    /// <param name="statName">Stat Name</param>
+    /// <param name="funcName">Function Name</param>
     public void removeFunc(string statName, string funcName)
     {
         if (stats.TryGetValue(statName, out var stat))

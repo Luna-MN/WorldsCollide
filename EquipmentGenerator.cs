@@ -112,7 +112,7 @@ public partial class EquipmentGenerator : Node2D
                         if (stat.Value.ClampValue)
                         {
                             // clamp the value between the min and max
-                            stat.Value.Value = stat.Value.MinValue + (stat.Value.MaxValue - stat.Value.MinValue) * qualPerc;
+                            stat.Value.CalcValue = stat.Value.MinValue + (stat.Value.MaxValue - stat.Value.MinValue) * qualPerc;
                         }
                     }
                     equipment.enhancements = enhancments.ToArray();
