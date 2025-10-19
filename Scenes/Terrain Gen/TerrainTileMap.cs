@@ -53,12 +53,10 @@ public partial class TerrainTileMap : TileMapLayer
 			var id = getTileMapLayer(1).TileSet.GetSourceId(i);
 			var name = getTileMapLayer(1).TileSet.GetSource(id).GetName();
 			TextNameToID.Add(name, id);
-			GD.Print($"{name} : {id}");
 		}
 
 		// updateAll();
 		getTileMapLayer(0).Changed += limitUpdates;
-		getTileMapLayer(0).Changed += () => GD.Print("haha");
 		// updateInternalTile(new Vector2I(4, -5));
 	}
 	
@@ -144,7 +142,6 @@ public partial class TerrainTileMap : TileMapLayer
 		//call update all deferred so it can update bulk changes at once
 		if (!ignoreRemake)
 		{
-			GD.Print("limit updates");
 			CallDeferred("updateAll");
 			ignoreRemake = true;
 		}
@@ -167,10 +164,8 @@ public partial class TerrainTileMap : TileMapLayer
 		
 		foreach (var coord in getTileMapLayer(0).GetUsedCells())
 		{
-			// GD.Print(coord);
 			updateInternalTile(coord);
 		}
-		GD.Print("Updated");
 		ignoreRemake = false;
 	}
 	
@@ -218,7 +213,6 @@ public partial class TerrainTileMap : TileMapLayer
 		// error if not 4 in length
 		if (neighbours.Length != 4) return;
 		TileInfo[] tiles = colourGroupsToAtlasInfo(neighbours);
-		// if (tiles.Length > 1) GD.Print(coord);
 		
 		for (int i = 0; i < tiles.Length; i++)
 		{

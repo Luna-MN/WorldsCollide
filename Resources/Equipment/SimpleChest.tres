@@ -30,6 +30,7 @@ script = ExtResource("3_uhyga")
 stats = Dictionary[String, ExtResource("4_e8g0n")]({
 "Damage": SubResource("Resource_ql2h3")
 })
+_origin = 2
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [resource]

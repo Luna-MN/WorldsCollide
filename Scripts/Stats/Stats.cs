@@ -9,8 +9,13 @@ public partial class Stats : Resource
     //dictionary of all name & stat classes
     [Export] 
     public Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
+    [Export]
+    public StatMaths.OriginType _origin;
+    
     public Stats()
     {
+        var s = (Script)this.GetLocalScene()?.GetScript().AsGodotObject();
+        GD.Print(s?.GetBaseScript());
     }
     /// <summary>
     /// Gets The calculated value

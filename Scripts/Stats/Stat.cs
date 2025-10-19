@@ -10,6 +10,7 @@ public partial class Stat : Resource
     
     private string _name;
     private float _value = 0.0f;
+    private StatMaths.OriginType _origin;
     // Might be useful, depends on how complicated we make formulas
     //private float _cachedResult;
     // Priority-ed list - main calculation runs at priority 10
@@ -33,7 +34,7 @@ public partial class Stat : Resource
     public float CalcValue
     {
         get => calculation();
-        set => _value = (float)(_validationFunction?.Invoke(null, [value])?? _value);
+        set => setValue(value);
     }
     
     /// <summary>
@@ -44,7 +45,7 @@ public partial class Stat : Resource
     public float DisplayValue
     {
         get => _value;
-        set => _value = (float)(_validationFunction?.Invoke(null, [value]) ?? _value);
+        set => setValue(value);
     }
     
     
@@ -100,25 +101,34 @@ public partial class Stat : Resource
             //[stat name]Vaildation = validation on setting a value
             _validationFunction = typeof(StatMaths).GetMethod(name + "Validation", BindingFlags.Static | BindingFlags.Public);
             if (_validationFunction == null)
-                _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+                _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Validation", BindingFlags.Static | BindingFlags.Public);
             
         }
         catch (Exception e)
         {
-            _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+            _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Validation", BindingFlags.Static | BindingFlags.Public);
         }
         try
         {
             //[stat name]Calc = calculation on value
             _calcFunction = typeof(StatMaths).GetMethod(name + "Calc", BindingFlags.Static | BindingFlags.Public);
             if (_calcFunction == null)
-                _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+                _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Calc", BindingFlags.Static | BindingFlags.Public);
         }
         catch (Exception e)
         {
-            _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+            _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Calc", BindingFlags.Static | BindingFlags.Public);
         }
         addFunc("","base", f => (float)_calcFunction.Invoke(null, [f]), 10);
+    }
+
+    /// <summary>
+    /// Sets the _value to the result of the validation function
+    /// </summary>
+    /// <param name="value">The value to pass into the validation function</param>
+    private void setValue(float value)
+    {
+        _value = (float)(_validationFunction?.Invoke(null, [value, _origin]) ?? _value);
     }
     
     /// <summary>

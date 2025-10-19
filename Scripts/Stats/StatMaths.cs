@@ -8,14 +8,26 @@ public static class StatMaths
     //functions obtained by invoking on name - careful changing any names
     //[stat name]Calc = calculation on value
     //[stat name]Validation = validation on setting a value
-    
+
+
+    public enum OriginType
+    {
+        Character,
+        Projectile,
+        Equipment,
+    }
     
     /// <summary>
-    /// Default Fallback Function - just returns the value straight
+    /// Default Fallback Functions - just returns the value straight
     /// </summary>
     /// <param name="v">Value of the stat</param>
     /// <returns>Value of the stat</returns>
-    public static float defaultFallBack(float v)
+    public static float defaultFallBackCalc(float v)
+    {
+        return v;
+    }
+    
+    public static float defaultFallBackValidation(float v, OriginType origin)
     {
         return v;
     }
@@ -35,8 +47,9 @@ public static class StatMaths
     /// Insures speed is positive and not extreme in either direction
     /// </summary>
     /// <param name="v">The value speed is being set to</param>
+    /// <param name="origin">The origin of the stats class</param>
     /// <returns>A speed Between 100 and 1000</returns>
-    public static float speedValidation(float v)
+    public static float speedValidation(float v, OriginType origin)
     {
         v = Math.Clamp(v, 100, 1000);
         return v;
@@ -58,8 +71,9 @@ public static class StatMaths
     /// Ensure listed armour does not go below 0
     /// </summary>
     /// <param name="v">The value armour is being set to</param>
+    /// <param name="origin">The origin of the stats class</param>
     /// <returns>Max of <paramref name="v"/> and  0</returns>
-    public static float armourValidation(float v)
+    public static float armourValidation(float v, OriginType origin)
     {
         v = float.Max(v, 0);
         return v;

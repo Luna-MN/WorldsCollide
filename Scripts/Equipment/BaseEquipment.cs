@@ -9,6 +9,7 @@ public partial class BaseEquipment : Resource
     [ExportGroup("Flags")]
     [Export]
     public Flags.AbilityFlags equipmentFlags;
+    [ExportGroup("Stats")]
     [Export] public Stats stats;
     [ExportGroup("Enhancements")]
     [Export(PropertyHint.ResourceType)]
@@ -20,6 +21,7 @@ public partial class BaseEquipment : Resource
     public EquipmentGenerator.Rarity Rarity;
     [Export]
     public int ItemId;
+    
     public virtual void OnEquip(Character character)
     {
         foreach (var enhance in enhancements)
