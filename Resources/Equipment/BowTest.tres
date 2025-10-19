@@ -61,7 +61,6 @@ WeaponName = "Bow"
 ShootPos = Vector2(3.5, 0)
 FlippedPos = Vector2(-3.5, 0)
 SpriteFrames = SubResource("SpriteFrames_q5f65")
-LeftType = 1
 Stats = null
 equipmentFlags = 2081
 enhancements = null

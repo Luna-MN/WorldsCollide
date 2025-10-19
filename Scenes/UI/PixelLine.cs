@@ -1,60 +1,74 @@
 using Godot;
 using System;
+
 [Tool]
 [GlobalClass]
 public partial class PixelLine : ColorRect
 {
-    [Export]
-    public Vector2 start;
-    [Export]
-    public Vector2 end;
-    [Export]
-    public Color color;
-    [Export]
-    public float thickness;
+    // Existing exports (kept for compatibility)
+    [Export] public Vector2 start;
+    [Export] public Vector2 end;
+    [Export] public Color color = Colors.White;
+    [Export] public float thickness = 1.0f;
+
+    // use normalized endpoints so the line stays in place when the Control resizes.
+    [Export] public bool UseNormalizedEndpoints { get; set; } = true;
+
+    // 0..1 coordinates within this control's rect
+    [Export(PropertyHint.Range, "0,1,0.001")]
+    public Vector2 StartUV { get; set; } = new Vector2(0f, 0.5f);
+
+    [Export(PropertyHint.Range, "0,1,0.001")]
+    public Vector2 EndUV { get; set; } = new Vector2(1f, 0.5f);
+
+    private ShaderMaterial _shader;
+
+    public override void _Ready()
+    {
+        _shader = Material as ShaderMaterial;
+    }
+
     public override void _Process(double delta)
     {
-        
-        // Calculate the required bounds to contain both points
-        Vector2 minBounds = new Vector2(
-            Mathf.Min(0, Mathf.Min(start.X, end.X)),
-            Mathf.Min(0, Mathf.Min(start.Y, end.Y))
-        );
-        
-        Vector2 maxBounds = new Vector2(
-            Mathf.Max(Size.X, Mathf.Max(start.X, end.X)),
-            Mathf.Max(Size.Y, Mathf.Max(start.Y, end.Y))
-        );
-        
-        // Calculate required dimensions
-        Vector2 requiredSize = maxBounds - minBounds;
-        
-        // Use the larger dimension to make it a square
-        float squareSize = Mathf.Max(requiredSize.X, requiredSize.Y);
-        Vector2 newSize = new Vector2(squareSize, squareSize);
-        
-        // Calculate position offset (center the content in the square)
-        Vector2 positionOffset = -minBounds;
-        
-        // Update size and position if needed
-        if (newSize != Size)
+        // Ensure we have a shader material to configure
+        if (_shader == null)
         {
-            Position += positionOffset;
-            Size = newSize;
+            _shader = Material as ShaderMaterial;
+            if (_shader == null)
+                return;
         }
 
-        // calculate the normalized UV positions of the end and start of the line 
-        Vector2 normalizedStart = start / Size;
-        Vector2 normalizedEnd = end / Size;
-        
+        var size = Size;
+        if (size.X <= 0 || size.Y <= 0)
+            return;
 
+        // IMPORTANT: Do not modify Position or Size here.
+        // Let the layout/anchors handle the Control's size/position.
 
-        var shader = (ShaderMaterial)Material;
-        shader.SetShaderParameter("point_a", normalizedStart);
-        shader.SetShaderParameter("point_b", normalizedEnd);
+        // Compute normalized endpoints (0..1)
+        Vector2 normalizedStart = UseNormalizedEndpoints ? StartUV : start / size;
+        Vector2 normalizedEnd   = UseNormalizedEndpoints ? EndUV   : end   / size;
 
-        shader.SetShaderParameter("color", color);
-        shader.SetShaderParameter("thickness", thickness);
-        shader.SetShaderParameter("node_scale", Size.X);
+        // Clamp to safe 0..1 range
+        normalizedStart = new Vector2(Mathf.Clamp(normalizedStart.X, 0f, 1f), Mathf.Clamp(normalizedStart.Y, 0f, 1f));
+        normalizedEnd   = new Vector2(Mathf.Clamp(normalizedEnd.X,   0f, 1f), Mathf.Clamp(normalizedEnd.Y,   0f, 1f));
+
+        // If your shader expects a single "node_scale" float, pick a consistent axis.
+        // Use min axis to keep thickness uniform regardless of aspect ratio.
+        float axis = Mathf.Min(size.X, size.Y);
+
+        // Account for global canvas scaling so thickness remains visually constant
+        // even if the node (or its parents) is scaled.
+        Transform2D gt = GetGlobalTransformWithCanvas();
+        float sx = gt.X.Length();
+        float sy = gt.Y.Length();
+        float canvasAxis = Mathf.Min(size.X * sx, size.Y * sy);
+
+        // Send parameters to the shader
+        _shader.SetShaderParameter("point_a", normalizedStart);
+        _shader.SetShaderParameter("point_b", normalizedEnd);
+        _shader.SetShaderParameter("color", color);
+        _shader.SetShaderParameter("thickness", thickness);
+        _shader.SetShaderParameter("node_scale", canvasAxis > 0 ? canvasAxis : axis);
     }
 }
