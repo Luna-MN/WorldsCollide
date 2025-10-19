@@ -12,7 +12,6 @@ public partial class Stat : Resource
     private float _value = 0.0f;
     //might be useful, depends on how complicated we make formulas
     //private float _cachedResult;
-    
     //priority-ed list - main calculation runs at priority 10
     private List<(string, Func<float, float>, int)> _funcs = new ();
     private MethodInfo _calcFunction;
@@ -120,7 +119,7 @@ public partial class Stat : Resource
                 //priorities lower than 10 before the default calculation 
                 if (function.Item3 < 10)
                 {
-                    v = function.Item2.Invoke(_value);
+                    v = function.Item2.Invoke(v);
                 }
                 //do the default calc calculation
                 else if (function.Item3 > 10 && !calcRun)
@@ -131,7 +130,7 @@ public partial class Stat : Resource
                 //do the rest
                 else
                 {
-                    v = function.Item2.Invoke(_value);
+                    v = function.Item2.Invoke(v);
                 }
             }
         }
