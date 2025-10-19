@@ -40,45 +40,99 @@ EquipmentGrid = NodePath("GridContainer/GridContainer")
 EquipmentSlots = [NodePath("Slot0"), NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3"), NodePath("Slot4"), NodePath("Slot5"), NodePath("Slot6"), NodePath("Slot7")]
 CloseButton = NodePath("Button")
 
-[node name="Side2" type="Sprite2D" parent="."]
-position = Vector2(89.715, 440.98)
+[node name="Side2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 75.169556
+offset_top = 426.43454
+offset_right = 107.169556
+offset_bottom = 459.43454
 texture = ExtResource("13_wxmjs")
+stretch_mode = 2
 
-[node name="Side3" type="Sprite2D" parent="."]
-position = Vector2(454.01498, 149.06999)
+[node name="Side3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 454.01498
+offset_top = 149.06999
+offset_right = 454.01498
+offset_bottom = 149.06999
 texture = ExtResource("14_12pyo")
+stretch_mode = 2
 
-[node name="Side1" type="Sprite2D" parent="."]
-position = Vector2(533.405, 89.91)
+[node name="Side1" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -458.36365
+offset_top = 77.27273
+offset_right = -426.36365
+offset_bottom = 110.27273
+grow_horizontal = 0
 texture = ExtResource("17_gjx4u")
+stretch_mode = 2
 
-[node name="Side4" type="Sprite2D" parent="."]
-position = Vector2(890.715, 430.98)
+[node name="Side4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 890.715
+offset_top = 430.98
+offset_right = 890.715
+offset_bottom = 430.98
 texture = ExtResource("18_12pyo")
+stretch_mode = 2
 
-[node name="Header" type="Sprite2D" parent="."]
-position = Vector2(264.415, 85.740005)
+[node name="Header" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 59.8696
+offset_top = 38.467285
+offset_right = 433.8696
+offset_bottom = 127.467285
 texture = ExtResource("8_wxmjs")
+stretch_mode = 2
 
-[node name="Star" type="Sprite2D" parent="."]
-position = Vector2(162.715, 380.98)
+[node name="Star" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 162.715
+offset_top = 380.98
+offset_right = 162.715
+offset_bottom = 380.98
 texture = ExtResource("9_7cgc1")
+stretch_mode = 2
 
-[node name="Star2" type="Sprite2D" parent="."]
-position = Vector2(414.715, 253.98001)
+[node name="Star2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 414.715
+offset_top = 253.98001
+offset_right = 414.715
+offset_bottom = 253.98001
 texture = ExtResource("9_7cgc1")
+stretch_mode = 2
 
-[node name="Star3" type="Sprite2D" parent="."]
-position = Vector2(164.715, 175.98)
+[node name="Star3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 164.715
+offset_top = 175.98
+offset_right = 164.715
+offset_bottom = 175.98
 texture = ExtResource("9_7cgc1")
+stretch_mode = 2
 
-[node name="Star4" type="Sprite2D" parent="."]
-position = Vector2(337.715, 166.98)
+[node name="Star4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 337.715
+offset_top = 166.98
+offset_right = 337.715
+offset_bottom = 166.98
 texture = ExtResource("9_7cgc1")
+stretch_mode = 2
 
-[node name="Star5" type="Sprite2D" parent="."]
-position = Vector2(96.715, 291.98)
+[node name="Star5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 96.715
+offset_top = 291.98
+offset_right = 96.715
+offset_bottom = 291.98
 texture = ExtResource("9_7cgc1")
+stretch_mode = 2
 
 [node name="Label" type="Label" parent="."]
 modulate = Color(0.7019608, 0.5568628, 0.44705883, 1)
@@ -106,12 +160,19 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Apply"
 
-[node name="ItemShadow" type="Sprite2D" parent="."]
-position = Vector2(729.09485, 259)
+[node name="ItemShadow" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -440.3636
+offset_top = 188.18181
+offset_right = -176.36359
+offset_bottom = 336.18182
+grow_horizontal = 0
 scale = Vector2(1.2658699, 1.0921737)
 texture = ExtResource("19_mmty0")
-region_enabled = true
-region_rect = Rect2(0, 1, 264, 148)
+stretch_mode = 2
 
 [node name="GridContainer" type="ScrollContainer" parent="."]
 layout_mode = 1

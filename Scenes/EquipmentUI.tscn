@@ -1,39 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgnwv3s31cdbs"]
+[gd_scene load_steps=7 format=3 uid="uid://cgnwv3s31cdbs"]
 
 [ext_resource type="Script" uid="uid://bitvv64ynwy3i" path="res://EquipmentUI.cs" id="1_0xyv2"]
 [ext_resource type="Theme" uid="uid://dl5ejn2cpa5tt" path="res://Scenes/EquipmentSlot.tres" id="1_n1j1a"]
 [ext_resource type="Texture2D" uid="uid://b2mpbkuvdso26" path="res://Pirates/Equipment/QuestionMark.png" id="2_36ypc"]
 [ext_resource type="PackedScene" uid="uid://st53bnwcvead" path="res://Scenes/Equipment/Equipment Hover Scene.tscn" id="2_h2mxk"]
 [ext_resource type="PackedScene" uid="uid://bcedvr4vxb7rq" path="res://Scenes/dummy_slot.tscn" id="3_vjoob"]
-[ext_resource type="PackedScene" uid="uid://g372bwgm6nqb" path="res://Scenes/Equipment/Bank Child.tscn" id="5_y3di0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36ypc"]
-size = Vector2(89, 88)
+size = Vector2(32, 32)
 
 [node name="Equipment" type="Panel" node_paths=PackedStringArray("area", "Icon")]
-custom_minimum_size = Vector2(90, 90)
-offset_left = -45.0
-offset_top = -45.0
-offset_right = 45.0
-offset_bottom = 45.0
-scale = Vector2(0.75, 0.75)
-pivot_offset = Vector2(45, 45)
+custom_minimum_size = Vector2(32, 32)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(16, 16)
 mouse_filter = 2
 theme = ExtResource("1_n1j1a")
 script = ExtResource("1_0xyv2")
 area = NodePath("Area2D")
-Icon = NodePath("Sprite2D")
+Icon = NodePath("Texture")
 HoverScene = ExtResource("2_h2mxk")
 DummyScene = ExtResource("3_vjoob")
-BlankScene = ExtResource("5_y3di0")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(44.5, 45)
+position = Vector2(16, 15.5)
 shape = SubResource("RectangleShape2D_36ypc")
+debug_color = Color(0, 0.6, 0.69803923, 0.05490196)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(45, 45)
-scale = Vector2(2.78125, 2.78125)
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
 texture = ExtResource("2_36ypc")

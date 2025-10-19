@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dft540hr27ugl"]
+[gd_scene load_steps=8 format=3 uid="uid://dft540hr27ugl"]
 
-[ext_resource type="Texture2D" uid="uid://b35u54ttw2jyu" path="res://Pirates/Equipment/Slots/FloorEquipmentIcon-Sheet.png" id="1_sy55v"]
 [ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="1_tppd4"]
 [ext_resource type="Script" uid="uid://8wxyrn2kcaqm" path="res://Scenes/Equipment/FloorEquipmentDefault.cs" id="1_w51j1"]
+[ext_resource type="SpriteFrames" uid="uid://dbsjtsp5r3gs7" path="res://Scenes/Equipment/Floor_Equipment_Default.tres" id="3_w51j1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w51j1"]
 resource_local_to_scene = true
@@ -10,56 +10,6 @@ shader = ExtResource("1_tppd4")
 shader_parameter/palette_array_size = 8
 shader_parameter/input_palette_array = PackedColorArray(0.701961, 0.709804, 0.709804, 1, 0.85098, 0.854902, 0.854902, 1, 1, 1, 1, 1, 0.917647, 0.917647, 0.909804, 1, 0.937255, 0.937255, 0.937255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/output_palette_array = PackedColorArray(0.788235, 0.686275, 0.423529, 1, 0.870588, 0.721569, 0.341176, 1, 0.988235, 0.772549, 0.223529, 1, 0.988235, 0.772549, 0.223529, 1, 0.921569, 0.858824, 0.509804, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dsvq0"]
-atlas = ExtResource("1_sy55v")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w51j1"]
-atlas = ExtResource("1_sy55v")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tppd4"]
-atlas = ExtResource("1_sy55v")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lcc26"]
-atlas = ExtResource("1_sy55v")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ydm0p"]
-atlas = ExtResource("1_sy55v")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtmdf"]
-atlas = ExtResource("1_sy55v")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2l517"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dsvq0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w51j1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tppd4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lcc26")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ydm0p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xtmdf")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w51j1"]
 properties/0/path = NodePath(".:position")
@@ -84,8 +34,8 @@ DestroyArea = NodePath("Destroy Area")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_w51j1")
-scale = Vector2(1.75, 1.75)
-sprite_frames = SubResource("SpriteFrames_2l517")
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("3_w51j1")
 frame = 4
 frame_progress = 0.667271
 

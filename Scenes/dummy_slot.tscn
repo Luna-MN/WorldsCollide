@@ -4,18 +4,17 @@
 [ext_resource type="Theme" uid="uid://dl5ejn2cpa5tt" path="res://Scenes/EquipmentSlot.tres" id="1_6uif8"]
 
 [node name="DummySlot" type="Panel" node_paths=PackedStringArray("Icon")]
-custom_minimum_size = Vector2(90, 90)
-offset_left = -45.0
-offset_top = -45.0
-offset_right = 45.0
-offset_bottom = 45.0
-scale = Vector2(0.75, 0.75)
-pivot_offset = Vector2(45, 45)
+custom_minimum_size = Vector2(32, 32)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 mouse_filter = 2
 theme = ExtResource("1_6uif8")
 script = ExtResource("1_0y4ge")
-Icon = NodePath("Sprite2D")
+Icon = NodePath("Texture Rect")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(45, 45)
-scale = Vector2(2.781, 2.781)
+[node name="Texture Rect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0

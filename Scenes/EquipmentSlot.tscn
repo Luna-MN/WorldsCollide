@@ -1,44 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://cty5igj15kppt"]
+[gd_scene load_steps=6 format=3 uid="uid://cty5igj15kppt"]
 
-[ext_resource type="Texture2D" uid="uid://bb1m44x833m4w" path="res://Pirates/Book Stuff/EquipmentSlot.png" id="1_7uml2"]
+[ext_resource type="Texture2D" uid="uid://btcmey0frd5vu" path="res://Pirates/UI/Slot.png" id="1_7uml2"]
 [ext_resource type="Script" uid="uid://cnhjg83han757" path="res://Scenes/EquipmentSlotUI.cs" id="1_i7ckq"]
 [ext_resource type="Texture2D" uid="uid://wkr7qhx6hwuo" path="res://Pirates/Equipment/Slots/EquipmentSlot_Helmet.png" id="2_ei0t3"]
-[ext_resource type="Shader" uid="uid://dvs4oc5lxvrj6" path="res://addons/eye_dropper/eye_dropper.gdshader" id="3_mj7oj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mj7oj"]
 texture = ExtResource("1_7uml2")
 
-[sub_resource type="Theme" id="Theme_q5wim"]
-Panel/styles/panel = SubResource("StyleBoxTexture_mj7oj")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rniuo"]
-size = Vector2(90.5, 89)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5wim"]
-shader = ExtResource("3_mj7oj")
-shader_parameter/palette_array_size = 2
-shader_parameter/input_palette_array = PackedColorArray(0.1764706, 0.14509805, 0.19215687, 1, 0.13333334, 0.105882354, 0.14509805, 1)
-shader_parameter/output_palette_array = PackedColorArray(0.7019608, 0.5568628, 0.44705883, 1, 0.7019608, 0.5568628, 0.44705883, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7uml2"]
+size = Vector2(32, 32)
 
 [node name="Slot" type="Panel" node_paths=PackedStringArray("IconSprite")]
-offset_left = -34.365
-offset_top = -33.41
-offset_right = 55.635
-offset_bottom = 56.59
-scale = Vector2(0.75, 0.75)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 mouse_filter = 2
-theme = SubResource("Theme_q5wim")
+theme_override_styles/panel = SubResource("StyleBoxTexture_mj7oj")
 script = ExtResource("1_i7ckq")
-IconSprite = NodePath("Sprite2D")
+IconSprite = NodePath("Sprite")
+
+[node name="Sprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("2_ei0t3")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(45, 44.5)
-shape = SubResource("RectangleShape2D_rniuo")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_q5wim")
-position = Vector2(45, 45)
-scale = Vector2(2.013, 2.013)
-texture = ExtResource("2_ei0t3")
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_7uml2")
+debug_color = Color(0.11372549, 0, 0.29411766, 0)

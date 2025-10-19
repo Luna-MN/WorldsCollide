@@ -4,7 +4,7 @@ using System;
 public partial class EquipmentSlotUI : Panel
 {
     [Export]
-    public Sprite2D IconSprite;
+    public TextureRect IconSprite;
 
     public EquipmentUI equip;
     public bool Blocked;

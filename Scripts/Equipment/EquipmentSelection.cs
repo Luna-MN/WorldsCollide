@@ -18,8 +18,8 @@ public partial class EquipmentSelection : Panel
         {
             var obj = EquipmentScene.Instantiate<EquipmentUI>();
             obj.AssignedEquipment = equipment;
-            obj.grid = EquipmentGrid;
-            obj.TopUI = this;
+            //obj.grid = EquipmentGrid;
+            // obj.UiController = this;
             if (equipment.Icon != null)
             {
                 obj.Icon.Texture = equipment.Icon;
@@ -33,8 +33,8 @@ public partial class EquipmentSelection : Panel
             {
                 var obj = EquipmentScene.Instantiate<EquipmentUI>();
                 obj.AssignedEquipment = slot.EquippedEquipment;
-                obj.grid = EquipmentGrid;
-                obj.TopUI = this;
+                //obj.grid = EquipmentGrid;
+                // obj.UiController = this;
                 if (slot.EquippedEquipment.Icon != null)
                 {
                     obj.Icon.Texture = slot.EquippedEquipment.Icon;
@@ -56,7 +56,6 @@ public partial class EquipmentSelection : Panel
         }
         CloseButton.ButtonDown += () =>
         {
-            openButton.EquipmentPanel = null; 
             GameManager.player.equipAll();
             var invIds = GameManager.player.inventory.AllEquipment.Select(x => x.ItemId).ToList();
             List<int> equippedIds = new();

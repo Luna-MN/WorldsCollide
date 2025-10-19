@@ -20,6 +20,7 @@ public partial class Skill : Resource
         DynamicStatBoost
     }
     [ExportGroup("Passives")]
+    // if its a passive it won't evaluate when you click the skill button and the passive will be applied when you set the skill
     [Export(PropertyHint.GroupEnable)]
     public bool IsPassive;
     [Export]
@@ -31,6 +32,7 @@ public partial class Skill : Resource
     [Export(PropertyHint.None, "This is mainly for the StatBoost Passive, the value to add to the stat")]
     public float PassiveValue;
     [ExportGroup("RPC")]
+    // this name is what RPC function gets called (classname)_(RpcName)
     [Export]
     public string RpcName;
     [Export]

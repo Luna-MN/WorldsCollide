@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://ciqntsdkcedin"]
+[gd_scene load_steps=38 format=4 uid="uid://ciqntsdkcedin"]
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_5lt6y"]
 [ext_resource type="PackedScene" uid="uid://b14otrrm17vx6" path="res://Scenes/TestingDummy.tscn" id="2_5rbs6"]
@@ -19,6 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://bbm0k33gprlv2" path="res://Scenes/Terrain Gen/TerrainChanger.tscn" id="17_8c81w"]
 
 [sub_resource type="Resource" id="Resource_8c81w"]
+[ext_resource type="TileSet" uid="uid://cp5lj3c46on2n" path="res://Pirates/GrassTiles.tres" id="7_c264a"]
+[ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="8_fi7j4"]
+[ext_resource type="PackedScene" uid="uid://dxrpbmeto0ib" path="res://Pirates/UI/ui_controller.tscn" id="16_4v62a"]
+[ext_resource type="PackedScene" uid="uid://d4nj0a3tkc87i" path="res://Pirates/UI/EquipmentSlots.tscn" id="17_c2lnq"]
+[ext_resource type="Script" uid="uid://c1ggu17meuh2w" path="res://Scenes/InventoryOpen.cs" id="18_4v62a"]
+[ext_resource type="PackedScene" uid="uid://balvacu5sqtc1" path="res://Pirates/UI/InventoryGrid.tscn" id="18_dwn5r"]
+
+[sub_resource type="Resource" id="Resource_4v62a"]
 resource_local_to_scene = true
 resource_name = "Simple Chest"
 script = ExtResource("4_t2vuu")
@@ -242,18 +250,36 @@ script = ExtResource("4_qsjrb")
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+mouse_filter = 1
 text = "Change Skills"
 script = ExtResource("4_iufkg")
 SkillUI = ExtResource("5_0f5h7")
 
-[node name="Button2" type="Button" parent="Camera2D/CanvasLayer/Control"]
+[node name="Button2" type="Button" parent="Camera2D/CanvasLayer/Control" node_paths=PackedStringArray("UiController")]
 layout_mode = 0
 offset_top = 34.615
 offset_right = 155.0
 offset_bottom = 65.615
+mouse_filter = 1
 text = "Change Equipment"
 script = ExtResource("7_6xh1p")
-EquipmentUI = ExtResource("8_5rbs6")
+EquipmentSlotsUI = ExtResource("17_c2lnq")
+UiController = NodePath("../UIController")
+
+[node name="Button3" type="Button" parent="Camera2D/CanvasLayer/Control" node_paths=PackedStringArray("UiController")]
+layout_mode = 0
+offset_top = 76.615005
+offset_right = 168.0
+offset_bottom = 107.615005
+mouse_filter = 1
+text = "Inventory"
+script = ExtResource("18_4v62a")
+InventoryUI = ExtResource("18_dwn5r")
+UiController = NodePath("../UIController")
+
+[node name="UIController" parent="Camera2D/CanvasLayer/Control" instance=ExtResource("16_4v62a")]
+layout_mode = 1
+mouse_filter = 2
 
 [node name="Background" parent="." instance=ExtResource("16_p30di")]
 tile_map_data = PackedByteArray("AAD/////AQABAAAAAAD+//7/AQABAAAAAAD+////AQABAAAAAAD///7/AQABAAAAAAAAAP7/AQABAAAAAAABAP7/AQABAAAAAAAAAP//AQABAAAAAAABAP//AQABAAAAAAD+/wAAAQABAAAAAAD+/wEAAQABAAAAAAD//wAAAQABAAAAAAD//wEAAQABAAAAAAAAAAAAAQABAAAAAAAAAAEAAQABAAAAAAABAAAAAQABAAAAAAABAAEAAQABAAAAAAD///3/AQAAAAAAAAD+//3/AQAAAAAAAAD9//3/AQAAAAAAAAD9//7/AQAAAAAAAAD9////AQAAAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD8/wEAAQAAAAAAAAD8/wIAAQAAAAAAAAD9/wIAAQAAAAAAAAD9/wEAAQAAAAAAAAD+/wIAAQABAAAAAAD//wIAAQABAAAAAAAAAAIAAQABAAAAAAABAAIAAQABAAAAAAACAAIAAQABAAAAAAD8//3/AQAAAAAAAAD8//7/AQAAAAAAAAD8////AQAAAAAAAAAAAP3/AQAAAAAAAAAAAPz/AQAAAAAAAAABAPz/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP7/AQABAAAAAAACAP//AQABAAAAAAADAP//AQAAAAAAAAADAP7/AQAAAAAAAAADAP3/AQAAAAAAAAADAPz/AQAAAAAAAAACAAAAAQABAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAACAAEAAQABAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD8//v/AQABAAAAAAD9//v/AQABAAAAAAD+//v/AQABAAAAAAD///v/AQABAAAAAAAAAPv/AQABAAAAAAABAPv/AQABAAAAAAACAPv/AQABAAAAAAADAPv/AQABAAAAAAAEAPv/AQABAAAAAAAFAPv/AQAAAAEAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAEAAAD7/wIAAQABAAEAAAD7/wEAAQAAAAEAAAD7/wAAAQABAAEAAAD7////AQAAAAEAAAD7//7/AQABAAEAAAD7//3/AQAAAAEAAAD7//z/AQABAAEAAAD7//v/AQAAAAEAAAAFAPz/AQABAAEAAAAFAP3/AQAAAAEAAAAFAP7/AQABAAEAAAAFAAIAAQABAAEAAAAFAAMAAQAAAAEAAAAFAAEAAQAAAAEAAAAFAAAAAQABAAEAAAAFAP//AQAAAAEAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAD6//z/AQAAAAEAAAD6//3/AQABAAEAAAD6//7/AQAAAAEAAAD6////AQABAAEAAAD6/wAAAQAAAAEAAAD6/wEAAQABAAEAAAD6/wIAAQAAAAEAAAD6/wMAAQABAAEAAAD6/wQAAQAAAAEAAAD6/wUAAQABAAEAAAD7/wQAAQABAAEAAAD7/wUAAQAAAAEAAAAFAAQAAQABAAEAAAAFAAUAAQAAAAEAAAAGAPv/AQABAAEAAAAGAPz/AQAAAAEAAAAGAP3/AQABAAEAAAAGAP7/AQAAAAEAAAAGAP//AQABAAEAAAAGAAAAAQAAAAEAAAAGAAEAAQABAAEAAAAGAAIAAQAAAAEAAAAGAAMAAQABAAEAAAAGAAQAAQAAAAEAAAAGAAUAAQABAAEAAAD8/wUAAQABAAAAAAD9/wUAAQABAAAAAAD+/wUAAQABAAAAAAD//wUAAQABAAAAAAAAAAUAAQABAAAAAAABAAUAAQABAAAAAAACAAUAAQABAAAAAAADAAUAAQABAAAAAAAEAAUAAQABAAAAAAD6//v/AQABAAEAAAA=")

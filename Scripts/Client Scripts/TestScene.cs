@@ -25,14 +25,10 @@ public partial class TestScene : Node2D
 		AddChild(Server);
 		if (Server is ServerConnect)
 		{
-			Multiplayer.ConnectedToServer += PlayerConnect;
 			GameManager.camera = GetNode<Camera2D>("Camera2D");
 		}
 	}
-	private void PlayerConnect()
-	{
-		GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId());
-	}
+
 
 
 }

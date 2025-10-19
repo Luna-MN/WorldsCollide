@@ -5,7 +5,7 @@ using System.Linq;
 [GlobalClass]
 public partial class PrimaryWeapon : BaseEquipment
 {
-    public enum WepeonType
+    public enum WeaponType
     {
         None,
         Projectile,
@@ -29,8 +29,6 @@ public partial class PrimaryWeapon : BaseEquipment
     [Export] public Vector2 ShootPos;
     [Export] public Vector2 FlippedPos;
     [Export] public SpriteFrames SpriteFrames;
-    [Export] public WepeonType LeftType;
-    [Export] public WepeonType RightType;
     [Export] public Stats[] Stats;
     public bool TwoHandedMode;
     public override void OnEquip(Character character)
@@ -89,14 +87,14 @@ public partial class PrimaryWeapon : BaseEquipment
         }
     }
     // this decides weather the attack available flag should be reset when the gun is fired 
-    public bool Reset(WepeonType type)
+    public bool Reset(WeaponType type)
     {
         switch (type)
         {
-            case WepeonType.Projectile:
-            case WepeonType.Slash:
+            case WeaponType.Projectile:
+            case WeaponType.Slash:
                 return false;
-            case WepeonType.Beam:
+            case WeaponType.Beam:
                 return true;
             default:
                 return false;
@@ -105,32 +103,37 @@ public partial class PrimaryWeapon : BaseEquipment
     // some weps we don't want to have a timer and want to be attack-available on other conditions
     public Timer CreateTimer(AttackData attack)
     {
-        if (attack.type == WepeonType.Beam)
+        if (attack.type == WeaponType.Beam)
         {
             return null;
         }
-        
+        var time = attack.stats["AttackSpeed"];
+        if (attack.attackTimer != null)
+        {
+            attack.attackTimer.QueueFree();
+            attack.attackTimer = null;
+        }
         return new Timer()
         {
             Autostart = false,
             OneShot = true,
-            WaitTime = attack.stats["AttackSpeed"],
+            WaitTime = time,
             Name = "Attack Timer"
         };
     }
     // This gets called when you fire
-    public bool StartTimerOnReset(WepeonType type)
+    public bool StartTimerOnReset(WeaponType type)
     {
-        if (type == WepeonType.Charge)
+        if (type == WeaponType.Charge)
         {
             return false;
         }
         return true;
     }
     // this gets called when you click
-    public bool StartTimerOnClick(WepeonType type)
+    public bool StartTimerOnClick(WeaponType type)
     {
-        if (type == WepeonType.Charge)
+        if (type == WeaponType.Charge)
         {
             return true;
         }
@@ -145,7 +148,7 @@ public partial class PrimaryWeapon : BaseEquipment
         ref var AttackAvailable = ref attack.Available;
         switch (attack.type)
         {
-            case WepeonType.Projectile:
+            case WeaponType.Projectile:
                 if (action == EventAction.click)
                 {
                     Event = true;
@@ -163,7 +166,7 @@ public partial class PrimaryWeapon : BaseEquipment
                 }
 
                 break;
-            case WepeonType.Slash:
+            case WeaponType.Slash:
                 if (action == EventAction.click)           
                 {                                          
                     Event = true;                          
@@ -179,7 +182,7 @@ public partial class PrimaryWeapon : BaseEquipment
                     return true;                           
                 }                                          
                 break;
-            case WepeonType.Beam:
+            case WeaponType.Beam:
                 if (action == EventAction.click)
                 {
                     AttackAvailable = true;
@@ -195,7 +198,7 @@ public partial class PrimaryWeapon : BaseEquipment
                     return true;
                 }
                 break;
-            case WepeonType.Charge:
+            case WeaponType.Charge:
                 if (action == EventAction.click)
                 {
                     Event = false;

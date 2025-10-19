@@ -3,5 +3,5 @@ using System;
 
 public partial class DummySlot : Panel
 {
-    [Export] public Sprite2D Icon;
+    [Export] public TextureRect Icon;
 }

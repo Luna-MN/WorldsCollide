@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://bf40n57vebate"]
+
+[ext_resource type="Script" uid="uid://c05nebm6er3me" path="res://Scenes/Equipment/EnhancmentsConstillations.cs" id="1_qc3ay"]
+[ext_resource type="PackedScene" uid="uid://ttfjlp028nq3" path="res://Scenes/Equipment/EnhancmentStar.tscn" id="2_y8myp"]
+[ext_resource type="Script" uid="uid://ciiq6jenbpwaf" path="res://Scripts/Equipment/Enhancements/ConstillationSlotData.cs" id="4_v3pds"]
+[ext_resource type="Script" uid="uid://cinqavkmdhk4o" path="res://Scripts/Equipment/Enhancements/ConstillationData.cs" id="5_va8x6"]
+
+[sub_resource type="Resource" id="Resource_2j5hy"]
+script = ExtResource("4_v3pds")
+connectionIndexes = PackedInt32Array(1, 2)
+metadata/_custom_type_script = "uid://ciiq6jenbpwaf"
+
+[sub_resource type="Resource" id="Resource_wej76"]
+script = ExtResource("4_v3pds")
+metadata/_custom_type_script = "uid://ciiq6jenbpwaf"
+
+[sub_resource type="Resource" id="Resource_sr82t"]
+script = ExtResource("4_v3pds")
+metadata/_custom_type_script = "uid://ciiq6jenbpwaf"
+
+[sub_resource type="Resource" id="Resource_el7ly"]
+script = ExtResource("5_va8x6")
+ConstillationSlots = Array[Resource]([SubResource("Resource_2j5hy"), SubResource("Resource_wej76"), SubResource("Resource_sr82t")])
+metadata/_custom_type_script = "uid://cinqavkmdhk4o"
+
+[node name="Enhancments" type="Control"]
+custom_minimum_size = Vector2(0, 45.325)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 139.95734
+offset_bottom = 96.885254
+script = ExtResource("1_qc3ay")
+star = ExtResource("2_y8myp")
+constellation = SubResource("Resource_el7ly")
+padding = 20
