@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7t0krqqvdpeo"]
+[gd_scene load_steps=5 format=3 uid="uid://c7t0krqqvdpeo"]
 
 [ext_resource type="Script" uid="uid://cd65r4iwpokqx" path="res://Scenes/SkillUIPanel.cs" id="1_86x3w"]
-[ext_resource type="Texture2D" uid="uid://brtcumbgynkyv" path="res://Pirates/Book Stuff/Blank.png" id="1_lfkld"]
+[ext_resource type="Texture2D" uid="uid://i6lcqmrjr3jd" path="res://Pirates/UI/SkillButton.png" id="1_lfkld"]
 [ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="1_uc8rf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_msnbu"]
 texture = ExtResource("1_lfkld")
-
-[sub_resource type="Theme" id="Theme_wifs0"]
-Panel/styles/panel = SubResource("StyleBoxTexture_msnbu")
 
 [node name="Skill" type="Panel"]
 custom_minimum_size = Vector2(135, 135)
@@ -16,7 +13,7 @@ offset_right = 135.0
 offset_bottom = 135.0
 scale = Vector2(0.75, 0.75)
 size_flags_vertical = 6
-theme = SubResource("Theme_wifs0")
+theme_override_styles/panel = SubResource("StyleBoxTexture_msnbu")
 script = ExtResource("1_86x3w")
 
 [node name="Button" type="Button" parent="."]

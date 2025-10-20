@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm1evqmmype2t"]
+[gd_scene load_steps=4 format=3 uid="uid://dm1evqmmype2t"]
 
-[ext_resource type="Theme" uid="uid://dl5ejn2cpa5tt" path="res://Scenes/EquipmentSlot.tres" id="1_ie48h"]
+[ext_resource type="Texture2D" uid="uid://i6lcqmrjr3jd" path="res://Pirates/UI/SkillButton.png" id="1_ie48h"]
 [ext_resource type="Script" uid="uid://dl412n3qovvt1" path="res://Scenes/SkillUI.cs" id="1_j0hcr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nfug1"]
+texture = ExtResource("1_ie48h")
 
 [node name="Skill Select" type="Panel"]
 custom_minimum_size = Vector2(135, 135)
@@ -9,7 +12,7 @@ offset_right = 135.0
 offset_bottom = 135.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme = ExtResource("1_ie48h")
+theme_override_styles/panel = SubResource("StyleBoxTexture_nfug1")
 script = ExtResource("1_j0hcr")
 
 [node name="Button" type="Button" parent="."]

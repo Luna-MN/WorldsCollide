@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 
 [sub_resource type="Resource" id="Resource_3qd38"]
 script = ExtResource("2_e1gee")
-stats = Dictionary[String, ExtResource("3_22b8y")]({
+stats = Dictionary[String, Variant]({
 "AttackSpeed": SubResource("Resource_wtb58"),
 "Damage": SubResource("Resource_e1gee"),
 "Range": SubResource("Resource_22b8y")

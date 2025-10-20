@@ -15,7 +15,13 @@ public partial class SkillUI : Panel
     [Export] 
     public Texture2D Icon;
 
-    
+    public void SetSkill(SkillUIPanel skill)
+    {
+        selectedSkill = skill;
+        SkillName = skill.SkillName;
+        Icon = skill.Icon;
+        UpdateButton();
+    }
     public Button GetButton()
     {
         return GetNode<Button>("Button");

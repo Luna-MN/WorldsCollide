@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 
-public partial class SkillSelection : Panel
+public partial class SkillSelectionLEGACY : Panel
 {
     [Export]
     public PackedScene skillUIPanel;
@@ -87,7 +87,7 @@ public partial class SkillSelection : Panel
             GameManager.player.TB2.SetIcon();
             GameManager.player.TB3.SetIcon();
             GameManager.player.TB4.SetIcon();
-            ChangeSkillsButton.SkillPanel = null;
+            // ChangeSkillsButton.SkillPanel = null;
             QueueFree();
         };
     }

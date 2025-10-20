@@ -5,7 +5,9 @@ public partial class ChangeSkills : Button
 {
     [Export]
     public PackedScene SkillUI;
-    public SkillSelection SkillPanel;
+    [Export]
+    public UiController UiController;
+
     public override void _Ready()
     {
         ButtonDown += onButtonPressed;
@@ -13,9 +15,8 @@ public partial class ChangeSkills : Button
 
     private void onButtonPressed()
     {
-        if (SkillPanel != null) return;
-        SkillPanel = SkillUI.Instantiate<SkillSelection>();
-        SkillPanel.ChangeSkillsButton = this;
-        GetParent().AddChild(SkillPanel);
+        if (UiController.SkillSelection != null) return;
+        UiController.SkillSelection = SkillUI.Instantiate<SkillSelection>();
+        UiController.AddChild(UiController.SkillSelection);
     }
 }

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cy1qh76mc4a6j" path="res://Scripts/Client Scripts/Camera.cs" id="1_khmn4"]
 [ext_resource type="Script" uid="uid://b6i5bobwio7fp" path="res://Scenes/SkillOnScreen.cs" id="2_cis8b"]
 [ext_resource type="Script" uid="uid://qinaso0i8icb" path="res://Scripts/Client Scripts/ChangeSkills.cs" id="3_scjhc"]
-[ext_resource type="PackedScene" uid="uid://2o87ghb0ppc2" path="res://Scenes/skill_selection.tscn" id="4_e5gfk"]
+[ext_resource type="PackedScene" uid="uid://d01so4pr7ee2s" path="res://Pirates/UI/SkillSelection.tscn" id="4_khmn4"]
 [ext_resource type="Script" uid="uid://b5t0lykikc27d" path="res://Scenes/ChangeEquipment.cs" id="5_cdix4"]
 [ext_resource type="PackedScene" uid="uid://d4nj0a3tkc87i" path="res://Pirates/UI/EquipmentSlots.tscn" id="6_yntpq"]
 [ext_resource type="Script" uid="uid://c1ggu17meuh2w" path="res://Scenes/InventoryOpen.cs" id="7_2ailg"]
@@ -86,14 +86,15 @@ vertical_icon_alignment = 2
 expand_icon = true
 script = ExtResource("2_cis8b")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control"]
+[node name="Button" type="Button" parent="CanvasLayer/Control" node_paths=PackedStringArray("UiController")]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 1
 text = "Change Skills"
 script = ExtResource("3_scjhc")
-SkillUI = ExtResource("4_e5gfk")
+SkillUI = ExtResource("4_khmn4")
+UiController = NodePath("../UIController")
 
 [node name="Button2" type="Button" parent="CanvasLayer/Control" node_paths=PackedStringArray("UiController")]
 layout_mode = 0

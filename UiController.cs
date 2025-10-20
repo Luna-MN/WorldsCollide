@@ -10,5 +10,5 @@ public partial class UiController : Control
     [Export]
     public Control DragLayer;
     public List<MovableObject> Objects = new();
-    public MovableObject SelectedObject;
+    public SkillSelection SkillSelection;
 }
