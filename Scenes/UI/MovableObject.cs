@@ -18,7 +18,7 @@ public partial class MovableObject : Panel
     private bool isScaling;
     private Vector2 dragOffset;
     private Vector2 scaleOffset;
-    private UiController uiController;
+    protected UiController uiController;
     public Vector2 SpawnPosition = Vector2.Inf;
     public override void _Ready()
     {
@@ -77,7 +77,7 @@ public partial class MovableObject : Panel
         
         if (!hasOverlap)
         {
-            GlobalPosition = idealPosition;
+            GlobalPosition = idealPosition - (Size * Scale) / 2;
             uiController.Objects.Add(this);
             return;
         }
@@ -134,7 +134,7 @@ public partial class MovableObject : Panel
             }
         }
         
-        GlobalPosition = bestPosition;
+        GlobalPosition = idealPosition - (Size * Scale) / 2;
         uiController.Objects.Add(this);
     }
 

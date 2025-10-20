@@ -87,4 +87,9 @@ public partial class SkillSelection : MovableObject
             };
         }
     }
+    public override void Close()
+    {
+        uiController.SkillSelection = null;
+        base.Close();
+    }
 }

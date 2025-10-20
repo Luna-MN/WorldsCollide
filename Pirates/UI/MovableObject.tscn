@@ -24,7 +24,6 @@ region_rect = Rect2(0, 0, 32, 32)
 material = SubResource("ShaderMaterial_y6101")
 offset_right = 294.0
 offset_bottom = 227.5
-scale = Vector2(2, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_3tvjr")
 script = ExtResource("3_g38x3")

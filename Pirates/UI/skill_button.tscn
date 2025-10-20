@@ -1,18 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy0wb20rhvwn2"]
+[gd_scene load_steps=4 format=3 uid="uid://cy0wb20rhvwn2"]
 
 [ext_resource type="Texture2D" uid="uid://i6lcqmrjr3jd" path="res://Pirates/UI/SkillButton.png" id="1_e0fid"]
-[ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="2_jmkqi"]
 [ext_resource type="Script" uid="uid://dcwiqv70epn0b" path="res://Pirates/UI/SkillButton.cs" id="2_oqugs"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hq2b"]
 texture = ExtResource("1_e0fid")
 
 [node name="SkillButton" type="Button" node_paths=PackedStringArray("Icon", "Text")]
-custom_minimum_size = Vector2(32, 32)
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+custom_minimum_size = Vector2(64, 64)
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_8hq2b")
 icon_alignment = 1
 vertical_icon_alignment = 2
@@ -24,19 +23,18 @@ Text = NodePath("Label")
 [node name="TextureRect" type="TextureRect" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 8.0
-offset_top = 12.0
-offset_right = 24.0
-offset_bottom = 28.0
-texture = ExtResource("2_jmkqi")
+offset_left = 16.0
+offset_top = 20.0
+offset_right = 48.0
+offset_bottom = 52.0
 expand_mode = 1
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 1.9999998
-offset_right = 88.71429
-offset_bottom = 18.0
-scale = Vector2(0.315, 0.315)
+offset_left = 7.0
+offset_top = 8.999999
+offset_right = 92.71429
+offset_bottom = 25.0
+scale = Vector2(0.605, 0.605)
 horizontal_alignment = 1

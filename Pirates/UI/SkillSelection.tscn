@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cy0wb20rhvwn2" path="res://Pirates/UI/skill_button.tscn" id="3_62rtm"]
 
 [node name="UIPanel" node_paths=PackedStringArray("SkillButtons", "SkillGrid") instance=ExtResource("1_t5v4h")]
-offset_right = 315.5
-offset_bottom = 207.0
+offset_right = 403.0
+offset_bottom = 255.0
 script = ExtResource("2_8hq2b")
 skillUIPanel = ExtResource("3_62rtm")
 SkillButtons = [NodePath("Control/SkillButton"), NodePath("Control/SkillButton2"), NodePath("Control/SkillButton3"), NodePath("Control/SkillButton4")]
@@ -27,30 +27,30 @@ mouse_filter = 2
 
 [node name="SkillButton" parent="Control" index="0" instance=ExtResource("3_62rtm")]
 layout_mode = 0
-offset_left = 62.0
+offset_left = 0.0
 offset_top = 17.0
-offset_right = 94.0
-offset_bottom = 49.0
+offset_right = 64.0
+offset_bottom = 81.0
 
 [node name="SkillButton2" parent="Control" index="1" instance=ExtResource("3_62rtm")]
 layout_mode = 0
-offset_left = 109.0
+offset_left = 79.25
 offset_top = 17.0
-offset_right = 141.0
+offset_right = 111.25003
 offset_bottom = 49.0
 
 [node name="SkillButton3" parent="Control" index="2" instance=ExtResource("3_62rtm")]
 layout_mode = 0
-offset_left = 156.0
+offset_left = 159.015
 offset_top = 17.0
-offset_right = 188.0
+offset_right = 191.015
 offset_bottom = 49.0
 
 [node name="SkillButton4" parent="Control" index="3" instance=ExtResource("3_62rtm")]
 layout_mode = 0
-offset_left = 203.0
+offset_left = 240.375
 offset_top = 17.0
-offset_right = 235.0
+offset_right = 272.37518
 offset_bottom = 49.0
 
 [node name="Line Point 1" type="Control" parent="." index="4"]
@@ -93,10 +93,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 0.25
-offset_top = -123.5
-offset_right = 0.25
-offset_bottom = -14.5
+offset_left = -52.5
+offset_top = -131.0
+offset_right = 51.5
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
 columns = 3

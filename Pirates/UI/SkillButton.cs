@@ -9,9 +9,9 @@ public partial class SkillButton : Button
     [Export]
     public String SkillName;
     [Export]
-    public TextureRect Icon;
+    public new TextureRect Icon;
     [Export]
-    public Label Text;
+    public new Label Text;
 
     public void SetSkill(SkillButton skill)
     {
