@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
 [ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="3_677pu"]
-[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/ClassScripts/Stats.cs" id="3_vdqda"]
-[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/ClassScripts/Stat.cs" id="4_xloa1"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="3_vdqda"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="4_xloa1"]
 
 [sub_resource type="Resource" id="Resource_vdqda"]
 resource_local_to_scene = true

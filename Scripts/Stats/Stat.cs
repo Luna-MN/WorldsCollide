@@ -10,10 +10,11 @@ public partial class Stat : Resource
     
     private string _name;
     private float _value = 0.0f;
+    private StatMaths.OriginType _origin;
     // Might be useful, depends on how complicated we make formulas
     //private float _cachedResult;
     // Priority-ed list - main calculation runs at priority 10
-    private List<(string, Func<float, float>, int)> _funcs = new ();
+    private List<CalculationStreamData> _calculationStream = new ();
     private MethodInfo _calcFunction;
     private MethodInfo _validationFunction;
     
@@ -33,7 +34,7 @@ public partial class Stat : Resource
     public float CalcValue
     {
         get => calculation();
-        set => _value = (float)(_validationFunction?.Invoke(null, [value])?? _value);
+        set => setValue(value);
     }
     
     /// <summary>
@@ -44,7 +45,7 @@ public partial class Stat : Resource
     public float DisplayValue
     {
         get => _value;
-        set => _value = (float)(_validationFunction?.Invoke(null, [value]) ?? _value);
+        set => setValue(value);
     }
     
     
@@ -88,63 +89,83 @@ public partial class Stat : Resource
     private void setName(string name)
     {
         _name = name;
+        foreach (var i in _calculationStream)
+        {
+            if (i.Priority != 10) continue;
+            _calculationStream.Remove(i);
+            break;
+        }
         // GD.Print($"Stat name: {_name}");
         try
         {
             //[stat name]Vaildation = validation on setting a value
             _validationFunction = typeof(StatMaths).GetMethod(name + "Validation", BindingFlags.Static | BindingFlags.Public);
             if (_validationFunction == null)
-                _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+                _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Validation", BindingFlags.Static | BindingFlags.Public);
             
         }
         catch (Exception e)
         {
-            _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+            _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Validation", BindingFlags.Static | BindingFlags.Public);
         }
         try
         {
             //[stat name]Calc = calculation on value
             _calcFunction = typeof(StatMaths).GetMethod(name + "Calc", BindingFlags.Static | BindingFlags.Public);
             if (_calcFunction == null)
-                _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+                _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Calc", BindingFlags.Static | BindingFlags.Public);
         }
         catch (Exception e)
         {
-            _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack", BindingFlags.Static | BindingFlags.Public);
+            _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Calc", BindingFlags.Static | BindingFlags.Public);
         }
+        addFunc("","base", f => (float)_calcFunction.Invoke(null, [f]), 10);
+    }
+
+    /// <summary>
+    /// Sets the _value to the result of the validation function
+    /// </summary>
+    /// <param name="value">The value to pass into the validation function</param>
+    private void setValue(float value)
+    {
+        _value = (float)(_validationFunction?.Invoke(null, [value, _origin]) ?? _value);
     }
     
     /// <summary>
     /// Add a function to the stream in the correct location
     /// </summary>
+    /// <param name="id">ID of the origin of the function</param>
     /// <param name="name">Function Name</param>
     /// <param name="func">The Function</param>
     /// <param name="priority">The priority</param>
     /// <exception cref="Exception">Error if the priority is 10</exception>
     /// <exception cref="Exception">Error if the name already exists</exception>
-    public void addFunc(string name, Func<float, float> func, int priority)
+    public void addFunc(string id, string name, Func<float, float> func, int priority)
     {
-        if (_funcs.Count(tuple => tuple.Item1 == name) != 0)
+        name = id + name;
+        if (_calculationStream.Count(csd => csd.Name == name) != 0)
             throw new Exception("There is already a function with that name");
-        if (priority == 10)
+        if (priority == 10 && name != "base")
             throw new Exception("Priority 10 not allowed");
-        foreach (var valueTuple in _funcs)
+        foreach (var csd in _calculationStream)
         {
-            if (valueTuple.Item3 <= priority)
+            if (csd.Priority <= priority)
                 continue;
-            _funcs.Insert(_funcs.IndexOf(valueTuple), (name, func, priority));
+            _calculationStream.Insert(_calculationStream.IndexOf(csd), new(name, func, priority));
             return;
         }
-        _funcs.Add((name, func, priority));
+        _calculationStream.Add(new(name, func, priority));
     }
     
     /// <summary>
     /// Remove the function based on name
     /// </summary>
+    /// <param name="id">ID of the origin of the function</param>
     /// <param name="name">Function Name</param>
-    public void removeFunc(string name)
+    public void removeFunc(string id, string name)
     {
-        _funcs.Remove(_funcs.Find(tuple => tuple.Item1 == name));
+        name = id + name;
+        _calculationStream.Remove(_calculationStream.Find(csd => csd.Name == name));
     }
     
     /// <summary>
@@ -157,35 +178,16 @@ public partial class Stat : Resource
         // GD.Print($"{Name} calculating : {_calcFunction?.Name} : {_validationFunction?.Name}");
         float v = _value;
         bool calcRun = false;
-        if (_funcs.Count != 0)
+        if (_calculationStream.Count != 0)
         {
             //loop through _func
-            foreach (var function in _funcs)
+            foreach (var csd in _calculationStream)
             {
-                //priorities lower than 10 before the default calculation 
-                if (function.Item3 < 10)
-                {
-                    v = function.Item2.Invoke(v);
-                }
-                //do the default calc calculation
-                else if (function.Item3 > 10 && !calcRun)
-                {
-                    v = (float)(_calcFunction?.Invoke(null, [v]) ?? v);
-                    calcRun = true;
-                }
-                //do the rest
-                else
-                {
-                    v = function.Item2.Invoke(v);
-                }
+                v = csd.Func.Invoke(v);
             }
-        }
-
-        if (!calcRun)
-        {
-            v = (float)(_calcFunction?.Invoke(null, [v])?? v);
         }
         // GD.Print($"{Name} calculated : {v}");
         return v;
     }
 }
+
