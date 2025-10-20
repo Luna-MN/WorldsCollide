@@ -26,7 +26,7 @@ public partial class EquipmentSlots : MovableObject
             {
                 var equipment = EquipmentUI.Instantiate<EquipmentUI>();
                 equipment.AssignedEquipment = slots[i].EquippedEquipment;
-                equipment.GlobalPosition = UISlots[i].GlobalPosition;
+                equipment.Position = UISlots[i].Position;
                 equipment.UiController = GetParent<UiController>();
                 equipment.selectedSlot = UISlots[i];
                 equipment.StartingPos = equipment.selectedSlot;
@@ -34,7 +34,7 @@ public partial class EquipmentSlots : MovableObject
                 equipment.Icon.Texture = equipment.AssignedEquipment.Icon;
                 equipment.Name = equipment.AssignedEquipment.ItemId.ToString();
                 equipments.Add(equipment);
-                UiController.AddChild(equipment);
+                AddChild(equipment);
             }
         }
     }

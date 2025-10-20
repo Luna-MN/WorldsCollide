@@ -175,7 +175,7 @@ public partial class EquipmentUI : Panel
 
                     //one handed wep
                     selectedSlot.equip = this;
-                    GlobalPosition = selectedSlot.GlobalPosition;
+                    Position = selectedSlot.Position;
                     GameManager.player.EquipmentSlots[UiController.EquipmentSlots.UISlots.ToList().IndexOf(selectedSlot)]
                         .EquippedEquipment = AssignedEquipment;
                     List<BaseEquipment> inv = GameManager.player.inventory.AllEquipment.ToList();
@@ -199,6 +199,8 @@ public partial class EquipmentUI : Panel
                             dTween.TweenProperty(dummy, "global_position", UiController.EquipmentSlots.UISlots[otherIndex].GlobalPosition, 0.4f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.Out);
                         }
                     }
+                    GetParent().RemoveChild(this);
+                    UiController.EquipmentSlots.CallDeferred("add_child", this);
                 }
                 // Remove from equipment slot
                 else
@@ -328,7 +330,8 @@ public partial class EquipmentUI : Panel
         // this is causing problems when you drag the inv over the slots add a bool or somthing that checks if this item is assigned to a slot
         else if (selectedSlot != null && SlotAssigned)
         {
-            GlobalPosition = selectedSlot.GlobalPosition;
+            Console.WriteLine($"{selectedSlot.Position} : {Position}");
+            Position = selectedSlot.Position;
         }
         if (!mouseIn && scene != null)
         {
