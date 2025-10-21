@@ -89,6 +89,11 @@ public partial class SkillSelection : MovableObject
     }
     public override void Close()
     {
+        for (int i = 0; i < SkillButtons.Length; i++)
+        {
+            GameManager.player.selectedSkillIndexes[i] = SkillButtons[i].skillIndex;
+            uiController.SkillsOnScreen[i].SetIcon();
+        }
         uiController.SkillSelection = null;
         base.Close();
     }

@@ -53,7 +53,7 @@ DisplayValue = 300.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_i0mew")
-stats = Dictionary[String, Variant]({
+stats = Dictionary[String, ExtResource("2_1x8at")]({
 "armour": SubResource("Resource_qf43b"),
 "critChance": SubResource("Resource_blayf"),
 "critDamage": SubResource("Resource_4pow8"),

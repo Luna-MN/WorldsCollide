@@ -118,6 +118,7 @@ script = ExtResource("7_2ailg")
 InventoryUI = ExtResource("8_v1x18")
 UiController = NodePath("../UIController")
 
-[node name="UIController" parent="CanvasLayer/Control" instance=ExtResource("9_8oka3")]
+[node name="UIController" parent="CanvasLayer/Control" node_paths=PackedStringArray("SkillsOnScreen") instance=ExtResource("9_8oka3")]
 layout_mode = 1
 mouse_filter = 2
+SkillsOnScreen = [NodePath("../HBoxContainer/1"), NodePath("../HBoxContainer/2"), NodePath("../HBoxContainer/3"), NodePath("../HBoxContainer/4"), NodePath("../HBoxContainer/5")]

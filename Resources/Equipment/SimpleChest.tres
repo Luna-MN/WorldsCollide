@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 [sub_resource type="Resource" id="Resource_551ok"]
 resource_local_to_scene = true
 script = ExtResource("3_uhyga")
-stats = Dictionary[String, Variant]({
+stats = Dictionary[String, ExtResource("4_e8g0n")]({
 "Damage": SubResource("Resource_ql2h3")
 })
 _origin = 2
