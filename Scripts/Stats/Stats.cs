@@ -91,10 +91,18 @@ public partial class Stats : Resource
     /// <param name="funcName">Function Name - must be unique</param>
     /// <param name="func">The function itself</param>
     /// <param name="priority">Priority of the stat - when it should run in the stream</param>
-    public void addFunc(string id, string statName, string funcName, Func<float, float> func, int priority)
+    /// <param name="contributors">A list of stat names that if those values change, the point will recalculate</param>
+    public void addFunc(string id, string statName, string funcName, Func<float, float> func, int priority, string[] contributors = null)
     {
         if (stats.TryGetValue(statName, out var stat))
         {
+            if (contributors != null)
+            {
+                foreach (var contributor in contributors)
+                {
+                    stats[contributor].OnUpdate += stat.Recalculate;
+                }
+            }
             stat.addFunc(id, funcName, func, priority);
         }
     }

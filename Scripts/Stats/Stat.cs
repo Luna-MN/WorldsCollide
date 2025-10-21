@@ -170,6 +170,11 @@ public partial class Stat : Resource
         name = id + name;
         _calculationStream.Remove(_calculationStream.Find(csd => csd.Name == name));
     }
+
+    public void Recalculate()
+    {
+        calculation();
+    }
     
     /// <summary>
     /// Loop through the list and apply the functions in order to the value starting at the lowest priority
