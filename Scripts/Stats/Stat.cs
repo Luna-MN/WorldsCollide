@@ -17,6 +17,8 @@ public partial class Stat : Resource
     private List<CalculationStreamData> _calculationStream = new ();
     private MethodInfo _calcFunction;
     private MethodInfo _validationFunction;
+    // Event that is called when calculation() is called
+    public event Action OnUpdate;
     
     /// <summary>
     /// Gets Sets Name of the stat - primarily for Godot Resource Handler
@@ -142,6 +144,7 @@ public partial class Stat : Resource
     /// <exception cref="Exception">Error if the name already exists</exception>
     public void addFunc(string id, string name, Func<float, float> func, int priority)
     {
+        // in this function we need to bring in the args (the things that effect this data stream) and then when those things change (calculation()) recalculate
         name = id + name;
         if (_calculationStream.Count(csd => csd.Name == name) != 0)
             throw new Exception("There is already a function with that name");
@@ -175,6 +178,7 @@ public partial class Stat : Resource
     /// <returns>The result of the stream</returns>
     private float calculation()
     {
+        OnUpdate?.Invoke();
         // GD.Print($"{Name} calculating : {_calcFunction?.Name} : {_validationFunction?.Name}");
         float v = _value;
         bool calcRun = false;
