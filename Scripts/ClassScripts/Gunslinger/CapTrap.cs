@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class CapTrap : Node2D
+public partial class CapTrap : Minion
 {
     [Export]
     public Area2D Area;

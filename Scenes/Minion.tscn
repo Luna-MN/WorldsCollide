@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cowudgar5kj2w"]
+
+[ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_ec8qx"]
+[ext_resource type="Script" uid="uid://x3wsb8qltmjq" path="res://Minion.cs" id="2_0r81q"]
+
+[node name="Character" instance=ExtResource("1_ec8qx")]
+script = ExtResource("2_0r81q")
+Traps = false
+Little = false
+Big = false
+Turrets = false
+Mirrors = false
+FloatingText = null
+GunPos = Vector2(0, 0)
+characterStats = null
