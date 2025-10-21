@@ -118,4 +118,15 @@ public partial class Stats : Resource
             stat.removeFunc(id, funcName);
         }
     }
+    /// <summary>
+    /// Call calculate of a specific stat
+    /// </summary>
+    /// <param name="statName">The name of the stat you would like to recalculate</param>
+    public void Recalculate(string statName)
+    {
+        if (stats.TryGetValue(statName, out var stat))
+        {
+            stat.Recalculate();
+        }
+    }
 }
