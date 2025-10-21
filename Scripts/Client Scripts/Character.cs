@@ -64,6 +64,9 @@ public partial class Character : CharacterBody2D
     public event Action<Node2D> OnCrit;
     public event Action<Node2D> OnCritSkill;
     public event Action<Node2D> OnCritEquip;
+    public event Action OnMove;
+    public event Action OnMoveSkill;
+    public event Action OnMoveEquip;
     public event Action OnFire;
     public event Action OnFireSkill;
     public event Action OnFireEquip;
@@ -338,6 +341,7 @@ protected Node ResolveRpcNode(Skill.RpcLocation loc)
     public void Move(float delta)
     {
         if (IsDummy) return;
+        OnMove?.Invoke();
         // Godot: up is negative Y
         Vector2 input = inputSync.moveInput.Normalized();
         if (input != Vector2.Zero)
