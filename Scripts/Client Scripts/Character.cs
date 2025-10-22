@@ -106,8 +106,15 @@ public partial class Character : CharacterBody2D
 
         OnFire += () => OnFireSkill?.Invoke();
         OnFire += () => OnFireEquip?.Invoke();
+        if (this is Player p)
+        {
+            SetMultiplayerAuthority(Convert.ToInt32(Name));
+        }
+        else
+        {
+            SetMultiplayerAuthority(1);       
+        }
 
-        SetMultiplayerAuthority(Convert.ToInt32(Name));
         PositionSync.SetMultiplayerAuthority(1);
     }
 

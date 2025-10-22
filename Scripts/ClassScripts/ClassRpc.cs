@@ -94,15 +94,21 @@ public partial class ClassRpc : Node2D
     #endregion
 
     #region Gunslinger
-
-        public void Gunslinger_Skill1()
+        [ExportGroup("Gunslinger")]
+        [Export]
+        public PackedScene CapTrap;
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+        public void Gunslinger_Skill1(int id)
         {
             
         }
-
-        public void Gunslinger_Skill2()
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+        public void Gunslinger_Skill2(int id)
         {
-            
+            var cap = CapTrap.Instantiate<CapTrap>();
+            var player = ServerManager.NodeDictionary[id];
+            cap.GlobalPosition = player.inputSync.mousePosition;
+            ServerManager.spawner.AddChild(cap, true);
         }
         
         public void Gunslinger_Skill3()

@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://cfuo2r04n4rh1"]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner"]
-_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://ul6rh048aliv", "uid://cjwb7dl5et8f5", "uid://ilkueeb0cdpt", "uid://c0mq410gglmrp", "uid://bk7ppctm372s7", "uid://dft540hr27ugl", "uid://cim15fes2mfwa")
+_spawnable_scenes = PackedStringArray("uid://qgdu76e3yi45", "uid://ul6rh048aliv", "uid://cjwb7dl5et8f5", "uid://ilkueeb0cdpt", "uid://c0mq410gglmrp", "uid://bk7ppctm372s7", "uid://dft540hr27ugl", "uid://cim15fes2mfwa", "uid://bv8oarxftvhtq", "uid://bmxur1gpaxtuc")
 spawn_path = NodePath(".")

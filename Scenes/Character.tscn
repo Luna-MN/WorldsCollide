@@ -65,7 +65,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(30.7692, 32.6923)
+size = Vector2(20.44199, 25.966852)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vdqda"]
 

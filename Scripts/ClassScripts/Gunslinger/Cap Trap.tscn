@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv8oarxftvhtq"]
+[gd_scene load_steps=7 format=3 uid="uid://bv8oarxftvhtq"]
 
 [ext_resource type="PackedScene" uid="uid://cowudgar5kj2w" path="res://Scenes/Minion.tscn" id="1_1bicw"]
 [ext_resource type="Script" uid="uid://c08j4udmmmrlp" path="res://Scripts/ClassScripts/Gunslinger/CapTrap.cs" id="1_6gotn"]
@@ -15,13 +15,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Minion" instance=ExtResource("1_1bicw")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48sor"]
+size = Vector2(14.364642, 12.154697)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_48sor"]
+radius = 130.01538
+
+[node name="Minion" node_paths=PackedStringArray("TurretEnemyAttackRange") instance=ExtResource("1_1bicw")]
 script = ExtResource("1_6gotn")
 Turrets = true
+TurretEnemyAttackRange = NodePath("Area2D")
+TurretAttacking = true
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_qj6wx")
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, 1.9999998)
+position = Vector2(4.7683716e-07, 1.9999995)
+shape = SubResource("RectangleShape2D_48sor")
+
+[node name="Area2D" type="Area2D" parent="." index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_48sor")

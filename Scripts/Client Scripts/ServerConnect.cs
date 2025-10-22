@@ -36,6 +36,6 @@ public partial class ServerConnect : Node2D
     }
     private void PlayerConnect()
     {
-        GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId(), "ComboClass");
+        GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId(), "Gunslinger");
     }
 }
