@@ -1,46 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv8oarxftvhtq"]
+[gd_scene load_steps=5 format=3 uid="uid://bv8oarxftvhtq"]
 
-[ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="1_1bicw"]
+[ext_resource type="PackedScene" uid="uid://cowudgar5kj2w" path="res://Scenes/Minion.tscn" id="1_1bicw"]
 [ext_resource type="Script" uid="uid://c08j4udmmmrlp" path="res://Scripts/ClassScripts/Gunslinger/CapTrap.cs" id="1_6gotn"]
-[ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_48sor"]
+[ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="3_48sor"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6gotn"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qj6wx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_1bicw")
+"texture": ExtResource("3_48sor")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1bicw"]
-radius = 271.0166
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1bicw"]
-
-[node name="Cap Trap" type="Node2D" node_paths=PackedStringArray("TurretEnemyAttackRange", "WepSprite")]
-position = Vector2(0, 1)
+[node name="Minion" instance=ExtResource("1_1bicw")]
 script = ExtResource("1_6gotn")
 Turrets = true
-TurretEnemyAttackRange = NodePath("Area2D")
-TurretAttacking = true
-FloatingText = ExtResource("2_48sor")
-WepSprite = NodePath("GunPos")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -5)
-sprite_frames = SubResource("SpriteFrames_6gotn")
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_qj6wx")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_1bicw")
-
-[node name="GunPos" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.005, -12.57)
-sprite_frames = SubResource("SpriteFrames_1bicw")
-
-[node name="ShootPos" type="Node2D" parent="GunPos"]
-position = Vector2(3.4285727, 0)
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1.9999998)
