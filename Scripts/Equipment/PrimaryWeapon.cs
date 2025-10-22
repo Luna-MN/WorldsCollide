@@ -107,7 +107,7 @@ public partial class PrimaryWeapon : BaseEquipment
         {
             return null;
         }
-        var time = attack.stats["AttackSpeed"];
+        var time = attack.stats[StatMaths.StatNum.attackSpeed];
         if (attack.attackTimer != null)
         {
             attack.attackTimer.QueueFree();

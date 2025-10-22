@@ -67,18 +67,18 @@ public partial class Projectile : Node2D
         if (Body is Character hitChar)
         {
             hitChar.TakeDamage(Damage * amountOfTimes, (int)Id);
-            modifiedDamage = Damage * hitChar.characterStats["armour"];
+            modifiedDamage = Damage * hitChar.characterStats[StatMaths.StatNum.armour];
         }
         ((Character)Body).DamageText(modifiedDamage, amountOfTimes);
     }
 
     public void obtainStats(Character c)
     {
-        Damage *= c.characterStats["damageIncrease"];
+        Damage *= c.characterStats[StatMaths.StatNum.damageIncrease];
         var rng = new RandomNumberGenerator();
-        if (rng.Randf() < c.characterStats["critChance"])
+        if (rng.Randf() < c.characterStats[StatMaths.StatNum.critChance])
         {
-            Damage *= c.characterStats["critDamage"];
+            Damage *= c.characterStats[StatMaths.StatNum.critDamage];
             crit = true;
         }
     }

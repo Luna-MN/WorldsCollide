@@ -1,14 +1,14 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using Godot.NativeInterop;
 
 [GlobalClass]
 public partial class Stats : Resource
 {
     //dictionary of all name & stat classes
-    [Export] 
-    public Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
+    // [Export] 
+    // public Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
+    [Export]
+    public Godot.Collections.Dictionary<int, Stat> stats { get; set; } = new();
     [Export]
     public StatMaths.OriginType _origin;
     
@@ -22,7 +22,7 @@ public partial class Stats : Resource
     /// Sets the value
     /// </summary>
     /// <param name="i">String name of stat</param>
-    public float this[string i]
+    public float this[StatMaths.StatNum i]
     {
         set => SetValue(i, value);
         get => GetCalcValue(i);
@@ -33,7 +33,7 @@ public partial class Stats : Resource
     /// </summary>
     /// <param name="i">String name of stat</param>
     /// <param name="s">D for display value anything else for other value</param>
-    public float this[string i, string s]
+    public float this[StatMaths.StatNum i, string s]
     {
         get => s.ToLower()=="d"? GetDisplayValue(i): GetCalcValue(i);
         set => SetValue(i, value);
@@ -43,11 +43,11 @@ public partial class Stats : Resource
     /// </summary>
     /// <param name="name">Stat Name</param>
     /// <param name="value">Value to set it to</param>
-    public void SetValue(string name, float value)
+    public void SetValue(StatMaths.StatNum name, float value)
     {
-        if (!stats.TryGetValue(name, out var stat))
+        if (!stats.TryGetValue((int)name, out var stat))
         {
-            stats.Add(name, new Stat(name, value));
+            stats.Add((int)name, new Stat(name, value));
         }
         else
         {
@@ -59,10 +59,10 @@ public partial class Stats : Resource
     /// </summary>
     /// <param name="name">Stat Name</param>
     /// <returns>Calculation Value of a stat</returns>
-    public float GetCalcValue(string name)
+    public float GetCalcValue(StatMaths.StatNum name)
     {
         float value;
-        if (!stats.TryGetValue(name, out var stat))
+        if (!stats.TryGetValue((int)name, out var stat))
         {
             SetValue(name, 0.0f);
             value = GetCalcValue(name);
@@ -80,27 +80,28 @@ public partial class Stats : Resource
     /// </summary>
     /// <param name="name">Stat Name</param>
     /// <returns>Display Value of a stat - no Calculation applied</returns>
-    public float GetDisplayValue(string name)
+    public float GetDisplayValue(StatMaths.StatNum name)
     {
-        return stats[name].DisplayValue;
+        return stats[(int)name].DisplayValue;
     }
     /// <summary>
     /// Adds a function to a stats calculation stream
     /// </summary>
+    /// <param name="id">ID of the origin of the function</param>
     /// <param name="statName">Stat Name</param>
     /// <param name="funcName">Function Name - must be unique</param>
     /// <param name="func">The function itself</param>
     /// <param name="priority">Priority of the stat - when it should run in the stream</param>
     /// <param name="contributors">A list of stat names that if those values change, the point will recalculate</param>
-    public void addFunc(string id, string statName, string funcName, Func<float, float> func, int priority, string[] contributors = null)
+    public void addFunc(string id, StatMaths.StatNum statName, string funcName, Func<float, float> func, int priority, StatMaths.StatNum[] contributors = null)
     {
-        if (stats.TryGetValue(statName, out var stat))
+        if (stats.TryGetValue((int)statName, out var stat))
         {
             if (contributors != null)
             {
                 foreach (var contributor in contributors)
                 {
-                    stats[contributor].OnUpdate += stat.Recalculate;
+                    stats[(int)contributor].OnUpdate += stat.Recalculate;
                 }
             }
             stat.addFunc(id, funcName, func, priority);
@@ -109,11 +110,12 @@ public partial class Stats : Resource
     /// <summary>
     /// Remove a function from a stream
     /// </summary>
+    /// <param name="id">ID of the origin on the function</param>
     /// <param name="statName">Stat Name</param>
     /// <param name="funcName">Function Name</param>
-    public void removeFunc(string id, string statName, string funcName)
+    public void removeFunc(string id, StatMaths.StatNum statName, string funcName)
     {
-        if (stats.TryGetValue(statName, out var stat))
+        if (stats.TryGetValue((int)statName, out var stat))
         {
             stat.removeFunc(id, funcName);
         }
@@ -122,9 +124,9 @@ public partial class Stats : Resource
     /// Call calculate of a specific stat
     /// </summary>
     /// <param name="statName">The name of the stat you would like to recalculate</param>
-    public void Recalculate(string statName)
+    public void Recalculate(StatMaths.StatNum statName)
     {
-        if (stats.TryGetValue(statName, out var stat))
+        if (stats.TryGetValue((int)statName, out var stat))
         {
             stat.Recalculate();
         }

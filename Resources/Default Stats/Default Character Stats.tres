@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=11 format=3 uid="uid://d1qg7816o6cbp"]
+
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="1_uu3cd"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="2_tfao1"]
+
+[sub_resource type="Resource" id="Resource_1x8at"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 1
+DisplayValue = 10.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_u363e"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 2
+DisplayValue = 0.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_5qtvi"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 3
+DisplayValue = 1.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_lb5d5"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 4
+DisplayValue = 100.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_qf43b"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 5
+DisplayValue = 1.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_6kgav"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 6
+DisplayValue = 0.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_vmxlg"]
+resource_local_to_scene = true
+script = ExtResource("2_tfao1")
+Name = 7
+DisplayValue = 100.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_uu3cd"]
+script = ExtResource("2_tfao1")
+Name = 8
+DisplayValue = 300.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_uu3cd")
+stats = Dictionary[int, ExtResource("2_tfao1")]({
+1: SubResource("Resource_1x8at"),
+2: SubResource("Resource_u363e"),
+3: SubResource("Resource_5qtvi"),
+4: SubResource("Resource_lb5d5"),
+5: SubResource("Resource_qf43b"),
+6: SubResource("Resource_6kgav"),
+7: SubResource("Resource_vmxlg"),
+8: SubResource("Resource_uu3cd")
+})

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bmxur1gpaxtuc"]
+[gd_scene load_steps=46 format=3 uid="uid://bmxur1gpaxtuc"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_4biqu"]
 [ext_resource type="Script" uid="uid://nis8tbvwbxea" path="res://Scripts/ClassScripts/Gunslinger/Gunslinger.cs" id="2_kj1io"]
@@ -101,19 +101,9 @@ EnhancmentText = "This Is also a test
 "
 metadata/_custom_type_script = "uid://k8whvj1c14xl"
 
-[sub_resource type="Resource" id="Resource_ql2h3"]
-script = ExtResource("7_o616e")
-MinValue = 1.0
-MaxValue = 100.0
-ClampValue = true
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
 [sub_resource type="Resource" id="Resource_0roah"]
 resource_local_to_scene = true
 script = ExtResource("6_k6rny")
-stats = Dictionary[String, ExtResource("7_o616e")]({
-"Damage": SubResource("Resource_ql2h3")
-})
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="Resource" id="Resource_v7btl"]
@@ -142,31 +132,8 @@ Icon = ExtResource("10_tmabg")
 ItemId = 8
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
 
-[sub_resource type="Resource" id="Resource_wtb58"]
-script = ExtResource("7_o616e")
-Name = "Attack Speed"
-DisplayValue = 1.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_e1gee"]
-script = ExtResource("7_o616e")
-Name = "Damage"
-DisplayValue = 11.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_22b8y"]
-script = ExtResource("7_o616e")
-Name = "Range"
-DisplayValue = 2.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
 [sub_resource type="Resource" id="Resource_3qd38"]
 script = ExtResource("6_k6rny")
-stats = Dictionary[String, ExtResource("7_o616e")]({
-"AttackSpeed": SubResource("Resource_wtb58"),
-"Damage": SubResource("Resource_e1gee"),
-"Range": SubResource("Resource_22b8y")
-})
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="Resource" id="Resource_kuigr"]

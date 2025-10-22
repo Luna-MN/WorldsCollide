@@ -4,7 +4,7 @@ using System;
 public partial class Enhancments : Node
 {
     #region Helpers
-        private void StatsOnMove(Character character, string StatName)
+        private void StatsOnMove(Character character, StatMaths.StatNum StatName)
         {
             character.OnMoveEquip += () =>
             {
@@ -12,28 +12,28 @@ public partial class Enhancments : Node
             };
         }
 
-        private void StatsOnHit(Character character, string StatName)
+        private void StatsOnHit(Character character, StatMaths.StatNum StatName)
         {
             character.OnHitEquip += (b, p, damage) =>
             {
                 character.characterStats.Recalculate(StatName);
             };
         }
-        private void StatsOnKill(Character character, string StatName)
+        private void StatsOnKill(Character character, StatMaths.StatNum StatName)
         {
             character.OnKillEquip += b =>
             {
                 character.characterStats.Recalculate(StatName);
             };
         }
-        private void StatsOnDeath(Character character, string StatName)
+        private void StatsOnDeath(Character character, StatMaths.StatNum StatName)
         {
             character.OnDeathEquip += b =>
             {
                 character.characterStats.Recalculate(StatName);
             };
         }
-        private void StatsOnCrit(Character character, string StatName)
+        private void StatsOnCrit(Character character, StatMaths.StatNum StatName)
         {
             character.OnCritEquip += b =>
             {
@@ -41,7 +41,7 @@ public partial class Enhancments : Node
             };
         }
 
-        private void StatsOnFire(Character character, string StatName)
+        private void StatsOnFire(Character character, StatMaths.StatNum StatName)
         {
             character.OnFireEquip += () =>
             {

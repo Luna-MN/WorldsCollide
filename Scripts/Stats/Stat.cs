@@ -8,7 +8,7 @@ using System.Reflection;
 public partial class Stat : Resource
 {
     
-    private string _name;
+    private StatMaths.StatNum _name;
     private float _value = 0.0f;
     private StatMaths.OriginType _origin;
     // Might be useful, depends on how complicated we make formulas
@@ -24,7 +24,7 @@ public partial class Stat : Resource
     /// Gets Sets Name of the stat - primarily for Godot Resource Handler
     /// </summary>
     [Export]
-    public string Name
+    public StatMaths.StatNum Name
     {
         get => _name;
         set => setName(value);
@@ -68,17 +68,18 @@ public partial class Stat : Resource
     /// <summary>
     /// Default constructor for Godot's Resource Handler
     /// </summary>
-    private Stat() : this("defaultStat", 0.0f) { }
+    private Stat() : this(StatMaths.StatNum.defaultFallback, 0.0f) { }
     /// <summary>
     /// Constructor with paramters
     /// </summary>
     /// <param name="name">Name to create with</param>
     /// <param name="startingValue">Initial Value of stat</param>
-    public Stat(string name, float startingValue)
+    public Stat(StatMaths.StatNum name, float startingValue)
     {
-        if (name == "defaultStat" || name == "")
+        if (name == StatMaths.StatNum.defaultFallback)
         {
-            name = ResourceName;
+            Enum.TryParse(ResourceName, out name);
+            GD.Print("Parsing");
         }
         setName(name);
         CalcValue = startingValue;
@@ -88,7 +89,7 @@ public partial class Stat : Resource
     /// Sets the _name and finds the Validation and Calculation Functions off of that name
     /// </summary>
     /// <param name="name">New Name</param>
-    private void setName(string name)
+    private void setName(StatMaths.StatNum name)
     {
         _name = name;
         foreach (var i in _calculationStream)

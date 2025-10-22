@@ -255,7 +255,7 @@ public partial class Character : CharacterBody2D
         // i don't think this works anymore
         stat?.SetValue(this, (float)stat?.GetValue(this)! + value);
     }
-protected Node ResolveRpcNode(Skill.RpcLocation loc)
+    protected Node ResolveRpcNode(Skill.RpcLocation loc)
     {
         return loc switch
         {
@@ -354,7 +354,7 @@ protected Node ResolveRpcNode(Skill.RpcLocation loc)
         if (input != Vector2.Zero)
         {
             PassiveMoveTimers.ForEach(x => x.Start());
-            Position += input.Normalized() * characterStats["speed"] * delta;
+            Position += input.Normalized() * characterStats[StatMaths.StatNum.speed] * delta;
         }
         else
         {
@@ -392,9 +392,9 @@ protected Node ResolveRpcNode(Skill.RpcLocation loc)
     public virtual void TakeDamage(float damage, int attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        damage *= characterStats["armour"];
-        characterStats["currentHealth"] -= damage;
-        if (characterStats["currentHealth"] <= 0 & !isDead)
+        damage *= characterStats[StatMaths.StatNum.armour];
+        characterStats[StatMaths.StatNum.currentHealth] -= damage;
+        if (characterStats[StatMaths.StatNum.currentHealth] <= 0 & !isDead)
         {
             isDead = true;
             OnDeath?.Invoke(this);
@@ -432,12 +432,12 @@ protected Node ResolveRpcNode(Skill.RpcLocation loc)
     }
     public void Heal(float heal)
     {
-        if (characterStats["currentHealth"] <= 0) return;
-        if (characterStats["currentHealth"] + heal > characterStats["maxHealth"])
+        if (characterStats[StatMaths.StatNum.currentHealth] <= 0) return;
+        if (characterStats[StatMaths.StatNum.currentHealth] + heal > characterStats[StatMaths.StatNum.maxHealth])
         {
-            heal = characterStats["maxHealth"] - characterStats["currentHealth"];
+            heal = characterStats[StatMaths.StatNum.maxHealth] - characterStats[StatMaths.StatNum.currentHealth];
         }
-        characterStats["currentHealth"] += heal;
+        characterStats[StatMaths.StatNum.currentHealth] += heal;
     }
 
 }

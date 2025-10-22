@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://cjtw53hfqy2nj" path="res://Scenes/ComboClass/Skill4.tres" id="5_s36wo"]
 [ext_resource type="Resource" uid="uid://vd7ocqvg6pfa" path="res://Scenes/ComboClass/Skill5.tres" id="6_txpl1"]
 [ext_resource type="Resource" uid="uid://xougc64oq7qh" path="res://Scenes/ComboClass/Skill6.tres" id="7_txpl1"]
-[ext_resource type="Resource" uid="uid://d1qg7816o6cbp" path="res://Resources/DefaultStats.tres" id="10_4psm2"]
+[ext_resource type="Resource" uid="uid://d1qg7816o6cbp" path="res://Resources/Default Stats/Default Character Stats.tres" id="10_4psm2"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="11_nhdph"]
 
 [sub_resource type="Resource" id="Resource_fd4e3"]

@@ -16,6 +16,22 @@ public static class StatMaths
         Projectile,
         Equipment,
     }
+
+    public enum StatNum
+    {
+        defaultFallback,
+        armour,
+        critChance,
+        critDamage,
+        currentHealth,
+        damageIncrease,
+        itemFind,
+        maxHealth,
+        speed,
+        damage,
+        range,
+        attackSpeed,
+    }
     
     /// <summary>
     /// Default Fallback Functions - just returns the value straight

@@ -109,8 +109,8 @@ public partial class EquipmentRpc : Node2D
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
         var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
-        bullet.Damage = attack.stats["Damage"];
-        bullet.RangeTime = attack.stats["Range"];
+        bullet.Damage = attack.stats[StatMaths.StatNum.damage];
+        bullet.RangeTime = attack.stats[StatMaths.StatNum.range];
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
@@ -133,8 +133,8 @@ public partial class EquipmentRpc : Node2D
         bullet.Id = id;
         bullet.Name = id + "_Bullet";
         var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
-        bullet.Damage = attack.stats["Damage"];
-        bullet.RangeTime = attack.stats["Range"];
+        bullet.Damage = attack.stats[StatMaths.StatNum.damage];
+        bullet.RangeTime = attack.stats[StatMaths.StatNum.range];
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
@@ -151,8 +151,8 @@ public partial class EquipmentRpc : Node2D
         bullet.Name = id + "_Bullet";
         bullet.character = Character;
         var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
-        bullet.Damage = attack.stats["Damage"];
-        bullet.RangeTime = attack.stats["Range"];
+        bullet.Damage = attack.stats[StatMaths.StatNum.damage];
+        bullet.RangeTime = attack.stats[StatMaths.StatNum.range];
         bullet.obtainStats(Character);
         ServerManager.spawner.AddChild(bullet, true);
     }
@@ -171,8 +171,8 @@ public partial class EquipmentRpc : Node2D
         arrow.Name = id + "_Arrow";
         arrow.deleteOnHit = false;
         var attack = ((PrimaryWeapon)Character.EquipmentSlots.ToList().Find(x => x.EquippedEquipment.ItemId == equipmentId).EquippedEquipment).Attacks[0];
-        arrow.Damage = attack.stats["Damage"];
-        arrow.RangeTime = attack.stats["Range"];
+        arrow.Damage = attack.stats[StatMaths.StatNum.damage];
+        arrow.RangeTime = attack.stats[StatMaths.StatNum.range];
         arrow.obtainStats(Character);
         ServerManager.spawner.AddChild(arrow, true);
     }

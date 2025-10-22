@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=31 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -98,9 +98,6 @@ metadata/_custom_type_script = "uid://b25igrq5gmts2"
 script = ExtResource("2_fkybt")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
-[sub_resource type="Resource" id="Resource_f1ek2"]
-script = ExtResource("6_8erm5")
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_677pu"]
 animations = [{
 "frames": [{
@@ -147,7 +144,6 @@ GunPos = Vector2(-9, 9)
 OffHandPos = Vector2(20, 9)
 skills = Array[Object]([null, null, null, null, null, null])
 UltSkill = SubResource("Resource_ukyrk")
-characterStats = SubResource("Resource_f1ek2")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(2, 2)
