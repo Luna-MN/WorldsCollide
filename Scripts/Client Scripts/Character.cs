@@ -288,11 +288,11 @@ protected Node ResolveRpcNode(Skill.RpcLocation loc)
     public override void _PhysicsProcess(double delta)
     {
         if(IsDummy) return;
-        if (Multiplayer.IsServer())
+        if (Multiplayer.IsServer() && this is Player p)
         {
             Move((float)delta);
         }
-        else if (Multiplayer.GetUniqueId() == Convert.ToInt32(Name) && inputSync != null)
+        else if (inputSync != null && Multiplayer.GetUniqueId() == Convert.ToInt32(Name))
         {
             inputSync.mousePosition = GetGlobalMousePosition();
         }
