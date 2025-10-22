@@ -14,8 +14,7 @@ public partial class Stats : Resource
     
     public Stats()
     {
-        var s = (Script)this.GetLocalScene()?.GetScript().AsGodotObject();
-        GD.Print(s?.GetBaseScript());
+
     }
     /// <summary>
     /// Gets The calculated value
