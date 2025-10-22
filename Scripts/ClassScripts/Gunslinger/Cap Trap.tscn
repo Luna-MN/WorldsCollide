@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv8oarxftvhtq"]
+[gd_scene load_steps=9 format=3 uid="uid://bv8oarxftvhtq"]
 
 [ext_resource type="PackedScene" uid="uid://cowudgar5kj2w" path="res://Scenes/Minion.tscn" id="1_1bicw"]
 [ext_resource type="Script" uid="uid://c08j4udmmmrlp" path="res://Scripts/ClassScripts/Gunslinger/CapTrap.cs" id="1_6gotn"]
 [ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="3_48sor"]
+[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="6_g88ok"]
+
+[sub_resource type="Resource" id="Resource_qj6wx"]
+script = ExtResource("6_g88ok")
+equipmentFlags = 32
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qj6wx"]
 animations = [{
@@ -21,11 +27,13 @@ size = Vector2(14.364642, 12.154697)
 [sub_resource type="CircleShape2D" id="CircleShape2D_48sor"]
 radius = 130.01538
 
-[node name="Minion" node_paths=PackedStringArray("TurretEnemyAttackRange") instance=ExtResource("1_1bicw")]
+[node name="Minion" node_paths=PackedStringArray("TurretEnemyAttackRange", "OffHandShootPosition") instance=ExtResource("1_1bicw")]
 script = ExtResource("1_6gotn")
 Turrets = true
 TurretEnemyAttackRange = NodePath("Area2D")
 TurretAttacking = true
+OffHandShootPosition = NodePath("OffHandPos/ShootPos")
+EquipmentSlots = Array[Object]([SubResource("Resource_qj6wx")])
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(1, 1)
