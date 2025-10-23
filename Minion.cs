@@ -25,6 +25,7 @@ public partial class Minion : Character
     public bool TurretHealing;
     public List<Enemy> EnemyBodysIn = [];
     public List<Character> Player_MinionsBodysIn = [];
+    protected bool LockedOn;
     [ExportGroup("Mirrors")]
     [Export(PropertyHint.GroupEnable)]
     public bool Mirrors;
@@ -38,6 +39,20 @@ public partial class Minion : Character
             TurretEnemyAttackRange.BodyExited += TurretRangeLeave;
         }
     }
+
+    public override void _Process(double delta)
+    {
+        if (!Multiplayer.IsServer())
+        {
+            return;
+        } 
+        base._Process(delta);
+        if (Turrets)
+        {
+            TurretProcessLogic();
+        }
+    }
+
     #region Turrets
         public virtual void TurretRangeEnter(Node2D body)
         {
@@ -100,6 +115,11 @@ public partial class Minion : Character
             {
                 // this aiming won't be good enough for moving targets
                 WepSprite.LookAt(ClosestCharacter.GlobalPosition);
+                LockedOn = true;
+            }
+            else
+            {
+                LockedOn = false;
             }
 
             if (WepSprite.RotationDegrees > 360)

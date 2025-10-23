@@ -9,7 +9,7 @@ public partial class ServerRpc : Node2D
     #region Server RPCs
     // Server -> Create a player with a given Id
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-    public void CreateNewPlayer(int id, string className)
+    public void CreateNewPlayer(string id, string className)
     {
         if(id == GameManager.LocalID) return;
         var classScene = ResourceLoader.Load<PackedScene>("res://Scenes/Classes/" + className + ".tscn", "PackedScene");
@@ -22,7 +22,7 @@ public partial class ServerRpc : Node2D
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-    public void UpdatePlayerEquipment(int id, int[] equipmentIds, int[] InvIds)
+    public void UpdatePlayerEquipment(string id, int[] equipmentIds, int[] InvIds)
     {
         var player = ServerManager.NodeDictionary[id];
         GD.Print(string.Join(", ", equipmentIds));

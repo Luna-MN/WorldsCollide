@@ -98,7 +98,7 @@ public partial class EquipmentRpc : Node2D
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Gun_LeftClick(int id, int equipmentId)
+    public void Gun_LeftClick(string id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
@@ -115,7 +115,7 @@ public partial class EquipmentRpc : Node2D
         ServerManager.spawner.AddChild(bullet, true);
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Gun_LeftClick(int id, int equipmentId, int rightClick)
+    public void Gun_LeftClick(string id, int equipmentId, int rightClick)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
@@ -139,7 +139,7 @@ public partial class EquipmentRpc : Node2D
         ServerManager.spawner.AddChild(bullet, true);
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void SlashingSword_LeftClick(int id, int equipmentId)
+    public void SlashingSword_LeftClick(string id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
@@ -159,7 +159,7 @@ public partial class EquipmentRpc : Node2D
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1,
         TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Bow_LeftClick(int id, int equipmentId)
+    public void Bow_LeftClick(string id, int equipmentId)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();

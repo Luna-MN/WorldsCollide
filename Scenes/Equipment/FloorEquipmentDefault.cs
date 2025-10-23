@@ -15,7 +15,7 @@ public partial class FloorEquipmentDefault : Node2D
     public BaseEquipment equipment;
     
     public Vector2 FinalPosition;
-    public int Id;
+    public string Id;
     private bool moving;
     public override void _Ready()
     {
@@ -112,7 +112,7 @@ public partial class FloorEquipmentDefault : Node2D
         //RPC that into the inv on the client
         var enhancmentIds = equipment.enhancements.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x)).ToArray();
         var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList().FindIndex(x => x.ResourceName == equipment.ResourceName);
-        ServerManager.EquipmentRpcs.RpcId(Id, "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId, (int)equipment.Rarity, equipment.Quality);
+        ServerManager.EquipmentRpcs.RpcId(Convert.ToInt32(Id), "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId, (int)equipment.Rarity, equipment.Quality);
         QueueFree();
     }
 }

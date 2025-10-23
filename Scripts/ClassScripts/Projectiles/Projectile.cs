@@ -5,7 +5,7 @@ public partial class Projectile : Node2D
 {
     public Vector2 MoveDirection;
     [Export]
-    public long Id;
+    public string Id;
     [Export]
     public Area2D Area;
     
@@ -54,7 +54,7 @@ public partial class Projectile : Node2D
         if(Name.ToString().Contains(Body.Name.ToString())) return;
         if(!Multiplayer.IsServer()) return;
 
-        if (ServerManager.NodeDictionary[(int)Id] != null && ServerManager.NodeDictionary[(int)Id] is Character bulletOwner)
+        if (ServerManager.NodeDictionary[Id] != null && ServerManager.NodeDictionary[Id] is Character bulletOwner)
         {
             bulletOwner.CallOnHit(Body, this, Damage);
             if (crit)
@@ -66,7 +66,7 @@ public partial class Projectile : Node2D
         var modifiedDamage = Damage;
         if (Body is Character hitChar)
         {
-            hitChar.TakeDamage(Damage * amountOfTimes, (int)Id);
+            hitChar.TakeDamage(Damage * amountOfTimes, Id);
             modifiedDamage = Damage * hitChar.characterStats[StatMaths.StatNum.armour];
         }
         ((Character)Body).DamageText(modifiedDamage, amountOfTimes);

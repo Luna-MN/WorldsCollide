@@ -72,18 +72,18 @@ public partial class PrimaryWeapon : BaseEquipment
 
     public void Left_Click()
     {
-        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID, ItemId);
+        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", GameManager.LocalID, ItemId);
     }
 
     public void Right_Click()
     {
         if (!HasRightClick)
         {
-            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", (int)GameManager.LocalID, ItemId, 1);
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", GameManager.LocalID, ItemId, 1);
         }
         else
         {
-            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", (int)GameManager.LocalID, ItemId);
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", GameManager.LocalID, ItemId);
         }
     }
     // this decides weather the attack available flag should be reset when the gun is fired 
