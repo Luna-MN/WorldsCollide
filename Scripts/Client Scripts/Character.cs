@@ -306,7 +306,7 @@ public partial class Character : CharacterBody2D
     #region Equipment
     protected virtual void LeftClick(PrimaryWeapon equip)
     {
-        equip.Left_Click();
+        equip.Left_Click(ID);
     }
     protected virtual void RightClick(PrimaryWeapon equip)
     {

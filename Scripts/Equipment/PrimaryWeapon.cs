@@ -70,9 +70,9 @@ public partial class PrimaryWeapon : BaseEquipment
         base.OnEquip(character);
     }
 
-    public void Left_Click()
+    public void Left_Click(string id)
     {
-        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", GameManager.LocalID, ItemId);
+        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", id, ItemId);
     }
 
     public void Right_Click()

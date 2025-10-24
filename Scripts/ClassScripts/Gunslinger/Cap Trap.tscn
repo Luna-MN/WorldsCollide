@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv8oarxftvhtq"]
+[gd_scene load_steps=10 format=3 uid="uid://bv8oarxftvhtq"]
 
 [ext_resource type="PackedScene" uid="uid://cowudgar5kj2w" path="res://Scenes/Minion.tscn" id="1_1bicw"]
 [ext_resource type="Script" uid="uid://c08j4udmmmrlp" path="res://Scripts/ClassScripts/Gunslinger/CapTrap.cs" id="1_6gotn"]
 [ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="3_48sor"]
+[ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="3_vd70i"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="6_g88ok"]
 
 [sub_resource type="Resource" id="Resource_qj6wx"]
+resource_local_to_scene = true
 script = ExtResource("6_g88ok")
 equipmentFlags = 32
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
@@ -32,6 +34,7 @@ script = ExtResource("1_6gotn")
 Turrets = true
 TurretEnemyAttackRange = NodePath("Area2D")
 TurretAttacking = true
+FloatingText = ExtResource("3_vd70i")
 OffHandShootPosition = NodePath("OffHandPos/ShootPos")
 EquipmentSlots = Array[Object]([SubResource("Resource_qj6wx")])
 

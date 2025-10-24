@@ -26,7 +26,7 @@ public partial class BaseEnhancement : Resource
         {
             return;
         }
-        GameManager.Enhancments.GetType().GetMethod(Name).Invoke(GameManager.Enhancments, new object[] { character });
+        GameManager.Enhancments.GetType().GetMethod(Name)?.Invoke(GameManager.Enhancments, new object[] { character });
     }
 
     public string GetDescription()
