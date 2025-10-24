@@ -29,7 +29,15 @@ public partial class CapTrap : Minion
 
     public override void _Process(double delta)
     {
-        PrimaryEquipment[0].Attacks[0].Event = true;
+        if (TargetPosition != Vector2.Zero)
+        {
+            PrimaryEquipment[0].Attacks[0].Event = true;
+        }
+        else
+        {
+            PrimaryEquipment[0].Attacks[0].Event = false;
+        }
+
         base._Process(delta);
         if (Multiplayer.IsServer())
         {
@@ -37,7 +45,7 @@ public partial class CapTrap : Minion
         }
         foreach (var wep in PrimaryEquipment)
         {
-            if (wep.Attacks[0].Available)
+            if (wep.Attacks[0].Available && wep.Attacks[0].Event)
             {
                 var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.fire);
                 if (attack)

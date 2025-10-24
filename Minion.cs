@@ -35,12 +35,30 @@ public partial class Minion : Character
 
     public override void _Ready()
     {
-        base._Ready();
         if (Turrets)
         {
             TurretEnemyAttackRange.BodyEntered += TurretRangeEnter;
             TurretEnemyAttackRange.BodyExited += TurretRangeLeave;
+            OnKill += node2D =>
+            {
+                if (node2D == ClosestCharacter)
+                {
+                    if (EnemyBodysIn.Contains(ClosestCharacter))
+                    {
+                        EnemyBodysIn.Remove((Enemy)ClosestCharacter);
+                    }
+
+                    if (Player_MinionsBodysIn.Contains(ClosestCharacter))
+                    {
+                        Player_MinionsBodysIn.Remove(ClosestCharacter);
+                    }
+                    ClosestCharacter = null;
+                    TargetPosition = Vector2.Zero;
+                }
+            };
         }
+        base._Ready();
+
     }
 
     public override void _Process(double delta)
