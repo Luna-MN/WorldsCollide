@@ -3,56 +3,56 @@
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="1_uu3cd"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="2_tfao1"]
 
-[sub_resource type="Resource" id="Resource_1x8at"]
+[sub_resource type="Resource" id="Resource_uu3cd"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 1
 DisplayValue = 10.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_u363e"]
+[sub_resource type="Resource" id="Resource_tfao1"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 2
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_5qtvi"]
+[sub_resource type="Resource" id="Resource_xtpbk"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 3
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_lb5d5"]
+[sub_resource type="Resource" id="Resource_jjwss"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 4
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_qf43b"]
+[sub_resource type="Resource" id="Resource_sxsui"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 5
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_6kgav"]
+[sub_resource type="Resource" id="Resource_eb1qj"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 6
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_vmxlg"]
+[sub_resource type="Resource" id="Resource_h1ss2"]
 resource_local_to_scene = true
 script = ExtResource("2_tfao1")
 Name = 7
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_uu3cd"]
+[sub_resource type="Resource" id="Resource_m5v1m"]
 script = ExtResource("2_tfao1")
 Name = 8
 DisplayValue = 300.0
@@ -61,11 +61,11 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_uu3cd")
-armour = SubResource("Resource_1x8at")
-critChance = SubResource("Resource_u363e")
-critDamage = SubResource("Resource_5qtvi")
-currentHealth = SubResource("Resource_lb5d5")
-damageIncrease = SubResource("Resource_qf43b")
-itemFind = SubResource("Resource_6kgav")
-maxHealth = SubResource("Resource_vmxlg")
-speed = SubResource("Resource_uu3cd")
+armour = SubResource("Resource_uu3cd")
+critChance = SubResource("Resource_tfao1")
+critDamage = SubResource("Resource_xtpbk")
+currentHealth = SubResource("Resource_jjwss")
+damageIncrease = SubResource("Resource_sxsui")
+itemFind = SubResource("Resource_eb1qj")
+maxHealth = SubResource("Resource_h1ss2")
+speed = SubResource("Resource_m5v1m")

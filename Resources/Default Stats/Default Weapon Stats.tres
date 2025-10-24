@@ -3,21 +3,21 @@
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="1_pkkbf"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="2_36af5"]
 
-[sub_resource type="Resource" id="Resource_vb8pv"]
+[sub_resource type="Resource" id="Resource_pkkbf"]
 resource_local_to_scene = true
 script = ExtResource("2_36af5")
 Name = 11
 DisplayValue = 0.25
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_ql2h3"]
+[sub_resource type="Resource" id="Resource_36af5"]
 resource_local_to_scene = true
 script = ExtResource("2_36af5")
 Name = 9
 DisplayValue = 10.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_ludog"]
+[sub_resource type="Resource" id="Resource_a5xjp"]
 resource_local_to_scene = true
 script = ExtResource("2_36af5")
 Name = 10
@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 resource_local_to_scene = true
 script = ExtResource("1_pkkbf")
 _origin = 2
-damage = SubResource("Resource_ql2h3")
-range = SubResource("Resource_ludog")
-attackSpeed = SubResource("Resource_vb8pv")
+damage = SubResource("Resource_36af5")
+range = SubResource("Resource_a5xjp")
+attackSpeed = SubResource("Resource_pkkbf")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"

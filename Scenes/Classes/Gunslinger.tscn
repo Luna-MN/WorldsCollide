@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bmxur1gpaxtuc"]
+[gd_scene load_steps=46 format=3 uid="uid://bmxur1gpaxtuc"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_4biqu"]
 [ext_resource type="Script" uid="uid://nis8tbvwbxea" path="res://Scripts/ClassScripts/Gunslinger/Gunslinger.cs" id="2_kj1io"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_rudow"]
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_yvny2"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="6_k6rny"]
-[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="7_o616e"]
 [ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="8_boh3p"]
 [ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="9_n57co"]
 [ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="10_tmabg"]
@@ -203,16 +202,6 @@ metadata/_custom_type_script = "uid://q3epmkk3eovh"
 script = ExtResource("15_1v4gb")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
-[sub_resource type="Resource" id="Resource_rudow"]
-script = ExtResource("7_o616e")
-Name = 8
-DisplayValue = 200.0
-
-[sub_resource type="Resource" id="Resource_yvny2"]
-resource_local_to_scene = true
-script = ExtResource("6_k6rny")
-speed = SubResource("Resource_rudow")
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_huf50"]
 animations = [{
 "frames": [{
@@ -234,7 +223,6 @@ CharacterName = "Gunslinger"
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_8inly"), SubResource("Resource_4e7uo"), SubResource("Resource_o737g"), SubResource("Resource_23dhc"), SubResource("Resource_p81i1"), SubResource("Resource_46m2f"), SubResource("Resource_t6j30")])
 inventory = SubResource("Resource_yvf5t")
 skills = Array[Object]([SubResource("Resource_6mwut"), SubResource("Resource_f83er"), SubResource("Resource_hncp3"), SubResource("Resource_4biqu"), SubResource("Resource_kj1io"), SubResource("Resource_ncb0t")])
-characterStats = SubResource("Resource_yvny2")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_huf50")
