@@ -70,20 +70,20 @@ public partial class PrimaryWeapon : BaseEquipment
         base.OnEquip(character);
     }
 
-    public void Left_Click()
+    public void Left_Click(string id, Vector2 direction)
     {
-        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", GameManager.LocalID, ItemId);
+        GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", id, ItemId, direction);
     }
 
-    public void Right_Click()
+    public void Right_Click(string id, Vector2 direction)
     {
         if (!HasRightClick)
         {
-            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", GameManager.LocalID, ItemId, 1);
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_LeftClick", id, ItemId, direction, 1);
         }
         else
         {
-            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", GameManager.LocalID, ItemId);
+            GameManager.EquipmentRpcs.RpcId(1, WeaponName + "_RightClick", id, ItemId, direction);
         }
     }
     // this decides weather the attack available flag should be reset when the gun is fired 
@@ -140,7 +140,7 @@ public partial class PrimaryWeapon : BaseEquipment
         return false;
     }
 
-    public bool Attack(Player c, bool primary, AttackData attack, EventAction action)
+    public bool Attack(Character c, bool primary, AttackData attack, EventAction action)
     {
         GD.Print(attack.type + " " + Attacks.ToList().IndexOf(attack));
         ref var timer = ref attack.attackTimer;

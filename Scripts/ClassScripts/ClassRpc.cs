@@ -98,9 +98,13 @@ public partial class ClassRpc : Node2D
         [Export]
         public PackedScene CapTrap;
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Gunslinger_Skill1(int id)
+        public void Gunslinger_Skill1(string id)
         {
-            
+            var character = (Gunslinger)ServerManager.NodeDictionary[id];
+            foreach (var c in character.charactersIn)
+            {
+                character.LeftClick(character.PrimaryEquipment[0], c.GlobalPosition);
+            }
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill2(string id)
@@ -109,6 +113,17 @@ public partial class ClassRpc : Node2D
             var player = ServerManager.NodeDictionary[id];
             cap.GlobalPosition = player.inputSync.mousePosition;
             cap.EquipmentSlots[0].EquippedEquipment = player.PrimaryEquipment[0];
+            while (true)
+            {
+                var capID = id + "_" + new Random().Next(1000000000);
+                if (!ServerManager.NodeDictionary.ContainsKey(capID))
+                {
+                    cap.ID = capID;
+                    cap.Name = cap.ID;
+                    ServerManager.NodeDictionary[cap.ID] = cap;
+                    break;
+                }
+            }
             cap.equipAll();
             ServerManager.spawner.AddChild(cap, true);
         }

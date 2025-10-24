@@ -16,6 +16,11 @@ public partial class ClientRpc : Node2D
         GetNode(obj).QueueFree();
     }
 
+    [Rpc(MultiplayerApi.RpcMode.Authority, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    public void AddPlayer(string path)
+    {
+        GameManager.Players.Add(GetNode<Player>(path));
+    }
     [Rpc(MultiplayerApi.RpcMode.Authority, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void FloatingText(float value, float multiplier, string nodePath, Color color)
     {

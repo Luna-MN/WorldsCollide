@@ -18,6 +18,7 @@ public partial class ServerRpc : Node2D
         
         ServerManager.spawner.AddChild(newPlayer, true);
         ServerManager.NodeDictionary.Add(id, newPlayer);
+        ServerManager.ClientRpcs.Rpc("AddPlayer", newPlayer.GetPath().ToString());
         GD.Print("New player created" + id);
     }
 

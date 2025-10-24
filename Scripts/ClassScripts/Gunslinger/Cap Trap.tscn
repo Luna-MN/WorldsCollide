@@ -1,14 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv8oarxftvhtq"]
+[gd_scene load_steps=17 format=3 uid="uid://bv8oarxftvhtq"]
 
 [ext_resource type="PackedScene" uid="uid://cowudgar5kj2w" path="res://Scenes/Minion.tscn" id="1_1bicw"]
 [ext_resource type="Script" uid="uid://c08j4udmmmrlp" path="res://Scripts/ClassScripts/Gunslinger/CapTrap.cs" id="1_6gotn"]
 [ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="3_48sor"]
+[ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="3_vd70i"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="5_sv0i1"]
+[ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="6_b25gs"]
 [ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="6_g88ok"]
 
 [sub_resource type="Resource" id="Resource_qj6wx"]
+resource_local_to_scene = true
 script = ExtResource("6_g88ok")
 equipmentFlags = 32
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_sv0i1"]
+script = ExtResource("5_sv0i1")
+Name = 2
+DisplayValue = 50.0
+
+[sub_resource type="Resource" id="Resource_b25gs"]
+script = ExtResource("5_sv0i1")
+Name = 3
+DisplayValue = 5.0
+
+[sub_resource type="Resource" id="Resource_aeakk"]
+script = ExtResource("5_sv0i1")
+Name = 5
+DisplayValue = 1.0
+
+[sub_resource type="Resource" id="Resource_jw3pt"]
+script = ExtResource("6_b25gs")
+damageIncrease = SubResource("Resource_aeakk")
+critChance = SubResource("Resource_sv0i1")
+critDamage = SubResource("Resource_b25gs")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qj6wx"]
 animations = [{
@@ -27,13 +53,21 @@ size = Vector2(14.364642, 12.154697)
 [sub_resource type="CircleShape2D" id="CircleShape2D_48sor"]
 radius = 130.01538
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vd70i"]
+properties/0/path = NodePath(".:TargetPosition")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Minion" node_paths=PackedStringArray("TurretEnemyAttackRange", "OffHandShootPosition") instance=ExtResource("1_1bicw")]
 script = ExtResource("1_6gotn")
 Turrets = true
 TurretEnemyAttackRange = NodePath("Area2D")
 TurretAttacking = true
+TargetPosition = Vector2(0, 0)
+FloatingText = ExtResource("3_vd70i")
 OffHandShootPosition = NodePath("OffHandPos/ShootPos")
 EquipmentSlots = Array[Object]([SubResource("Resource_qj6wx")])
+characterStats = SubResource("Resource_jw3pt")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(1, 1)
@@ -47,3 +81,6 @@ shape = SubResource("RectangleShape2D_48sor")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_48sor")
+
+[node name="MinionSync" type="MultiplayerSynchronizer" parent="." index="6"]
+replication_config = SubResource("SceneReplicationConfig_vd70i")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bajs7hlctlmpk"]
+
+[ext_resource type="Shader" uid="uid://crba4orrfap8c" path="res://FloorFlame.gdshader" id="1_6j74s"]
+[ext_resource type="Texture2D" uid="uid://dqpfsr53w0x7s" path="res://icon.svg" id="2_ev8cj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlhtx"]
+shader = ExtResource("1_6j74s")
+shader_parameter/radius = 0.45
+shader_parameter/pixel_grid = Vector2(24, 24)
+shader_parameter/cell_grid = Vector2(14, 14)
+shader_parameter/aspect = 1.0
+shader_parameter/speed = 0.9
+shader_parameter/freq = 5.0
+shader_parameter/vigor = 0.9
+shader_parameter/levels = 1579
+shader_parameter/core_bias = 0.41
+shader_parameter/up_dir = Vector2(0, 1)
+shader_parameter/col_core = Color(1, 0.7647059, 0.2784314, 0.6313726)
+shader_parameter/col_hot = Color(1.4687854, 0.9646802, 0.46057498, 0.36862746)
+shader_parameter/col_warm = Color(1, 0.6, 0.12156863, 0.36862746)
+shader_parameter/col_cool = Color(0.92941177, 0.30980393, 0.078431375, 0.39215687)
+shader_parameter/alpha_boost = 0.385
+shader_parameter/USE_ADDITIVE = false
+
+[node name="Sprite2D" type="Sprite2D"]
+material = SubResource("ShaderMaterial_hlhtx")
+texture = ExtResource("2_ev8cj")
