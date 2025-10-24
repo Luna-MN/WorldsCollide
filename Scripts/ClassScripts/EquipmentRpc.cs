@@ -98,11 +98,11 @@ public partial class EquipmentRpc : Node2D
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Gun_LeftClick(string id, int equipmentId)
+    public void Gun_LeftClick(string id, int equipmentId, Vector2 direction)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
-        var mousePos = Character.inputSync.mousePosition;
+        var mousePos = direction;
         var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
         bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
@@ -115,11 +115,11 @@ public partial class EquipmentRpc : Node2D
         ServerManager.spawner.AddChild(bullet, true);
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Gun_LeftClick(string id, int equipmentId, int rightClick)
+    public void Gun_LeftClick(string id, int equipmentId, Vector2 direction, int rightClick)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
-        var mousePos = Character.inputSync.mousePosition;
+        var mousePos = direction;
         var bullet = Basic_Bullet.Instantiate<BasicRangedProjectile>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
         if (rightClick == 1)
@@ -139,11 +139,11 @@ public partial class EquipmentRpc : Node2D
         ServerManager.spawner.AddChild(bullet, true);
     }
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void SlashingSword_LeftClick(string id, int equipmentId)
+    public void SlashingSword_LeftClick(string id, int equipmentId, Vector2 direction)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
-        var mousePos = Character.inputSync.mousePosition;
+        var mousePos = direction;
         var bullet = Melee_Slash.Instantiate<Melee_Slash>();
         bullet.MoveDirection = mousePos - Character.GlobalPosition;
         bullet.GlobalPosition = Character.ShootPosition.GlobalPosition;
@@ -159,11 +159,11 @@ public partial class EquipmentRpc : Node2D
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1,
         TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void Bow_LeftClick(string id, int equipmentId)
+    public void Bow_LeftClick(string id, int equipmentId, Vector2 direction)
     {
         var Character = ServerManager.NodeDictionary[id];
         Character.CallOnFire();
-        var mousePos = Character.inputSync.mousePosition;
+        var mousePos = direction;
         var arrow = Arrow.Instantiate<BasicRangedProjectile>();
         arrow.MoveDirection = mousePos - Character.GlobalPosition;
         arrow.GlobalPosition = Character.ShootPosition.GlobalPosition;

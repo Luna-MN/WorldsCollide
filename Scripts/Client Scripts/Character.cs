@@ -10,7 +10,7 @@ public partial class Character : CharacterBody2D
 {
     [Export] public bool IsDummy = false;
     public bool isDead = false;
-    public string ID;
+    public string ID = "-1";
     [Export] public PackedScene FloatingText;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
@@ -120,7 +120,7 @@ public partial class Character : CharacterBody2D
 
     public override void _Ready()
     {
-        if (!Multiplayer.IsServer())
+        if (!Multiplayer.IsServer() && ID == "-1")
         {
             ID = Name.ToString();
         }
@@ -304,13 +304,13 @@ public partial class Character : CharacterBody2D
     }
     #region Inputs
     #region Equipment
-    protected virtual void LeftClick(PrimaryWeapon equip)
+    protected virtual void LeftClick(PrimaryWeapon equip, Vector2 direction)
     {
-        equip.Left_Click(ID);
+        equip.Left_Click(ID, direction);
     }
-    protected virtual void RightClick(PrimaryWeapon equip)
+    protected virtual void RightClick(PrimaryWeapon equip, Vector2 direction)
     {
-        equip.Right_Click();
+        equip.Right_Click(ID, direction);
     }
     #endregion
     #region skill stuff
@@ -423,6 +423,10 @@ public partial class Character : CharacterBody2D
     public void AddPlayersToDropLoot(string attacker)
     {
         if(PlayerIds.Contains(attacker)) return;
+        if (attacker.Contains('_'))
+        {
+            attacker = attacker.Split('_')[0];
+        }
         PlayerIds.Add(attacker);
     }
     public void DropLoot(Node2D Killer)

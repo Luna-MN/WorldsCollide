@@ -31,5 +31,20 @@ public partial class CapTrap : Minion
     {
         PrimaryEquipment[0].Attacks[0].Event = true;
         base._Process(delta);
+        if (Multiplayer.IsServer())
+        {
+            return;
+        }
+        foreach (var wep in PrimaryEquipment)
+        {
+            if (wep.Attacks[0].Available)
+            {
+                var attack = wep.Attack(this, true, wep.Attacks[0], PrimaryWeapon.EventAction.fire);
+                if (attack)
+                {
+                    LeftClick(wep, TargetPosition);
+                }
+            }
+        }
     }
 }
