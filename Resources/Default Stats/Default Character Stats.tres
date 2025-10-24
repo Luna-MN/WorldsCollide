@@ -61,13 +61,11 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_uu3cd")
-stats = Dictionary[int, ExtResource("2_tfao1")]({
-1: SubResource("Resource_1x8at"),
-2: SubResource("Resource_u363e"),
-3: SubResource("Resource_5qtvi"),
-4: SubResource("Resource_lb5d5"),
-5: SubResource("Resource_qf43b"),
-6: SubResource("Resource_6kgav"),
-7: SubResource("Resource_vmxlg"),
-8: SubResource("Resource_uu3cd")
-})
+armour = SubResource("Resource_1x8at")
+critChance = SubResource("Resource_u363e")
+critDamage = SubResource("Resource_5qtvi")
+currentHealth = SubResource("Resource_lb5d5")
+damageIncrease = SubResource("Resource_qf43b")
+itemFind = SubResource("Resource_6kgav")
+maxHealth = SubResource("Resource_vmxlg")
+speed = SubResource("Resource_uu3cd")

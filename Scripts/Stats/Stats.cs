@@ -161,14 +161,19 @@ public partial class Stats : Resource
                 {"hint_string", "Stat"},
             });
         }
-        b.Add(new Godot.Collections.Dictionary()
+
+        if (stats.Count < Enum.GetValuesAsUnderlyingType<StatMaths.StatNum>().Length)
         {
-            {"name", "New Value"},
-            {"type", (int)Variant.Type.Object},
-            {"class_name", new StringName("Stat")},
-            {"hint", (int)PropertyHint.ResourceType},
-            {"hint_string", "Stat"},
-        });
+            b.Add(new Godot.Collections.Dictionary()
+            {
+                { "name", "New Value" },
+                { "type", (int)Variant.Type.Object },
+                { "class_name", new StringName("Stat") },
+                { "hint", (int)PropertyHint.ResourceType },
+                { "hint_string", "Stat" },
+            });
+        }
+
         return b;
     }
     //
@@ -190,9 +195,18 @@ public partial class Stats : Resource
         GD.Print($"{ResourceSceneUniqueId} : Setting {property} to {value} of type {value.VariantType}");
         if (property.ToString() == "New Value")
         {
-            stats[0] = new Stat(StatMaths.StatNum.defaultFallback, 10);
-            stats[0].Origin = _origin;
-            stats[0].parent = this;
+            int i = 0;
+            while (stats.ContainsKey(i))
+            {
+                i++;
+                if (i >= Enum.GetValuesAsUnderlyingType<StatMaths.StatNum>().Length)
+                {
+                    return false;
+                }
+            }
+            stats[i] = new Stat((StatMaths.StatNum)i, 10);
+            stats[i].Origin = _origin;
+            stats[i].parent = this;
             NotifyPropertyListChanged();
         }
         if (Enum.TryParse<StatMaths.StatNum>(property.ToString(), out var name))

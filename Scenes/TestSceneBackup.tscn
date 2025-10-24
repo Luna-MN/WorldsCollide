@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dmfd0cxi4u7y4"]
+[gd_scene load_steps=40 format=4 uid="uid://dmfd0cxi4u7y4"]
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_jgjff"]
 [ext_resource type="PackedScene" uid="uid://cfuo2r04n4rh1" path="res://Scenes/MultiplayerSpawner.tscn" id="2_rcmtm"]
@@ -14,13 +14,17 @@
 [ext_resource type="PackedScene" uid="uid://dbob4f3yjvg4x" path="res://Scenes/Terrain Gen/MapNode.tscn" id="11_y3w2a"]
 [ext_resource type="PackedScene" uid="uid://bbm0k33gprlv2" path="res://Scenes/Terrain Gen/TerrainChanger.tscn" id="12_ujy1n"]
 [ext_resource type="Script" uid="uid://c7vemr1x5o63s" path="res://MyNode.cs" id="14_1ryov"]
-[ext_resource type="Resource" uid="uid://ddqgxsghkfqxr" path="res://Resources/Default Stats/Default Weapon Stats.tres" id="15_bcv8b"]
+
+[sub_resource type="Resource" id="Resource_1ryov"]
+script = ExtResource("7_lon7e")
+DisplayValue = 10.0
 
 [sub_resource type="Resource" id="Resource_bcv8b"]
 resource_local_to_scene = true
 resource_name = "Simple Chest"
 script = ExtResource("6_4v1wc")
 _origin = 2
+defaultFallback = SubResource("Resource_1ryov")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="Resource" id="Resource_4v1wc"]
@@ -46,17 +50,22 @@ EnhancmentText = "This Is also a test
 metadata/_custom_type_script = "uid://k8whvj1c14xl"
 
 [sub_resource type="Resource" id="Resource_lon7e"]
+script = ExtResource("7_lon7e")
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_q1ivu"]
 resource_local_to_scene = true
 script = ExtResource("6_4v1wc")
 _origin = 2
+defaultFallback = SubResource("Resource_lon7e")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_q1ivu"]
+[sub_resource type="Resource" id="Resource_p8ypu"]
 resource_local_to_scene = true
 resource_name = "Simple Chest"
 script = ExtResource("5_bcv8b")
 equipmentFlags = 8
-stats = SubResource("Resource_lon7e")
+stats = SubResource("Resource_q1ivu")
 enhancements = Array[Object]([SubResource("Resource_lv8gr"), SubResource("Resource_e8g0n")])
 Icon = ExtResource("8_q1ivu")
 ItemId = 5
@@ -67,7 +76,7 @@ script = ExtResource("6_4v1wc")
 _origin = 2
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_p8ypu"]
+[sub_resource type="Resource" id="Resource_p6t6h"]
 resource_local_to_scene = true
 resource_name = "Simple Helm"
 script = ExtResource("5_bcv8b")
@@ -114,20 +123,24 @@ DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
 [sub_resource type="Resource" id="Resource_x5eam"]
+script = ExtResource("7_lon7e")
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_88mm2"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 6
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_88mm2"]
+[sub_resource type="Resource" id="Resource_xbcah"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 7
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_uu3cd"]
+[sub_resource type="Resource" id="Resource_sa2sp"]
 script = ExtResource("7_lon7e")
 Name = 8
 DisplayValue = 300.0
@@ -141,9 +154,37 @@ critChance = SubResource("Resource_8ke31")
 critDamage = SubResource("Resource_rao7x")
 currentHealth = SubResource("Resource_5kgin")
 damageIncrease = SubResource("Resource_j3lra")
-itemFind = SubResource("Resource_x5eam")
-maxHealth = SubResource("Resource_88mm2")
-speed = SubResource("Resource_uu3cd")
+itemFind = SubResource("Resource_88mm2")
+maxHealth = SubResource("Resource_xbcah")
+speed = SubResource("Resource_sa2sp")
+defaultFallback = SubResource("Resource_x5eam")
+
+[sub_resource type="Resource" id="Resource_a7wc7"]
+script = ExtResource("7_lon7e")
+Name = 1
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_ukb8w"]
+script = ExtResource("7_lon7e")
+Name = 2
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_c3dv7"]
+script = ExtResource("7_lon7e")
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_opbyx"]
+script = ExtResource("7_lon7e")
+Name = 7
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_1cqke"]
+script = ExtResource("6_4v1wc")
+maxHealth = SubResource("Resource_opbyx")
+armour = SubResource("Resource_a7wc7")
+critChance = SubResource("Resource_ukb8w")
+defaultFallback = SubResource("Resource_c3dv7")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_jgjff")
@@ -154,7 +195,7 @@ script = ExtResource("1_jgjff")
 position = Vector2(328, 176)
 EquipmentSlots = Array[Object]([])
 DropLootOnDeath = true
-DroppableEquipment = Array[Object]([SubResource("Resource_4v1wc"), SubResource("Resource_q1ivu"), SubResource("Resource_p8ypu")])
+DroppableEquipment = Array[Object]([SubResource("Resource_4v1wc"), SubResource("Resource_p8ypu"), SubResource("Resource_p6t6h")])
 EquipmentSpawner = ExtResource("10_yyxgi")
 characterStats = SubResource("Resource_56q2o")
 
@@ -168,6 +209,6 @@ TileMap = NodePath("../Background")
 
 [node name="MyNode" type="Node" parent="."]
 script = ExtResource("14_1ryov")
-jeff = ExtResource("15_bcv8b")
+jeff = SubResource("Resource_1cqke")
 NumberCount = 1
 number_0 = 3
