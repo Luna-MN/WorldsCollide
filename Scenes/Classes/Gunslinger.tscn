@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bmxur1gpaxtuc"]
+[gd_scene load_steps=49 format=3 uid="uid://bmxur1gpaxtuc"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_4biqu"]
 [ext_resource type="Script" uid="uid://nis8tbvwbxea" path="res://Scripts/ClassScripts/Gunslinger/Gunslinger.cs" id="2_kj1io"]
@@ -224,8 +224,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" instance=ExtResource("1_4biqu")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_4biqu"]
+radius = 281.34854
+
+[node name="Player" node_paths=PackedStringArray("ShootArea") instance=ExtResource("1_4biqu")]
 script = ExtResource("2_kj1io")
+ShootArea = NodePath("Area2D")
 CharacterName = "Gunslinger"
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_8inly"), SubResource("Resource_4e7uo"), SubResource("Resource_o737g"), SubResource("Resource_23dhc"), SubResource("Resource_p81i1"), SubResource("Resource_46m2f"), SubResource("Resource_t6j30")])
 inventory = SubResource("Resource_yvf5t")
@@ -237,3 +241,8 @@ sprite_frames = SubResource("SpriteFrames_huf50")
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.49999976, 4.5000005)
+
+[node name="Area2D" type="Area2D" parent="." index="6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_4biqu")

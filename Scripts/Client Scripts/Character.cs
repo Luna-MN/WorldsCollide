@@ -304,7 +304,7 @@ public partial class Character : CharacterBody2D
     }
     #region Inputs
     #region Equipment
-    protected virtual void LeftClick(PrimaryWeapon equip, Vector2 direction)
+    public virtual void LeftClick(PrimaryWeapon equip, Vector2 direction)
     {
         equip.Left_Click(ID, direction);
     }

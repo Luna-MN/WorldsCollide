@@ -98,9 +98,13 @@ public partial class ClassRpc : Node2D
         [Export]
         public PackedScene CapTrap;
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Gunslinger_Skill1(int id)
+        public void Gunslinger_Skill1(string id)
         {
-            
+            var character = (Gunslinger)ServerManager.NodeDictionary[id];
+            foreach (var c in character.charactersIn)
+            {
+                character.LeftClick(character.PrimaryEquipment[0], c.GlobalPosition);
+            }
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill2(string id)
