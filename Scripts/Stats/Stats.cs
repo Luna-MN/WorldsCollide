@@ -1,21 +1,36 @@
 using Godot;
 using System;
+using System.Linq;
+using Godot.Collections;
 
+[Tool]
 [GlobalClass]
 public partial class Stats : Resource
 {
     //dictionary of all name & stat classes
     // [Export] 
     // public Godot.Collections.Dictionary<string, Stat> stats { get; set; } = new();
-    [Export]
-    public Godot.Collections.Dictionary<int, Stat> stats { get; set; } = new();
+    // [Export]
+    public Godot.Collections.Dictionary<int, Stat> stats
+    {
+        get; 
+        set;
+    } = new();
     [Export]
     public StatMaths.OriginType _origin;
     
     public Stats()
     {
-
+        foreach (var key in stats.Keys)
+        {
+            GD.Print($"Stats has {key}");
+            if (key != (int)stats[key].Name)
+            {
+                GD.Print("Cry");
+            }
+        }
     }
+    
     /// <summary>
     /// Gets The calculated value
     /// Sets the value
@@ -129,5 +144,72 @@ public partial class Stats : Resource
         {
             stat.Recalculate();
         }
+    }
+
+    public override Godot.Collections.Array<Godot.Collections.Dictionary> _GetPropertyList()
+    {
+        // GD.Print("Loo0o0p");
+        Godot.Collections.Array<Godot.Collections.Dictionary> b = new();
+        for (int i = 0; i < stats.Count; i++)
+        {
+            b.Add(new Godot.Collections.Dictionary()
+            {
+                {"name", ((StatMaths.StatNum)stats.Keys.ElementAt(i)).ToString()},
+                {"type", (int)Variant.Type.Object},
+                {"class_name", new StringName("Stat")},
+                {"hint", (int)PropertyHint.ResourceType},
+                {"hint_string", "Stat"},
+            });
+        }
+        b.Add(new Godot.Collections.Dictionary()
+        {
+            {"name", "New Value"},
+            {"type", (int)Variant.Type.Object},
+            {"class_name", new StringName("Stat")},
+            {"hint", (int)PropertyHint.ResourceType},
+            {"hint_string", "Stat"},
+        });
+        return b;
+    }
+    //
+    public override Variant _Get(StringName property)
+    {
+        // GD.Print($"Getting {property}");
+        if (Enum.TryParse<StatMaths.StatNum>(property.ToString(), out var name))
+        {
+            if (stats.TryGetValue((int)name, out var s))
+            {
+                return s;
+            }
+        }
+        return default;
+    }
+    
+    public override bool _Set(StringName property, Variant value)
+    {
+        GD.Print($"{ResourceSceneUniqueId} : Setting {property} to {value} of type {value.VariantType}");
+        if (property.ToString() == "New Value")
+        {
+            stats[0] = new Stat(StatMaths.StatNum.defaultFallback, 10);
+            stats[0].Origin = _origin;
+            stats[0].parent = this;
+            NotifyPropertyListChanged();
+        }
+        if (Enum.TryParse<StatMaths.StatNum>(property.ToString(), out var name))
+        {
+            if (value.Obj == null)
+            {
+                GD.Print("null haha");
+                stats.Remove((int)name);
+                NotifyPropertyListChanged();
+                return true;
+            }
+            stats[(int)name] = (Stat)((Stat)value).Duplicate();
+            stats[(int)name].Origin = _origin;
+            stats[(int)name].parent = this;
+            NotifyPropertyListChanged();
+            return true;
+        }
+        return default;
     }
 }

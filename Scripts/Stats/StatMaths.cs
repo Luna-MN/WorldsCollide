@@ -55,7 +55,7 @@ public static class StatMaths
     /// <returns>The speed value</returns>
     public static float speedCalc(float v)
     {
-        GD.Print("speedCalc");
+        // GD.Print("speedCalc");
         return v;
     }
     
@@ -78,7 +78,7 @@ public static class StatMaths
     /// <returns>The multiplicative relation between the listed damage and the damage taken because of armour</returns>
     public static float armourCalc(float v)
     {
-        GD.Print("armourCalc");
+        // GD.Print("armourCalc");
         v = 100 / (100 + v);
         return v;
     }

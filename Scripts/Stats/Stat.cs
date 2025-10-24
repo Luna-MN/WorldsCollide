@@ -3,14 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Godot.Collections;
 
+[Tool]
 [GlobalClass]
 public partial class Stat : Resource
 {
-    
+    public StatMaths.OriginType Origin;
+    public Stats parent;
     private StatMaths.StatNum _name;
     private float _value = 0.0f;
-    private StatMaths.OriginType _origin;
     // Might be useful, depends on how complicated we make formulas
     //private float _cachedResult;
     // Priority-ed list - main calculation runs at priority 10
@@ -79,7 +81,7 @@ public partial class Stat : Resource
         if (name == StatMaths.StatNum.defaultFallback)
         {
             Enum.TryParse(ResourceName, out name);
-            GD.Print("Parsing");
+            // GD.Print("Parsing - " + name);
         }
         setName(name);
         CalcValue = startingValue;
@@ -91,7 +93,15 @@ public partial class Stat : Resource
     /// <param name="name">New Name</param>
     private void setName(StatMaths.StatNum name)
     {
+        if (parent != null && parent.stats != null)
+        {
+            if (parent.stats.ContainsKey((int)name)) return;
+            parent.stats.Remove((int)_name);
+            parent.stats[(int)name] = this;
+            parent.NotifyPropertyListChanged();
+        }
         _name = name;
+        
         foreach (var i in _calculationStream)
         {
             if (i.Priority != 10) continue;
@@ -102,7 +112,7 @@ public partial class Stat : Resource
         try
         {
             //[stat name]Vaildation = validation on setting a value
-            _validationFunction = typeof(StatMaths).GetMethod(name + "Validation", BindingFlags.Static | BindingFlags.Public);
+            _validationFunction = typeof(StatMaths).GetMethod(_name + "Validation", BindingFlags.Static | BindingFlags.Public);
             if (_validationFunction == null)
                 _validationFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Validation", BindingFlags.Static | BindingFlags.Public);
             
@@ -114,7 +124,7 @@ public partial class Stat : Resource
         try
         {
             //[stat name]Calc = calculation on value
-            _calcFunction = typeof(StatMaths).GetMethod(name + "Calc", BindingFlags.Static | BindingFlags.Public);
+            _calcFunction = typeof(StatMaths).GetMethod(_name + "Calc", BindingFlags.Static | BindingFlags.Public);
             if (_calcFunction == null)
                 _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Calc", BindingFlags.Static | BindingFlags.Public);
         }
@@ -123,6 +133,7 @@ public partial class Stat : Resource
             _calcFunction = typeof(StatMaths).GetMethod("defaultFallBack" + "Calc", BindingFlags.Static | BindingFlags.Public);
         }
         addFunc("","base", f => (float)_calcFunction.Invoke(null, [f]), 10);
+        
     }
 
     /// <summary>
@@ -131,7 +142,7 @@ public partial class Stat : Resource
     /// <param name="value">The value to pass into the validation function</param>
     private void setValue(float value)
     {
-        _value = (float)(_validationFunction?.Invoke(null, [value, _origin]) ?? _value);
+        _value = (float)(_validationFunction?.Invoke(null, [value, Origin]) ?? _value);
     }
     
     /// <summary>
