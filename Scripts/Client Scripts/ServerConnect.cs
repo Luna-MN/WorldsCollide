@@ -28,7 +28,7 @@ public partial class ServerConnect : Node2D
     private void ConnectionSuccess()
     {
         GD.Print("Connected");
-        GameManager.LocalID = Multiplayer.GetUniqueId();
+        GameManager.LocalID = Multiplayer.GetUniqueId().ToString();
     }
     private void ConnectionFailed()
     {
@@ -36,6 +36,6 @@ public partial class ServerConnect : Node2D
     }
     private void PlayerConnect()
     {
-        GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId(), "Gunslinger");
+        GameManager.ServerRpcs.RpcId(1, "CreateNewPlayer", Multiplayer.GetUniqueId().ToString(), "Gunslinger");
     }
 }

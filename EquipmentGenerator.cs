@@ -12,7 +12,7 @@ public partial class EquipmentGenerator : Node2D
     public Godot.Collections.Dictionary<Rarity, Color[]> Colors;
     public int Level;
     public float Prestige;
-    public List<int> CharacterIds;
+    public List<string> CharacterIds;
     public List<BaseEquipment> GenerationEquipment;
     public float GenerateStep = 0.85f;
     public float GeneratePercentage = 1f;

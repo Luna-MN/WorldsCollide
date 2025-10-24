@@ -12,7 +12,7 @@ public partial class ClassRpc : Node2D
     #region Class1
     
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Class1_ShurikenThrow(int id)
+        public void Class1_ShurikenThrow(string id)
         {
             var Character = ServerManager.NodeDictionary[id];
             var mousePos = Character.inputSync.mousePosition;
@@ -41,7 +41,7 @@ public partial class ClassRpc : Node2D
             ServerManager.spawner.AddChild(bullet3, true);
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Class1_Blink(int id)
+        public void Class1_Blink(string id)
         {
             var Character = ServerManager.NodeDictionary[id];
             var mousePos = Character.inputSync.mousePosition;
@@ -49,7 +49,7 @@ public partial class ClassRpc : Node2D
             Character.GlobalPosition += MoveDirection.Normalized() * 500;
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Class1_CircleShuriken(int id)
+        public void Class1_CircleShuriken(string id)
         {
             var Character = ServerManager.NodeDictionary[id];
             var mousePos = Character.inputSync.mousePosition;
@@ -103,7 +103,7 @@ public partial class ClassRpc : Node2D
             
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-        public void Gunslinger_Skill2(int id)
+        public void Gunslinger_Skill2(string id)
         {
             var cap = CapTrap.Instantiate<CapTrap>();
             var player = ServerManager.NodeDictionary[id];

@@ -10,7 +10,7 @@ public partial class Character : CharacterBody2D
 {
     [Export] public bool IsDummy = false;
     public bool isDead = false;
-    public int ID;
+    public string ID;
     [Export] public PackedScene FloatingText;
     [Export] public InputSync inputSync;
     [Export] public MultiplayerSynchronizer PositionSync;
@@ -36,7 +36,7 @@ public partial class Character : CharacterBody2D
 
     [Export] public int Prestige = 1;
     [Export(PropertyHint.ResourceType)] public BaseEquipment[] DroppableEquipment;
-    public List<int> PlayerIds = new();
+    public List<string> PlayerIds = new();
     [Export] public PackedScene EquipmentSpawner;
     public FloatingText RunningTotal;
 
@@ -389,7 +389,7 @@ public partial class Character : CharacterBody2D
         text.value = heal;
         AddChild(text, true);
     }
-    public virtual void TakeDamage(float damage, int attacker)
+    public virtual void TakeDamage(float damage, string attacker)
     {
         if (!Multiplayer.IsServer()) return;
         damage *= characterStats[StatMaths.StatNum.armour];
@@ -415,7 +415,7 @@ public partial class Character : CharacterBody2D
             AddPlayersToDropLoot(attacker);
         }
     }
-    public void AddPlayersToDropLoot(int attacker)
+    public void AddPlayersToDropLoot(string attacker)
     {
         if(PlayerIds.Contains(attacker)) return;
         PlayerIds.Add(attacker);
