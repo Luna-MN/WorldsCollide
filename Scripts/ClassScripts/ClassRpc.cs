@@ -109,6 +109,17 @@ public partial class ClassRpc : Node2D
             var player = ServerManager.NodeDictionary[id];
             cap.GlobalPosition = player.inputSync.mousePosition;
             cap.EquipmentSlots[0].EquippedEquipment = player.PrimaryEquipment[0];
+            while (true)
+            {
+                var capID = id + "_" + new Random().Next(1000000000);
+                if (!ServerManager.NodeDictionary.ContainsKey(capID))
+                {
+                    cap.ID = capID;
+                    cap.Name = cap.ID;
+                    ServerManager.NodeDictionary[cap.ID] = cap;
+                    break;
+                }
+            }
             cap.equipAll();
             ServerManager.spawner.AddChild(cap, true);
         }

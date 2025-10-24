@@ -120,6 +120,11 @@ public partial class Character : CharacterBody2D
 
     public override void _Ready()
     {
+        if (!Multiplayer.IsServer())
+        {
+            ID = Name.ToString();
+        }
+
         if (DropLootOnDeath)
         {
             OnDeath += DropLoot;
