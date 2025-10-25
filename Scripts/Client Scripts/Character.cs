@@ -217,13 +217,14 @@ public partial class Character : CharacterBody2D
                         SetUpTimer(skill, info, true, false);
                         break;
                     case Skill.PassiveType.StatBoost:
-                        var fieldInfo = GetType().GetField(skill.PassiveStat,
-                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
-                            BindingFlags.FlattenHierarchy);
-                        StatBoost(fieldInfo, skill.PassiveValue);
+                        // var fieldInfo = GetType().GetField(skill.PassiveStat,
+                        //     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                        //     BindingFlags.FlattenHierarchy);
+                        // StatBoost(fieldInfo, skill.PassiveValue);
                         break;
                     case Skill.PassiveType.DynamicStatBoost:
-                        OnStatCalcSkill += () => { info.Invoke(this, new object[] { }); };
+                        // OnStatCalcSkill += () => { info.Invoke(this, new object[] { }); };
+                        
                         break;
                 }
             }
