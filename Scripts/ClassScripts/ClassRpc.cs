@@ -103,6 +103,11 @@ public partial class ClassRpc : Node2D
             var character = (Gunslinger)ServerManager.NodeDictionary[id];
             foreach (var c in character.charactersIn)
             {
+                if (c == character) continue;
+                if (character.healingShots == false && c is not Enemy)
+                {
+                    continue;
+                }
                 ServerManager.EquipmentRpcs.RpcId(1, character.PrimaryEquipment[0].WeaponName+"_LeftClick", character.Name.ToString(), character.PrimaryEquipment[0].ItemId, c.GlobalPosition);
             }
         }
