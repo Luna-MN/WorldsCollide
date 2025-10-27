@@ -97,6 +97,8 @@ public partial class ClassRpc : Node2D
         [ExportGroup("Gunslinger")]
         [Export]
         public PackedScene CapTrap;
+        [Export]
+        public PackedScene FloorFire;
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill1(string id)
         {
@@ -133,9 +135,27 @@ public partial class ClassRpc : Node2D
             ServerManager.spawner.AddChild(cap, true);
         }
         
-        public void Gunslinger_Skill3()
+        public void Gunslinger_Skill3(string id)
         {
-            
+            var character = (Gunslinger)ServerManager.NodeDictionary[id];
+            character.OnHitSkill += OnHitSkill3;
+            var timer = new Timer()
+            {
+                Autostart = true,
+                OneShot = true,
+                WaitTime = 0.5f,
+                Name = "Skill3Timer"
+            };
+            timer.Timeout += () =>
+            {
+                character.OnHitSkill -= OnHitSkill3;
+                timer.QueueFree();
+            };
+            character.AddChild(timer);
+        }
+        public void OnHitSkill3(Node2D Body, Projectile proj, float damage)
+        {
+            // create floor fire on an enemy
         }
     #endregion
 }
