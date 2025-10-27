@@ -112,13 +112,14 @@ public partial class FloatingText : Marker2D
             var currentTotal = character.RunningTotal.RunningTotal;
             character.RunningTotal.RunningTotal = currentTotal + newTotal;
             character.RunningTotal.NoMultText.Text = character.RunningTotal.RunningTotal.ToString();
+            character.RunningTotal.ZIndex = 1000;
             character.RunningTotal.GoneTimer?.Stop();
             character.RunningTotal.GoneTimer?.Start();
             GlobalPosition = character.RunningTotal.GlobalPosition;
             
             var tween = CreateTween();
 
-            tween.TweenProperty(this, "scale", new Vector2(2f, 2f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
+            tween.TweenProperty(this, "scale", new Vector2(0.5f, 0.5f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
             tween.TweenProperty(this, "scale", new Vector2(1f, 1f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
             await ToSignal(tween, Tween.SignalName.Finished);
             QueueFree();

@@ -103,7 +103,7 @@ public partial class ClassRpc : Node2D
             var character = (Gunslinger)ServerManager.NodeDictionary[id];
             foreach (var c in character.charactersIn)
             {
-                character.LeftClick(character.PrimaryEquipment[0], c.GlobalPosition);
+                ServerManager.EquipmentRpcs.RpcId(1, character.PrimaryEquipment[0].WeaponName+"_LeftClick", character.Name.ToString(), character.PrimaryEquipment[0].ItemId, c.GlobalPosition);
             }
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]

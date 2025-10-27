@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bmxur1gpaxtuc"]
+[gd_scene load_steps=57 format=3 uid="uid://bmxur1gpaxtuc"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_4biqu"]
 [ext_resource type="Script" uid="uid://nis8tbvwbxea" path="res://Scripts/ClassScripts/Gunslinger/Gunslinger.cs" id="2_kj1io"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="13_hkj60"]
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="14_u7rbx"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="15_1v4gb"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="15_4biqu"]
 [ext_resource type="Texture2D" uid="uid://cn6uoccb3x3g2" path="res://Pirates/Class2/GunSlinger.png" id="16_p28sf"]
 
 [sub_resource type="Resource" id="Resource_fd4e3"]
@@ -202,6 +203,78 @@ metadata/_custom_type_script = "uid://q3epmkk3eovh"
 script = ExtResource("15_1v4gb")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
+[sub_resource type="Resource" id="Resource_rudow"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 1
+DisplayValue = 10.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_yvny2"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 2
+DisplayValue = 0.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_k6rny"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 3
+DisplayValue = 1.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_o616e"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 4
+DisplayValue = 100.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_boh3p"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 5
+DisplayValue = 1.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_n57co"]
+script = ExtResource("15_4biqu")
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_tmabg"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 6
+DisplayValue = 0.1
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_u2qpu"]
+resource_local_to_scene = true
+script = ExtResource("15_4biqu")
+Name = 7
+DisplayValue = 100.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_jitwt"]
+script = ExtResource("15_4biqu")
+Name = 8
+DisplayValue = 300.0
+metadata/_custom_type_script = "uid://nh64xjbomd32"
+
+[sub_resource type="Resource" id="Resource_hkj60"]
+resource_local_to_scene = true
+script = ExtResource("6_k6rny")
+armour = SubResource("Resource_rudow")
+critChance = SubResource("Resource_yvny2")
+critDamage = SubResource("Resource_k6rny")
+currentHealth = SubResource("Resource_o616e")
+damageIncrease = SubResource("Resource_boh3p")
+itemFind = SubResource("Resource_tmabg")
+maxHealth = SubResource("Resource_u2qpu")
+speed = SubResource("Resource_jitwt")
+defaultFallback = SubResource("Resource_n57co")
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_huf50"]
 animations = [{
 "frames": [{
@@ -223,6 +296,7 @@ CharacterName = "Gunslinger"
 EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_8inly"), SubResource("Resource_4e7uo"), SubResource("Resource_o737g"), SubResource("Resource_23dhc"), SubResource("Resource_p81i1"), SubResource("Resource_46m2f"), SubResource("Resource_t6j30")])
 inventory = SubResource("Resource_yvf5t")
 skills = Array[Object]([SubResource("Resource_6mwut"), SubResource("Resource_f83er"), SubResource("Resource_hncp3"), SubResource("Resource_4biqu"), SubResource("Resource_kj1io"), SubResource("Resource_ncb0t")])
+characterStats = SubResource("Resource_hkj60")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_huf50")
