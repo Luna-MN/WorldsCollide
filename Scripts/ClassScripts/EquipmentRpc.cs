@@ -97,7 +97,7 @@ public partial class EquipmentRpc : Node2D
         GameManager.player.inventory.AllEquipment = currentEquipment;
     }
     
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void Gun_LeftClick(string id, int equipmentId, Vector2 direction)
     {
         var Character = ServerManager.NodeDictionary[id];

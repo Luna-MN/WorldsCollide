@@ -15,7 +15,7 @@ public partial class ServerRpc : Node2D
         var classScene = ResourceLoader.Load<PackedScene>("res://Scenes/Classes/" + className + ".tscn", "PackedScene");
         var newPlayer = classScene.Instantiate<Player>();
         newPlayer.Name = id.ToString();
-        
+        newPlayer.ID = id.ToString();
         ServerManager.spawner.AddChild(newPlayer, true);
         ServerManager.NodeDictionary.Add(id, newPlayer);
         ServerManager.ClientRpcs.Rpc("AddPlayer", newPlayer.GetPath().ToString());
