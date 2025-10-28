@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class ClassRpc : Node2D
 {
@@ -176,7 +177,15 @@ public partial class ClassRpc : Node2D
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill5(string id)
         {
-            
+            var character = (Gunslinger)ServerManager.NodeDictionary[id];
+            foreach (var primaryWeaponAttack in character.PrimaryEquipment.SelectMany(primaryWeapon => primaryWeapon.Attacks))
+            {
+                primaryWeaponAttack.RicochetCount += 1;
+            }
+            foreach (var secondaryEquipmentAttack in character.SecondaryEquipment.SelectMany(secondaryEquipment => secondaryEquipment.Attacks))
+            {
+                secondaryEquipmentAttack.RicochetCount += 1;
+            }
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill6(string id)
