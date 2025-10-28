@@ -134,28 +134,38 @@ public partial class ClassRpc : Node2D
             cap.equipAll();
             ServerManager.spawner.AddChild(cap, true);
         }
-        
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill3(string id)
         {
             var character = (Gunslinger)ServerManager.NodeDictionary[id];
-            character.OnHitSkill += OnHitSkill3;
+            character.OnHitSkill += (b, p, d) =>
+            {
+                Gunslinger_OnHitSkill3(id, b, p, d);
+            };
             var timer = new Timer()
             {
                 Autostart = true,
                 OneShot = true,
-                WaitTime = 0.5f,
+                WaitTime = 20f,
                 Name = "Skill3Timer"
             };
             timer.Timeout += () =>
             {
-                character.OnHitSkill -= OnHitSkill3;
+                character.OnHitSkill -= (b, p, d) =>
+                {
+                    Gunslinger_OnHitSkill3(id, b, p, d);
+                };
                 timer.QueueFree();
             };
             character.AddChild(timer);
         }
-        public void OnHitSkill3(Node2D Body, Projectile proj, float damage)
+        public void Gunslinger_OnHitSkill3(string Id, Node2D Body, Projectile proj, float damage)
         {
             // create floor fire on an enemy
+            var createdFire = FloorFire.Instantiate<FloorFire>();
+            createdFire.GlobalPosition = Body.GlobalPosition;
+            createdFire.Name = Id + "_" + new Random().Next(100000);
+            ServerManager.spawner.CallDeferred("add_child", createdFire, true);
         }
     #endregion
 }

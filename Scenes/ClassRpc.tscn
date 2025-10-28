@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://xm4ai3nif1ty"]
+[gd_scene load_steps=6 format=3 uid="uid://xm4ai3nif1ty"]
 
 [ext_resource type="Script" uid="uid://cut6es3us77k3" path="res://Scripts/ClassScripts/ClassRpc.cs" id="1_xvl2t"]
 [ext_resource type="PackedScene" uid="uid://ilkueeb0cdpt" path="res://Scenes/ComboClass/Class1_Shuriken.tscn" id="2_jwqxc"]
 [ext_resource type="PackedScene" uid="uid://bk7ppctm372s7" path="res://Scenes/ComboClass/Class1_CircleShuriken.tscn" id="3_jwqxc"]
 [ext_resource type="PackedScene" uid="uid://bv8oarxftvhtq" path="res://Scripts/ClassScripts/Gunslinger/Cap Trap.tscn" id="4_dfj0a"]
+[ext_resource type="PackedScene" uid="uid://bajs7hlctlmpk" path="res://Scenes/ComboClass/Floor Fire.tscn" id="5_r2v4j"]
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_xvl2t")
 Shuriken = ExtResource("2_jwqxc")
 CircleShuriken = ExtResource("3_jwqxc")
 CapTrap = ExtResource("4_dfj0a")
+FloorFire = ExtResource("5_r2v4j")
