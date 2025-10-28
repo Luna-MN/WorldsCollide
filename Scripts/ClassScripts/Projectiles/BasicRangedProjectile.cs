@@ -1,10 +1,31 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 [GlobalClass]
 public partial class BasicRangedProjectile : Projectile
 {
     [Export]
     public bool deleteOnHit = true;
+    public int RicochetCount = 0;
+    public Area2D RicochetArea;
+    public CollisionShape2D RicochetShape;
+    public List<Character> charactersIn = [];
+    public override void _Ready()
+    {
+        base._Ready();
+        RicochetArea = new Area2D();
+        AddChild(RicochetArea);
+        RicochetShape = new CollisionShape2D();
+        RicochetArea.AddChild(RicochetShape);
+        RicochetShape.Shape = new CircleShape2D()
+        {
+            Radius = 10
+        };
+        RicochetArea.BodyEntered += RicochetBodyEntered;
+        RicochetArea.BodyExited += RicochetBodyExited;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         if(!Multiplayer.IsServer()) return;
@@ -33,9 +54,38 @@ public partial class BasicRangedProjectile : Projectile
                 timer.QueueFree();
             };
             await ToSignal(timer, "timeout");
-            if(deleteOnHit)
+            if (RicochetCount > 0)
+            {
+                var closestPlayer = charactersIn[0];
+                foreach (var character in charactersIn)
+                {
+                    if (closestPlayer.GlobalPosition.DistanceTo(GlobalPosition) > character.GlobalPosition.DistanceTo(GlobalPosition))
+                    {
+                        closestPlayer = character;    
+                    }
+                }
+                MoveDirection = closestPlayer.GlobalPosition;
+                RicochetCount--;
+            }
+            else if (deleteOnHit)
+            {
                 QueueFree();
+            }
         }
+    }
 
+    public void RicochetBodyEntered(Node2D Body)
+    {
+        if (Body is Enemy e)
+        {
+            charactersIn.Add(e);
+        }
+    }
+    public void RicochetBodyExited(Node2D Body)
+    {
+        if (Body is Enemy e)
+        {
+            charactersIn.Remove(e);
+        }
     }
 }
