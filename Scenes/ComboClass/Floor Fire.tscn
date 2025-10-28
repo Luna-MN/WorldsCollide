@@ -34,10 +34,12 @@ properties/1/path = NodePath(".:z_index")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Sprite2D" type="Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" node_paths=PackedStringArray("DamageArea")]
 material = SubResource("ShaderMaterial_hlhtx")
 texture = ExtResource("2_ev8cj")
 script = ExtResource("3_ev8cj")
+DamageArea = NodePath("Area2D")
+Damage = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

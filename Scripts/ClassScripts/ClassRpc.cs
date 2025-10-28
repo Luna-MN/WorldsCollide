@@ -138,23 +138,18 @@ public partial class ClassRpc : Node2D
         public void Gunslinger_Skill3(string id)
         {
             var character = (Gunslinger)ServerManager.NodeDictionary[id];
-            character.OnHitSkill += (b, p, d) =>
-            {
-                Gunslinger_OnHitSkill3(id, b, p, d);
-            };
+            var handler = (Node2D b,Projectile p,float d) => Gunslinger_OnHitSkill3(id, b, p, d);
+            character.OnHitSkill += handler;
             var timer = new Timer()
             {
                 Autostart = true,
                 OneShot = true,
-                WaitTime = 20f,
+                WaitTime = 10f,
                 Name = "Skill3Timer"
             };
             timer.Timeout += () =>
             {
-                character.OnHitSkill -= (b, p, d) =>
-                {
-                    Gunslinger_OnHitSkill3(id, b, p, d);
-                };
+                character.OnHitSkill -= handler;
                 timer.QueueFree();
             };
             character.AddChild(timer);
