@@ -195,9 +195,7 @@ public partial class Character : CharacterBody2D
             if (!selectedSkillIndexes.Contains(skills.ToList().IndexOf(skill))) continue;
             if (skill.IsPassive)
             {
-                var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1),
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
-                    BindingFlags.FlattenHierarchy);
+                var info = GetType().GetMethod("Skill" + (skills.ToList().IndexOf(skill) + 1), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
 
                 switch (skill.passiveType)
                 {

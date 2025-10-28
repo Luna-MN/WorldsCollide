@@ -162,5 +162,35 @@ public partial class ClassRpc : Node2D
             createdFire.Name = Id + "_" + new Random().Next(100000);
             ServerManager.spawner.CallDeferred("add_child", createdFire, true);
         }
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+        public void Gunslinger_Skill4(string id)
+        {
+            var character = (Gunslinger)ServerManager.NodeDictionary[id];
+            var statCalc = (float f) =>
+            {
+                // change to be based on a stat or something
+                return (float)(f * 1.01);
+            };
+            character.characterStats.addFunc(id, StatMaths.StatNum.attackSpeed, "Skill4", statCalc, 6);
+        }
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+        public void Gunslinger_Skill5(string id)
+        {
+            
+        }
+        [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
+        public void Gunslinger_Skill6(string id)
+        {
+            var character = (Gunslinger)ServerManager.NodeDictionary[id];
+            if (Multiplayer.IsServer() && character.healingShots == false)
+            {
+                character.healingShots = true;
+                ServerManager.ClassRpcs.Rpc("Gunslinger_Skill6", id);
+            }
+            else
+            {
+                character.healingShots = false;
+            }
+        }
     #endregion
 }
