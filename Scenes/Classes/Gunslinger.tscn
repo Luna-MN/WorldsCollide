@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bmxur1gpaxtuc"]
+[gd_scene load_steps=58 format=3 uid="uid://bmxur1gpaxtuc"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_4biqu"]
 [ext_resource type="Script" uid="uid://nis8tbvwbxea" path="res://Scripts/ClassScripts/Gunslinger/Gunslinger.cs" id="2_kj1io"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="14_u7rbx"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="15_1v4gb"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="15_4biqu"]
+[ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="15_kj1io"]
 [ext_resource type="Texture2D" uid="uid://cn6uoccb3x3g2" path="res://Pirates/Class2/GunSlinger.png" id="16_p28sf"]
 
 [sub_resource type="Resource" id="Resource_fd4e3"]
@@ -179,21 +180,27 @@ metadata/_custom_type_script = "uid://b25igrq5gmts2"
 
 [sub_resource type="Resource" id="Resource_6mwut"]
 script = ExtResource("15_1v4gb")
+Name = "Flame Bullets"
 RpcName = "_Skill1"
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_f83er"]
 script = ExtResource("15_1v4gb")
+Name = "Cap Trap"
+Icon = ExtResource("15_kj1io")
 RpcName = "_Skill2"
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_hncp3"]
 script = ExtResource("15_1v4gb")
+Name = "Deadeye"
 RpcName = "_Skill3"
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_4biqu"]
 script = ExtResource("15_1v4gb")
+IsPassive = true
+RpcName = "_Skill4"
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
 [sub_resource type="Resource" id="Resource_kj1io"]

@@ -53,9 +53,6 @@ public partial class FloatingText : Marker2D
 
             }
             var tween = CreateTween();
-            var rng = new RandomNumberGenerator();
-            var SideMovement = rng.RandiRange(-40, 40);
-            // Vel = new Vector2(SideMovement, 25);
 
             tween.TweenProperty(this, "scale", new Vector2(2f, 2f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
             tween.TweenProperty(this, "scale", new Vector2(1f, 1f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
@@ -116,7 +113,9 @@ public partial class FloatingText : Marker2D
             character.RunningTotal.GoneTimer?.Stop();
             character.RunningTotal.GoneTimer?.Start();
             GlobalPosition = character.RunningTotal.GlobalPosition;
-            
+            var rng = new RandomNumberGenerator();
+            var SideMovement = rng.RandiRange(-40, 40);
+            Vel = new Vector2(SideMovement, 25);
             var tween = CreateTween();
 
             tween.TweenProperty(this, "scale", new Vector2(0.5f, 0.5f), 0.5f).SetTrans(Tween.TransitionType.Linear).SetEase(Tween.EaseType.Out);
