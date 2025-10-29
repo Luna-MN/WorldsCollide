@@ -39,7 +39,12 @@ public partial class EnhancmentStar : TextureRect
     {
         if (dragging)
         {
-            GlobalPosition = GetGlobalMousePosition() - offset;
+            var newPos = GetGlobalMousePosition() - offset;
+            if (GetParent<Control>().GetRect().HasPoint(newPos))
+            {
+                GlobalPosition = newPos;
+            }
+            
         }
     }
 }

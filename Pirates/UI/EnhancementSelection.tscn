@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://x7xhwjxtvs0y"]
+
+[ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_2q7ge"]
+[ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_446de"]
+[ext_resource type="PackedScene" uid="uid://bf40n57vebate" path="res://Scenes/Equipment/enhancmentsConstillations.tscn" id="3_5d4m1"]
+[ext_resource type="PackedScene" uid="uid://d15omp016sv8h" path="res://Scenes/UI/Pixel Line.tscn" id="4_n65oy"]
+
+[node name="UIPanel" instance=ExtResource("1_2q7ge")]
+
+[node name="PixelLine" parent="." index="0" instance=ExtResource("4_n65oy")]
+layout_mode = 1
+offset_right = -284.84375
+offset_bottom = -220.375
+color = Color(1, 1, 1, 1)
+color = Color(1, 1, 1, 1)
+thickness = 15.88
+StartUV = Vector2(0, 0.35)
+EndUV = Vector2(1, 0.35)
+
+[node name="Slot" parent="." index="4" instance=ExtResource("2_446de")]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 37.0
+offset_right = 163.0
+offset_bottom = 69.0
+
+[node name="Enhancments" parent="." index="5" instance=ExtResource("3_5d4m1")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 79.0
+offset_right = 292.0
+offset_bottom = 227.0
