@@ -110,7 +110,7 @@ public partial class FloorEquipmentDefault : Node2D
         GD.Print(equipment.ResourceName);
         ServerManager.NodeDictionary[Id].inventory.AllEquipment = currentEquipment;
         //RPC that into the inv on the client
-        var enhancmentIds = equipment.enhancements.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x)).ToArray();
+        var enhancmentIds = equipment.EnhancementData.ConstillationSlots.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x.Star)).ToArray();
         var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList().FindIndex(x => x.ResourceName == equipment.ResourceName);
         ServerManager.EquipmentRpcs.RpcId(Convert.ToInt32(Id), "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId, (int)equipment.Rarity, equipment.Quality);
         QueueFree();

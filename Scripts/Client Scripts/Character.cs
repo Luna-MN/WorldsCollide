@@ -158,7 +158,7 @@ public partial class Character : CharacterBody2D
         {
             foreach (var equip in equipment)
             {
-                equip.OnEquip(this);
+                equip?.OnEquip(this);
             }
         }
 

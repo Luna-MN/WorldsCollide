@@ -33,7 +33,7 @@ public partial class EquipmentUI : Panel
                 scene.ItemIcon.Texture = Icon.Texture;
                 scene.ItemName.Text = AssignedEquipment.ResourceName;
                 scene.ItemName.Modulate = scene.TextColors[(int)AssignedEquipment.Rarity];
-                scene.ItemDescription.Text = string.Join('\n', AssignedEquipment.enhancements.Select(x => x.EnhancmentText));
+                scene.ItemDescription.Text = string.Join('\n', AssignedEquipment.EnhancementData.ConstillationSlots.Select(x => x.Star.EnhancmentText));
                 scene.Quality.Text = AssignedEquipment.Quality.ToString();
                 if (AssignedEquipment is PrimaryWeapon p)
                 {

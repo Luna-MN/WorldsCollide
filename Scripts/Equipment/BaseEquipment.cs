@@ -12,8 +12,6 @@ public partial class BaseEquipment : Resource
     [ExportGroup("Stats")]
     [Export] public Stats stats;
     [ExportGroup("Enhancements")]
-    [Export(PropertyHint.ResourceType)]
-    public BaseEnhancement[] enhancements;
     [Export] public Vector2 Scale = new Vector2(0.875f, 0.875f);
     [Export]
     public Texture2D Icon;
@@ -21,10 +19,12 @@ public partial class BaseEquipment : Resource
     public EquipmentGenerator.Rarity Rarity;
     [Export]
     public int ItemId;
+    [Export] public ConstillationData EnhancementData = new();
     
     public virtual void OnEquip(Character character)
     {
-        foreach (var enhance in enhancements)
+        if(EnhancementData.ConstillationSlots == null) return;
+        foreach (var enhance in EnhancementData.ConstillationSlots.Select(x => x.Star).Where(x => x != null))
         {
             enhance.Enhance(character);
         }

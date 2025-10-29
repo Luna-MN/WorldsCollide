@@ -15,6 +15,18 @@ public partial class EnhancmentsConstillations : Control
 
     public override void _Ready()
     {
+    }
+
+    public override void _Process(double delta)
+    {
+        // Redraw lines when stars move
+        if (lineDrawer != null)
+        {
+            lineDrawer.QueueRedraw();
+        }
+    }
+    public void DrawStars()
+    {
         // Create the line drawer first
         lineDrawer = new ConstellationLines();
         AddChild(lineDrawer);
@@ -45,16 +57,6 @@ public partial class EnhancmentsConstillations : Control
                 lineDrawer.connections.Add((i, connection));
             }
         }
-
         lineDrawer.stars = stars;
-    }
-
-    public override void _Process(double delta)
-    {
-        // Redraw lines when stars move
-        if (lineDrawer != null)
-        {
-            lineDrawer.QueueRedraw();
-        }
     }
 }

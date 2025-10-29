@@ -115,7 +115,10 @@ public partial class EquipmentGenerator : Node2D
                             stat.Value.CalcValue = stat.Value.MinValue + (stat.Value.MaxValue - stat.Value.MinValue) * qualPerc;
                         }
                     }
-                    equipment.enhancements = enhancments.ToArray();
+                    for (var i = 0; i < enhancments.Count; i++)
+                    {
+                        equipment.EnhancementData.ConstillationSlots[i].Star = enhancments[i];
+                    }
                     floorItem.equipment = equipment;
                 }
 

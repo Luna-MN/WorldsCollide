@@ -18,11 +18,13 @@ StartUV = Vector2(0, 0.35)
 EndUV = Vector2(1, 0.35)
 
 [node name="Slot" parent="." index="4" instance=ExtResource("2_446de")]
-layout_mode = 0
-offset_left = 131.0
-offset_top = 37.0
-offset_right = 163.0
-offset_bottom = 69.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 28.0
+offset_bottom = 60.0
+grow_horizontal = 2
 
 [node name="Enhancments" parent="." index="5" instance=ExtResource("3_5d4m1")]
 layout_mode = 0
