@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://x7xhwjxtvs0y"]
+[gd_scene load_steps=6 format=3 uid="uid://x7xhwjxtvs0y"]
 
 [ext_resource type="PackedScene" uid="uid://d6anon58wrkj" path="res://Pirates/UI/MovableObject.tscn" id="1_2q7ge"]
 [ext_resource type="PackedScene" uid="uid://cty5igj15kppt" path="res://Scenes/EquipmentSlot.tscn" id="2_446de"]
+[ext_resource type="Script" uid="uid://b4tb40u38whi" path="res://Pirates/UI/EnhancementSelection.cs" id="2_kueqq"]
 [ext_resource type="PackedScene" uid="uid://bf40n57vebate" path="res://Scenes/Equipment/enhancmentsConstillations.tscn" id="3_5d4m1"]
 [ext_resource type="PackedScene" uid="uid://d15omp016sv8h" path="res://Scenes/UI/Pixel Line.tscn" id="4_n65oy"]
 
-[node name="UIPanel" instance=ExtResource("1_2q7ge")]
+[node name="UIPanel" node_paths=PackedStringArray("UISlot", "constellation") instance=ExtResource("1_2q7ge")]
+script = ExtResource("2_kueqq")
+UISlot = NodePath("Slot")
+constellation = NodePath("Enhancments")
 
 [node name="PixelLine" parent="." index="0" instance=ExtResource("4_n65oy")]
 layout_mode = 1
