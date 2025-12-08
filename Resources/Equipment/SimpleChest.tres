@@ -1,20 +1,13 @@
-[gd_resource type="Resource" script_class="BaseEquipment" load_steps=7 format=3 uid="uid://dcrn58i05jmtr"]
+[gd_resource type="Resource" script_class="BaseEquipment" load_steps=6 format=3 uid="uid://dcrn58i05jmtr"]
 
 [ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="1_510fn"]
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_pnni1"]
-[ext_resource type="Script" uid="uid://k8whvj1c14xl" path="res://Scripts/Equipment/Enhancements/BaseEnhancement.cs" id="2_e8g0n"]
+[ext_resource type="Script" uid="uid://cinqavkmdhk4o" path="res://Scripts/Equipment/Enhancements/ConstillationData.cs" id="1_uhyga"]
 [ext_resource type="Resource" uid="uid://ddqgxsghkfqxr" path="res://Resources/Default Stats/Default Weapon Stats.tres" id="4_uhyga"]
 
-[sub_resource type="Resource" id="Resource_lv8gr"]
-script = ExtResource("2_e8g0n")
-EnhancmentText = "This Is a Test Of the Text"
-metadata/_custom_type_script = "uid://k8whvj1c14xl"
-
-[sub_resource type="Resource" id="Resource_e8g0n"]
-script = ExtResource("2_e8g0n")
-EnhancmentText = "This Is also a test
-"
-metadata/_custom_type_script = "uid://k8whvj1c14xl"
+[sub_resource type="Resource" id="Resource_twovv"]
+script = ExtResource("1_uhyga")
+ConstillationSlots = null
 
 [resource]
 resource_local_to_scene = true
@@ -22,7 +15,6 @@ resource_name = "Simple Chest"
 script = ExtResource("1_pnni1")
 equipmentFlags = 8
 stats = ExtResource("4_uhyga")
-enhancements = Array[Object]([SubResource("Resource_lv8gr"), SubResource("Resource_e8g0n")])
 Icon = ExtResource("1_510fn")
 ItemId = 5
 metadata/_custom_type_script = "uid://c8xpcraad14yd"

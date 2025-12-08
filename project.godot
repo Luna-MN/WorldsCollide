@@ -101,6 +101,10 @@ left_click={
 ]
 }
 
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://AI"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

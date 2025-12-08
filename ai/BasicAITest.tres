@@ -1,0 +1,36 @@
+[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://dkac84hk3df7m"]
+
+[ext_resource type="Script" uid="uid://c0lwcjpga1mjd" path="res://ai/tasks/Utility_Custom/AwaitVarTime.cs" id="1_41nhw"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_dmoef"]
+var/Await_var/name = &"Await_var"
+var/Await_var/type = 3
+var/Await_var/value = 0.0
+var/Await_var/hint = 0
+var/Await_var/hint_string = "how many ticks the BT should wait"
+var/Parent_var/name = &"Parent_var"
+var/Parent_var/type = 22
+var/Parent_var/value = NodePath(".")
+var/Parent_var/hint = 0
+var/Parent_var/hint_string = "The parent that controls the BT"
+
+[sub_resource type="BBNode" id="BBNode_t8na1"]
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_41nhw"]
+node = SubResource("BBNode_t8na1")
+result_var = &"Await_var"
+
+[sub_resource type="BTAction" id="BTAction_fr7y0"]
+script = ExtResource("1_41nhw")
+
+[sub_resource type="BTSequence" id="BTSequence_fr7y0"]
+children = [SubResource("BTCallMethod_41nhw"), SubResource("BTAction_fr7y0")]
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_770u8"]
+children = [SubResource("BTSequence_fr7y0")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_dmoef")
+root_task = SubResource("BTProbabilitySelector_770u8")

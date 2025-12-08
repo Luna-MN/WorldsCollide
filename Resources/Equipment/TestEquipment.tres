@@ -1,7 +1,12 @@
-[gd_resource type="Resource" script_class="BaseEquipment" load_steps=4 format=3 uid="uid://cmqpexfhmr6p4"]
+[gd_resource type="Resource" script_class="BaseEquipment" load_steps=6 format=3 uid="uid://cmqpexfhmr6p4"]
 
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="1_boj3u"]
+[ext_resource type="Script" uid="uid://cinqavkmdhk4o" path="res://Scripts/Equipment/Enhancements/ConstillationData.cs" id="1_twovv"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="2_x2y7e"]
+
+[sub_resource type="Resource" id="Resource_twovv"]
+script = ExtResource("1_twovv")
+ConstillationSlots = null
 
 [sub_resource type="Resource" id="Resource_hctok"]
 resource_local_to_scene = true
@@ -15,6 +20,5 @@ resource_name = "TestRes"
 script = ExtResource("1_boj3u")
 equipmentFlags = 2047
 stats = SubResource("Resource_hctok")
-enhancements = null
 ItemId = 14
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
