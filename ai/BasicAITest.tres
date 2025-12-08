@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://dkac84hk3df7m"]
+[gd_resource type="BehaviorTree" load_steps=11 format=3 uid="uid://dkac84hk3df7m"]
 
 [ext_resource type="Script" uid="uid://c0lwcjpga1mjd" path="res://ai/tasks/Utility_Custom/AwaitVarTime.cs" id="1_41nhw"]
 
@@ -20,17 +20,31 @@ saved_value = NodePath(".")
 
 [sub_resource type="BTCallMethod" id="BTCallMethod_41nhw"]
 node = SubResource("BBNode_t8na1")
+method = &"Roam"
 result_var = &"Await_var"
+
+[sub_resource type="BBFloat" id="BBFloat_41nhw"]
+resource_name = "$Await_var"
+value_source = 1
+variable = &"Await_var"
 
 [sub_resource type="BTAction" id="BTAction_fr7y0"]
 script = ExtResource("1_41nhw")
+AwaitVar = SubResource("BBFloat_41nhw")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_41nhw"]
+text = "Meow"
 
 [sub_resource type="BTSequence" id="BTSequence_fr7y0"]
-children = [SubResource("BTCallMethod_41nhw"), SubResource("BTAction_fr7y0")]
+children = [SubResource("BTCallMethod_41nhw"), SubResource("BTAction_fr7y0"), SubResource("BTConsolePrint_41nhw")]
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_770u8"]
 children = [SubResource("BTSequence_fr7y0")]
 
+[sub_resource type="BTRepeat" id="BTRepeat_41nhw"]
+children = [SubResource("BTProbabilitySelector_770u8")]
+forever = true
+
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_dmoef")
-root_task = SubResource("BTProbabilitySelector_770u8")
+root_task = SubResource("BTRepeat_41nhw")

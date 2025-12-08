@@ -1,26 +1,36 @@
 using Godot;
-using System;
 
 public partial class AwaitVarTime : BTAction
 {
-    public override Status _Tick(double delta)
+    [Export]
+    public BBFloat AwaitVar;
+    private double waitSeconds;
+    private double elapsed;
+
+    public override void _Enter()
     {
-        Wait();
-        return Status.Success;
+        waitSeconds = (float)AwaitVar.GetValue(SceneRoot, Blackboard, 0.0);
     }
 
-    public async void Wait()
+    public override Status _Tick(double delta)
     {
-        Timer timer = new Timer()
+        if (waitSeconds <= 0.0)
         {
-            WaitTime = (float)Blackboard.GetVar("Await_var"),
-            Autostart = true,
-            OneShot = true
-        };
-        var parent = (Node2D)Blackboard.GetVar("Parent_var");
-        parent.AddChild(timer);
-        await ToSignal(timer, "timeout");
-        timer.QueueFree();
-        Blackboard.SetVar("Await_var", 0);
+            return Status.Success;
+        }
+
+        elapsed += delta;
+        if (elapsed >= waitSeconds)
+        {
+            Blackboard.SetVar("Await_var", 0.0);
+            return Status.Success;
+        }
+
+        return Status.Running;
+    }
+
+    public override void _Exit()
+    {
+        elapsed = 0.0;
     }
 }
