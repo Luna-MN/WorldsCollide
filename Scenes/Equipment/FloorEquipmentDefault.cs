@@ -110,8 +110,22 @@ public partial class FloorEquipmentDefault : Node2D
         GD.Print(equipment.ResourceName);
         ServerManager.NodeDictionary[Id].inventory.AllEquipment = currentEquipment;
         //RPC that into the inv on the client
-        var enhancmentIds = equipment.EnhancementData.ConstillationSlots.Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x.Star)).ToArray();
-        var equipmentId = ServerManager.EquipmentRpcs.equipment.ToList().FindIndex(x => x.ResourceName == equipment.ResourceName);
+        
+        var enhancmentIds = new int[0];
+        var equipmentId = -1;
+        try
+        {
+            enhancmentIds = equipment.EnhancementData.ConstillationSlots
+                .Select(x => ServerManager.EquipmentRpcs.Enhancments.ToList().IndexOf(x.Star)).ToArray();
+
+        }
+        catch (Exception e)
+        {
+            // ignored should never happen in real game, just because enhancments haven't been configured yet
+        }
+
+        equipmentId = ServerManager.EquipmentRpcs.equipment.ToList()
+            .FindIndex(x => x.ResourceName == equipment.ResourceName);
         ServerManager.EquipmentRpcs.RpcId(Convert.ToInt32(Id), "AddEquipmentToInv", enhancmentIds, equipmentId, equipment.ItemId, (int)equipment.Rarity, equipment.Quality);
         QueueFree();
     }

@@ -88,12 +88,17 @@ public partial class EquipmentRpc : Node2D
         GD.Print(string.Join(", ", EnhancmentIndexes));
         var currentEquipment = GameManager.player.inventory.AllEquipment;
         Array.Resize(ref currentEquipment, currentEquipment.Length + 1);
+        GD.Print(equipmentId);
         var eq = equipment[equipmentId].Duplicate() as BaseEquipment;
         var enhancements = EnhancmentIndexes.Select(x => Enhancments[x]).ToArray();
-        for (var i = 0; i < enhancements.Length; i++)
+        if (enhancements.Length > 0)
         {
-            eq.EnhancementData.ConstillationSlots[i].Star = enhancements[i];
+            for (var i = 0; i < enhancements.Length; i++)
+            {
+                eq.EnhancementData.ConstillationSlots[i].Star = enhancements[i];
+            }
         }
+
         eq.ItemId = ItemId;
         eq.Rarity = (EquipmentGenerator.Rarity)Rarity;
         eq.Quality = quality;
