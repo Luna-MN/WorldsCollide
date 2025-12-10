@@ -5,6 +5,8 @@ using System.Linq;
 
 public partial class Minion : Character
 {
+    [Export]
+    public Character summoner;
     [ExportGroup("Traps")]
     [Export(PropertyHint.GroupEnable)]
     public bool Traps;

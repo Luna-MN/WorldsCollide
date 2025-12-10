@@ -119,6 +119,7 @@ public partial class ClassRpc : Node2D
         {
             var cap = CapTrap.Instantiate<CapTrap>();
             var player = ServerManager.NodeDictionary[id];
+            cap.summoner = player;
             cap.GlobalPosition = player.inputSync.mousePosition;
             cap.EquipmentSlots[0].EquippedEquipment = player.PrimaryEquipment[0];
             while (true)
