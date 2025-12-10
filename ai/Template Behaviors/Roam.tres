@@ -1,0 +1,30 @@
+[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://1jmgxtdc78wt"]
+
+[ext_resource type="Script" uid="uid://c0lwcjpga1mjd" path="res://ai/tasks/Utility_Custom/AwaitVarTime.cs" id="1_6wvwt"]
+
+[sub_resource type="BBNode" id="BBNode_vv6sq"]
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_8yq7i"]
+node = SubResource("BBNode_vv6sq")
+method = &"Roam"
+result_var = &"Await_var"
+
+[sub_resource type="BBFloat" id="BBFloat_anux7"]
+resource_name = "$Await_var"
+value_source = 1
+variable = &"Await_var"
+
+[sub_resource type="BTAction" id="BTAction_0jcly"]
+script = ExtResource("1_6wvwt")
+AwaitVar = SubResource("BBFloat_anux7")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_ipt4v"]
+text = "Roam"
+
+[sub_resource type="BTSequence" id="BTSequence_ac0a0"]
+children = [SubResource("BTCallMethod_8yq7i"), SubResource("BTAction_0jcly"), SubResource("BTConsolePrint_ipt4v")]
+
+[resource]
+root_task = SubResource("BTSequence_ac0a0")

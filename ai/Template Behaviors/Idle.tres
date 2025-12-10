@@ -1,0 +1,30 @@
+[gd_resource type="BehaviorTree" load_steps=8 format=3 uid="uid://bnxffngabpoio"]
+
+[ext_resource type="Script" uid="uid://c0lwcjpga1mjd" path="res://ai/tasks/Utility_Custom/AwaitVarTime.cs" id="1_wm00f"]
+
+[sub_resource type="BBNode" id="BBNode_dtvm1"]
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_rrdf8"]
+node = SubResource("BBNode_dtvm1")
+method = &"Idle"
+result_var = &"Await_var"
+
+[sub_resource type="BBFloat" id="BBFloat_k6pbl"]
+resource_name = "$Await_var"
+value_source = 1
+variable = &"Await_var"
+
+[sub_resource type="BTAction" id="BTAction_eg2qs"]
+script = ExtResource("1_wm00f")
+AwaitVar = SubResource("BBFloat_k6pbl")
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_wohwj"]
+text = "Idle"
+
+[sub_resource type="BTSequence" id="BTSequence_y3cwx"]
+children = [SubResource("BTCallMethod_rrdf8"), SubResource("BTAction_eg2qs"), SubResource("BTConsolePrint_wohwj")]
+
+[resource]
+root_task = SubResource("BTSequence_y3cwx")

@@ -1,6 +1,7 @@
-[gd_resource type="BehaviorTree" load_steps=11 format=3 uid="uid://dkac84hk3df7m"]
+[gd_resource type="BehaviorTree" load_steps=24 format=3 uid="uid://dkac84hk3df7m"]
 
-[ext_resource type="Script" uid="uid://c0lwcjpga1mjd" path="res://ai/tasks/Utility_Custom/AwaitVarTime.cs" id="1_41nhw"]
+[ext_resource type="BehaviorTree" uid="uid://1jmgxtdc78wt" path="res://ai/Template Behaviors/Roam.tres" id="1_fr7y0"]
+[ext_resource type="BehaviorTree" uid="uid://bnxffngabpoio" path="res://ai/Template Behaviors/Idle.tres" id="2_770u8"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_dmoef"]
 var/Await_var/name = &"Await_var"
@@ -13,36 +14,95 @@ var/Parent_var/type = 22
 var/Parent_var/value = NodePath(".")
 var/Parent_var/hint = 0
 var/Parent_var/hint_string = "The parent that controls the BT"
+var/PlayerInRange_var/name = &"PlayerInRange_var"
+var/PlayerInRange_var/type = 1
+var/PlayerInRange_var/value = false
+var/PlayerInRange_var/hint = 0
+var/PlayerInRange_var/hint_string = ""
+var/PlayerAgro_var/name = &"PlayerAgro_var"
+var/PlayerAgro_var/type = 1
+var/PlayerAgro_var/value = false
+var/PlayerAgro_var/hint = 0
+var/PlayerAgro_var/hint_string = ""
 
-[sub_resource type="BBNode" id="BBNode_t8na1"]
+[sub_resource type="BBNode" id="BBNode_fr7y0"]
 resource_name = "."
 saved_value = NodePath(".")
 
-[sub_resource type="BTCallMethod" id="BTCallMethod_41nhw"]
-node = SubResource("BBNode_t8na1")
-method = &"Roam"
-result_var = &"Await_var"
+[sub_resource type="BTCallMethod" id="BTCallMethod_770u8"]
+custom_name = "CheckPlatersInRange - Bool: PlayerInRange_var"
+node = SubResource("BBNode_fr7y0")
+method = &"CheckPlayersInRange"
+result_var = &"PlayerInRange_var"
 
-[sub_resource type="BBFloat" id="BBFloat_41nhw"]
-resource_name = "$Await_var"
-value_source = 1
-variable = &"Await_var"
+[sub_resource type="BTComment" id="BTComment_fr7y0"]
+custom_name = "This will check if the player is in range, if the player isn't it will return sucess and not run the probability selector"
 
-[sub_resource type="BTAction" id="BTAction_fr7y0"]
-script = ExtResource("1_41nhw")
-AwaitVar = SubResource("BBFloat_41nhw")
+[sub_resource type="BBVariant" id="BBVariant_mkpdr"]
+resource_name = "false"
+saved_value = false
+type = 1
 
-[sub_resource type="BTConsolePrint" id="BTConsolePrint_41nhw"]
-text = "Meow"
+[sub_resource type="BTCheckVar" id="BTCheckVar_vesqq"]
+variable = &"PlayerInRange_var"
+value = SubResource("BBVariant_mkpdr")
 
-[sub_resource type="BTSequence" id="BTSequence_fr7y0"]
-children = [SubResource("BTCallMethod_41nhw"), SubResource("BTAction_fr7y0"), SubResource("BTConsolePrint_41nhw")]
+[sub_resource type="BTSequence" id="BTSequence_lw8pa"]
+custom_name = "Check Player In Range"
+children = [SubResource("BTCallMethod_770u8"), SubResource("BTComment_fr7y0"), SubResource("BTCheckVar_vesqq")]
+
+[sub_resource type="BBNode" id="BBNode_770u8"]
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_mkpdr"]
+custom_name = "CheckAgro - Bool: PlayerAgro_var"
+node = SubResource("BBNode_770u8")
+method = &"CheckAgro"
+result_var = &"PlayerAgro_var"
+
+[sub_resource type="BBVariant" id="BBVariant_vesqq"]
+resource_name = "<null>"
+saved_value = false
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_lw8pa"]
+variable = &"PlayerAgro_var"
+value = SubResource("BBVariant_vesqq")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_mkpdr"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_vesqq"]
+custom_name = "Roam"
+blackboard_plan = SubResource("BlackboardPlan_mkpdr")
+subtree = ExtResource("1_fr7y0")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_lw8pa"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_hbr04"]
+custom_name = "Idle"
+blackboard_plan = SubResource("BlackboardPlan_lw8pa")
+subtree = ExtResource("2_770u8")
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_770u8"]
-children = [SubResource("BTSequence_fr7y0")]
+custom_name = "Random Movement If player not agro"
+children = [SubResource("BTSubtree_vesqq"), SubResource("BTSubtree_hbr04")]
+
+[sub_resource type="BTSequence" id="BTSequence_hbr04"]
+children = [SubResource("BTCallMethod_mkpdr"), SubResource("BTCheckVar_lw8pa"), SubResource("BTProbabilitySelector_770u8")]
+
+[sub_resource type="BTComment" id="BTComment_770u8"]
+custom_name = "This is where attacks will be run"
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_fr7y0"]
+custom_name = "Attacks"
+children = [SubResource("BTComment_770u8")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hbr04"]
+children = [SubResource("BTSequence_lw8pa"), SubResource("BTSequence_hbr04"), SubResource("BTProbabilitySelector_fr7y0")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_41nhw"]
-children = [SubResource("BTProbabilitySelector_770u8")]
+children = [SubResource("BTDynamicSelector_hbr04")]
 forever = true
 
 [resource]

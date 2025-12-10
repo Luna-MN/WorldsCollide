@@ -8,4 +8,19 @@ public partial class BasicAiTest : Node2D
 
         return 10f;
     }
+
+    public float Idle()
+    {
+        return 5f;
+    }
+
+    public bool CheckPlayersInRange()
+    {
+        return true;
+    }
+
+    public bool CheckAgro()
+    {
+        return false;
+    }
 }

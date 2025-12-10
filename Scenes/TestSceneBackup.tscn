@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dmfd0cxi4u7y4"]
+[gd_scene load_steps=45 format=4 uid="uid://dmfd0cxi4u7y4"]
 
 [ext_resource type="Script" uid="uid://dmbjam1ily58e" path="res://Scripts/Client Scripts/TestScene.cs" id="1_jgjff"]
 [ext_resource type="PackedScene" uid="uid://cfuo2r04n4rh1" path="res://Scenes/MultiplayerSpawner.tscn" id="2_rcmtm"]
@@ -13,28 +13,33 @@
 [ext_resource type="PackedScene" uid="uid://bh43r4421n8lf" path="res://Scenes/equipment_generator.tscn" id="10_yyxgi"]
 [ext_resource type="PackedScene" uid="uid://dbob4f3yjvg4x" path="res://Scenes/Terrain Gen/MapNode.tscn" id="11_y3w2a"]
 
-[sub_resource type="Resource" id="Resource_ujy1n"]
+[sub_resource type="Resource" id="Resource_y3w2a"]
 script = ExtResource("4_y3w2a")
 ConstillationSlots = null
 
-[sub_resource type="Resource" id="Resource_1ryov"]
+[sub_resource type="Resource" id="Resource_ujy1n"]
 script = ExtResource("7_lon7e")
 Name = 1
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_bcv8b"]
+[sub_resource type="Resource" id="Resource_1ryov"]
 script = ExtResource("7_lon7e")
 Name = 2
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_4v1wc"]
+[sub_resource type="Resource" id="Resource_bcv8b"]
 script = ExtResource("7_lon7e")
 Name = 3
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_lon7e"]
+[sub_resource type="Resource" id="Resource_4v1wc"]
 script = ExtResource("7_lon7e")
 Name = 4
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_lon7e"]
+script = ExtResource("7_lon7e")
+Name = 5
 DisplayValue = 10.0
 
 [sub_resource type="Resource" id="Resource_q1ivu"]
@@ -47,10 +52,11 @@ resource_name = "Simple Chest"
 script = ExtResource("6_4v1wc")
 _origin = 2
 defaultFallback = SubResource("Resource_q1ivu")
-armour = SubResource("Resource_1ryov")
-critChance = SubResource("Resource_bcv8b")
-critDamage = SubResource("Resource_4v1wc")
-currentHealth = SubResource("Resource_lon7e")
+armour = SubResource("Resource_ujy1n")
+critChance = SubResource("Resource_1ryov")
+critDamage = SubResource("Resource_bcv8b")
+currentHealth = SubResource("Resource_4v1wc")
+damageIncrease = SubResource("Resource_lon7e")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="Resource" id="Resource_p6t6h"]
@@ -85,25 +91,31 @@ DisplayValue = 10.0
 
 [sub_resource type="Resource" id="Resource_j3lra"]
 script = ExtResource("7_lon7e")
+Name = 5
 DisplayValue = 10.0
 
 [sub_resource type="Resource" id="Resource_x5eam"]
+script = ExtResource("7_lon7e")
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_88mm2"]
 resource_local_to_scene = true
 script = ExtResource("6_4v1wc")
 _origin = 2
-defaultFallback = SubResource("Resource_j3lra")
+defaultFallback = SubResource("Resource_x5eam")
 armour = SubResource("Resource_yyxgi")
 critChance = SubResource("Resource_8ke31")
 critDamage = SubResource("Resource_rao7x")
 currentHealth = SubResource("Resource_5kgin")
+damageIncrease = SubResource("Resource_j3lra")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_88mm2"]
+[sub_resource type="Resource" id="Resource_xbcah"]
 resource_local_to_scene = true
 resource_name = "Simple Chest"
 script = ExtResource("5_bcv8b")
 equipmentFlags = 8
-stats = SubResource("Resource_x5eam")
+stats = SubResource("Resource_88mm2")
 Icon = ExtResource("8_q1ivu")
 ItemId = 5
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
@@ -113,7 +125,7 @@ script = ExtResource("6_4v1wc")
 _origin = 2
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
-[sub_resource type="Resource" id="Resource_xbcah"]
+[sub_resource type="Resource" id="Resource_sa2sp"]
 resource_local_to_scene = true
 resource_name = "Simple Helm"
 script = ExtResource("5_bcv8b")
@@ -123,75 +135,75 @@ Icon = ExtResource("4_1ryov")
 ItemId = -2
 metadata/_custom_type_script = "uid://c8xpcraad14yd"
 
-[sub_resource type="Resource" id="Resource_sa2sp"]
+[sub_resource type="Resource" id="Resource_a7wc7"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 1
 DisplayValue = 10.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_a7wc7"]
+[sub_resource type="Resource" id="Resource_ukb8w"]
 script = ExtResource("7_lon7e")
 Name = 11
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_ukb8w"]
+[sub_resource type="Resource" id="Resource_c3dv7"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 2
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_c3dv7"]
+[sub_resource type="Resource" id="Resource_opbyx"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 3
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_opbyx"]
+[sub_resource type="Resource" id="Resource_1cqke"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 4
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_1cqke"]
+[sub_resource type="Resource" id="Resource_m8anv"]
 script = ExtResource("7_lon7e")
 Name = 9
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_m8anv"]
+[sub_resource type="Resource" id="Resource_ptqdf"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 5
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_ptqdf"]
+[sub_resource type="Resource" id="Resource_83wii"]
 script = ExtResource("7_lon7e")
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_83wii"]
+[sub_resource type="Resource" id="Resource_rvktp"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 6
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_rvktp"]
+[sub_resource type="Resource" id="Resource_ywqgm"]
 resource_local_to_scene = true
 script = ExtResource("7_lon7e")
 Name = 7
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_ywqgm"]
+[sub_resource type="Resource" id="Resource_7lpof"]
 script = ExtResource("7_lon7e")
 Name = 10
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_7lpof"]
+[sub_resource type="Resource" id="Resource_5ocax"]
 script = ExtResource("7_lon7e")
 Name = 8
 DisplayValue = 300.0
@@ -200,18 +212,18 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 [sub_resource type="Resource" id="Resource_56q2o"]
 resource_local_to_scene = true
 script = ExtResource("6_4v1wc")
-armour = SubResource("Resource_sa2sp")
-critChance = SubResource("Resource_ukb8w")
-critDamage = SubResource("Resource_c3dv7")
-currentHealth = SubResource("Resource_opbyx")
-damageIncrease = SubResource("Resource_m8anv")
-itemFind = SubResource("Resource_83wii")
-maxHealth = SubResource("Resource_rvktp")
-speed = SubResource("Resource_7lpof")
-defaultFallback = SubResource("Resource_ptqdf")
-damage = SubResource("Resource_1cqke")
-range = SubResource("Resource_ywqgm")
-attackSpeed = SubResource("Resource_a7wc7")
+armour = SubResource("Resource_a7wc7")
+critChance = SubResource("Resource_c3dv7")
+critDamage = SubResource("Resource_opbyx")
+currentHealth = SubResource("Resource_1cqke")
+damageIncrease = SubResource("Resource_ptqdf")
+itemFind = SubResource("Resource_rvktp")
+maxHealth = SubResource("Resource_ywqgm")
+speed = SubResource("Resource_5ocax")
+defaultFallback = SubResource("Resource_83wii")
+damage = SubResource("Resource_m8anv")
+range = SubResource("Resource_7lpof")
+attackSpeed = SubResource("Resource_ukb8w")
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_jgjff")
@@ -222,7 +234,7 @@ script = ExtResource("1_jgjff")
 position = Vector2(328, 176)
 EquipmentSlots = Array[Object]([])
 DropLootOnDeath = true
-DroppableEquipment = Array[Object]([SubResource("Resource_p6t6h"), SubResource("Resource_88mm2"), SubResource("Resource_xbcah")])
+DroppableEquipment = Array[Object]([SubResource("Resource_p6t6h"), SubResource("Resource_xbcah"), SubResource("Resource_sa2sp")])
 EquipmentSpawner = ExtResource("10_yyxgi")
 characterStats = SubResource("Resource_56q2o")
 
