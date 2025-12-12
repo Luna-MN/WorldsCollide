@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=24 format=3 uid="uid://dkac84hk3df7m"]
+[gd_resource type="BehaviorTree" load_steps=25 format=3 uid="uid://dkac84hk3df7m"]
 
 [ext_resource type="BehaviorTree" uid="uid://1jmgxtdc78wt" path="res://ai/Template Behaviors/Roam.tres" id="1_fr7y0"]
 [ext_resource type="BehaviorTree" uid="uid://bnxffngabpoio" path="res://ai/Template Behaviors/Idle.tres" id="2_770u8"]
@@ -44,12 +44,16 @@ saved_value = false
 type = 1
 
 [sub_resource type="BTCheckVar" id="BTCheckVar_vesqq"]
+_enabled = false
 variable = &"PlayerInRange_var"
 value = SubResource("BBVariant_mkpdr")
 
 [sub_resource type="BTSequence" id="BTSequence_lw8pa"]
 custom_name = "Check Player In Range"
 children = [SubResource("BTCallMethod_770u8"), SubResource("BTComment_fr7y0"), SubResource("BTCheckVar_vesqq")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_fr7y0"]
+children = [SubResource("BTSequence_lw8pa")]
 
 [sub_resource type="BBNode" id="BBNode_770u8"]
 resource_name = "."
@@ -67,6 +71,7 @@ saved_value = false
 type = 1
 
 [sub_resource type="BTCheckVar" id="BTCheckVar_lw8pa"]
+_enabled = false
 variable = &"PlayerAgro_var"
 value = SubResource("BBVariant_vesqq")
 
@@ -76,6 +81,7 @@ value = SubResource("BBVariant_vesqq")
 custom_name = "Roam"
 blackboard_plan = SubResource("BlackboardPlan_mkpdr")
 subtree = ExtResource("1_fr7y0")
+metadata/_weight_ = 10.0
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lw8pa"]
 
@@ -100,7 +106,7 @@ custom_name = "Attacks"
 children = [SubResource("BTComment_770u8")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hbr04"]
-children = [SubResource("BTSequence_lw8pa"), SubResource("BTSequence_hbr04"), SubResource("BTProbabilitySelector_fr7y0")]
+children = [SubResource("BTAlwaysFail_fr7y0"), SubResource("BTSequence_hbr04"), SubResource("BTProbabilitySelector_fr7y0")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_41nhw"]
 children = [SubResource("BTDynamicSelector_hbr04")]

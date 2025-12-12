@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dj85p1u66u4gl"]
+[gd_scene load_steps=11 format=3 uid="uid://dj85p1u66u4gl"]
 
 [ext_resource type="PackedScene" uid="uid://pvnlwhskemr2" path="res://Scenes/enemy.tscn" id="1_2btid"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="2_dpndv"]
@@ -6,77 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://dteist3uan2ii" path="res://Pirates/Skeleton/Skeleton.png" id="4_ygee8"]
 [ext_resource type="PackedScene" uid="uid://bn8nupptp1h45" path="res://ai/BasicAITest.tscn" id="5_g22im"]
 
-[sub_resource type="Resource" id="Resource_g22im"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 1
-DisplayValue = 10.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_v7rdr"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 2
-DisplayValue = 0.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_and3r"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 3
-DisplayValue = 1.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_ivhqf"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 4
-DisplayValue = 100.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_vb502"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 5
-DisplayValue = 1.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_jyjs1"]
-script = ExtResource("2_dpndv")
-DisplayValue = 10.0
-
-[sub_resource type="Resource" id="Resource_qqoon"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 6
-DisplayValue = 0.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_pxdd2"]
-resource_local_to_scene = true
-script = ExtResource("2_dpndv")
-Name = 7
-DisplayValue = 100.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_xxlxq"]
+[sub_resource type="Resource" id="Resource_ygee8"]
 script = ExtResource("2_dpndv")
 Name = 8
-DisplayValue = 300.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
+DisplayValue = 100.0
 
-[sub_resource type="Resource" id="Resource_jjepw"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_g22im"]
 script = ExtResource("3_ygee8")
-armour = SubResource("Resource_g22im")
-critChance = SubResource("Resource_v7rdr")
-critDamage = SubResource("Resource_and3r")
-currentHealth = SubResource("Resource_ivhqf")
-damageIncrease = SubResource("Resource_vb502")
-itemFind = SubResource("Resource_qqoon")
-maxHealth = SubResource("Resource_pxdd2")
-speed = SubResource("Resource_xxlxq")
-defaultFallback = SubResource("Resource_jyjs1")
+speed = SubResource("Resource_ygee8")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v7rdr"]
 animations = [{
@@ -96,7 +34,7 @@ radius = 874.0824
 radius = 390.0
 
 [node name="Skeleton" instance=ExtResource("1_2btid")]
-characterStats = SubResource("Resource_jjepw")
+stats = SubResource("Resource_g22im")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_v7rdr")
@@ -108,10 +46,8 @@ position = Vector2(5.9604645e-08, 1.1920929e-07)
 
 [node name="CollisionShape2D" parent="AI Control/StartBT" index="0"]
 shape = SubResource("CircleShape2D_ygee8")
-debug_color = Color(1, 1, 1, 0)
 
 [node name="CollisionShape2D" parent="AI Control/AgroRange" index="0"]
 shape = SubResource("CircleShape2D_g22im")
-debug_color = Color(1, 0, 0.13333334, 0.015686275)
 
 [editable path="AI Control"]

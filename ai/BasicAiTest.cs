@@ -9,16 +9,36 @@ public partial class BasicAiTest : Node2D
     [Export] private Area2D AgroRange;
     public List<Character> playersInSightRange = [];
     public List<Character> playersInAgro = [];
+    public Enemy enemy;
+    private readonly RandomNumberGenerator rng = new();
+
+    [Export] public float RoamRadius { get; set; } = 300f; 
+    [Export] public float RoamMinRadius { get; set; } = 0f;
+
     public override void _Ready()
     {
         PlayerSightRange.BodyEntered += OnPlayerSightBodyEntered;
         PlayerSightRange.BodyExited += OnPlayerSightBodyExited;
         AgroRange.BodyEntered += OnAgroBodyEntered;
         AgroRange.BodyExited += OnAgroBodyExited;
+        enemy = (Enemy)GetParent();
+        rng.Randomize();
+
     }
 
     public virtual float Roam()
     {
+
+        // Uniform random point within a ring [RoamMinRadius, RoamRadius]
+        float min = Mathf.Max(0f, RoamMinRadius);
+        float max = Mathf.Max(min, RoamRadius);
+
+        float angle = rng.RandfRange(0f, Mathf.Tau);
+        float u = rng.Randf();
+        float r = Mathf.Sqrt(Mathf.Lerp(min * min, max * max, u)); // uniform area distribution
+
+        Vector2 offset = Vector2.FromAngle(angle) * r;
+        enemy.targetPos = enemy.GlobalPosition + offset;
 
         return 10f;
     }

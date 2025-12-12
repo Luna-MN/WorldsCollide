@@ -173,7 +173,7 @@ public partial class ClassRpc : Node2D
                 // change to be based on a stat or something
                 return (float)(f * 1.01);
             };
-            character.characterStats.addFunc(id, StatMaths.StatNum.attackSpeed, "Skill4", statCalc, 6);
+            character.stats.addFunc(id, StatMaths.StatNum.attackSpeed, "Skill4", statCalc, 6);
         }
         [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 1, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
         public void Gunslinger_Skill5(string id)

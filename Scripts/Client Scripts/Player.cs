@@ -307,13 +307,26 @@ public partial class Player : Character
         Vector2 input = inputSync.moveInput.Normalized();
         if (input != Vector2.Zero)
         {
-            Position += input.Normalized() * characterStats[StatMaths.StatNum.speed] * delta;
+            Position += input.Normalized() * stats[StatMaths.StatNum.speed] * delta;
             OnMoveToggle(true);
         }
         else
         {
             PassiveMoveTimers.ForEach(x => x.Stop());
             OnMoveToggle(false);
+        }
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        if (Multiplayer.IsServer())
+        {
+            Move((float)delta);
+        }
+        else if (inputSync != null && Multiplayer.GetUniqueId() == Convert.ToInt32(Name))
+        {
+            inputSync.mousePosition = GetGlobalMousePosition();
         }
     }
 

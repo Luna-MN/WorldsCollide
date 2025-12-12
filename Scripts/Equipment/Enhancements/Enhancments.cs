@@ -8,7 +8,7 @@ public partial class Enhancments : Node
         {
             character.OnMoveEquip += () =>
             {
-                character.characterStats.Recalculate(StatName);
+                character.stats.Recalculate(StatName);
             };
         }
 
@@ -16,28 +16,28 @@ public partial class Enhancments : Node
         {
             character.OnHitEquip += (b, p, damage) =>
             {
-                character.characterStats.Recalculate(StatName);
+                character.stats.Recalculate(StatName);
             };
         }
         private void StatsOnKill(Character character, StatMaths.StatNum StatName)
         {
             character.OnKillEquip += b =>
             {
-                character.characterStats.Recalculate(StatName);
+                character.stats.Recalculate(StatName);
             };
         }
         private void StatsOnDeath(Character character, StatMaths.StatNum StatName)
         {
             character.OnDeathEquip += b =>
             {
-                character.characterStats.Recalculate(StatName);
+                character.stats.Recalculate(StatName);
             };
         }
         private void StatsOnCrit(Character character, StatMaths.StatNum StatName)
         {
             character.OnCritEquip += b =>
             {
-                character.characterStats.Recalculate(StatName);
+                character.stats.Recalculate(StatName);
             };
         }
 
@@ -45,7 +45,7 @@ public partial class Enhancments : Node
         {
             character.OnFireEquip += () =>
             {
-                character.characterStats.Recalculate(StatName);
+                character.stats.Recalculate(StatName);
             };
         }
     #endregion

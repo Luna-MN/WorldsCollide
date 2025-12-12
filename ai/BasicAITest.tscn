@@ -11,8 +11,10 @@ radius = 874.0824
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlqit"]
 radius = 390.0
 
-[node name="AI Control" type="Node2D"]
+[node name="AI Control" type="Node2D" node_paths=PackedStringArray("PlayerSightRange", "AgroRange")]
 script = ExtResource("1_802p7")
+PlayerSightRange = NodePath("StartBT")
+AgroRange = NodePath("AgroRange")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("1_tib5x")

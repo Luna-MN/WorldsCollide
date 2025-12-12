@@ -77,7 +77,7 @@ public partial class Character : CharacterBody2D
 
     #region Player Properties
 
-    [ExportGroup("Stats")] [Export] public Stats characterStats;
+    [ExportGroup("Stats")] [Export] public Stats stats;
     [Export] public int Level;
 
     #endregion
@@ -292,14 +292,6 @@ public partial class Character : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         if(IsDummy) return;
-        if (Multiplayer.IsServer() && this is Player p)
-        {
-            Move((float)delta);
-        }
-        else if (inputSync != null && Multiplayer.GetUniqueId() == Convert.ToInt32(Name))
-        {
-            inputSync.mousePosition = GetGlobalMousePosition();
-        }
     }
     #region Inputs
     #region Equipment
@@ -352,13 +344,13 @@ public partial class Character : CharacterBody2D
     public virtual void Move(float delta)
     {
         if (IsDummy) return;
-        OnMove?.Invoke();
-
     }
     protected void OnMoveToggle(bool moving)
     {
+        if(PassiveTimers.Count == 0) return;
         if (PassiveTimers?.First().Paused ?? true && moving)
         {
+            OnMove?.Invoke();
             PassiveMoveTimers.ForEach(x => x.Start());
         }
         if(!moving)
@@ -397,9 +389,9 @@ public partial class Character : CharacterBody2D
     public virtual void TakeDamage(float damage, string attacker)
     {
         if (!Multiplayer.IsServer()) return;
-        damage *= characterStats[StatMaths.StatNum.armour];
-        characterStats[StatMaths.StatNum.currentHealth] -= damage;
-        if (characterStats[StatMaths.StatNum.currentHealth] <= 0 & !isDead)
+        damage *= stats[StatMaths.StatNum.armour];
+        stats[StatMaths.StatNum.currentHealth] -= damage;
+        if (stats[StatMaths.StatNum.currentHealth] <= 0 & !isDead)
         {
             isDead = true;
             OnDeath?.Invoke(this);
@@ -441,12 +433,12 @@ public partial class Character : CharacterBody2D
     }
     public void Heal(float heal)
     {
-        if (characterStats[StatMaths.StatNum.currentHealth] <= 0) return;
-        if (characterStats[StatMaths.StatNum.currentHealth] + heal > characterStats[StatMaths.StatNum.maxHealth])
+        if (stats[StatMaths.StatNum.currentHealth] <= 0) return;
+        if (stats[StatMaths.StatNum.currentHealth] + heal > stats[StatMaths.StatNum.maxHealth])
         {
-            heal = characterStats[StatMaths.StatNum.maxHealth] - characterStats[StatMaths.StatNum.currentHealth];
+            heal = stats[StatMaths.StatNum.maxHealth] - stats[StatMaths.StatNum.currentHealth];
         }
-        characterStats[StatMaths.StatNum.currentHealth] += heal;
+        stats[StatMaths.StatNum.currentHealth] += heal;
     }
 
 }
