@@ -113,7 +113,7 @@ script = ExtResource("4_rudow")
 equipmentFlags = 16
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
-[sub_resource type="Resource" id="Resource_u7rbx"]
+[sub_resource type="Resource" id="Resource_p28sf"]
 script = ExtResource("7_n57co")
 ConstillationSlots = null
 
@@ -251,60 +251,60 @@ metadata/_custom_type_script = "uid://q3epmkk3eovh"
 script = ExtResource("15_1v4gb")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
-[sub_resource type="Resource" id="Resource_rudow"]
+[sub_resource type="Resource" id="Resource_yvny2"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 1
 DisplayValue = 10.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_yvny2"]
+[sub_resource type="Resource" id="Resource_k6rny"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 2
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_k6rny"]
+[sub_resource type="Resource" id="Resource_o616e"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 3
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_o616e"]
+[sub_resource type="Resource" id="Resource_boh3p"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 4
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_boh3p"]
+[sub_resource type="Resource" id="Resource_n57co"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 5
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_n57co"]
+[sub_resource type="Resource" id="Resource_tmabg"]
 script = ExtResource("15_4biqu")
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_tmabg"]
+[sub_resource type="Resource" id="Resource_u2qpu"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 6
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_u2qpu"]
+[sub_resource type="Resource" id="Resource_jitwt"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 7
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_jitwt"]
+[sub_resource type="Resource" id="Resource_u7rbx"]
 script = ExtResource("15_4biqu")
 Name = 8
 DisplayValue = 300.0
@@ -313,15 +313,15 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 [sub_resource type="Resource" id="Resource_hkj60"]
 resource_local_to_scene = true
 script = ExtResource("6_k6rny")
-armour = SubResource("Resource_rudow")
-critChance = SubResource("Resource_yvny2")
-critDamage = SubResource("Resource_k6rny")
-currentHealth = SubResource("Resource_o616e")
-damageIncrease = SubResource("Resource_boh3p")
-itemFind = SubResource("Resource_tmabg")
-maxHealth = SubResource("Resource_u2qpu")
-speed = SubResource("Resource_jitwt")
-defaultFallback = SubResource("Resource_n57co")
+armour = SubResource("Resource_yvny2")
+critChance = SubResource("Resource_k6rny")
+critDamage = SubResource("Resource_o616e")
+currentHealth = SubResource("Resource_boh3p")
+damageIncrease = SubResource("Resource_n57co")
+itemFind = SubResource("Resource_u2qpu")
+maxHealth = SubResource("Resource_jitwt")
+speed = SubResource("Resource_u7rbx")
+defaultFallback = SubResource("Resource_tmabg")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_huf50"]
 animations = [{
@@ -350,7 +350,7 @@ characterStats = SubResource("Resource_hkj60")
 sprite_frames = SubResource("SpriteFrames_huf50")
 
 [node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0.49999976, 4.5000005)
+position = Vector2(0, 0)
 
 [node name="Area2D" type="Area2D" parent="." index="6"]
 

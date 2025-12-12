@@ -300,6 +300,23 @@ public partial class Player : Character
         }
     }
 
+    public override void Move(float delta)
+    {
+        base.Move(delta);
+        // Godot: up is negative Y
+        Vector2 input = inputSync.moveInput.Normalized();
+        if (input != Vector2.Zero)
+        {
+            Position += input.Normalized() * characterStats[StatMaths.StatNum.speed] * delta;
+            OnMoveToggle(true);
+        }
+        else
+        {
+            PassiveMoveTimers.ForEach(x => x.Stop());
+            OnMoveToggle(false);
+        }
+    }
+
     protected virtual void SetUI(Button button)
     {
         button.Modulate = new Color(0, 0, 1);

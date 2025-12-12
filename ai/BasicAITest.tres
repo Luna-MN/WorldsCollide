@@ -30,7 +30,7 @@ resource_name = "."
 saved_value = NodePath(".")
 
 [sub_resource type="BTCallMethod" id="BTCallMethod_770u8"]
-custom_name = "CheckPlatersInRange - Bool: PlayerInRange_var"
+custom_name = "CheckPlayersInRange - Bool: PlayerInRange_var"
 node = SubResource("BBNode_fr7y0")
 method = &"CheckPlayersInRange"
 result_var = &"PlayerInRange_var"
@@ -62,7 +62,7 @@ method = &"CheckAgro"
 result_var = &"PlayerAgro_var"
 
 [sub_resource type="BBVariant" id="BBVariant_vesqq"]
-resource_name = "<null>"
+resource_name = "false"
 saved_value = false
 type = 1
 
@@ -89,6 +89,7 @@ custom_name = "Random Movement If player not agro"
 children = [SubResource("BTSubtree_vesqq"), SubResource("BTSubtree_hbr04")]
 
 [sub_resource type="BTSequence" id="BTSequence_hbr04"]
+custom_name = "Non Agro moves"
 children = [SubResource("BTCallMethod_mkpdr"), SubResource("BTCheckVar_lw8pa"), SubResource("BTProbabilitySelector_770u8")]
 
 [sub_resource type="BTComment" id="BTComment_770u8"]
