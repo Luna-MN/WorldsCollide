@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=43 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="Script" uid="uid://c1aulq7oydgwi" path="res://Scripts/Client Scripts/Player.cs" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://be7qr07d8kcvf" path="res://Resources/Equipment/SimpleHelm.tres" id="9_ukyrk"]
 [ext_resource type="Resource" uid="uid://2kchbqsq2oad" path="res://Resources/Equipment/BowTest.tres" id="10_7dp3o"]
 [ext_resource type="Texture2D" uid="uid://cjpmfq8vw5esg" path="res://Pirates/Class1/ComboDudeV2.png" id="12_ukyrk"]
-[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="15_l6n3p"]
+[ext_resource type="Resource" uid="uid://d1qg7816o6cbp" path="res://Resources/Default Stats/Default Character Stats.tres" id="18_l6n3p"]
 
 [sub_resource type="Resource" id="Resource_p7sjl"]
 resource_local_to_scene = true
@@ -113,7 +113,7 @@ script = ExtResource("4_8erm5")
 equipmentFlags = 16
 metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
-[sub_resource type="Resource" id="Resource_u7rbx"]
+[sub_resource type="Resource" id="Resource_wpjfl"]
 script = ExtResource("7_bi64h")
 ConstillationSlots = null
 
@@ -149,78 +149,6 @@ metadata/_custom_type_script = "uid://b25igrq5gmts2"
 [sub_resource type="Resource" id="Resource_ukyrk"]
 script = ExtResource("2_fkybt")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_wpjfl"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 1
-DisplayValue = 10.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_bi64h"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 2
-DisplayValue = 0.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_2ijsl"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 3
-DisplayValue = 1.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_p1odr"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 4
-DisplayValue = 100.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_0gysh"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 5
-DisplayValue = 1.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_vfarp"]
-script = ExtResource("15_l6n3p")
-DisplayValue = 10.0
-
-[sub_resource type="Resource" id="Resource_y6uwr"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 6
-DisplayValue = 0.1
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_83xs0"]
-resource_local_to_scene = true
-script = ExtResource("15_l6n3p")
-Name = 7
-DisplayValue = 100.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_ypfnu"]
-script = ExtResource("15_l6n3p")
-Name = 8
-DisplayValue = 300.0
-metadata/_custom_type_script = "uid://nh64xjbomd32"
-
-[sub_resource type="Resource" id="Resource_xuaoq"]
-resource_local_to_scene = true
-script = ExtResource("6_8erm5")
-armour = SubResource("Resource_wpjfl")
-critChance = SubResource("Resource_bi64h")
-critDamage = SubResource("Resource_2ijsl")
-currentHealth = SubResource("Resource_p1odr")
-damageIncrease = SubResource("Resource_0gysh")
-itemFind = SubResource("Resource_y6uwr")
-maxHealth = SubResource("Resource_83xs0")
-speed = SubResource("Resource_ypfnu")
-defaultFallback = SubResource("Resource_vfarp")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_677pu"]
 animations = [{
@@ -268,10 +196,9 @@ GunPos = Vector2(-9, 9)
 OffHandPos = Vector2(20, 9)
 skills = Array[Object]([null, null, null, null, null, null])
 UltSkill = SubResource("Resource_ukyrk")
-characterStats = SubResource("Resource_xuaoq")
+stats = ExtResource("18_l6n3p")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_677pu")
 
 [node name="InputSync" type="MultiplayerSynchronizer" parent="." index="2"]
