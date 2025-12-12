@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=25 format=3 uid="uid://dkac84hk3df7m"]
+[gd_resource type="BehaviorTree" load_steps=32 format=3 uid="uid://dkac84hk3df7m"]
 
 [ext_resource type="BehaviorTree" uid="uid://1jmgxtdc78wt" path="res://ai/Template Behaviors/Roam.tres" id="1_fr7y0"]
 [ext_resource type="BehaviorTree" uid="uid://bnxffngabpoio" path="res://ai/Template Behaviors/Idle.tres" id="2_770u8"]
@@ -24,6 +24,35 @@ var/PlayerAgro_var/type = 1
 var/PlayerAgro_var/value = false
 var/PlayerAgro_var/hint = 0
 var/PlayerAgro_var/hint_string = ""
+var/IsServer_var/name = &"IsServer_var"
+var/IsServer_var/type = 1
+var/IsServer_var/value = false
+var/IsServer_var/hint = 0
+var/IsServer_var/hint_string = ""
+
+[sub_resource type="BTWait" id="BTWait_fr7y0"]
+duration = 0.5
+
+[sub_resource type="BBNode" id="BBNode_mkpdr"]
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_vesqq"]
+node = SubResource("BBNode_mkpdr")
+method = &"IsServer"
+result_var = &"IsServer_var"
+
+[sub_resource type="BBVariant" id="BBVariant_fr7y0"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_770u8"]
+variable = &"IsServer_var"
+value = SubResource("BBVariant_fr7y0")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_lw8pa"]
+children = [SubResource("BTCallMethod_vesqq"), SubResource("BTCheckVar_770u8")]
 
 [sub_resource type="BBNode" id="BBNode_fr7y0"]
 resource_name = "."
@@ -112,6 +141,9 @@ children = [SubResource("BTAlwaysFail_fr7y0"), SubResource("BTSequence_hbr04"), 
 children = [SubResource("BTDynamicSelector_hbr04")]
 forever = true
 
+[sub_resource type="BTSequence" id="BTSequence_g8bpm"]
+children = [SubResource("BTWait_fr7y0"), SubResource("BTDynamicSequence_lw8pa"), SubResource("BTRepeat_41nhw")]
+
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_dmoef")
-root_task = SubResource("BTRepeat_41nhw")
+root_task = SubResource("BTSequence_g8bpm")

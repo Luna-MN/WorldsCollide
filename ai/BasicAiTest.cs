@@ -26,9 +26,12 @@ public partial class BasicAiTest : Node2D
 
     }
 
+    public bool IsServer()
+    {
+        return Multiplayer.IsServer();    
+    }
     public virtual float Roam()
     {
-
         // Uniform random point within a ring [RoamMinRadius, RoamRadius]
         float min = Mathf.Max(0f, RoamMinRadius);
         float max = Mathf.Max(min, RoamRadius);
@@ -39,8 +42,10 @@ public partial class BasicAiTest : Node2D
 
         Vector2 offset = Vector2.FromAngle(angle) * r;
         enemy.targetPos = enemy.GlobalPosition + offset;
-
-        return 10f;
+        
+        float distance = offset.Length();
+        GD.Print(offset.Length());
+        return distance / enemy.stats[StatMaths.StatNum.speed];
     }
 
     public virtual float Idle()

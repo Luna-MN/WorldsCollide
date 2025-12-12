@@ -198,7 +198,6 @@ public partial class Player : Character
         else if (inputSync.moveInput.X > 0)
         {
             Sprite.FlipH = false;
-
         }
         if (WepSprite.SpriteFrames != null && PrimaryEquipment.Count > 0)
         {
