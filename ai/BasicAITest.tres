@@ -110,7 +110,7 @@ value = SubResource("BBVariant_vesqq")
 custom_name = "Roam"
 blackboard_plan = SubResource("BlackboardPlan_mkpdr")
 subtree = ExtResource("1_fr7y0")
-metadata/_weight_ = 10.0
+metadata/_weight_ = 3.0
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_lw8pa"]
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2podqpoej8hm"]
+[gd_scene load_steps=7 format=3 uid="uid://d2podqpoej8hm"]
 
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
 [ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="3_677pu"]
-[ext_resource type="Resource" uid="uid://d1qg7816o6cbp" path="res://Resources/Default Stats/Default Character Stats.tres" id="3_v7dgu"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]
 properties/0/path = NodePath(".:position")
@@ -12,6 +11,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("GunPos:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(30.93923, 33.149174)
@@ -27,7 +29,6 @@ OffHandSprite = NodePath("OffHandPos")
 Sprite = NodePath("AnimatedSprite2D")
 ShootPosition = NodePath("GunPos/ShootPos")
 GunPos = Vector2(-4, 9)
-characterStats = ExtResource("3_v7dgu")
 
 [node name="CharacterSync" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4flbx")

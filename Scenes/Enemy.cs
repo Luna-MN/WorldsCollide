@@ -57,9 +57,14 @@ public partial class Enemy : Character
         
         MoveAndSlide();
 
-        // Flip based on actual motion
-        if (Mathf.Abs(Velocity.X) > 0.01f)
-            Sprite.FlipH = Velocity.X < 0f;
+        if (Velocity.X > 0)
+        {
+            Sprite.FlipH = false;
+        }
+        else if (Velocity.X < 0)
+        {
+            Sprite.FlipH = true;
+        }
     }
 
     public override void _PhysicsProcess(double delta)
