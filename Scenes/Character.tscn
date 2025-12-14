@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2podqpoej8hm"]
+[gd_scene load_steps=9 format=3 uid="uid://d2podqpoej8hm"]
 
 [ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="1_0y7nr"]
 [ext_resource type="PackedScene" uid="uid://cv11ebq8y00to" path="res://Scenes/floating_text.tscn" id="2_677pu"]
 [ext_resource type="SpriteFrames" uid="uid://yhuibdr1jc5o" path="res://Pirates/BasicAnimatedSprite.tres" id="3_677pu"]
 [ext_resource type="Script" uid="uid://cu5sgw8403mis" path="res://Scenes/CharacterSync.cs" id="3_v7dgu"]
+[ext_resource type="PackedScene" uid="uid://d4c8le0q6rbg8" path="res://Scenes/UI/health_bar.tscn" id="5_vdqda"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]
 properties/0/path = NodePath(".:position")
@@ -27,7 +28,7 @@ size = Vector2(30.93923, 33.149174)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vdqda"]
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync", "WepSprite", "OffHandSprite", "Sprite", "ShootPosition")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("PositionSync", "WepSprite", "OffHandSprite", "Sprite", "ShootPosition", "healthBar")]
 script = ExtResource("1_0y7nr")
 FloatingText = ExtResource("2_677pu")
 PositionSync = NodePath("CharacterSync")
@@ -36,6 +37,7 @@ OffHandSprite = NodePath("OffHandPos")
 Sprite = NodePath("AnimatedSprite2D")
 ShootPosition = NodePath("GunPos/ShootPos")
 GunPos = Vector2(-4, 9)
+healthBar = NodePath("HealthBar")
 
 [node name="CharacterSync" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4flbx")
@@ -60,3 +62,9 @@ sprite_frames = SubResource("SpriteFrames_vdqda")
 sprite_frames = SubResource("SpriteFrames_vdqda")
 
 [node name="ShootPos" type="Node2D" parent="OffHandPos"]
+
+[node name="HealthBar" parent="." instance=ExtResource("5_vdqda")]
+offset_left = -33.0
+offset_top = -44.0
+offset_right = 33.0
+offset_bottom = -32.0

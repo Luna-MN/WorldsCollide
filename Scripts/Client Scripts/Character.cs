@@ -30,10 +30,10 @@ public partial class Character : CharacterBody2D
     [Export] public Inventory inventory;
     [Export] public Vector2 GunPos;
     [Export] public Vector2 OffHandPos;
-
+    [Export]
+    private TextureProgressBar healthBar;
     [ExportSubgroup("Loot Drop")] [Export(PropertyHint.GroupEnable)]
     public bool DropLootOnDeath;
-
     [Export] public int Prestige = 1;
     [Export(PropertyHint.ResourceType)] public BaseEquipment[] DroppableEquipment;
     public List<string> PlayerIds = new();
@@ -292,6 +292,19 @@ public partial class Character : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
     }
+
+    public override void _Process(double delta)
+    {
+        if (Multiplayer.IsServer())
+        {
+            PositionSync.currentHealth = stats[StatMaths.StatNum.currentHealth];
+            PositionSync.maxHealth = stats[StatMaths.StatNum.maxHealth];
+        }
+
+        healthBar.MaxValue = PositionSync.maxHealth;
+        healthBar.Value = PositionSync.currentHealth;
+    }
+
     #region Inputs
     #region Equipment
     public virtual void LeftClick(PrimaryWeapon equip, Vector2 direction)
