@@ -13,7 +13,7 @@ public partial class Character : CharacterBody2D
     public string ID = "-1";
     [Export] public PackedScene FloatingText;
     [Export] public InputSync inputSync;
-    [Export] public MultiplayerSynchronizer PositionSync;
+    [Export] public CharacterSync PositionSync;
 
     [Export]
     // mostly for RPC this will be used to call the RPC of the skills on the server (CharacterName)_(SkillName) is the function that will be called
@@ -291,7 +291,6 @@ public partial class Character : CharacterBody2D
     #endregion
     public override void _PhysicsProcess(double delta)
     {
-        if(IsDummy) return;
     }
     #region Inputs
     #region Equipment
@@ -388,10 +387,9 @@ public partial class Character : CharacterBody2D
     }
     public virtual void TakeDamage(float damage, string attacker)
     {
-        if (!Multiplayer.IsServer()) return;
         damage *= stats[StatMaths.StatNum.armour];
         stats[StatMaths.StatNum.currentHealth] -= damage;
-        if (stats[StatMaths.StatNum.currentHealth] <= 0 & !isDead)
+        if (stats[StatMaths.StatNum.currentHealth] <= 0 & !isDead && Multiplayer.IsServer())
         {
             isDead = true;
             OnDeath?.Invoke(this);
@@ -407,7 +405,7 @@ public partial class Character : CharacterBody2D
                 QueueFree();
             }
         }
-        if (DropLootOnDeath)
+        if (DropLootOnDeath && Multiplayer.IsServer())
         {
             AddPlayersToDropLoot(attacker);
         }

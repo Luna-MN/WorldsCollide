@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4c8le0q6rbg8"]
+
+[ext_resource type="Texture2D" uid="uid://cilsc08fct3b0" path="res://Pirates/UI/HealthBarBottom.png" id="1_1s5oa"]
+[ext_resource type="Texture2D" uid="uid://ddgje7bhbqy2c" path="res://Pirates/UI/HealthBarTop.png" id="2_mfw7x"]
+[ext_resource type="Texture2D" uid="uid://cm8h6cil7jld0" path="res://Pirates/UI/HealthBarProgress.png" id="3_ah7g7"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+offset_left = -82.0
+offset_top = -7.0
+offset_right = 82.0
+offset_bottom = 8.0
+value = 39.0
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+texture_under = ExtResource("1_1s5oa")
+texture_over = ExtResource("2_mfw7x")
+texture_progress = ExtResource("3_ah7g7")

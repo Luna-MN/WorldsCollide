@@ -14,7 +14,6 @@ public partial class TestScene : Node2D
 		}
 		catch (Exception e)
 		{
-			GD.PushWarning($"Failed to create server: {e.Message}");
 			Server = new ServerConnect();
 			GD.Print("I am client");
 		}

@@ -15,6 +15,8 @@ public partial class BasicAiTest : Node2D
     [Export] public float RoamRadius { get; set; } = 300f; 
     [Export] public float RoamMinRadius { get; set; } = 0f;
 
+    [Export] public bool HasAttacks;
+    [Export] public bool HasHealing;
     public override void _Ready()
     {
         PlayerSightRange.BodyEntered += OnPlayerSightBodyEntered;
@@ -26,74 +28,114 @@ public partial class BasicAiTest : Node2D
 
     }
 
-    public bool IsServer()
-    {
-        return Multiplayer.IsServer();    
-    }
-    public virtual float Roam()
-    {
-        // Uniform random point within a ring [RoamMinRadius, RoamRadius]
-        float min = Mathf.Max(0f, RoamMinRadius);
-        float max = Mathf.Max(min, RoamRadius);
+    #region Checks
+        public bool IsServer()
+        {
+            return Multiplayer.IsServer();    
+        }
+        public bool CheckPlayersInRange()
+        {
+            return playersInSightRange.Count > 0;
+        }
+        public bool CheckAgro()
+        {
+            return playersInAgro.Count > 0;
+        }
+        /// <summary>
+        /// this is how we dictate what the enemy is doing if it is agro'd
+        /// </summary>
+        /// <returns>
+        /// <param name="WhatAreWeDoing_var">1 = Healing/Defence,
+        /// 2 = Attacks, anything else = auto attack</param>
+        /// </returns>
+        public virtual float WhatAreWeDoing()
+        {
+            // create a dictionary, EnemySkillClass vs Probability, the class contains a function that recalculates the probability and the function to do the thing
+            if(!HasAttacks && !HasHealing) return 0f;
+            
+            var r = rng.RandiRange(1, 100);
+            
+            if(enemy.stats[StatMaths.StatNum.maxHealth] / enemy.stats[StatMaths.StatNum.currentHealth] < 0.5f && HasHealing)
+            {
+                if(r <= 50) return 1f;
+            }
 
-        float angle = rng.RandfRange(0f, Mathf.Tau);
-        float u = rng.Randf();
-        float r = Mathf.Sqrt(Mathf.Lerp(min * min, max * max, u)); // uniform area distribution
+            if (r <= 50 && HasAttacks) return 2f;
+            
+            return 0f;
+        }
+    #endregion
+    #region Non-Agro Actions
+        public virtual float Roam()
+        {
+            // Uniform random point within a ring [RoamMinRadius, RoamRadius]
+            float min = Mathf.Max(0f, RoamMinRadius);
+            float max = Mathf.Max(min, RoamRadius);
 
-        Vector2 offset = Vector2.FromAngle(angle) * r;
-        enemy.targetPos = enemy.GlobalPosition + offset;
+            float angle = rng.RandfRange(0f, Mathf.Tau);
+            float u = rng.Randf();
+            float r = Mathf.Sqrt(Mathf.Lerp(min * min, max * max, u)); // uniform area distribution
+
+            Vector2 offset = Vector2.FromAngle(angle) * r;
+            enemy.targetPos = enemy.GlobalPosition + offset;
+            
+            float distance = offset.Length();
+            GD.Print(offset.Length());
+            return distance / enemy.stats[StatMaths.StatNum.speed];
+        }
         
-        float distance = offset.Length();
-        GD.Print(offset.Length());
-        return distance / enemy.stats[StatMaths.StatNum.speed];
-    }
-
-    public virtual float Idle()
-    {
-        return 5f;
-    }
-
-    public bool CheckPlayersInRange()
-    {
-        return playersInSightRange.Count > 0;
-    }
-    public bool CheckAgro()
-    {
-        return playersInAgro.Count > 0;
-    }
-    private void OnPlayerSightBodyEntered(Node body)
-    {
-        if ((body is not Player) && (body is not Minion)) return;
-        playersInSightRange.Add((Character)body);
-    }
-    private void OnPlayerSightBodyExited(Node body)
-    {
-        if ((body is not Player) && (body is not Minion)) return;
-        if (playersInSightRange.Contains((Character)body))
+        public virtual float Idle()
         {
-            playersInSightRange.Remove((Character)body);
+            return 5f;
         }
-    }
-    private void OnAgroBodyEntered(Node body)
-    {
-        if (body is Player p)
+    #endregion
+    #region AutoAttack
+        public float AutoAttack()
         {
-            playersInAgro.Add(p);
+            return 30f;
         }
-        else if (body is Minion m)
+    #endregion
+    #region Attacking
+    
+    #endregion
+    #region Healing
+    
+    #endregion
+    #region Area Handlers
+        private void OnPlayerSightBodyEntered(Node body)
         {
-            playersInAgro.Add(m.summoner);
+            if ((body is not Player) && (body is not Minion)) return;
+            playersInSightRange.Add((Character)body);
         }
-    }
-    private void OnAgroBodyExited(Node body)
-    {
-        if (body is Player p && playersInAgro.Contains(p))
+        private void OnPlayerSightBodyExited(Node body)
         {
-            playersInAgro.Remove(p);
+            if ((body is not Player) && (body is not Minion)) return;
+            if (playersInSightRange.Contains((Character)body))
+            {
+                playersInSightRange.Remove((Character)body);
+            }
         }
-        else if (body is Minion m && playersInAgro.Contains(m.summoner))
+        private void OnAgroBodyEntered(Node body)
         {
-            playersInAgro.Remove(m.summoner);
+            if (body is Player p)
+            {
+                playersInAgro.Add(p);
+            }
+            else if (body is Minion m)
+            {
+                playersInAgro.Add(m.summoner);
+            }
         }
-    }
+        private void OnAgroBodyExited(Node body)
+        {
+            if (body is Player p && playersInAgro.Contains(p))
+            {
+                playersInAgro.Remove(p);
+            }
+            else if (body is Minion m && playersInAgro.Contains(m.summoner))
+            {
+                playersInAgro.Remove(m.summoner);
+            }
+        }
+    #endregion
 }

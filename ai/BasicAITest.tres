@@ -1,7 +1,8 @@
-[gd_resource type="BehaviorTree" load_steps=32 format=3 uid="uid://dkac84hk3df7m"]
+[gd_resource type="BehaviorTree" load_steps=36 format=3 uid="uid://dkac84hk3df7m"]
 
 [ext_resource type="BehaviorTree" uid="uid://1jmgxtdc78wt" path="res://ai/Template Behaviors/Roam.tres" id="1_fr7y0"]
 [ext_resource type="BehaviorTree" uid="uid://bnxffngabpoio" path="res://ai/Template Behaviors/Idle.tres" id="2_770u8"]
+[ext_resource type="Script" uid="uid://c0lwcjpga1mjd" path="res://ai/tasks/Utility_Custom/AwaitVarTime.cs" id="3_770u8"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_dmoef"]
 var/Await_var/name = &"Await_var"
@@ -29,6 +30,11 @@ var/IsServer_var/type = 1
 var/IsServer_var/value = false
 var/IsServer_var/hint = 0
 var/IsServer_var/hint_string = ""
+var/WhatAreWeDoing_var/name = &"WhatAreWeDoing_var"
+var/WhatAreWeDoing_var/type = 3
+var/WhatAreWeDoing_var/value = 0.0
+var/WhatAreWeDoing_var/hint = 0
+var/WhatAreWeDoing_var/hint_string = ""
 
 [sub_resource type="BTWait" id="BTWait_fr7y0"]
 duration = 0.5
@@ -127,15 +133,29 @@ children = [SubResource("BTSubtree_vesqq"), SubResource("BTSubtree_hbr04")]
 custom_name = "Non Agro moves"
 children = [SubResource("BTCallMethod_mkpdr"), SubResource("BTCheckVar_lw8pa"), SubResource("BTProbabilitySelector_770u8")]
 
-[sub_resource type="BTComment" id="BTComment_770u8"]
-custom_name = "This is where attacks will be run"
+[sub_resource type="BBNode" id="BBNode_vesqq"]
+resource_name = "."
+saved_value = NodePath(".")
 
-[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_fr7y0"]
-custom_name = "Attacks"
-children = [SubResource("BTComment_770u8")]
+[sub_resource type="BTCallMethod" id="BTCallMethod_lw8pa"]
+node = SubResource("BBNode_vesqq")
+method = &"WhatAreWeDoing"
+result_var = &"WhatAreWeDoing_var"
+
+[sub_resource type="BBFloat" id="BBFloat_mkpdr"]
+resource_name = "$WhatAreWeDoing_var"
+value_source = 1
+variable = &"WhatAreWeDoing_var"
+
+[sub_resource type="BTAction" id="BTAction_vesqq"]
+script = ExtResource("3_770u8")
+AwaitVar = SubResource("BBFloat_mkpdr")
+
+[sub_resource type="BTSequence" id="BTSequence_yu8hw"]
+children = [SubResource("BTCallMethod_lw8pa"), SubResource("BTAction_vesqq")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hbr04"]
-children = [SubResource("BTAlwaysFail_fr7y0"), SubResource("BTSequence_hbr04"), SubResource("BTProbabilitySelector_fr7y0")]
+children = [SubResource("BTAlwaysFail_fr7y0"), SubResource("BTSequence_hbr04"), SubResource("BTSequence_yu8hw")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_41nhw"]
 children = [SubResource("BTDynamicSelector_hbr04")]

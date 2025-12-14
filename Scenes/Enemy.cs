@@ -7,6 +7,8 @@ public partial class Enemy : Character
     private bool _isMoving;
     private Timer spawnDebounceTimer;
     private bool spawned = false;
+    [Export]
+    private TextureProgressBar healthBar;
     public override void _Ready()
     {
         base._Ready();
@@ -70,6 +72,14 @@ public partial class Enemy : Character
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        if (Multiplayer.IsServer())
+        {
+            PositionSync.currentHealth = stats[StatMaths.StatNum.currentHealth];
+            PositionSync.maxHealth = stats[StatMaths.StatNum.maxHealth];
+        }
+
+        healthBar.MaxValue = PositionSync.maxHealth;
+        healthBar.Value = PositionSync.currentHealth;
         if (Multiplayer.IsServer())
         {
             Move((float)delta);
