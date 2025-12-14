@@ -31,7 +31,7 @@ public partial class Character : CharacterBody2D
     [Export] public Vector2 GunPos;
     [Export] public Vector2 OffHandPos;
     [Export]
-    private TextureProgressBar healthBar;
+    public TextureProgressBar healthBar;
     [ExportSubgroup("Loot Drop")] [Export(PropertyHint.GroupEnable)]
     public bool DropLootOnDeath;
     [Export] public int Prestige = 1;
@@ -301,6 +301,14 @@ public partial class Character : CharacterBody2D
             PositionSync.maxHealth = stats[StatMaths.StatNum.maxHealth];
         }
 
+        if (PositionSync.currentHealth == PositionSync.maxHealth)
+        {
+            healthBar.Visible = false;
+        }
+        else
+        {
+            healthBar.Visible = true;
+        }
         healthBar.MaxValue = PositionSync.maxHealth;
         healthBar.Value = PositionSync.currentHealth;
     }

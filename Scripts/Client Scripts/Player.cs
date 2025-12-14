@@ -26,7 +26,7 @@ public partial class Player : Character
             TB4.SetIcon();
             TB5 = GetNode<SkillOnScreen>("/root/Node2D2/Camera2D/CanvasLayer/Control/HBoxContainer/5");
             TB5.SetIcon(true);
-
+            healthBar.Visible = false;
         }
         base._Ready();
     }
