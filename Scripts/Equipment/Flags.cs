@@ -32,4 +32,14 @@ public partial class Flags : Node
         DynamicStatBoost = 1L << 7,
         OnCrit           = 1L << 8,
     }
+
+    [Flags]
+    public enum Alleigence : long
+    {
+        Player = 1L << 0,
+        Minion = 1L << 1,
+        AllEnemies = 1L << 2,
+        Fantasy = 1L << 3,
+        
+    }
 }

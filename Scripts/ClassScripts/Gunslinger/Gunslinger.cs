@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Gunslinger : Player
+public partial class Gunslinger : Character
 {
     [Export] public Area2D ShootArea;
     public List<Character> charactersIn = [];

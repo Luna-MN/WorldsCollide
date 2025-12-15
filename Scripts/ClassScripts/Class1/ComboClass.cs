@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class ComboClass : Player
+public partial class ComboClass : Character
 {
     public int currentCombo = 0;
     public Timer comboTimer = new Timer()

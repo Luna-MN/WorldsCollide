@@ -13,4 +13,5 @@ public partial class UiController : Control
     public SkillSelection SkillSelection;
     [Export]
     public SkillOnScreen[] SkillsOnScreen;
+    public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
 }

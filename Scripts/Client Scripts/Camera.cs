@@ -3,7 +3,7 @@ using System;
 
 public partial class Camera : Camera2D
 {
-    private Player player;
+    private Character player;
     private bool found;
     [Export]
     public bool followPlayer = true;
@@ -32,15 +32,15 @@ public partial class Camera : Camera2D
             else
             {
                 var playerPos = player.GlobalPosition;
-                var dir = (player.inputSync.mousePosition - player.GlobalPosition).Normalized();
+                var dir = (player.TargetPosition - player.GlobalPosition).Normalized();
                 var target = Vector2.Zero;
-                if (playerPos.DistanceTo(player.inputSync.mousePosition) > 100)
+                if (playerPos.DistanceTo(player.TargetPosition) > 100)
                 {
                     target = playerPos + dir *  50;
                 }
                 else
                 {
-                    target = (playerPos + player.inputSync.mousePosition) /2;
+                    target = (playerPos + player.TargetPosition) /2;
                 }
 
             
@@ -60,13 +60,13 @@ public partial class Camera : Camera2D
         var spawner = sceneRoot.GetNodeOrNull<Node>("MultiplayerSpawner");
         if (spawner != null)
         {
-            player = spawner.GetNodeOrNull<Player>(Multiplayer.GetUniqueId().ToString());
+            player = spawner.GetNodeOrNull<Character>(Multiplayer.GetUniqueId().ToString());
             if (player != null)
                 return;
         }
 
         // 2) Fallback: deep search anywhere under the scene root
-        player = sceneRoot.FindChild(Multiplayer.GetUniqueId().ToString(), recursive: true, owned: false) as Player;
+        player = sceneRoot.FindChild(Multiplayer.GetUniqueId().ToString(), recursive: true, owned: false) as Character;
     }
 
 }

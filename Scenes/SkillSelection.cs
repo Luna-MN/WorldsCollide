@@ -83,10 +83,10 @@ public partial class SkillSelectionLEGACY : Panel
                 return;
             }
             GameManager.player.SetSkills();
-            GameManager.player.TB1.SetIcon();
-            GameManager.player.TB2.SetIcon();
-            GameManager.player.TB3.SetIcon();
-            GameManager.player.TB4.SetIcon();
+            GameManager.UiController.TB1.SetIcon();
+            GameManager.UiController.TB2.SetIcon();
+            GameManager.UiController.TB3.SetIcon();
+            GameManager.UiController.TB4.SetIcon();
             // ChangeSkillsButton.SkillPanel = null;
             QueueFree();
         };

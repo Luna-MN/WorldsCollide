@@ -5,12 +5,13 @@ using System.Linq;
 using System.Reflection;
 
 [GlobalClass]
-public partial class Player : Character
+public partial class Playera : Character
 {
     #region Input Handling
     public SkillOnScreen TB1, TB2, TB3, TB4, TB5;
     public bool LeftEvent;
     public bool RightEvent;
+    [Export] public InputSync inputSync;
     public override void _Ready()
     {
         if (GetMultiplayerAuthority() == Multiplayer.GetUniqueId())

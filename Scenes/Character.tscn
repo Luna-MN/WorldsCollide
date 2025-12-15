@@ -65,6 +65,6 @@ sprite_frames = SubResource("SpriteFrames_vdqda")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_vdqda")]
 offset_left = -33.0
-offset_top = -44.0
+offset_top = -41.0
 offset_right = 33.0
-offset_bottom = -32.0
+offset_bottom = -29.0

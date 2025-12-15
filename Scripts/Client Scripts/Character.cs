@@ -12,16 +12,15 @@ public partial class Character : CharacterBody2D
     public bool isDead = false;
     public string ID = "-1";
     [Export] public PackedScene FloatingText;
-    [Export] public InputSync inputSync;
     [Export] public CharacterSync PositionSync;
 
     [Export]
     // mostly for RPC this will be used to call the RPC of the skills on the server (CharacterName)_(SkillName) is the function that will be called
     protected string CharacterName = "Class1";
 
-    [Export] protected AnimatedSprite2D WepSprite;
-    [Export] protected AnimatedSprite2D OffHandSprite;
-    [Export] protected AnimatedSprite2D Sprite;
+    [Export] public  AnimatedSprite2D WepSprite;
+    [Export] public  AnimatedSprite2D OffHandSprite;
+    [Export] public AnimatedSprite2D Sprite;
     [Export] public Node2D ShootPosition;
     [Export] public Node2D OffHandShootPosition;
     public List<PrimaryWeapon> PrimaryEquipment = new();
@@ -30,6 +29,7 @@ public partial class Character : CharacterBody2D
     [Export] public Inventory inventory;
     [Export] public Vector2 GunPos;
     [Export] public Vector2 OffHandPos;
+    [Export] public Flags.Alleigence alleigence;
     [Export]
     public TextureProgressBar healthBar;
     [ExportSubgroup("Loot Drop")] [Export(PropertyHint.GroupEnable)]
@@ -39,6 +39,7 @@ public partial class Character : CharacterBody2D
     public List<string> PlayerIds = new();
     [Export] public PackedScene EquipmentSpawner;
     public FloatingText RunningTotal;
+    public Vector2 TargetPosition;
 
     [ExportGroup("Skills")] [Export(PropertyHint.ResourceType)]
     public Skill[] skills;
@@ -70,7 +71,7 @@ public partial class Character : CharacterBody2D
     public event Action OnFire;
     public event Action OnFireSkill;
     public event Action OnFireEquip;
-    protected List<Timer> PassiveMoveTimers = new List<Timer>();
+    public List<Timer> PassiveMoveTimers = new List<Timer>();
     protected List<Timer> PassiveTimers = new List<Timer>();
 
     #endregion
@@ -106,7 +107,7 @@ public partial class Character : CharacterBody2D
 
         OnFire += () => OnFireSkill?.Invoke();
         OnFire += () => OnFireEquip?.Invoke();
-        if (this is Player p)
+        if (alleigence.HasFlag(Flags.Alleigence.Player))
         {
             SetMultiplayerAuthority(Convert.ToInt32(Name));
         }
@@ -319,20 +320,20 @@ public partial class Character : CharacterBody2D
     {
         equip.Left_Click(ID, direction);
     }
-    protected virtual void RightClick(PrimaryWeapon equip, Vector2 direction)
+    public virtual void RightClick(PrimaryWeapon equip, Vector2 direction)
     {
         equip.Right_Click(ID, direction);
     }
     #endregion
     #region skill stuff
-    protected virtual void Skill1()
+    public virtual void Skill1()
     {
         var skill = skills[selectedSkillIndexes[0]];
         GD.Print(CharacterName + skill.RpcName);
         var rpcNode = ResolveRpcNode(skill.RpcCallLocation);
         rpcNode.RpcId(1, CharacterName + skill.RpcName, Convert.ToInt32(Name));
     }
-    protected virtual void Skill2()
+    public virtual void Skill2()
     {
         var skill = skills[selectedSkillIndexes[1]];
         GD.Print(CharacterName + skill.RpcName);
@@ -340,21 +341,21 @@ public partial class Character : CharacterBody2D
         rpcNode.RpcId(1, CharacterName + skill.RpcName, Convert.ToInt32(Name));
     }
 
-    protected virtual void Skill3()
+    public virtual void Skill3()
     {
         var skill = skills[selectedSkillIndexes[2]];
         GD.Print(CharacterName + skill.RpcName);
         var rpcNode = ResolveRpcNode(skill.RpcCallLocation);
         rpcNode.RpcId(1, CharacterName + skill.RpcName, Convert.ToInt32(Name));
     }
-    protected virtual void Skill4()
+    public virtual void Skill4()
     {
         var skill = skills[selectedSkillIndexes[3]];
         GD.Print(CharacterName + skill.RpcName);
         var rpcNode = ResolveRpcNode(skill.RpcCallLocation);
         rpcNode.RpcId(1, CharacterName + skill.RpcName, Convert.ToInt32(Name));
     }
-    protected virtual void Skill5()
+    public virtual void Skill5()
     {
         // wacky ult stuff not touching rn
         GameManager.ClassRpcs.RpcId(1, CharacterName + "_Skill5", Convert.ToInt32(Name));
@@ -365,7 +366,7 @@ public partial class Character : CharacterBody2D
     {
         if (IsDummy) return;
     }
-    protected void OnMoveToggle(bool moving)
+    public void OnMoveToggle(bool moving)
     {
         if(PassiveTimers.Count == 0) return;
         if (PassiveTimers?.First().Paused ?? true && moving)
@@ -415,9 +416,9 @@ public partial class Character : CharacterBody2D
             isDead = true;
             OnDeath?.Invoke(this);
             ServerManager.NodeDictionary[attacker].CallOnKill(this);
-            if (this is Player p)
+            if (alleigence.HasFlag(Flags.Alleigence.Player))
             {
-                ServerManager.ServerRpcs.RpcId(1, "KillPlayer", p.Name);
+                ServerManager.ServerRpcs.RpcId(1, "KillPlayer", Name);
             }
             ServerManager.NodeDictionary.Remove(ID);
             if (IsMultiplayerAuthority())

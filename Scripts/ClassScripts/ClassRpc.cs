@@ -16,7 +16,7 @@ public partial class ClassRpc : Node2D
         public void Class1_ShurikenThrow(string id)
         {
             var Character = ServerManager.NodeDictionary[id];
-            var mousePos = Character.inputSync.mousePosition;
+            var mousePos = Character.TargetPosition;
             var bullet1 = Shuriken.Instantiate<BasicRangedProjectile>();
             var bullet2 = Shuriken.Instantiate<BasicRangedProjectile>();
             var bullet3 = Shuriken.Instantiate<BasicRangedProjectile>();
@@ -45,7 +45,7 @@ public partial class ClassRpc : Node2D
         public void Class1_Blink(string id)
         {
             var Character = ServerManager.NodeDictionary[id];
-            var mousePos = Character.inputSync.mousePosition;
+            var mousePos = Character.TargetPosition;
             var MoveDirection = mousePos - Character.GlobalPosition;
             Character.GlobalPosition += MoveDirection.Normalized() * 500;
         }
@@ -53,7 +53,7 @@ public partial class ClassRpc : Node2D
         public void Class1_CircleShuriken(string id)
         {
             var Character = ServerManager.NodeDictionary[id];
-            var mousePos = Character.inputSync.mousePosition;
+            var mousePos = Character.TargetPosition;
             var bullet1 = CircleShuriken.Instantiate<Circling_Projectile>();
             bullet1.GlobalPosition = Character.GlobalPosition;
             bullet1.angle = 0;
@@ -120,7 +120,7 @@ public partial class ClassRpc : Node2D
             var cap = CapTrap.Instantiate<CapTrap>();
             var player = ServerManager.NodeDictionary[id];
             cap.summoner = player;
-            cap.GlobalPosition = player.inputSync.mousePosition;
+            cap.GlobalPosition = player.TargetPosition;
             cap.EquipmentSlots[0].EquippedEquipment = player.PrimaryEquipment[0];
             while (true)
             {

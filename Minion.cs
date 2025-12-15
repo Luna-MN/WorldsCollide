@@ -90,7 +90,7 @@ public partial class Minion : Character
                 }
                 if (TurretHealing)
                 {
-                    if (c is Player or Minion)
+                    if (c.alleigence.HasFlag(Flags.Alleigence.Player) || c.alleigence.HasFlag(Flags.Alleigence.Minion))
                     {
                         Player_MinionsBodysIn.Add(c);
                     }
@@ -108,7 +108,7 @@ public partial class Minion : Character
                         EnemyBodysIn.Remove(e);
                     }
                 }
-                if (c is Player or Minion)
+                if (c.alleigence.HasFlag(Flags.Alleigence.Player) || c.alleigence.HasFlag(Flags.Alleigence.Minion))
                 {
                     if (Player_MinionsBodysIn.Contains(c))
                     {

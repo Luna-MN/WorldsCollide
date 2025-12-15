@@ -13,7 +13,7 @@ public partial class ServerRpc : Node2D
     {
         if(id == GameManager.LocalID) return;
         var classScene = ResourceLoader.Load<PackedScene>("res://Scenes/Classes/" + className + ".tscn", "PackedScene");
-        var newPlayer = classScene.Instantiate<Player>();
+        var newPlayer = classScene.Instantiate<Character>();
         newPlayer.Name = id.ToString();
         newPlayer.ID = id.ToString();
         ServerManager.spawner.AddChild(newPlayer, true);

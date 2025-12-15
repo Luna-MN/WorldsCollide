@@ -7,7 +7,7 @@ public partial class CapTrap : Minion
 {
     public override void _Ready()
     {
-        var player = null as Player;
+        var player = null as Character;
         if (!Multiplayer.IsServer())
         {
 
@@ -20,7 +20,7 @@ public partial class CapTrap : Minion
         }
         else
         {
-            player = ServerManager.NodeDictionary[ID.Split('_')[0]] as Player;
+            player = ServerManager.NodeDictionary[ID.Split('_')[0]] as Character;
         }
         EquipmentSlots[0].EquippedEquipment = (PrimaryWeapon)player?.EquipmentSlots[0].EquippedEquipment.Duplicate(true);
         GD.Print(EquipmentSlots[0].EquippedEquipment);

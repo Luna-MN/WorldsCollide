@@ -13,6 +13,7 @@ public partial class ServerConnect : Node2D
         GameManager.ClassRpcs = GetNode<ClassRpc>("/root/ClassRpc");
         GameManager.EquipmentRpcs = GetNode<EquipmentRpc>("/root/EquipmentRpc");
         GameManager.Enhancments = GetParent().GetNode<Enhancments>("/root/Enhancment");
+        GameManager.UiController = GetParent().GetNode<UiController>("/root/Node2D2/Camera2D/CanvasLayer/Control/UIController");
         Multiplayer.ConnectedToServer += PlayerConnect;
         Connect();
     }

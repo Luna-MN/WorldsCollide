@@ -7,6 +7,7 @@ public partial class BasicAiTest : Node2D
 {
     [Export] private Area2D PlayerSightRange;
     [Export] private Area2D AgroRange;
+    [Export] private BaseAbility[] Abilities;
     public List<Character> playersInSightRange = [];
     public List<Character> playersInAgro = [];
     public Enemy enemy;
@@ -104,38 +105,51 @@ public partial class BasicAiTest : Node2D
     #region Area Handlers
         private void OnPlayerSightBodyEntered(Node body)
         {
-            if ((body is not Player) && (body is not Minion)) return;
-            playersInSightRange.Add((Character)body);
+            if (body is Character c)
+            {
+                if ((c.alleigence.HasFlag(Flags.Alleigence.Player)) && (c.alleigence.HasFlag(Flags.Alleigence.Minion))) return;
+                playersInSightRange.Add((Character)body);
+            }
         }
         private void OnPlayerSightBodyExited(Node body)
         {
-            if ((body is not Player) && (body is not Minion)) return;
-            if (playersInSightRange.Contains((Character)body))
+            if (body is Character c)
             {
-                playersInSightRange.Remove((Character)body);
+                if ((c.alleigence.HasFlag(Flags.Alleigence.Player)) && (c.alleigence.HasFlag(Flags.Alleigence.Minion))) return;
+                if (playersInSightRange.Contains((Character)body))
+                {
+                    playersInSightRange.Remove((Character)body);
+                }
             }
         }
         private void OnAgroBodyEntered(Node body)
         {
-            if (body is Player p)
+            if (body is Character c)
             {
-                playersInAgro.Add(p);
-            }
-            else if (body is Minion m)
-            {
-                playersInAgro.Add(m.summoner);
+                if (c.alleigence.HasFlag(Flags.Alleigence.Player))
+                {
+                    playersInAgro.Add(c);
+                }
+                else if (body is Minion m)
+                {
+                    playersInAgro.Add(m.summoner);
+                }
             }
         }
+
         private void OnAgroBodyExited(Node body)
         {
-            if (body is Player p && playersInAgro.Contains(p))
+            if (body is Character c)
             {
-                playersInAgro.Remove(p);
-            }
-            else if (body is Minion m && playersInAgro.Contains(m.summoner))
-            {
-                playersInAgro.Remove(m.summoner);
+                if (c.alleigence.HasFlag(Flags.Alleigence.Player) && playersInAgro.Contains(c))
+                {
+                    playersInAgro.Remove(c);
+                }
+                else if (body is Minion m && playersInAgro.Contains(m.summoner))
+                {
+                    playersInAgro.Remove(m.summoner);
+                }
             }
         }
-    #endregion
+        #endregion
 }

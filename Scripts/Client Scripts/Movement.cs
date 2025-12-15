@@ -3,7 +3,7 @@ using System;
 
 public partial class Movement : Node2D
 {
-    private Player player;
+    private Character player;
     [Export] public float Speed = 200f;
 
     public int playerId;
@@ -21,7 +21,7 @@ public partial class Movement : Node2D
 
     public override void _Ready()
     {
-        player = GetParent<Player>();
+        player = GetParent<Character>();
         if (player != null)
         {
             // Prefer a stable ID if you have one; fall back to path string once.
