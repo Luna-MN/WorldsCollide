@@ -76,16 +76,16 @@ public partial class BasicRangedProjectile : Projectile
 
     public void RicochetBodyEntered(Node2D Body)
     {
-        if (Body is Enemy e)
+        if (Body is Character c && c.alleigence.HasFlag(Flags.Alleigence.AllEnemies))
         {
-            charactersIn.Add(e);
+            charactersIn.Add(c);
         }
     }
     public void RicochetBodyExited(Node2D Body)
     {
-        if (Body is Enemy e)
+        if (Body is Character c && c.alleigence.HasFlag(Flags.Alleigence.AllEnemies))
         {
-            charactersIn.Remove(e);
+            charactersIn.Remove(c);
         }
     }
 }

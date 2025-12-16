@@ -5,6 +5,7 @@ public partial class SkillOnScreen : Button
 {
     public void SetIcon(bool isUlt = false)
     {
+        if (GameManager.player == null) return;
         if (!isUlt)
         {
             var sel = GameManager.player.selectedSkillIndexes[Convert.ToInt32(Name) - 1];

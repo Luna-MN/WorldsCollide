@@ -1,11 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://qgdu76e3yi45"]
+[gd_scene load_steps=47 format=3 uid="uid://qgdu76e3yi45"]
 
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="2_7dp3o"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://cc4tw3qw2fv7d" path="res://Scripts/Equipment/AttackData.cs" id="2_qqcod"]
 [ext_resource type="Script" uid="uid://clvwcrbbcm0lk" path="res://Scripts/Client Scripts/InputSync.cs" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="3_igrcy"]
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_tx1dd"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="6_8erm5"]
+[ext_resource type="Script" uid="uid://rhuq6dqrqhyy" path="res://Scripts/Equipment/PrimaryWeapon.cs" id="6_fs7ks"]
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="6_gymyn"]
+[ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="6_igrcy"]
 [ext_resource type="Script" uid="uid://cinqavkmdhk4o" path="res://Scripts/Equipment/Enhancements/ConstillationData.cs" id="7_bi64h"]
 [ext_resource type="Resource" uid="uid://dcrn58i05jmtr" path="res://Resources/Equipment/SimpleChest.tres" id="8_ukyrk"]
 [ext_resource type="Resource" uid="uid://be7qr07d8kcvf" path="res://Resources/Equipment/SimpleHelm.tres" id="9_ukyrk"]
@@ -14,9 +19,118 @@
 [ext_resource type="Resource" uid="uid://d1qg7816o6cbp" path="res://Resources/Default Stats/Default Character Stats.tres" id="18_l6n3p"]
 [ext_resource type="Script" uid="uid://ddkegqxmcq47k" path="res://Scripts/Client Scripts/PlayerAttachment.cs" id="21_olqyp"]
 
-[sub_resource type="Resource" id="Resource_yvny2"]
+[sub_resource type="Resource" id="Resource_2ijsl"]
+script = ExtResource("3_igrcy")
+Name = 11
+DisplayValue = 0.5
+
+[sub_resource type="Resource" id="Resource_p1odr"]
+script = ExtResource("3_igrcy")
+Name = 9
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_0gysh"]
+script = ExtResource("3_igrcy")
+Name = 10
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_vfarp"]
+script = ExtResource("6_8erm5")
+_origin = 2
+damage = SubResource("Resource_p1odr")
+range = SubResource("Resource_0gysh")
+attackSpeed = SubResource("Resource_2ijsl")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_y6uwr"]
+script = ExtResource("2_qqcod")
+stats = SubResource("Resource_vfarp")
+type = 1
+metadata/_custom_type_script = "uid://cc4tw3qw2fv7d"
+
+[sub_resource type="Resource" id="Resource_83xs0"]
 script = ExtResource("7_bi64h")
-ConstillationSlots = null
+ConstillationSlots = []
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqcod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_igrcy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_xuaoq"]
+script = ExtResource("3_igrcy")
+Name = 11
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_wohnl"]
+script = ExtResource("3_igrcy")
+Name = 9
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_36dho"]
+script = ExtResource("3_igrcy")
+Name = 10
+DisplayValue = 10.0
+
+[sub_resource type="Resource" id="Resource_yh6i2"]
+script = ExtResource("6_8erm5")
+_origin = 2
+damage = SubResource("Resource_wohnl")
+attackSpeed = SubResource("Resource_xuaoq")
+range = SubResource("Resource_36dho")
+metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
+
+[sub_resource type="Resource" id="Resource_ypfnu"]
+script = ExtResource("6_fs7ks")
+Attacks = Array[Object]([SubResource("Resource_y6uwr")])
+WeaponName = "Gun"
+Description = "Issa Gun"
+SpriteFrames = SubResource("SpriteFrames_qqcod")
+Stats = null
+equipmentFlags = 33
+stats = SubResource("Resource_yh6i2")
+EnhancementData = SubResource("Resource_83xs0")
+metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
+
+[sub_resource type="Resource" id="Resource_fd4e3"]
+script = ExtResource("2_7dp3o")
+EquippedEquipment = SubResource("Resource_ypfnu")
+equipmentFlags = 32
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_qqcod"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_igrcy"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_fs7ks"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_l6n3p"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_olqyp"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_wpjfl"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
+
+[sub_resource type="Resource" id="Resource_bi64h"]
+script = ExtResource("2_7dp3o")
+metadata/_custom_type_script = "uid://bakru0sj3w5q"
 
 [sub_resource type="Resource" id="Resource_hctok"]
 resource_local_to_scene = true
@@ -89,6 +203,7 @@ properties/6/replication_mode = 2
 
 [node name="Player" node_paths=PackedStringArray("OffHandShootPosition") instance=ExtResource("1_v0iea")]
 OffHandShootPosition = NodePath("OffHandPos/ShootPos")
+EquipmentSlots = Array[Object]([SubResource("Resource_fd4e3"), SubResource("Resource_qqcod"), SubResource("Resource_igrcy"), SubResource("Resource_fs7ks"), SubResource("Resource_l6n3p"), SubResource("Resource_olqyp"), SubResource("Resource_wpjfl"), SubResource("Resource_bi64h")])
 inventory = SubResource("Resource_h4iuc")
 GunPos = Vector2(-9, 9)
 OffHandPos = Vector2(20, 9)

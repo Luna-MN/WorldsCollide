@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class CapTrap : Minion
+public partial class CapTrap : Character
 {
     public override void _Ready()
     {

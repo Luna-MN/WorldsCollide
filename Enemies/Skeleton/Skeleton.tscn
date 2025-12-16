@@ -1,19 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://dj85p1u66u4gl"]
+[gd_scene load_steps=12 format=3 uid="uid://dj85p1u66u4gl"]
 
 [ext_resource type="PackedScene" uid="uid://pvnlwhskemr2" path="res://Scenes/enemy.tscn" id="1_2btid"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="2_dpndv"]
+[ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="2_g22im"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="3_ygee8"]
 [ext_resource type="Texture2D" uid="uid://bmxnqgoodh13q" path="res://Pirates/Enemies/Skeleton/Skeleton.png" id="4_ygee8"]
 [ext_resource type="PackedScene" uid="uid://bn8nupptp1h45" path="res://ai/BasicAITest.tscn" id="5_g22im"]
 
-[sub_resource type="Resource" id="Resource_v7rdr"]
+[sub_resource type="Resource" id="Resource_ygee8"]
 script = ExtResource("2_dpndv")
 Name = 8
 DisplayValue = 100.0
 
 [sub_resource type="Resource" id="Resource_g22im"]
 script = ExtResource("3_ygee8")
-speed = SubResource("Resource_v7rdr")
+speed = SubResource("Resource_ygee8")
 metadata/_custom_type_script = "uid://ch1m5rphn6fr6"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v7rdr"]
@@ -34,6 +35,7 @@ radius = 874.0824
 radius = 390.0
 
 [node name="Skeleton" instance=ExtResource("1_2btid")]
+script = ExtResource("2_g22im")
 stats = SubResource("Resource_g22im")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
@@ -44,6 +46,7 @@ sprite_frames = SubResource("SpriteFrames_v7rdr")
 position = Vector2(5.9604645e-08, 1.1920929e-07)
 
 [node name="AI Control" parent="." index="5" instance=ExtResource("5_g22im")]
+Abilities = []
 
 [node name="CollisionShape2D" parent="AI Control/StartBT" index="0"]
 shape = SubResource("CircleShape2D_ygee8")

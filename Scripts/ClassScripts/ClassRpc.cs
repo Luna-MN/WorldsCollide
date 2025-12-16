@@ -107,7 +107,7 @@ public partial class ClassRpc : Node2D
             foreach (var c in character.charactersIn)
             {
                 if (c == character) continue;
-                if (character.healingShots == false && c is not Enemy)
+                if (character.healingShots == false && !c.alleigence.HasFlag(Flags.Alleigence.AllEnemies))
                 {
                     continue;
                 }
@@ -119,7 +119,7 @@ public partial class ClassRpc : Node2D
         {
             var cap = CapTrap.Instantiate<CapTrap>();
             var player = ServerManager.NodeDictionary[id];
-            cap.summoner = player;
+            cap.GetNode<MinionAttachment>("MinionControl").summoner = player;
             cap.GlobalPosition = player.TargetPosition;
             cap.EquipmentSlots[0].EquippedEquipment = player.PrimaryEquipment[0];
             while (true)

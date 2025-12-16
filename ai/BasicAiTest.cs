@@ -10,7 +10,7 @@ public partial class BasicAiTest : Node2D
     [Export] private BaseAbility[] Abilities;
     public List<Character> playersInSightRange = [];
     public List<Character> playersInAgro = [];
-    public Enemy enemy;
+    public Character enemy;
     private readonly RandomNumberGenerator rng = new();
 
     [Export] public float RoamRadius { get; set; } = 300f; 
@@ -24,7 +24,7 @@ public partial class BasicAiTest : Node2D
         PlayerSightRange.BodyExited += OnPlayerSightBodyExited;
         AgroRange.BodyEntered += OnAgroBodyEntered;
         AgroRange.BodyExited += OnAgroBodyExited;
-        enemy = (Enemy)GetParent();
+        enemy = GetParent<Character>();
         rng.Randomize();
 
     }
@@ -78,7 +78,7 @@ public partial class BasicAiTest : Node2D
             float r = Mathf.Sqrt(Mathf.Lerp(min * min, max * max, u)); // uniform area distribution
 
             Vector2 offset = Vector2.FromAngle(angle) * r;
-            enemy.targetPos = enemy.GlobalPosition + offset;
+            enemy.GetNode<EnemyAttachment>("EnemyAttachment").targetPos = enemy.GlobalPosition + offset;
             
             float distance = offset.Length();
             GD.Print(offset.Length());
@@ -130,9 +130,9 @@ public partial class BasicAiTest : Node2D
                 {
                     playersInAgro.Add(c);
                 }
-                else if (body is Minion m)
+                else if (c.alleigence.HasFlag(Flags.Alleigence.Minion))
                 {
-                    playersInAgro.Add(m.summoner);
+                    playersInAgro.Add(c.GetNode<MinionAttachment>("MinionControl").summoner);
                 }
             }
         }
@@ -145,9 +145,9 @@ public partial class BasicAiTest : Node2D
                 {
                     playersInAgro.Remove(c);
                 }
-                else if (body is Minion m && playersInAgro.Contains(m.summoner))
+                else if (c.alleigence.HasFlag(Flags.Alleigence.Minion) && playersInAgro.Contains(c.GetNode<MinionAttachment>("MinionControl").summoner))
                 {
-                    playersInAgro.Remove(m.summoner);
+                    playersInAgro.Remove(c.GetNode<MinionAttachment>("MinionControl").summoner);
                 }
             }
         }

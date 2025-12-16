@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b14otrrm17vx6"]
+[gd_scene load_steps=3 format=3 uid="uid://b14otrrm17vx6"]
 
 [ext_resource type="PackedScene" uid="uid://pvnlwhskemr2" path="res://Scenes/enemy.tscn" id="1_qijij"]
+[ext_resource type="Script" uid="uid://bpodk32pct6vq" path="res://Scripts/Client Scripts/Character.cs" id="2_ik73l"]
 
 [node name="Dummy" instance=ExtResource("1_qijij")]
+script = ExtResource("2_ik73l")
 IsDummy = true
 
 [node name="AnimatedSprite2D" parent="." index="1"]

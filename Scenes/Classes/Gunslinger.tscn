@@ -1,16 +1,11 @@
-[gd_scene load_steps=66 format=3 uid="uid://bmxur1gpaxtuc"]
+[gd_scene load_steps=45 format=3 uid="uid://bmxur1gpaxtuc"]
 
 [ext_resource type="PackedScene" uid="uid://qgdu76e3yi45" path="res://Scenes/player.tscn" id="1_4biqu"]
 [ext_resource type="Script" uid="uid://nis8tbvwbxea" path="res://Scripts/ClassScripts/Gunslinger/Gunslinger.cs" id="2_kj1io"]
-[ext_resource type="Resource" uid="uid://ddqgxsghkfqxr" path="res://Resources/Default Stats/Default Weapon Stats.tres" id="4_k6rny"]
-[ext_resource type="Script" uid="uid://bakru0sj3w5q" path="res://Scripts/Equipment/EquipmentSlot.cs" id="4_rudow"]
-[ext_resource type="Resource" uid="uid://bqabth1btdvqe" path="res://Resources/Enhancments/_1.tres" id="5_o616e"]
 [ext_resource type="Script" uid="uid://c8xpcraad14yd" path="res://Scripts/Equipment/BaseEquipment.cs" id="5_yvny2"]
-[ext_resource type="Script" uid="uid://ciiq6jenbpwaf" path="res://Scripts/Equipment/Enhancements/ConstillationSlotData.cs" id="6_boh3p"]
 [ext_resource type="Script" uid="uid://ch1m5rphn6fr6" path="res://Scripts/Stats/Stats.cs" id="6_k6rny"]
 [ext_resource type="Script" uid="uid://cinqavkmdhk4o" path="res://Scripts/Equipment/Enhancements/ConstillationData.cs" id="7_n57co"]
 [ext_resource type="Texture2D" uid="uid://cqxahedh6wmjh" path="res://Pirates/Equipment/Chest/Simple.png" id="8_boh3p"]
-[ext_resource type="Texture2D" uid="uid://rso2y8pkyfk" path="res://Pirates/Equipment/Primary/Gun.png" id="8_tmabg"]
 [ext_resource type="Texture2D" uid="uid://dca2l2ia4082n" path="res://Pirates/Equipment/Helm/Simple.png" id="10_tmabg"]
 [ext_resource type="Script" uid="uid://cc4tw3qw2fv7d" path="res://Scripts/Equipment/AttackData.cs" id="11_u2qpu"]
 [ext_resource type="Texture2D" uid="uid://c4de7wmvqt1m7" path="res://Pirates/Equipment/Primary/Bow.png" id="12_jitwt"]
@@ -18,102 +13,9 @@
 [ext_resource type="Script" uid="uid://b25igrq5gmts2" path="res://Scripts/Equipment/Inventory.cs" id="14_u7rbx"]
 [ext_resource type="Script" uid="uid://q3epmkk3eovh" path="res://Scripts/ClassScripts/Skill.cs" id="15_1v4gb"]
 [ext_resource type="Script" uid="uid://nh64xjbomd32" path="res://Scripts/Stats/Stat.cs" id="15_4biqu"]
-[ext_resource type="Texture2D" uid="uid://cxgrvh7ebjtwt" path="res://Pirates/Class2/Skill 2 Trap.png" id="15_kj1io"]
 [ext_resource type="Texture2D" uid="uid://cn6uoccb3x3g2" path="res://Pirates/Class2/GunSlinger.png" id="16_p28sf"]
 
-[sub_resource type="Resource" id="Resource_p7sjl"]
-resource_local_to_scene = true
-script = ExtResource("11_u2qpu")
-stats = ExtResource("4_k6rny")
-type = 1
-metadata/_custom_type_script = "uid://cc4tw3qw2fv7d"
-
-[sub_resource type="Resource" id="Resource_wohnl"]
-script = ExtResource("6_boh3p")
-Star = ExtResource("5_o616e")
-metadata/_custom_type_script = "uid://ciiq6jenbpwaf"
-
-[sub_resource type="Resource" id="Resource_36dho"]
-script = ExtResource("7_n57co")
-ConstillationSlots = Array[Object]([SubResource("Resource_wohnl")])
-metadata/_custom_type_script = "uid://cinqavkmdhk4o"
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_h6cdl"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_tmabg")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="Resource" id="Resource_l6n3p"]
-script = ExtResource("13_hkj60")
-Attacks = Array[Object]([SubResource("Resource_p7sjl")])
-WeaponName = "Gun"
-ShootPos = Vector2(14.857, 3.429)
-FlippedPos = Vector2(14.857, -3.429)
-SpriteFrames = SubResource("SpriteFrames_h6cdl")
-Stats = Array[Object]([ExtResource("4_k6rny")])
-equipmentFlags = 97
-stats = ExtResource("4_k6rny")
-Icon = ExtResource("8_tmabg")
-ItemId = -2
-EnhancementData = SubResource("Resource_36dho")
-metadata/_custom_type_script = "uid://rhuq6dqrqhyy"
-
-[sub_resource type="Resource" id="Resource_olqyp"]
-script = ExtResource("4_rudow")
-EquippedEquipment = SubResource("Resource_l6n3p")
-equipmentFlags = 2080
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_qqcod"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 64
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_4b18b"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 128
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_peemv"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 8
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_omicx"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 512
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_v7dgu"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 256
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_8au8k"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 1024
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_p3cti"]
-resource_local_to_scene = true
-script = ExtResource("4_rudow")
-equipmentFlags = 16
-metadata/_custom_type_script = "uid://bakru0sj3w5q"
-
-[sub_resource type="Resource" id="Resource_yvny2"]
+[sub_resource type="Resource" id="Resource_k6rny"]
 script = ExtResource("7_n57co")
 ConstillationSlots = null
 
@@ -218,93 +120,76 @@ script = ExtResource("14_u7rbx")
 AllEquipment = Array[Object]([SubResource("Resource_lox6r"), SubResource("Resource_8c6rh"), SubResource("Resource_v7btl"), SubResource("Resource_wth3h"), SubResource("Resource_xl7m8")])
 metadata/_custom_type_script = "uid://b25igrq5gmts2"
 
-[sub_resource type="Resource" id="Resource_6mwut"]
-script = ExtResource("15_1v4gb")
-Name = "Flame Bullets"
-RpcName = "_Skill1"
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_f83er"]
-script = ExtResource("15_1v4gb")
-Name = "Cap Trap"
-Icon = ExtResource("15_kj1io")
-RpcName = "_Skill2"
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_hncp3"]
-script = ExtResource("15_1v4gb")
-Name = "Deadeye"
-RpcName = "_Skill3"
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_4biqu"]
-script = ExtResource("15_1v4gb")
-IsPassive = true
-RpcName = "_Skill4"
-metadata/_custom_type_script = "uid://q3epmkk3eovh"
-
-[sub_resource type="Resource" id="Resource_kj1io"]
+[sub_resource type="Resource" id="Resource_o616e"]
 script = ExtResource("15_1v4gb")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
-[sub_resource type="Resource" id="Resource_ncb0t"]
+[sub_resource type="Resource" id="Resource_boh3p"]
 script = ExtResource("15_1v4gb")
 metadata/_custom_type_script = "uid://q3epmkk3eovh"
 
-[sub_resource type="Resource" id="Resource_k6rny"]
+[sub_resource type="Resource" id="Resource_n57co"]
+script = ExtResource("15_1v4gb")
+metadata/_custom_type_script = "uid://q3epmkk3eovh"
+
+[sub_resource type="Resource" id="Resource_tmabg"]
+script = ExtResource("15_1v4gb")
+metadata/_custom_type_script = "uid://q3epmkk3eovh"
+
+[sub_resource type="Resource" id="Resource_eq662"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 1
 DisplayValue = 10.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_o616e"]
+[sub_resource type="Resource" id="Resource_2pnr6"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 2
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_boh3p"]
+[sub_resource type="Resource" id="Resource_vjk1b"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 3
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_n57co"]
+[sub_resource type="Resource" id="Resource_yeg20"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 4
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_tmabg"]
+[sub_resource type="Resource" id="Resource_4biqu"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 5
 DisplayValue = 1.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_u2qpu"]
+[sub_resource type="Resource" id="Resource_kj1io"]
 script = ExtResource("15_4biqu")
 DisplayValue = 10.0
 
-[sub_resource type="Resource" id="Resource_jitwt"]
+[sub_resource type="Resource" id="Resource_ncb0t"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 6
 DisplayValue = 0.1
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_hkj60"]
+[sub_resource type="Resource" id="Resource_rudow"]
 resource_local_to_scene = true
 script = ExtResource("15_4biqu")
 Name = 7
 DisplayValue = 100.0
 metadata/_custom_type_script = "uid://nh64xjbomd32"
 
-[sub_resource type="Resource" id="Resource_u7rbx"]
+[sub_resource type="Resource" id="Resource_yvny2"]
 script = ExtResource("15_4biqu")
 Name = 8
 DisplayValue = 300.0
@@ -313,15 +198,15 @@ metadata/_custom_type_script = "uid://nh64xjbomd32"
 [sub_resource type="Resource" id="Resource_p28sf"]
 resource_local_to_scene = true
 script = ExtResource("6_k6rny")
-armour = SubResource("Resource_k6rny")
-critChance = SubResource("Resource_o616e")
-critDamage = SubResource("Resource_boh3p")
-currentHealth = SubResource("Resource_n57co")
-damageIncrease = SubResource("Resource_tmabg")
-itemFind = SubResource("Resource_jitwt")
-maxHealth = SubResource("Resource_hkj60")
-speed = SubResource("Resource_u7rbx")
-defaultFallback = SubResource("Resource_u2qpu")
+armour = SubResource("Resource_eq662")
+critChance = SubResource("Resource_2pnr6")
+critDamage = SubResource("Resource_vjk1b")
+currentHealth = SubResource("Resource_yeg20")
+damageIncrease = SubResource("Resource_4biqu")
+itemFind = SubResource("Resource_ncb0t")
+maxHealth = SubResource("Resource_rudow")
+speed = SubResource("Resource_yvny2")
+defaultFallback = SubResource("Resource_kj1io")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_huf50"]
 animations = [{
@@ -341,10 +226,8 @@ radius = 281.34854
 script = ExtResource("2_kj1io")
 ShootArea = NodePath("Area2D")
 CharacterName = "Gunslinger"
-EquipmentSlots = Array[Object]([SubResource("Resource_olqyp"), SubResource("Resource_qqcod"), SubResource("Resource_4b18b"), SubResource("Resource_peemv"), SubResource("Resource_omicx"), SubResource("Resource_v7dgu"), SubResource("Resource_8au8k"), SubResource("Resource_p3cti")])
 inventory = SubResource("Resource_yvf5t")
-alleigence = 1
-skills = Array[Object]([SubResource("Resource_6mwut"), SubResource("Resource_f83er"), SubResource("Resource_hncp3"), SubResource("Resource_4biqu"), SubResource("Resource_kj1io"), SubResource("Resource_ncb0t")])
+skills = Array[Object]([SubResource("Resource_o616e"), SubResource("Resource_boh3p"), SubResource("Resource_n57co"), SubResource("Resource_tmabg")])
 stats = SubResource("Resource_p28sf")
 
 [node name="AnimatedSprite2D" parent="." index="1"]

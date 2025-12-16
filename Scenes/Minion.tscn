@@ -1,17 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cowudgar5kj2w"]
 
 [ext_resource type="PackedScene" uid="uid://d2podqpoej8hm" path="res://Scenes/Character.tscn" id="1_ec8qx"]
-[ext_resource type="Script" uid="uid://x3wsb8qltmjq" path="res://Minion.cs" id="2_0r81q"]
+[ext_resource type="Script" uid="uid://saq8vqi0clky" path="res://Scripts/Client Scripts/MinionAttachment.cs" id="3_0r81q"]
 
 [node name="Minion" instance=ExtResource("1_ec8qx")]
-script = ExtResource("2_0r81q")
-Traps = false
-Little = false
-Big = false
-Turrets = false
-TurretAttacking = false
-TurretHealing = false
-Mirrors = false
-FloatingText = null
 GunPos = Vector2(0, 0)
-characterStats = null
+
+[node name="MinionControl" type="Node2D" parent="." index="6"]
+script = ExtResource("3_0r81q")

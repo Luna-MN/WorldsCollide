@@ -7,7 +7,7 @@ public partial class BaseAbility : Resource
 {
     [Export]
     public int Priority;
-    public virtual int UpdatePriority(Enemy enemy)
+    public virtual int UpdatePriority(Character enemy)
     {
         return 100;
     }

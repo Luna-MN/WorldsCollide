@@ -49,14 +49,14 @@ public partial class FloorFire : Sprite2D
 
     private void DamageAreaEnter(Node2D body)
     {
-        if (body is Enemy c)
+        if (body is Character c && c.alleigence.HasFlag(Flags.Alleigence.AllEnemies))
         {
             DamageChars.Add(c);
         }
     }
     private void DamageAreaExit(Node2D body)
     {
-        if (body is Enemy c)
+        if (body is Character c && c.alleigence.HasFlag(Flags.Alleigence.AllEnemies))
         {
             DamageChars.Remove(c);
         }
