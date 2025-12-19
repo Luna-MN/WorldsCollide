@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class EnemyAttachment : Node2D
 {
@@ -8,6 +10,7 @@ public partial class EnemyAttachment : Node2D
     private Timer spawnDebounceTimer;
     private bool spawned = false;
     private Character enemy;
+    public AgroManager agroManager = null;
     public override void _Ready()
     {
         enemy = (Character)GetParent();
@@ -76,6 +79,19 @@ public partial class EnemyAttachment : Node2D
         }
     }
 
+    private void JoinAgro(Character character)
+    {
+        if(agroManager == null)
+        {
+            agroManager = new AgroManager();
+            AddChild(agroManager);
+        }
+        agroManager.charactersAgros.Add(new CharacterAgro()
+        {
+            character = character,
+        });
+        
+    }
     private void SetMoving(bool moving)
     {
         if (_isMoving == moving) return;
