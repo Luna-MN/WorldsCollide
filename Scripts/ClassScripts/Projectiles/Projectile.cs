@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Linq;
+
 [GlobalClass]
 public partial class Projectile : Node2D
 {
@@ -53,9 +55,10 @@ public partial class Projectile : Node2D
     {
         if(Name.ToString().Contains(Body.Name.ToString())) return;
         if(!Multiplayer.IsServer()) return;
-
-        if (ServerManager.NodeDictionary[Id] != null && ServerManager.NodeDictionary[Id] is Character bulletOwner)
+        Character bulletOwner = null;
+        if (ServerManager.NodeDictionary[Id] != null && ServerManager.NodeDictionary[Id] is Character)
         {
+            bulletOwner = ServerManager.NodeDictionary[Id];
             bulletOwner.CallOnHit(Body, this, Damage);
             if (crit)
             {
@@ -68,6 +71,26 @@ public partial class Projectile : Node2D
         {
             hitChar.TakeDamage(Damage * amountOfTimes, Id);
             modifiedDamage = Damage * hitChar.stats[StatMaths.StatNum.armour];
+            if ((hitChar.alleigence & Flags.Alleigence.AllEnemies) != 0)
+            {
+                EnemyAttachment control = hitChar.GetNode<EnemyAttachment>("EnemyAttachment");
+                if (control != null)
+                {
+                    if (control.agroManager.charactersAgros.Any(x => x.character == bulletOwner))
+                    {
+                        control.agroManager.charactersAgros.First(x => x.character == bulletOwner).Damage += Damage;
+                    }
+                    else
+                    {
+                        control.agroManager.charactersAgros.Add(new CharacterAgro()
+                        {
+                            character = bulletOwner,
+                            Agro = 1,
+                            Damage = Damage
+                        });
+                    }
+                }
+            }
         }
         ((Character)Body).DamageText(modifiedDamage, amountOfTimes);
     }

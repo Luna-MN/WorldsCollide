@@ -86,6 +86,7 @@ public partial class EnemyAttachment : Node2D
             agroManager = new AgroManager();
             AddChild(agroManager);
         }
+        if(agroManager.charactersAgros.Any(x => x.character == character)) return;
         agroManager.charactersAgros.Add(new CharacterAgro()
         {
             character = character,
