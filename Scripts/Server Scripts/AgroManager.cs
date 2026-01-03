@@ -3,17 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 /// <summary>
-/// The Agro Managment for an enemy or a minion, these are stored in a list in the player for each enemy the player has agro over
+/// The Agro Management for an enemy or a minion, these are stored in a list in the player for each enemy the player has agro over
 /// </summary>
 public partial class AgroManager : Node2D
 {
-    public List<CharacterAgro> charactersAgros;
+    public List<CharacterAgro> charactersAgros = [];
     private int OrderType = 0; // 0 = Agro, 1 = DPS, 2 = HPS
+    public override void _Process(double delta)
+    {
+        charactersAgros.ForEach(x => x.TimeCounter(delta));
+    }
+
     /// <summary>
     /// Returns the highest agro in Agro
     /// </summary>
     /// <returns>Main Tank</returns>
-    private Character MainTankAgro()
+    public Character MainTankAgro()
     {
         if (OrderType != 0)
         { 
@@ -26,7 +31,7 @@ public partial class AgroManager : Node2D
     /// Return second in agro
     /// </summary>
     /// <returns>Off Tank</returns>
-    private Character OffTankAgro()
+    public Character OffTankAgro()
     {
         if (OrderType != 0)
         { 
@@ -34,5 +39,15 @@ public partial class AgroManager : Node2D
             OrderType = 0;
         }
         return charactersAgros[1].character;
+    }
+
+    public Character AgroWithHighestDamage()
+    {
+        return charactersAgros.OrderByDescending(x => x.Damage).First().character;
+    }
+
+    public Character Random()
+    {
+        return charactersAgros[new Random().Next(charactersAgros.Count)].character;
     }
 }

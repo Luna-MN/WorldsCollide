@@ -8,9 +8,12 @@ public partial class BasicAiTest : Node2D
     [Export] private Area2D PlayerSightRange;
     [Export] private Area2D AgroRange;
     [Export] private BaseAbility[] Abilities;
+    [Export] private float AutoAttackRange = 300f;
+    
     public List<Character> playersInSightRange = [];
     public List<Character> playersInAgro = [];
     public Character enemy;
+    public EnemyAttachment Attachment;
     private readonly RandomNumberGenerator rng = new();
 
     [Export] public float RoamRadius { get; set; } = 300f; 
@@ -26,7 +29,7 @@ public partial class BasicAiTest : Node2D
         AgroRange.BodyExited += OnAgroBodyExited;
         enemy = GetParent<Character>();
         rng.Randomize();
-
+        Attachment = enemy.GetNode<EnemyAttachment>("EnemyAttachment");
     }
 
     #region Checks
@@ -78,7 +81,7 @@ public partial class BasicAiTest : Node2D
             float r = Mathf.Sqrt(Mathf.Lerp(min * min, max * max, u)); // uniform area distribution
 
             Vector2 offset = Vector2.FromAngle(angle) * r;
-            enemy.GetNode<EnemyAttachment>("EnemyAttachment").targetPos = enemy.GlobalPosition + offset;
+            Attachment.targetPos = enemy.GlobalPosition + offset;
             
             float distance = offset.Length();
             GD.Print(offset.Length());
@@ -93,7 +96,14 @@ public partial class BasicAiTest : Node2D
     #region AutoAttack
         public float AutoAttack()
         {
-            return 30f;
+            Character MT = Attachment.agroManager.MainTankAgro();
+            if(enemy.GlobalPosition.DistanceTo(MT.GlobalPosition) > AutoAttackRange)
+            {
+                Attachment.targetPos = MT.GlobalPosition;
+                return 1f;
+            }
+            enemy.LeftClick(enemy.PrimaryEquipment[0], MT.GlobalPosition);
+            return enemy.PrimaryEquipment[0].Attacks[0].stats[StatMaths.StatNum.attackSpeed];
         }
     #endregion
     #region Attacking
